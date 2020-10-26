@@ -2,50 +2,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PossessionBehaviour : MonoBehaviour
 {
-    private Shader _highlightShader;
-    private Shader _standardShader;
+    public MeshRenderer PlayerMesh;
+
+    private float _possessionRadius = 0.8f;
+    private GameObject _possessionTarget;
+    private bool _isPossessing = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        _highlightShader = Shader.Find("Outlined/Highlight");
-        _standardShader = Shader.Find("Standard");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        HightlightTargetsInRadius();
+        if (!_isPossessing)
+        {
+            HighlightPossession();
+            PossessTarget();
+        } 
+        else
+        {
+            LeavePossessedTarget();
+        }
     }
 
-    private void HightlightTargetsInRadius()
+    private void LeavePossessedTarget()
     {
-        Collider[] collides = Physics.OverlapSphere(transform.position, 2f);
-        foreach (Collider collider in collides)
+        if (Input.GetMouseButtonDown(1) && _possessionTarget && _isPossessing)
         {
-            GameObject possessableGameObject = collider.gameObject;
-            if (possessableGameObject.TryGetComponent<IPossessable>(out IPossessable possessable))
+            _isPossessing = false;
+            transform.position = _possessionTarget.transform.position;
+            PlayerMesh.enabled = true;
+            _possessionTarget = null;
+        }
+    }
+
+    private void PossessTarget()
+    {
+        if (Input.GetMouseButtonDown(1) && _possessionTarget && !_isPossessing)
+        {
+            _isPossessing = true;
+            transform.position = _possessionTarget.transform.position;
+            PlayerMesh.enabled = false;
+        }
+    }
+
+    private void HighlightPossession()
+    {
+        if (Physics.SphereCast(transform.position, _possessionRadius, transform.forward, out RaycastHit raycastHit, 1))
+        {
+            GameObject possessionGameObject = raycastHit.transform.gameObject;
+
+            if (possessionGameObject.TryGetComponent<IPossessable>(out IPossessable possessable) && !_possessionTarget)
             {
-                ChangeShader(possessableGameObject.GetComponent<Renderer>(), _highlightShader);
+                _possessionTarget = possessionGameObject;
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        print(other);
-        GameObject possessableGameObject = other.gameObject;
-        if (possessableGameObject.TryGetComponent<IPossessable>(out IPossessable possessable))
+        } 
+        else if (_possessionTarget)
         {
-            ChangeShader(possessableGameObject.GetComponent<Renderer>(), _standardShader);
+            _possessionTarget = null;
         }
-    }
-
-    private void ChangeShader(Renderer possessableRenderer, Shader shader)
-    {
-        possessableRenderer.material.shader = shader;
     }
 }

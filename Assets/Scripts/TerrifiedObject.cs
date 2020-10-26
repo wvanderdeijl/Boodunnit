@@ -37,7 +37,7 @@ namespace DefaultNamespace
             
             TerrifyState = TerrifyState.Terrified;
             
-            Vector3 offset = (_player.position - transform.position);
+            Vector3 offset = _player.position - transform.position;
             Vector3 direction = (offset * -1).normalized;
             _velocity = direction * _speed;
 

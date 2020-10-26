@@ -29,6 +29,7 @@ public class TerrifyBehaviour : MonoBehaviour
     private void GetEntitiesInProximity()
     {
         _fearables.Clear();
+        
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, transform.forward,
             _distance);
         

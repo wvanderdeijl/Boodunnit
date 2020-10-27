@@ -14,37 +14,35 @@ public class CameraController : MonoBehaviour
     private Vector3 _pointToSlerpTo;
     [SerializeField]
     private float _angle;
-    private int _rotationInput;
+    private float _rotationInput;
     
     private void Awake()
     {
         _pointToSlerpTo = transform.position;
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        _rotationInput = Input.GetKey(KeyCode.E) ? 1 : Input.GetKey(KeyCode.Q) ? -1 : 0;
-        if (_rotationInput == 0)
-        {
-            _pointToSlerpTo = transform.position;
-            _angle = Vector3.Angle(CameraRotationTarget.position, transform.position);
-        }
-    }
-
-    private void LateUpdate()
-    {
+        _rotationInput = Input.GetAxis("Mouse X");
+        float angleOffset = 0;
         if (Vector3.Distance(transform.position, _pointToSlerpTo) > 1)
         {
             Vector3 slerpedPosition = Vector3.Slerp(transform.position, _pointToSlerpTo, Time.deltaTime * Sensitivity);
             slerpedPosition.y = transform.position.y;
             transform.position = slerpedPosition;
             transform.LookAt(CameraRotationTarget);
+            angleOffset = _rotationInput * RotationSpeed * Time.deltaTime * Sensitivity;
         }
 
         if (_rotationInput != 0)
         {
             RotateCamera(_rotationInput);
+        }
+        else
+        {
+            _angle -= angleOffset;
         }
     }
 

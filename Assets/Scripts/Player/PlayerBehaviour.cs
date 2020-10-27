@@ -2,23 +2,32 @@
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public PossessionBehaviour PossessionBehaviour;
+
     // Update is called once per frame
     void Update()
     {
         //Posses behaviour
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.E))
         {
-            print("Key F was hit");
+            if (PossessionBehaviour.IsPossessing)
+            {
+                PossessionBehaviour.LeavePossessedTarget();
+            } 
+            else
+            {
+                PossessionBehaviour.PossessTarget();
+            }
         }
 
-        //Scare behaviour
-        if (Input.GetKeyDown(KeyCode.G))
+        //Dash behaviour
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            print("Key G was hit");
+            print("Key LeftShift was hit");
         }
 
         //Levitate behaviour
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetMouseButtonDown(0))
         {
             print("Key H was hit");
         }

@@ -12,7 +12,7 @@ public class PossessionBehaviour : MonoBehaviour
     private float _possessionRadius = 1;
     private GameObject _possessionTarget;
 
-    private void LeavePossessedTarget()
+    public void LeavePossessedTarget()
     {
         if (_possessionTarget && IsPossessing)
         {
@@ -23,7 +23,7 @@ public class PossessionBehaviour : MonoBehaviour
         }
     }
 
-    private void PossessTarget()
+    public void PossessTarget()
     {
         if (IsPossessing)
         {

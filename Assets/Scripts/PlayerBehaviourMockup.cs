@@ -1,13 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBehaviourMockup : MonoBehaviour
 {
     [SerializeField] private LevitateBehaviour _levitateBehaviour;
-    //[SerializeField] private TerrifyBehaviour _terrifyBehaviour;
 
     private void Update()
     {
-        throw new NotImplementedException();
+        _levitateBehaviour.ReceiveObjectRigidbodyWithMouseClick();
+    }
+
+    private void FixedUpdate()
+    {
+        _levitateBehaviour.MoveLevitateableObject();
     }
 }

@@ -7,30 +7,16 @@ using UnityEngine.UIElements;
 public class PossessionBehaviour : MonoBehaviour
 {
     public MeshRenderer PlayerMesh;
+    public bool IsPossessing = false;
 
-    private float _possessionRadius = 0.8f;
+    private float _possessionRadius = 1;
     private GameObject _possessionTarget;
-    private bool _isPossessing = false;
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!_isPossessing)
-        {
-            HighlightPossession();
-            PossessTarget();
-        } 
-        else
-        {
-            LeavePossessedTarget();
-        }
-    }
 
     private void LeavePossessedTarget()
     {
-        if (Input.GetKey(KeyCode.E) && _possessionTarget && _isPossessing)
+        if (_possessionTarget && IsPossessing)
         {
-            _isPossessing = false;
+            IsPossessing = false;
             transform.position = _possessionTarget.transform.position;
             PlayerMesh.enabled = true;
             _possessionTarget = null;
@@ -39,23 +25,21 @@ public class PossessionBehaviour : MonoBehaviour
 
     private void PossessTarget()
     {
-        if (Input.GetKey(KeyCode.E) && _possessionTarget && !_isPossessing)
+        if (IsPossessing)
         {
-            _isPossessing = true;
-            transform.position = _possessionTarget.transform.position;
-            PlayerMesh.enabled = false;
+            return;
         }
-    }
 
-    private void HighlightPossession()
-    {
         if (Physics.SphereCast(transform.position, _possessionRadius, transform.forward, out RaycastHit raycastHit, 1))
         {
             GameObject possessionGameObject = raycastHit.transform.gameObject;
-
-            if (possessionGameObject.TryGetComponent<IPossessable>(out IPossessable possessable) && !_possessionTarget)
+            IPossessable possessableInterface = possessionGameObject.GetComponent<IPossessable>();
+            if (possessionGameObject && possessableInterface != null && !_possessionTarget)
             {
                 _possessionTarget = possessionGameObject;
+                IsPossessing = true;
+                transform.position = _possessionTarget.transform.position;
+                PlayerMesh.enabled = false;
             }
         } 
         else if (_possessionTarget)

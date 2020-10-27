@@ -34,7 +34,7 @@ public class PossessionBehaviour : MonoBehaviour
 
     private void LeavePossessedTarget()
     {
-        if (Input.GetMouseButtonDown(1) && _possessionTarget && _isPossessing)
+        if (Input.GetKey(KeyCode.E) && _possessionTarget && _isPossessing)
         {
             _isPossessing = false;
             transform.position = _possessionTarget.transform.position;
@@ -45,7 +45,7 @@ public class PossessionBehaviour : MonoBehaviour
 
     private void PossessTarget()
     {
-        if (Input.GetMouseButtonDown(1) && _possessionTarget && !_isPossessing)
+        if (Input.GetKey(KeyCode.E) && _possessionTarget && !_isPossessing)
         {
             _isPossessing = true;
             transform.position = _possessionTarget.transform.position;

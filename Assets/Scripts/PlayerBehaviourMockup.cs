@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -28,7 +27,8 @@ public class PlayerBehaviourMockup : MonoBehaviour
     private void FixedUpdate()
     {
         _levitateBehaviour.MoveLevitateableObject();
-    
+    }
+
     private IEnumerator ActivateCooldown()
     {
         _isOnCooldown = true;

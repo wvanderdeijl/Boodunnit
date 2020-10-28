@@ -1,41 +1,65 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class HighlightBehaviour : MonoBehaviour
 {
     public float Radius;
-    private Shader _standardShader;
-    private void Update()
-    {
-        HighlightTargetsInRadius();
-    }
+
+    private Shader _standardShader, _noShader;
+    private List<Collider> _previousColliders = new List<Collider>();
+    private IEnumerable<Collider> _removeShaderFromColliders;
 
     private void Awake()
     {
         _standardShader = Shader.Find("Outlined/Highlight");
+        _noShader = Shader.Find("Standard");
     }
 
-    private void HighlightTargetsInRadius()
+    public void HighlightTargetsInRadius()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, Radius);
+        List<Collider> currentColliders = new List<Collider>();
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.gameObject.TryGetComponent<IPossessable>(out IPossessable possessable) ||
-                hitCollider.gameObject.TryGetComponent<ILevitatetable>(out ILevitatetable levitatetable) ||
-                hitCollider.gameObject.TryGetComponent<IScareable>(out IScareable scareable))
+            if (hitCollider.gameObject.TryGetComponent(out IPossessable possessable) ||
+                hitCollider.gameObject.TryGetComponent(out ILevitatetable levitatetable))
             {
-                ChangeShader(hitCollider.gameObject.GetComponent<Renderer>(), _standardShader);
+                ChangeShader(hitCollider.gameObject.GetComponent<Renderer>(), _standardShader, true);
+
+                //Add colliders tot the previous list
+                if (!_previousColliders.Contains(hitCollider))
+                {
+                    _previousColliders.Add(hitCollider);
+                }
+
+                if (!currentColliders.Contains(hitCollider))
+                {
+                    currentColliders.Add(hitCollider);
+                }
             } 
-            else
-            {
-                //change shader back
-            }
+        }
+
+        //Check differences in previous and current collider list
+        _removeShaderFromColliders = _previousColliders.Except(currentColliders);
+
+        foreach (Collider c in _removeShaderFromColliders)
+        {
+            ChangeShader(c.gameObject.GetComponent<Renderer>(), _noShader, false);
         }
     }
 
-    private void ChangeShader(Renderer renderer, Shader shader)
+    private void ChangeShader(Renderer renderer, Shader shader, bool addShader)
     {
-        renderer.material.shader = shader;
+        if (addShader)
+        {
+            renderer.material.shader = shader;
+        }
+        else
+        {
+            renderer.material.shader = _noShader;
+        }
     }
 
     private void OnDrawGizmosSelected()

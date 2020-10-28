@@ -3,10 +3,13 @@
 public class PlayerBehaviour : MonoBehaviour
 {
     public PossessionBehaviour PossessionBehaviour;
+    public HighlightBehaviour HighlightBehaviour;
 
     // Update is called once per frame
     void Update()
     {
+        HighlightBehaviour.HighlightGameobjectsInRadius();
+
         //Posses behaviour
         if (Input.GetKey(KeyCode.E))
         {

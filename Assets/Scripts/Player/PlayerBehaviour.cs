@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HighlightBehaviour.HighlightTargetsInRadius();
+        HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Posses behaviour
         if (Input.GetKey(KeyCode.E))

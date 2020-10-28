@@ -26,6 +26,7 @@ public class StandardLevitateableObject : MonoBehaviour, ILevitateable
     {
         _rigidbodyObject.useGravity = false;
         _rigidbodyObject.isKinematic = true;
+        CanBeLevitated = false;
         _currentLevitationState = LevitationState.Levitating;
     }
 
@@ -33,6 +34,7 @@ public class StandardLevitateableObject : MonoBehaviour, ILevitateable
     {
         _rigidbodyObject.useGravity = true;
         _rigidbodyObject.isKinematic = false;
+        CanBeLevitated = true;
         _currentLevitationState = LevitationState.NotLevitating;
     }
 

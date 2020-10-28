@@ -6,5 +6,4 @@ public interface ILevitateable
     bool CanBeLevitated { get; set; }
     LevitationState State { get; set; }
     IEnumerator LevitateForSeconds(float seconds);
-    IEnumerator LevitateForSeconds(int seconds);
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerBehaviourMockup : MonoBehaviour
 {
     [SerializeField] private LevitateBehaviour _levitateBehaviour;
-    [SerializeField] private TerrifyBehaviour _terrifyBehaviour;
 
     private bool _isOnCooldown;
 
@@ -24,6 +23,7 @@ public class PlayerBehaviourMockup : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             _levitateBehaviour.RotateLevitateableObject();
+            StartCoroutine(ActivateCooldown());
         }
 
         _levitateBehaviour.PushOrPullLevitateableObject();

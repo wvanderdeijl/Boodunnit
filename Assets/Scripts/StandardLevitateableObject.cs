@@ -1,11 +1,6 @@
 ﻿using System.Collections;
+using DefaultNamespace.Enums;
 using UnityEngine;
-
-public enum LevitationState
-{
- Levitating,
- NotLevitating
-}
 
 [RequireComponent(typeof(Rigidbody))]
 public class StandardLevitateableObject : MonoBehaviour, ILevitateable

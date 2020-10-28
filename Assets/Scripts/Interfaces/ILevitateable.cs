@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DefaultNamespace.Enums;
 
 public interface ILevitateable
 {

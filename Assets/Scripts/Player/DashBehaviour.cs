@@ -17,63 +17,64 @@ public class DashBehaviour : MonoBehaviour
 
     private Rigidbody _rigidbodyPlayer;
 
-    private ArrayList _stopDashLayerList;
+    private IEnumerator _dashCoroutine;
 
     private void Awake()
     {
         _rigidbodyPlayer = GetComponent<Rigidbody>();
         _dashSpeed = _dashDistance / _dashDuration;
         _endPositionRadius = GetComponent<Collider>().bounds.extents.z;
-        _stopDashLayerList = new ArrayList() {10};
     }
 
     public void Dash()
     {
-        StartCoroutine(PerformDash());
-        StartCoroutine(DashCoroutineTimer());
+        _dashCoroutine = PerformDash();
+        StartCoroutine(_dashCoroutine);
+        StartCoroutine(DashTimer());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (_stopDashLayerList.Contains(collision.gameObject.layer))
-        {
-            StopCoroutine(PerformDash());
-            IsDashing = false;
-        }
+        StopCoroutine(_dashCoroutine);
+        IsDashing = false;
     }
 
     private IEnumerator PerformDash()
     {
         IsDashing = true;
+
         Vector3 oldVelocity = _rigidbodyPlayer.velocity;
-        Vector3 newVelocity = transform.rotation * transform.forward * _dashSpeed;
-        if (CheckDashEndPosition(newVelocity))
+        Vector3 newVelocity = transform.forward * _dashSpeed;
+
+        if (CheckDashEndPosition())
         {
             gameObject.layer = 9;
         }
+
         _rigidbodyPlayer.velocity = newVelocity;
 
         yield return new WaitForSeconds(_dashDuration);
 
         _rigidbodyPlayer.velocity = oldVelocity;
         gameObject.layer = 8;
+
         DashOnCooldown = true;
         IsDashing = false;
     }
 
-    private bool CheckDashEndPosition(Vector3 velocity)
+    private bool CheckDashEndPosition()
     {
-        Vector3 endPosition = velocity * _dashDuration;
+        Vector3 endPosition = transform.position + (transform.forward * _dashDistance);
 
-        Collider[] endPositionColliders = Physics.OverlapSphere(endPosition, _endPositionRadius);
-        if (endPositionColliders != null)
+        Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _endPositionRadius);
+        if (endPositionColliderArray != null)
         {
-            return endPositionColliders.Length == 0;
+            return endPositionColliderArray.Length == 0;
         }
         return true;
     }
 
-    private IEnumerator DashCoroutineTimer()
+    private IEnumerator DashTimer()
     {
         yield return new WaitForSeconds(_dashCooldown + _dashDuration);
         DashOnCooldown = false;

@@ -5,14 +5,14 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
 
-    public void StartGame()
+    public void NewGame()
     {
-        // Todo start the game
+        // Todo start a new game
     }
 
-    public void LoadGame()
+    public void ContinueGame()
     {
-        // Todo load the game
+        // Todo load the game from the last save point
     }
 
     public void QuitGame()

@@ -15,13 +15,18 @@ public class PlayerBehaviourMockup : MonoBehaviour
 
     private void Update()
     {
-        _levitateBehaviour.ReceiveObjectRigidbodyWithMouseClick();
-
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !_isOnCooldown)
+        
+        if (Input.GetMouseButtonDown(0))
         {
-            _terrifyBehaviour.TerrifyEntities();
-            StartCoroutine(ActivateCooldown());
+            _levitateBehaviour.LevitationStateHandler();
         }
+        
+        if (Input.GetMouseButton(1))
+        {
+            _levitateBehaviour.RotateLevitateableObject();
+        }
+
+        _levitateBehaviour.PushOrPullLevitateableObject();
     }
 
     private void FixedUpdate()

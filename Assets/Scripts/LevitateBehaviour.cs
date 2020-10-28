@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class LevitateBehaviour : MonoBehaviour
 {
@@ -11,20 +12,23 @@ public class LevitateBehaviour : MonoBehaviour
     
     private Vector3 _originalScreenTargetPosition;
     private Vector3 _originalRigidbodyPosition;
-
-    public void ReceiveObjectRigidbodyWithMouseClick()
+    
+    private enum LevitationState { IsLevitating, IsNotLevitating }
+    private LevitationState _currentLevitationState = LevitationState.IsNotLevitating;
+    
+    public void LevitationStateHandler()
     {
-        if (Input.GetMouseButtonDown(0))
+        switch (_currentLevitationState)
         {
-            _selectedRigidbody = GetRigidbodyFromMouseClick();
-        }
-        
-        if (Input.GetMouseButtonUp(0) && _selectedRigidbody)
-        {
-            _selectedRigidbody = null;
+            case LevitationState.IsNotLevitating:
+                GetRigidbodyAndChangeState();
+                break;
+            case LevitationState.IsLevitating:
+                StartCoroutine(RemoveRigidbodyAndChangeState());
+                break;
         }
     }
-
+    
     public void MoveLevitateableObject()
     {
         if (_selectedRigidbody)
@@ -32,6 +36,7 @@ public class LevitateBehaviour : MonoBehaviour
             if (!LevitateableObjectIsInRange())
             {
                 _selectedRigidbody = null;
+                _currentLevitationState = LevitationState.IsNotLevitating;
                 return;
             }
             
@@ -49,16 +54,56 @@ public class LevitateBehaviour : MonoBehaviour
                 * (500 * Time.deltaTime);
         }
     }
+
+    public void PushOrPullLevitateableObject()
+    {
+        if (_selectedRigidbody)
+        {
+            //todo: push or pull with scroll bar 
+        }
+    }
+
+    public void RotateLevitateableObject()
+    {
+        if (_selectedRigidbody)
+        {
+            //todo: rotate object by dragging mouse
+        }
+    }
+
+    private void GetRigidbodyAndChangeState()
+    {
+        _selectedRigidbody = GetRigidbodyFromMouseClick();
+
+        if (!_selectedRigidbody) return;
+                
+        _currentLevitationState = LevitationState.IsLevitating;
+    }
+
+    private IEnumerator RemoveRigidbodyAndChangeState()
+    {
+        ActivateLevitateCoRoutine();
+        
+        yield return new WaitForSeconds(5f);
+        
+        _currentLevitationState = LevitationState.IsNotLevitating;
+        
+        _selectedRigidbody = null;
+    }
     
     private Rigidbody GetRigidbodyFromMouseClick()
     {
+        if (_currentLevitationState == LevitationState.IsLevitating) return null;
+
         RaycastHit hitInfo = new RaycastHit();
         
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         
         bool hit = Physics.Raycast(ray, out hitInfo);
         
-        if (hit)
+        //todo: also check if the gameobject has an Ilevatateable Interface
+        
+        if (hit && hitInfo.collider.gameObject.GetComponent<StandardLevitateableObject>())
         {
             if (hitInfo.collider.gameObject.GetComponent<Rigidbody>())
             {
@@ -85,5 +130,21 @@ public class LevitateBehaviour : MonoBehaviour
     {
         float distance = Vector3.Distance(_player.transform.position, _selectedRigidbody.transform.position);
         return distance < _levitateRange;
+    }
+
+    private bool IsLevitateableObjectInFrontOfPlayer()
+    {
+        //todo: check if objects are in front of the player
+        return false;
+    }
+    
+    private void ActivateLevitateCoRoutine()
+    {
+        if (_selectedRigidbody)
+        {
+            _selectedRigidbody.transform.gameObject.GetComponent<StandardLevitateableObject>().StartLevitation();
+            
+            //todo: Start the levitate CoRoutine if the game object has an ILevitateable interface
+        }
     }
 }

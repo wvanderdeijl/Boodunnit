@@ -1,45 +1,62 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class StandardLevitateableObject : MonoBehaviour
+public enum LevitationState
 {
-    private int _secondsToLevitate = 5;
+ Levitating,
+ NotLevitating
+}
+
+[RequireComponent(typeof(Rigidbody))]
+public class StandardLevitateableObject : MonoBehaviour, ILevitateable
+{
+    private float _secondsToLevitate = 5f;
     private Rigidbody _rigidbodyObject;
+
+    private LevitationState _currentLevitationState = LevitationState.NotLevitating;
     
-    private enum LevitationState { IsLevitated, IsNotLevitated }
-    private LevitationState _currentLevitationState = LevitationState.IsNotLevitated;
     
     private void Awake()
     {
         _rigidbodyObject = GetComponent<Rigidbody>();
+        CanBeLevitated = true;
     }
 
     private void FreezeObject()
     {
         _rigidbodyObject.useGravity = false;
         _rigidbodyObject.isKinematic = true;
-        _currentLevitationState = LevitationState.IsLevitated;
+        _currentLevitationState = LevitationState.Levitating;
     }
 
     private void ReleaseObject()
     {
-        _rigidbodyObject.useGravity = false;
-        _rigidbodyObject.isKinematic = true;
-        _currentLevitationState = LevitationState.IsNotLevitated;
+        _rigidbodyObject.useGravity = true;
+        _rigidbodyObject.isKinematic = false;
+        _currentLevitationState = LevitationState.NotLevitating;
     }
-    
-    public IEnumerator LevitateForSeconds(int seconds)
+
+    public void StartLevitation()
+    {
+        if (_currentLevitationState == LevitationState.NotLevitating)
+        {
+            StartCoroutine(LevitateForSeconds(_secondsToLevitate));
+        }
+    }
+
+    public IEnumerator LevitateForSeconds(float seconds)
     {
         FreezeObject();
         yield return new WaitForSeconds(seconds);
         ReleaseObject();
     }
 
-    public void StartLevitation()
+    public void ToggleCanBeLevitated()
     {
-        if (_currentLevitationState == LevitationState.IsNotLevitated)
-        {
-            StartCoroutine(LevitateForSeconds(_secondsToLevitate));
-        }
+        CanBeLevitated = !CanBeLevitated;
     }
+
+    public bool CanBeLevitated { get; set; }
+    
+    public LevitationState State { get; set; }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class TerrifyBehaviour : MonoBehaviour
 {
     [SerializeField] private float _radius = 10f;
-    [SerializeField] private float _distance = 20f;
+    [SerializeField] private float _angle = 90f;
 
     private List<IFearable> _fearables;
 
@@ -29,14 +29,17 @@ public class TerrifyBehaviour : MonoBehaviour
     private void GetEntitiesInProximity()
     {
         _fearables.Clear();
-        
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, transform.forward,
-            _distance);
-        
-        foreach (RaycastHit hit in hits)
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+
+        foreach (Collider collider in colliders)
         {
-            IFearable fearable = hit.collider.GetComponent<IFearable>();
-            if(fearable != null) _fearables.Add(fearable);
+            Vector3 offset = (collider.transform.position - transform.position).normalized;
+            float dot = Vector3.Dot(offset, transform.forward);
+            
+            IFearable fearable = collider.GetComponent<IFearable>();
+
+            if (dot * 100f >= (90 - (_angle / 2f)) && fearable != null) _fearables.Add(fearable);
         }
     }
 }

@@ -3,6 +3,7 @@
 public class PlayerBehaviour : MonoBehaviour
 {
     public PossessionBehaviour PossessionBehaviour;
+    public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
 
     // Update is called once per frame
@@ -26,7 +27,10 @@ public class PlayerBehaviour : MonoBehaviour
         //Dash behaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            print("Key LeftShift was hit");
+            if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown)
+            {
+                DashBehaviour.Dash();
+            }
         }
 
         //Levitate behaviour

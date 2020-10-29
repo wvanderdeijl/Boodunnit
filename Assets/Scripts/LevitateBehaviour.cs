@@ -160,11 +160,11 @@ public class LevitateBehaviour : MonoBehaviour
                 if (hitCollider.gameObject.GetComponent(typeof(ILevitateable)))
                 {
                     Vector3 targetDirection = hitCollider.transform.position - transform.position;
-                    float angle = Vector3.Angle(targetDirection, transform.forward);
+                    float angle = Vector3.Angle(targetDirection, _player.transform.forward);
 
-                    if (angle > -30f || angle < 30f) //todo: wat de knekker moet ik voor waarden in vullen.
+                    if (angle > -45f && angle < 45f)
                     {
-                        Debug.Log(hitCollider.gameObject.name);
+                        Debug.Log(hitCollider.gameObject.name + " " + angle);
                         hitCollider.gameObject.GetComponent<ILevitateable>().IsInsideSphere = false;
                     }
                 }

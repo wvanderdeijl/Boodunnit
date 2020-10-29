@@ -6,6 +6,8 @@ public class PlayerBehaviourMockup : MonoBehaviour
     
     private void Update()
     {
+        _levitateBehaviour.FindObjectInFrontOfPLayer();
+        
         if (Input.GetMouseButtonDown(0))
         {
             _levitateBehaviour.LevitationStateHandler();

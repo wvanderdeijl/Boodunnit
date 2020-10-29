@@ -23,7 +23,7 @@ public class PlayerBehaviourMockup : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             _levitateBehaviour.RotateLevitateableObject();
-            StartCoroutine(ActivateCooldown());
+            // StartCoroutine(ActivateCooldown());
         }
 
         _levitateBehaviour.PushOrPullLevitateableObject();

@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsPaused;
 
     public GameObject Canvas;
+
+    public List<GameObject> CanvasPanels;
 
     public void OnPauseGame()
     {
@@ -22,6 +25,7 @@ public class PauseMenu : MonoBehaviour
     {
         Canvas.SetActive(false);
         IsPaused = false;
+        ResetPanels();
 
         Time.timeScale = 1;
     }
@@ -29,5 +33,14 @@ public class PauseMenu : MonoBehaviour
     public void OnQuitToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void ResetPanels()
+    {
+        foreach(GameObject panel in CanvasPanels)
+        {
+            panel.SetActive(false);
+        }
+        CanvasPanels[0].SetActive(true);
     }
 }

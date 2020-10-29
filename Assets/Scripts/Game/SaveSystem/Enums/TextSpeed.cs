@@ -1,4 +1,4 @@
-﻿public enum TextSpeedEnum
+﻿public enum TextSpeed
 {
     Slow,
     Normal,

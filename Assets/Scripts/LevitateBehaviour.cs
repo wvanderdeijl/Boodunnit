@@ -36,7 +36,7 @@ public class LevitateBehaviour : MonoBehaviour
                 _selectedRigidbody = null;
                 return;
             }
-            
+
             Vector3 mousePosition = new Vector3(
                 Input.mousePosition.x,
                 Input.mousePosition.y,
@@ -56,7 +56,15 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (_selectedRigidbody)
         {
-            //todo: push or pull with scroll bar 
+            if (_selectionDistance < 2f)
+            {
+                //todo: Mathf.Clamp
+                
+                _selectionDistance = 2.1f;
+                return;
+            }
+            
+            _selectionDistance += (Input.GetAxis("Mouse ScrollWheel") * 300f * Time.deltaTime);
         }
     }
 
@@ -97,6 +105,11 @@ public class LevitateBehaviour : MonoBehaviour
             {
                 return null;
             }
+
+            if (!_selectedRigidbody.gameObject.GetComponent<ILevitateable>().CanBeLevitated)
+            {
+                return null;
+            }
         } 
             
 
@@ -105,9 +118,7 @@ public class LevitateBehaviour : MonoBehaviour
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         
         bool hit = Physics.Raycast(ray, out hitInfo);
-        
-        //todo: also check if the gameobject has an Ilevatateable Interface
-        
+
         if (hit && hitInfo.collider.gameObject.GetComponent(typeof(ILevitateable)) )
         {
             if (hitInfo.collider.gameObject.GetComponent<Rigidbody>())

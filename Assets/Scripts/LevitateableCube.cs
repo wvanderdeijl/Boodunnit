@@ -14,8 +14,6 @@ public class LevitateableCube : MonoBehaviour, ILevitateable
     }
 
     public bool CanBeLevitated { get; set; }
-    
-    public float SecondsToLevitate { get; set; }
 
     public LevitationState State { get; set; }
     

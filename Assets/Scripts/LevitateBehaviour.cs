@@ -32,8 +32,13 @@ public class LevitateBehaviour : MonoBehaviour
         {
             if (!LevitateableObjectIsInRange())
             {
-                _selectedRigidbody.gameObject.GetComponent<ILevitateable>().State = LevitationState.NotLevitating;
-                _selectedRigidbody = null;
+                RemoveGameObjectFromCursor();
+                return;
+            }
+
+            if (!_selectedRigidbody.gameObject.GetComponent<ILevitateable>().CanBeLevitated)
+            {
+                RemoveGameObjectFromCursor();
                 return;
             }
 
@@ -51,6 +56,13 @@ public class LevitateBehaviour : MonoBehaviour
                 * (500 * Time.deltaTime);
         }
     }
+
+    private void RemoveGameObjectFromCursor()
+    {
+        _selectedRigidbody.gameObject.GetComponent<ILevitateable>().State = LevitationState.NotLevitating;
+        _selectedRigidbody = null;
+    }
+    
 
     public void PushOrPullLevitateableObject()
     {

@@ -150,6 +150,8 @@ public class LevitateBehaviour : MonoBehaviour
     public void FindObjectInFrontOfPLayer()
     {
         _hitColliders = Physics.OverlapSphere(_player.transform.position, 5f);
+        
+        //PATRICK LET NIET OP DEZE DRIE IFJES HET SPIJT ME IK FIX DIT BINNENKORT
 
         if (_colliderCount > 0)
         {

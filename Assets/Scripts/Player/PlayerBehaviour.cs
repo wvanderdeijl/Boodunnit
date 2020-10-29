@@ -12,7 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Posses behaviour
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (PossessionBehaviour.IsPossessing)
             {

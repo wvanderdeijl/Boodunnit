@@ -2,15 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PossessionBehaviour : MonoBehaviour
 {
     public MeshRenderer PlayerMesh;
     public bool IsPossessing = false;
 
+    public Image CooldownImage;
+
     private float _possessionRadius = 1;
     private GameObject _possessionTarget;
+
+    private float _cooldown = 2f;
+    private bool _isOnCooldown = false;
 
     public void LeavePossessedTarget()
     {
@@ -20,12 +25,15 @@ public class PossessionBehaviour : MonoBehaviour
             transform.position = _possessionTarget.transform.position;
             PlayerMesh.enabled = true;
             _possessionTarget = null;
+            _isOnCooldown = true;
+
+            StartCoroutine(PossessionTimer());
         }
     }
 
     public void PossessTarget()
     {
-        if (IsPossessing)
+        if (IsPossessing || _isOnCooldown)
         {
             return;
         }
@@ -46,5 +54,18 @@ public class PossessionBehaviour : MonoBehaviour
         {
             _possessionTarget = null;
         }
+    }
+
+    private IEnumerator PossessionTimer()
+    {
+        float currentTime = 0;
+
+        while (currentTime < _cooldown)
+        {
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+            CooldownImage.fillAmount = currentTime / _cooldown;
+        }
+        _isOnCooldown = false;
     }
 }

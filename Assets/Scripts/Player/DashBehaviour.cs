@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DashBehaviour : MonoBehaviour
 {
     public bool IsDashing = false;
     public bool DashOnCooldown = false;
+
+    public Image DashCooldownImage;
 
     private float _dashCooldown = 2f;
     private float _dashDuration = 0.4f;
@@ -35,8 +38,11 @@ public class DashBehaviour : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        StopCoroutine(_dashCoroutine);
-        IsDashing = false;
+        if (IsDashing)
+        {
+            StopCoroutine(_dashCoroutine);
+            IsDashing = false;
+        }
     }
 
     private IEnumerator PerformDash()
@@ -76,7 +82,15 @@ public class DashBehaviour : MonoBehaviour
 
     private IEnumerator DashTimer()
     {
-        yield return new WaitForSeconds(_dashCooldown + _dashDuration);
+        float currentTime = 0;
+        float interval = _dashCooldown + _dashDuration;
+
+        while (currentTime < interval)
+        {
+            yield return new WaitForEndOfFrame();
+            currentTime += Time.deltaTime;
+            DashCooldownImage.fillAmount = currentTime / interval;
+        }
         DashOnCooldown = false;
     }
 }

@@ -17,8 +17,10 @@ public class CameraController : MonoBehaviour
         get { return _distance; }
         set
         {
-            if (value > MaxDistance) value = MaxDistance;
-            if (value < MinDistance) value = MinDistance;
+            if (value > MaxDistance)
+                value = MaxDistance;
+            if (value < MinDistance)
+                value = MinDistance;
             _distance = value;
         }
     }
@@ -40,14 +42,23 @@ public class CameraController : MonoBehaviour
     private float _minElevationOrigin;
     private float _maxElevationOrigin;
     public float MaxElevation = 8f;
-    public float MinElevation = -0.5f;
+    public float MinElevation = 0f;
+
+    private bool _elevationOverflow;
     public float ElevationRange
     {
-        get { return _elevationRange;}
+        get
+        {
+            return _elevationRange;
+        }
         set
         {
             if (value > MaxElevation) value = MaxElevation;
-            if (value < MinElevation) value = MinElevation;
+            if (value < MinElevation)
+            {
+                value = MinElevation;
+                ScrollZoom(_rotationInput.y * Time.deltaTime);
+            }
             _elevationRange = value;
         }
     }
@@ -62,6 +73,7 @@ public class CameraController : MonoBehaviour
         Distance = MaxDistance;
         _minElevationOrigin = MinElevation;
         _maxElevationOrigin = MaxElevation;
+        ScrollZoom(0);
     }
 
     private void Update()
@@ -118,26 +130,27 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Physics.Raycast(CameraRotationTarget.position, (transform.position - CameraRotationTarget.position).normalized,out RaycastHit raycastHit,
+        Vector3 direction = (transform.position - CameraRotationTarget.position).normalized;
+        if (Physics.Raycast(CameraRotationTarget.position, direction,out RaycastHit raycastHit,
             Distance ))
         {
             ScrollZoom(-Vector3.Distance(transform.position, raycastHit.point));
             _scrollZoomActivation = false;
-            if (raycastHit.point.y <= CameraRotationTarget.position.y || CameraRotationTarget.position.y > transform.position.y)
-            {
-                ElevateCamera(30f);
-                Vector3 newPoint = raycastHit.point;
-                newPoint.y += 0.1f;
-                transform.position = newPoint;
-                _scrollZoomActivation = true;
-            }
-            else if (raycastHit.point.y > CameraRotationTarget.position.y +
-                CameraRotationTarget.GetComponent<Collider>().bounds.size.y)
-            {
-                ElevateCamera(-30f);
-                _scrollZoomActivation = true;
-            }
+
+            //     ElevateCamera(30f);
+            //     Vector3 newPoint = raycastHit.point;
+            //     newPoint.y += 0.1f;
+            //     transform.position = newPoint;
+            //     _scrollZoomActivation = true;
+            // }
+            // else if (raycastHit.point.y > CameraRotationTarget.position.y +
+            //     CameraRotationTarget.GetComponent<Collider>().bounds.size.y)
+            // {
+            //     ElevateCamera(-30f);
+            //     _scrollZoomActivation = true;
+            // }
         }
+
     }
 
     private void ScrollZoom(float zoomAmount)
@@ -147,8 +160,6 @@ public class CameraController : MonoBehaviour
         MaxElevation = _maxElevationOrigin * Distance / 7;
         RotateCamera(0);
     }
-
-
     private void RotateCamera(float rotationInput)
     {
         _angle += (rotationInput * RotationSpeed * Time.deltaTime);

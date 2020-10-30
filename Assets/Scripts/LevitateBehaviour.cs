@@ -8,6 +8,10 @@ public class LevitateBehaviour : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private float _mouseWheelSpeed = 300f;
     [SerializeField] private float _overlapSphereRadius = 5f;
+    [SerializeField] private float _minimumSelectionDistance = 2f;
+    [SerializeField] private float _rotationSpeed = 30f;
+    [SerializeField] private float _frozenDuration = 5f;
+    [SerializeField] private float _overlapSphereAngle = 45f;
     
     private Rigidbody _selectedRigidbody;
     private float _selectionDistance;
@@ -61,7 +65,13 @@ public class LevitateBehaviour : MonoBehaviour
 
     private void RemoveGameObjectFromCursor()
     {
-        _selectedRigidbody.gameObject.GetComponent<ILevitateable>().State = LevitationState.NotLevitating;
+        ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+
+        if (levitateable != null)
+        {
+            levitateable.State = LevitationState.NotLevitating;
+        }
+
         _selectedRigidbody = null;
     }
 
@@ -69,9 +79,9 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (!_selectedRigidbody) return;
         
-        if (_selectionDistance < 2f)
+        if (_selectionDistance < _minimumSelectionDistance)
         {
-            _selectionDistance = 2.1f;
+            _selectionDistance = _minimumSelectionDistance + 0.1f;
             return;
         }
             
@@ -82,8 +92,8 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (!_selectedRigidbody) return;
 
-        float xaxisRotation = Input.GetAxis("Mouse X")* 30f * Time.deltaTime;
-        float yaxisRotation = Input.GetAxis("Mouse Y")* 30f * Time.deltaTime;
+        float xaxisRotation = Input.GetAxis("Mouse X")* _rotationSpeed * Time.deltaTime;
+        float yaxisRotation = Input.GetAxis("Mouse Y")* _rotationSpeed * Time.deltaTime;
             
         _selectedRigidbody.transform.RotateAround (Vector3.down, xaxisRotation);
         _selectedRigidbody.transform.RotateAround (Vector3.right, yaxisRotation);
@@ -93,14 +103,24 @@ public class LevitateBehaviour : MonoBehaviour
     {
         _selectedRigidbody = GetRigidbodyFromMouseClick();
 
+        ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+
         if (!_selectedRigidbody) return;
-                
-        _selectedRigidbody.gameObject.GetComponent<ILevitateable>().State = LevitationState.Levitating;
+
+        if (levitateable != null)
+        {
+            levitateable.State = LevitationState.Levitating;
+        }
     }
 
     private void RemoveRigidbodyAndChangeState()
     {
-        _selectedRigidbody.gameObject.GetComponent<ILevitateable>().State = LevitationState.Frozen;
+        ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+
+        if (levitateable != null)
+        {
+            levitateable.State = LevitationState.Frozen;
+        }
 
         ActivateLevitateCoRoutine();
         
@@ -111,32 +131,28 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (_selectedRigidbody)
         {
-
             ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
             
-            if (levitateable.State == LevitationState.Frozen)
-            {
-                return null;
-            }
-
-            if (!levitateable.IsInsideSphere ||
-                !levitateable.CanBeLevitated)
+            if (levitateable != null &&
+                (!levitateable.IsInsideSphere ||
+                !levitateable.CanBeLevitated ||
+                levitateable.State == LevitationState.Frozen))
             {
                 return null;
             }
         }
         
         RaycastHit hitInfo = new RaycastHit();
-
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-
         bool hit = Physics.Raycast(ray, out hitInfo);
 
-        if (!hit || !hitInfo.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
-        if (!hitInfo.collider.gameObject.GetComponent<Rigidbody>()) return null;
-
+        Rigidbody rigidbody = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
+        
+        if (!hit || hitInfo.collider.gameObject.GetComponent<ILevitateable>() != null) return null;
+        
+        if (!rigidbody) return null;
+        
         _selectionDistance = Vector3.Distance(ray.origin, hitInfo.point);
-
         _originalScreenTargetPosition = _mainCamera.ScreenToWorldPoint(
             new Vector3(
                 Input.mousePosition.x,
@@ -146,8 +162,7 @@ public class LevitateBehaviour : MonoBehaviour
         );
 
         _originalRigidbodyPosition = hitInfo.collider.transform.position;
-
-        return hitInfo.collider.gameObject.GetComponent<Rigidbody>();
+        return rigidbody;
     }
 
 
@@ -159,7 +174,9 @@ public class LevitateBehaviour : MonoBehaviour
         {
             foreach (var hitCollider in _cachedHitColliders)
             {
-                if (hitCollider.gameObject.GetComponent(typeof(ILevitateable)))
+                ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();
+                
+                if (levitateable != null)
                 {
                     ToggleIsInsideSphereBool(hitCollider, false);
                 }
@@ -168,7 +185,9 @@ public class LevitateBehaviour : MonoBehaviour
 
         foreach (var hitCollider in _hitColliders)
         {
-            if (hitCollider.gameObject.GetComponent(typeof(ILevitateable)))
+            ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();
+            
+            if (levitateable != null)
             {
                 ToggleIsInsideSphereBool(hitCollider, true);
             }
@@ -183,18 +202,24 @@ public class LevitateBehaviour : MonoBehaviour
         Vector3 targetDirection = hitCollider.transform.position - transform.position;
         float angle = Vector3.Angle(targetDirection, _player.transform.forward);
                 
-        if (angle > -45f && angle < 45f)
+        if (angle > -_overlapSphereAngle && angle < _overlapSphereAngle)
         {
-            hitCollider.gameObject.GetComponent<ILevitateable>().IsInsideSphere = isInsideSphere;
+            ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();
+
+            if (levitateable != null)
+            {
+                levitateable.IsInsideSphere = isInsideSphere;
+            }
         }
     }
 
     private void ActivateLevitateCoRoutine()
     {
-        if (_selectedRigidbody && _selectedRigidbody.transform.gameObject.GetComponent(typeof(ILevitateable)))
+        ILevitateable levitateable = _selectedRigidbody.transform.gameObject.GetComponent<ILevitateable>();
+        
+        if (_selectedRigidbody && levitateable != null)
         {
-            StartCoroutine(_selectedRigidbody.transform.gameObject.GetComponent<ILevitateable>().LevitateForSeconds(5f));
-            StartCoroutine(_selectedRigidbody.transform.gameObject.GetComponent<ILevitateable>().LevitateForSeconds(5f));
+            StartCoroutine(levitateable.LevitateForSeconds(_frozenDuration));
         }
     }
 }

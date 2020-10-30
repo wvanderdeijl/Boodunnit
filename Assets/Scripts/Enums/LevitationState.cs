@@ -3,6 +3,7 @@
     public enum LevitationState
     {
         Levitating,
-        NotLevitating
+        NotLevitating,
+        Frozen
     }
 }

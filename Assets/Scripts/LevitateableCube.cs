@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DefaultNamespace.Enums;
 using UnityEngine;
 
@@ -6,12 +7,18 @@ using UnityEngine;
 public class LevitateableCube : MonoBehaviour, ILevitateable
 {
     private Rigidbody _rigidbody;
+    
     private void Awake()
     {
         CanBeLevitated = true;
         IsInsideSphere = false;
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        Debug.Log(gameObject.name + "'s state: " + State);
     }
 
     public bool CanBeLevitated { get; set; }
@@ -25,7 +32,7 @@ public class LevitateableCube : MonoBehaviour, ILevitateable
         _rigidbody.useGravity = false;
         _rigidbody.isKinematic = true;
         CanBeLevitated = false;
-        State = LevitationState.Levitating;
+        State = LevitationState.Frozen;
     }
 
     private void ReleaseObject()

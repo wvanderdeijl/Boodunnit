@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DefaultNamespace.Enums;
 using UnityEngine;
 
@@ -14,11 +13,6 @@ public class LevitateableCube : MonoBehaviour, ILevitateable
         IsInsideSphere = false;
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
-    }
-
-    private void Update()
-    {
-        Debug.Log(gameObject.name + "'s state: " + State);
     }
 
     public bool CanBeLevitated { get; set; }

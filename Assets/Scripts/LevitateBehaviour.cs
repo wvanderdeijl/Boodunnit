@@ -81,7 +81,7 @@ public class LevitateBehaviour : MonoBehaviour
     public void RotateLevitateableObject()
     {
         if (!_selectedRigidbody) return;
-        
+
         float xaxisRotation = Input.GetAxis("Mouse X")* 30f * Time.deltaTime;
         float yaxisRotation = Input.GetAxis("Mouse Y")* 30f * Time.deltaTime;
             
@@ -193,6 +193,7 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (_selectedRigidbody && _selectedRigidbody.transform.gameObject.GetComponent(typeof(ILevitateable)))
         {
+            StartCoroutine(_selectedRigidbody.transform.gameObject.GetComponent<ILevitateable>().LevitateForSeconds(5f));
             StartCoroutine(_selectedRigidbody.transform.gameObject.GetComponent<ILevitateable>().LevitateForSeconds(5f));
         }
     }

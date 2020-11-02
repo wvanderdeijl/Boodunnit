@@ -3,31 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool IsPaused;
 
     public GameObject Canvas;
+    public GameObject SettingsCanvas;
 
     public List<GameObject> CanvasPanels;
 
-    public void OnPauseGame()
+    public void TogglePauseGame(bool isActiveCanvas, int timeScale)
     {
-        Canvas.SetActive(true);
-        IsPaused = true;
+        Canvas.SetActive(isActiveCanvas);
+        IsPaused = !IsPaused;
 
-        Time.timeScale = 0;
-    }
-
-    public void OnUnpauseGame()
-    {
-        Canvas.SetActive(false);
-        IsPaused = false;
-        ResetPanels();
-
-        Time.timeScale = 1;
+        Time.timeScale = timeScale;
     }
 
     public void OnQuitToMainMenu()
@@ -35,9 +26,10 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void ResetPanels()
+    public void ResetPanels()
     {
-        foreach(GameObject panel in CanvasPanels)
+        SettingsCanvas.SetActive(false);
+        foreach (GameObject panel in CanvasPanels)
         {
             panel.SetActive(false);
         }

@@ -17,11 +17,12 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (!PauseMenu.IsPaused)
             {
-                PauseMenu.OnPauseGame();
+                PauseMenu.TogglePauseGame(true, 0);
             } 
             else
             {
-                PauseMenu.OnUnpauseGame();
+                PauseMenu.TogglePauseGame(false, 1);
+                PauseMenu.ResetPanels();
             }
         }
         if (PauseMenu.IsPaused)

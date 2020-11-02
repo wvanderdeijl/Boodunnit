@@ -2,13 +2,19 @@ using UnityEngine;
 
 public abstract class BaseMovement : MonoBehaviour
 {
-    public Rigidbody Rigidbody { get; set; }
-    
-    public float Speed { get; set; }
+    public Rigidbody Rigidbody;
+    public float Speed;
+
+    private float _rotationSpeed = 10f;
     
     public void MoveEntityInDirection(Vector3 direction)
     {
-        direction = direction.normalized;
-        Rigidbody.velocity = direction * Speed;
+        Rigidbody.velocity = direction.normalized * Speed;
+
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, 
+                Quaternion.LookRotation(direction.normalized), Time.deltaTime * _rotationSpeed);
+        }
     }
 }

@@ -6,19 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool IsPaused;
+    public static bool IsPaused = false;
 
     public GameObject Canvas;
     public GameObject SettingsCanvas;
 
     public List<GameObject> CanvasPanels;
 
-    public void TogglePauseGame(bool isActiveCanvas, int timeScale)
+    public void TogglePauseGame()
     {
-        Canvas.SetActive(isActiveCanvas);
+        if (IsPaused)
+        {
+            ResetPanels();
+        }
         IsPaused = !IsPaused;
-
-        Time.timeScale = timeScale;
+        Canvas.SetActive(IsPaused);
+        Time.timeScale = IsPaused ? 0 : 1;
     }
 
     public void OnQuitToMainMenu()
@@ -26,9 +29,10 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void ResetPanels()
+    private void ResetPanels()
     {
         SettingsCanvas.SetActive(false);
+
         foreach (GameObject panel in CanvasPanels)
         {
             panel.SetActive(false);

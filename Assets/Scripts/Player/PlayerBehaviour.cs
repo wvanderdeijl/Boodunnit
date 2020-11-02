@@ -15,16 +15,10 @@ public class PlayerBehaviour : MonoBehaviour
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!PauseMenu.IsPaused)
-            {
-                PauseMenu.TogglePauseGame(true, 0);
-            } 
-            else
-            {
-                PauseMenu.TogglePauseGame(false, 1);
-                PauseMenu.ResetPanels();
-            }
+            PauseMenu.TogglePauseGame();
         }
+
+        //Return when the game is paused, so there can be no input buffer
         if (PauseMenu.IsPaused)
         {
             return;

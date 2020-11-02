@@ -2,6 +2,7 @@
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public PauseMenu PauseMenu;
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
@@ -10,6 +11,18 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         HighlightBehaviour.HighlightGameobjectsInRadius();
+
+        //Pause game behaviour
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu.TogglePauseGame();
+        }
+
+        //Return when the game is paused, so there can be no input buffer
+        if (PauseMenu.IsPaused)
+        {
+            return;
+        }
 
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -53,6 +54,7 @@ public class SaveHandler
                 propertiesInScene.Add(unqiueKey, propertyValue);
             }
 
+            PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
         } else
         {
             Dictionary<string, object> propertiesInScene = new Dictionary<string, object>();
@@ -72,7 +74,7 @@ public class SaveHandler
 
         if (propertiesInScene.ContainsKey(uniqueKey))
         {
-            return (T)propertiesInScene[uniqueKey];
+            return (T)Convert.ChangeType(propertiesInScene[uniqueKey], typeof(T));
         }
 
         return default;

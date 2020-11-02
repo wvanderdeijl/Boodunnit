@@ -44,6 +44,7 @@ public class DialogueManager : MonoBehaviour
 
         _sentences.Clear();
 
+        //Add all sentences to Queue -> FIFO
         foreach (Sentence sentence in dialogue.sentences)
         {
             _sentences.Enqueue(sentence.sentence.ToString());
@@ -62,7 +63,9 @@ public class DialogueManager : MonoBehaviour
 
         string sentence = _sentences.Dequeue();
 
+        //Stop typing sentence before starting new coroutine
         StopAllCoroutines();
+
         StartCoroutine(TypeSentence(sentence, 0));
     }
 

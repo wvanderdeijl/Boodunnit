@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Test : MonoBehaviour, IEntity
+public class EntityPolice : MonoBehaviour, IEntity
 {
     public Dialogue M_dialogue;
     public Dialogue Dialogue

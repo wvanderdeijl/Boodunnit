@@ -5,6 +5,11 @@ public class PlayerBehaviour : MonoBehaviour
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
+    public DialogueManager DialogueManager;
+
+    [Header("Player Interaction Radius")]
+    public Transform InteractPoint;
+    public float InteractRadius;
 
     // Update is called once per frame
     void Update()
@@ -24,6 +29,15 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
+        //Dialogue behaviour
+        if (Input.GetKey(KeyCode.F))
+        {
+            if (!DialogueManager.hasDialogueStarted)
+            {
+                DialogueManager.TriggerDialogue(InteractPoint, InteractRadius);
+            }
+        }
+
         //Dash behaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -38,5 +52,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             print("Key H was hit");
         }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(InteractPoint.position, InteractRadius);
     }
 }

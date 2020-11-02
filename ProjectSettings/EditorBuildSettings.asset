@@ -4,5 +4,38 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Loading.unity
+    guid: 2ab8af32d428e4943a40adf57ff75249
+  - enabled: 1
+    path: Assets/Scenes/AbilityCooldownScene.unity
+    guid: 99c80549267fa5744aa114e656b6a6bd
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 080349b04d7ac7b49bdedeab11e69fb4
+  - enabled: 1
+    path: Assets/Scenes/CameraDevelopmentScene.unity
+    guid: 4c2d7109fbfe465438f906846e53d409
+  - enabled: 1
+    path: Assets/Scenes/DashBehaviourScene.unity
+    guid: 699bc7f5d9fce5046821c1f04c8521d4
+  - enabled: 1
+    path: Assets/Scenes/DevelopmentScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Highlight.unity
+    guid: 89c9396ed3c4c1b4baf21744cc35de5d
+  - enabled: 1
+    path: Assets/Scenes/LevitateScene.unity
+    guid: 0d29621e6978a4148a46a500ba5b6a18
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1883c24cd7424f44eac28a96aaac090f
+  - enabled: 1
+    path: Assets/Scenes/PllayerPossessionScene.unity
+    guid: a4f0b89a46b19dd4aa31075d923816a8
+  - enabled: 1
+    path: Assets/Scenes/TerrifyScene.unity
+    guid: 852947bf38190f747aa203de3fc0cba4
   m_configObjects: {}

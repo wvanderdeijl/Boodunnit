@@ -35,6 +35,12 @@ public class SaveHandler
         PlayerPrefs.DeleteAll();
     }
 
+    /// <summary>
+    /// This method is used to save a property of a gameobject in a specific scene
+    /// </summary>
+    /// <param name="nameOfGameObject">Name of game object</param>
+    /// <param name="nameOfProperty">Name of property you want to save</param>
+    /// <param name="propertyValue">Value of the property</param>
     public void SaveGameProperty(string nameOfGameObject, string nameOfProperty, object propertyValue)
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -65,9 +71,22 @@ public class SaveHandler
         PlayerPrefs.Save();
     }
 
-    public T GetPropertyValueFromUniqueKey<T>(string nameOfGameObject, string nameOfProperty)
+    /// <summary>
+    /// This method lets you get a value from a property of a scene
+    /// </summary>
+    /// <typeparam name="T">Type of value you return</typeparam>
+    /// <param name="nameOfGameObject">Name of the game object</param>
+    /// <param name="nameOfProperty">Name of the property</param>
+    /// <param name="sceneName">Name of the scene, default it's null, so it'll get the current scene.  
+    /// If you want to access properties from a different scene other then your current, pass the scene name.
+    /// </param>
+    /// <returns></returns>
+    public T GetPropertyValueFromUniqueKey<T>(string nameOfGameObject, string nameOfProperty, string sceneName = null)
     {
-        string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == null)
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
         string uniqueKey = nameOfGameObject + "_" + nameOfProperty;
 
         Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(PlayerPrefs.GetString(sceneName));

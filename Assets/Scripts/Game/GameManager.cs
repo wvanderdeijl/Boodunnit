@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,8 +42,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void UpdatePlayerPostion(float posX, float posY, float posZ)
+    {
+        GameObject gameObject = GameObject.Find("Knaap");
+        if (gameObject)
+        {
+            gameObject.transform.position = new Vector3(posX, posY, posZ);
+        }
+    }
+
     public void LoadSaveState()
     {
-        Dictionary<string, object> objects = SaveHandler.Instance.LoadGameObjects(Scene.name);
     }
 }

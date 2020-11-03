@@ -17,8 +17,9 @@ public class SceneTransitionHandler
     
     private static SceneTransitionHandler _instance;
 
-    public void GoToScene()
+    public void GoToScene(string sceneNameToLoad)
     {
+        // todo: daryl's SaveHandler saves next scene to load with param
         SceneManager.LoadScene("LoadingScene");
     }
 }

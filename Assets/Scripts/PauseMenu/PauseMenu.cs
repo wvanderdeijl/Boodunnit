@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject SettingsCanvas;
 
     public List<GameObject> CanvasPanels;
+    public GameObject CluePanel;
 
     public void TogglePauseGame()
     {

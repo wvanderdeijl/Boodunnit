@@ -556,10 +556,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingBar: {fileID: 597133183}
   HintText: {fileID: 279797820}
+  LoadingBackground: {fileID: 533904886}
   HintTextArray:
   - Did you know that Boolia likes pancakes?
-  - Jesse is legendarisch!
-  - Iedere wasbeer heeft een staart, maar niet iedere staart heeft een wasbeer.
+  - Did you know that Boolia likes Jesse?
+  - Did you know that Boolia likes Ryan?
 --- !u!1 &980051438
 GameObject:
   m_ObjectHideFlags: 0

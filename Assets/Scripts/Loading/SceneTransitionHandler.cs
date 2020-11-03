@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
-public class SceneTransitionHandler : MonoBehaviour
+public class SceneTransitionHandler
 {
     public static SceneTransitionHandler Instance
     {
@@ -18,16 +17,8 @@ public class SceneTransitionHandler : MonoBehaviour
     
     private static SceneTransitionHandler _instance;
 
-    public void GoToScene(string sceneName)
+    public void GoToScene()
     {
-        // niet naar loading screen, maar volgende screen. Loading screen wordt 
-        // automatisch ingeladen.
-        // todo
-        SceneManager.LoadScene(sceneName);
-    }
-
-    private void Start()
-    {
-        GoToScene("LoadingScene");
+        SceneManager.LoadScene("LoadingScene");
     }
 }

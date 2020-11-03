@@ -8,18 +8,32 @@ public class LoadingScreen : MonoBehaviour
 {
     public Slider LoadingBar;
     public Text HintText;
+    public Image LoadingBackground;
     public string[] HintTextArray;
-
+    
+    private Sprite _loadingBackgroundSprite;
     private float _minimumLoadingTime = 2f;
+    private string _sceneName;
 
     private void Awake()
     {
-        ShowRandomHintInLoadScreen();
+        InitializeLoadingScene();
     }
 
     private void Start()
     {
-        StartCoroutine(LoadLevelAsynchronously("LevitateScene"));
+        StartCoroutine(LoadLevelAsynchronously(_sceneName));
+    }
+
+    private void InitializeLoadingScene()
+    {
+        SetSceneToLoadAsynchronously("LevitateScene"); // mockup
+        
+        ShowRandomHintInLoadScreen();
+        ShowBackgroundImage();
+        
+        // todo: Get scene from daryl's save script
+        // todo: Get background from daryl's save script
     }
 
     private IEnumerator LoadLevelAsynchronously(string sceneName)
@@ -42,8 +56,6 @@ public class LoadingScreen : MonoBehaviour
             yield return null;
         }
     }
-    
-   
 
     private void UpdateLoadingBarValue(float progress)
     {
@@ -55,9 +67,24 @@ public class LoadingScreen : MonoBehaviour
         HintText.text = GetRandomHintFromArray();
     }
 
+    private void ShowBackgroundImage()
+    {
+        LoadingBackground.sprite = _loadingBackgroundSprite;
+    }
+
     private string GetRandomHintFromArray()
     {
         int randomIndex = Random.Range (0, HintTextArray.Length);
         return HintTextArray[randomIndex];
+    }
+
+    public void SetSceneToLoadAsynchronously(string sceneName)
+    {
+        _sceneName = sceneName;
+    }
+
+    public void SetLoadingBackgroundSprite(Sprite backgroundSprite)
+    {
+        _loadingBackgroundSprite = backgroundSprite;
     }
 }

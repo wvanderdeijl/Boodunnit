@@ -48,7 +48,7 @@ public class DialogueManager : MonoBehaviour
         //Add all sentences to Queue -> FIFO
         foreach (Sentence sentence in dialogue.sentences)
         {
-            _sentences.Enqueue(sentence.sentence.ToString());
+            _sentences.Enqueue(sentence.Text.ToString());
         }
 
         DisplayNextSentence();

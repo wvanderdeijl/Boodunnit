@@ -4,7 +4,7 @@
 public struct Sentence
 {
     [TextArea(3, 10)]
-    public string sentence;
+    public string Text;
 }
 
 [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]

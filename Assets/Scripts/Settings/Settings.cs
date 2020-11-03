@@ -14,12 +14,11 @@ public class Settings : MonoBehaviour
 
     public Dropdown TextSpeedDropdown;
 
-    private readonly string _musicVolume = "Music";
-    private readonly string _soundEffectVolume = "SoundEffect";
-    private readonly string _textSpeed = "TextSpeed";
+    private PlayerSettings _playerSettings;
 
     private void Awake()
     {
+        _playerSettings = new PlayerSettings();
         AddOptionsToDropdown();
         CheckIfPlayerSettingsExist();
     }
@@ -36,13 +35,10 @@ public class Settings : MonoBehaviour
 
     public void OnClickSaveChanges()
     {
-        Dictionary<string, string> playerSettings = new Dictionary<string, string>();
-        playerSettings.Add(_musicVolume, MusicSlider.value.ToString());
-        playerSettings.Add(_soundEffectVolume, SoundEffectSlider.value.ToString());
-        playerSettings.Add(_textSpeed, TextSpeedDropdown.value.ToString());
-
-        string playerSettingsString = JsonConvert.SerializeObject(playerSettings);
-        SaveHandler.Instance.SaveSettings(playerSettingsString);
+        _playerSettings.MusicVolume = (int) MusicSlider.value;
+        _playerSettings.SoundEffectVolume = (int)SoundEffectSlider.value;
+        _playerSettings.TextSpeed = TextSpeedDropdown.value;
+        SaveHandler.Instance.SaveSettings(_playerSettings);
     }
 
     private void AddOptionsToDropdown()
@@ -78,13 +74,11 @@ public class Settings : MonoBehaviour
 
     private void OnLoadPlayerSettings()
     {
-        string playerSettingsString = SaveHandler.Instance.LoadSettings();
-        Dictionary<string, string> playerSettings = JsonConvert.DeserializeObject<Dictionary<string, string>>(playerSettingsString);
-
-        SoundEffectValueText.text = playerSettings[_soundEffectVolume];
-        MusicValueText.text = playerSettings[_musicVolume];
-        SoundEffectSlider.value = int.Parse(playerSettings[_soundEffectVolume]);
-        MusicSlider.value = int.Parse(playerSettings[_musicVolume]);
-        TextSpeedDropdown.value = int.Parse(playerSettings[_textSpeed]);
+        _playerSettings = SaveHandler.Instance.LoadSettings();
+        SoundEffectValueText.text = _playerSettings.SoundEffectVolume.ToString();
+        MusicValueText.text = _playerSettings.MusicVolume.ToString();
+        SoundEffectSlider.value = _playerSettings.SoundEffectVolume;
+        MusicSlider.value = _playerSettings.MusicVolume;
+        TextSpeedDropdown.value = _playerSettings.TextSpeed;
     }
 }

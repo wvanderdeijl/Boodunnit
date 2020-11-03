@@ -11,9 +11,11 @@ public class LoadingScreen : MonoBehaviour
     public Image LoadingBackground;
     public string[] HintTextArray;
     
-    private Sprite _loadingBackgroundSprite;
     private float _minimumLoadingTime = 2f;
+    private Sprite _loadingBackgroundSprite;
     private string _sceneName;
+
+    [SerializeField] private Sprite _backgroundSpriteMockup; //Mockup
 
     private void Awake()
     {
@@ -27,13 +29,14 @@ public class LoadingScreen : MonoBehaviour
 
     private void InitializeLoadingScene()
     {
+        // todo: Get scene from daryl's save script
+        // todo: Get background from daryl's save script
+        
         SetSceneToLoadAsynchronously("LevitateScene"); // mockup
+        SetLoadingBackgroundSprite(_backgroundSpriteMockup); // mockup
         
         ShowRandomHintInLoadScreen();
         ShowBackgroundImage();
-        
-        // todo: Get scene from daryl's save script
-        // todo: Get background from daryl's save script
     }
 
     private IEnumerator LoadLevelAsynchronously(string sceneName)

@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : BaseMovement
 {
+    public PauseMenu PauseMenu;
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
@@ -11,13 +13,32 @@ public class PlayerBehaviour : MonoBehaviour
     public Transform InteractPoint;
     public float InteractRadius;
 
+    private Transform _cameraTransform;
+
+    private void Awake()
+    {
+        _cameraTransform = Camera.main.transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
+        //Pause game behaviour
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu.TogglePauseGame();
+        }
+
+        //Return when the game is paused, so there can be no input buffer
+        if (PauseMenu.IsPaused)
+        {
+            return;
+        }
+
         //Posses behaviour
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (PossessionBehaviour.IsPossessing)
             {
@@ -51,6 +72,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             print("Key H was hit");
+        }
+        
+        //Move player with BaseMovement.
+        if (!DashBehaviour.IsDashing)
+        {
+            Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraTransform.forward +
+                                    Input.GetAxis("Horizontal") * _cameraTransform.right;
+            moveDirection.y = 0;
+            MoveEntityInDirection(moveDirection);   
         }
     }
     private void OnDrawGizmosSelected()

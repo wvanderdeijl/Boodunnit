@@ -44,7 +44,7 @@ public class SaveHandler
     public void SaveGameProperty(string nameOfGameObject, string nameOfProperty, object propertyValue)
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        string unqiueKey = nameOfGameObject + "_" + nameOfProperty;
+        string uniqueKey = (nameOfGameObject + "_" + nameOfProperty).ToLower();
 
         string scene = PlayerPrefs.GetString(sceneName);
 
@@ -52,19 +52,19 @@ public class SaveHandler
         {
             Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(scene);
 
-            if (propertiesInScene.ContainsKey(unqiueKey))
+            if (propertiesInScene.ContainsKey(uniqueKey))
             {
-                propertiesInScene[unqiueKey] = propertyValue;
+                propertiesInScene[uniqueKey] = propertyValue;
             } else
             {
-                propertiesInScene.Add(unqiueKey, propertyValue);
+                propertiesInScene.Add(uniqueKey, propertyValue);
             }
 
             PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
         } else
         {
             Dictionary<string, object> propertiesInScene = new Dictionary<string, object>();
-            propertiesInScene.Add(unqiueKey, propertyValue);
+            propertiesInScene.Add(uniqueKey, propertyValue);
             PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
         }
 
@@ -89,7 +89,7 @@ public class SaveHandler
         {
             sceneName = SceneManager.GetActiveScene().name;
         }
-        string uniqueKey = nameOfGameObject + "_" + nameOfProperty;
+        string uniqueKey = (nameOfGameObject + "_" + nameOfProperty).ToLower();
 
         string sceneProperties = PlayerPrefs.GetString(sceneName);
         if (!String.IsNullOrEmpty(sceneProperties))

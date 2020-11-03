@@ -80,23 +80,29 @@ public class SaveHandler
     /// <param name="sceneName">Name of the scene, default it's null, so it'll get the current scene.  
     /// If you want to access properties from a different scene other then your current, pass the scene name.
     /// </param>
-    /// <returns></returns>
-    public T GetPropertyValueFromUniqueKey<T>(string nameOfGameObject, string nameOfProperty, string sceneName = null)
+    /// <returns>Return the value from the unique key combined of nameOfGameObject and nameOfProperty</returns>
+    public bool GetPropertyValueFromUniqueKey<T>(string nameOfGameObject, string nameOfProperty, out T propertyValue, string sceneName = null)
     {
+        propertyValue = default;
+        bool isValueFound = false;
         if(sceneName == null)
         {
             sceneName = SceneManager.GetActiveScene().name;
         }
         string uniqueKey = nameOfGameObject + "_" + nameOfProperty;
 
-        Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(PlayerPrefs.GetString(sceneName));
-
-        if (propertiesInScene.ContainsKey(uniqueKey))
+        string sceneProperties = PlayerPrefs.GetString(sceneName);
+        if (!String.IsNullOrEmpty(sceneProperties))
         {
-            return (T)Convert.ChangeType(propertiesInScene[uniqueKey], typeof(T));
+            Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(sceneProperties);
+            if (propertiesInScene.ContainsKey(uniqueKey))
+            {
+                propertyValue = (T)Convert.ChangeType(propertiesInScene[uniqueKey], typeof(T));
+                isValueFound = true;
+            }
         }
 
-        return default;
+        return isValueFound;
     }
     
     /// <summary>

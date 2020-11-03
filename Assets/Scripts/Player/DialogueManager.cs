@@ -11,9 +11,11 @@ public class DialogueManager : MonoBehaviour
 
     public Text EntityName;
     public Text DialogueText;
-    public Animator animator;
+    public Animator Animator;
+    public QuestionManager QuestionManager;
 
     private Queue<string> _sentences;
+    private Question _question;
 
     private void Start()
     {
@@ -39,7 +41,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        animator.SetBool("IsOpen", true);
+        Animator.SetBool("IsOpen", true);
+        _question = dialogue.question;
 
         EntityName.text = dialogue.entityName;
 
@@ -58,16 +61,24 @@ public class DialogueManager : MonoBehaviour
     {
         if (_sentences.Count == 0)
         {
-            EndDialogue();
-            return;
+            if (_question)
+            {
+                QuestionManager.StartQuestion(_question, DialogueText);
+            } 
+            else
+            {
+                print("we dont have a question");
+                EndDialogue();
+            }
+        } else
+        {
+            string sentence = _sentences.Dequeue();
+
+            //Stop typing sentence before starting new coroutine
+            StopAllCoroutines();
+
+            StartCoroutine(TypeSentence(sentence, 0));
         }
-
-        string sentence = _sentences.Dequeue();
-
-        //Stop typing sentence before starting new coroutine
-        StopAllCoroutines();
-
-        StartCoroutine(TypeSentence(sentence, 0));
     }
 
     IEnumerator TypeSentence(string sentence, float _typeSpeed)
@@ -83,7 +94,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        animator.SetBool("IsOpen", false);
+        Animator.SetBool("IsOpen", false);
         hasDialogueStarted = false;
     }
 }

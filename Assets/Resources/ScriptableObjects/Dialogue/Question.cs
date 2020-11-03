@@ -4,7 +4,7 @@
 public struct Choice
 {
     [TextArea(2, 5)]
-    public string choiceText;
+    public string Text;
     public Dialogue dialogue;
 }
 
@@ -12,6 +12,6 @@ public struct Choice
 public class Question : ScriptableObject
 {
     [TextArea(2, 5)]
-    public string question;
+    public string Text;
     public Choice[] choices;
 }

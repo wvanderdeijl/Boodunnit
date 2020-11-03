@@ -587,7 +587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: -107.53}
+  m_AnchoredPosition: {x: 11, y: -37.6}
   m_SizeDelta: {x: 315.94067, y: 124.42909}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569565264
@@ -738,6 +738,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 569565263}
+  - {fileID: 826787610}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -812,6 +813,84 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &826787609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826787610}
+  - component: {fileID: 826787611}
+  - component: {fileID: 826787612}
+  m_Layer: 5
+  m_Name: QuestionPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &826787610
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826787609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 638684818}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10.998, y: -159.43}
+  m_SizeDelta: {x: 315.9439, y: 105}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &826787611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826787609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf9ed14e82e2ca4094b0bd11947fd65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - Tag: ChoiceButton
+    Prefab: {fileID: 2239350686054090819, guid: 96a03ae65c4c2f245a2f5832bed98e47, type: 3}
+    ButtonParent: {fileID: 0}
+    Size: 5
+--- !u!114 &826787612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826787609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 150, y: 35}
+  m_Spacing: {x: 16, y: 7}
+  m_Constraint: 1
+  m_ConstraintCount: 2
 --- !u!1 &832251879
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +1039,7 @@ GameObject:
   - component: {fileID: 1062870043}
   - component: {fileID: 1062870045}
   - component: {fileID: 1062870046}
+  - component: {fileID: 1062870048}
   - component: {fileID: 1062870047}
   m_Layer: 0
   m_Name: Player
@@ -1110,7 +1190,8 @@ MonoBehaviour:
   hasDialogueStarted: 0
   EntityName: {fileID: 1635397587}
   DialogueText: {fileID: 17596141}
-  animator: {fileID: 569565266}
+  Animator: {fileID: 569565266}
+  QuestionManager: {fileID: 1062870048}
 --- !u!54 &1062870047
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1127,6 +1208,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1062870048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062870038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d172cf88d11cd494d990a8a3479009cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestionBox: {fileID: 826787609}
 --- !u!1 &1139291699
 GameObject:
   m_ObjectHideFlags: 0

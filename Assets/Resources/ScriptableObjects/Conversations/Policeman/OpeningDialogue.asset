@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityName: Policeman Barry Barnes
   sentences:
-  - sentence: Oh! It's you!
-  - sentence: I haven't seen you in ... gosh, it must have been 12 years already!
-  - sentence: Tell me, what do you want to talk about?
+  - Text: Oh! It's you!
+  - Text: I haven't seen you in... gosh it must have been 12 years already!
+  question: {fileID: 11400000, guid: 9bfa56a5855e69f48b0598ccb1a0cc91, type: 2}

@@ -13,5 +13,6 @@ public class Dialogue : ScriptableObject
     public string entityName;
     //public Question question;
     public Sentence[] sentences;
+    public Question question;
 }
 

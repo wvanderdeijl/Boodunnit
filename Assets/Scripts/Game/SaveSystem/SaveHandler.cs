@@ -168,7 +168,7 @@ public class SaveHandler
     /// </summary>
     /// <param name="nameOfClue">Name of the clue</param>
     /// <returns>boolean if the player found the clue</returns>
-    public bool doesPlayerHaveClue(string nameOfClue)
+    public bool DoesPlayerHaveClue(string nameOfClue)
     {
         string clues = PlayerPrefs.GetString(_cluesSaveKey);
         if (!String.IsNullOrEmpty(clues))

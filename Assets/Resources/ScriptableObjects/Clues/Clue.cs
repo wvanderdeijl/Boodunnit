@@ -9,5 +9,5 @@ public class Clue : ScriptableObject
     public string Details;
     public string Location;
     public string Description;
-    public Texture2D Image;
+    public Sprite Image;
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,11 +28,11 @@ public class DialogueManager : MonoBehaviour
         {
             GameObject entityGameobject = entityCollider.gameObject;
 
-            if (entityGameobject.TryGetComponent(out IEntity entity))
+            if (entityGameobject.TryGetComponent(out IHuman human))
             {
                 //Start dialog with entity
                 hasDialogueStarted = true;
-                StartDialogue(entity.Dialogue);
+                StartDialogue(human.Dialogue);
             }
         }
     }

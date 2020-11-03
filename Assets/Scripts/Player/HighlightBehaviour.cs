@@ -25,7 +25,7 @@ public class HighlightBehaviour : MonoBehaviour
         {
             GameObject otherGameobject = hitCollider.gameObject;
 
-            if (otherGameobject.TryGetComponent(out IPossessable possessable) || otherGameobject.TryGetComponent(out ILevitatetable levitatetable))
+            if (otherGameobject.TryGetComponent(out IPossessable possessable) || otherGameobject.TryGetComponent(out ILevitateable levitateable))
             {
                 Renderer renderer = otherGameobject.GetComponent<Renderer>();
 

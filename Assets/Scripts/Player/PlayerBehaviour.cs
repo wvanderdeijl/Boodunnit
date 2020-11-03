@@ -7,6 +7,11 @@ public class PlayerBehaviour : BaseMovement
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
+    public DialogueManager DialogueManager;
+
+    [Header("Player Interaction Radius")]
+    public Transform InteractPoint;
+    public float InteractRadius;
 
     private Transform _cameraTransform;
 
@@ -45,6 +50,15 @@ public class PlayerBehaviour : BaseMovement
             }
         }
 
+        //Dialogue behaviour
+        if (Input.GetKey(KeyCode.F))
+        {
+            if (!DialogueManager.hasDialogueStarted)
+            {
+                DialogueManager.TriggerDialogue(InteractPoint, InteractRadius);
+            }
+        }
+
         //Dash behaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -68,5 +82,9 @@ public class PlayerBehaviour : BaseMovement
             moveDirection.y = 0;
             MoveEntityInDirection(moveDirection);   
         }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(InteractPoint.position, InteractRadius);
     }
 }

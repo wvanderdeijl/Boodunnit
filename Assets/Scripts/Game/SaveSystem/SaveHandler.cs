@@ -1,7 +1,14 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Singleton class. To access the Instance you type: SaveHandler.Instance.MethodYouWantToCall();
+/// </summary>
 public class SaveHandler
 {
     private static SaveHandler _instance;
@@ -18,55 +25,118 @@ public class SaveHandler
         }
     }
 
-    private readonly string _saveGame = "Save";
-    private readonly string _playerSettings = "PlayerSettings";
+    private readonly string _playerSettingsSafeKey = "PlayerSettings";
 
-    public void StartNewGame()
-    {
-        List<object> saveGameData = new List<object>();
-        string saveGameDataString = JsonConvert.SerializeObject(saveGameData);
-        PlayerPrefs.SetString(_saveGame, saveGameDataString);
-
-        PlayerPrefs.Save();
-    }
-
+    /// <summary>
+    /// This method will remove the current save game.
+    /// </summary>
     public void DeleteSaveGame()
     {
-        PlayerPrefs.DeleteKey(_saveGame);
+        PlayerPrefs.DeleteAll();
+    }
+
+    /// <summary>
+    /// This method is used to save a property of a gameobject in a specific scene
+    /// </summary>
+    /// <param name="nameOfGameObject">Name of game object</param>
+    /// <param name="nameOfProperty">Name of property you want to save</param>
+    /// <param name="propertyValue">Value of the property</param>
+    public void SaveGameProperty(string nameOfGameObject, string nameOfProperty, object propertyValue)
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        string uniqueKey = (nameOfGameObject + "_" + nameOfProperty).ToLower();
+
+        string scene = PlayerPrefs.GetString(sceneName);
+
+        if (scene != null && !scene.Equals(""))
+        {
+            Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(scene);
+
+            if (propertiesInScene.ContainsKey(uniqueKey))
+            {
+                propertiesInScene[uniqueKey] = propertyValue;
+            } else
+            {
+                propertiesInScene.Add(uniqueKey, propertyValue);
+            }
+
+            PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
+        } else
+        {
+            Dictionary<string, object> propertiesInScene = new Dictionary<string, object>();
+            propertiesInScene.Add(uniqueKey, propertyValue);
+            PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
+        }
+
         PlayerPrefs.Save();
     }
 
-    public string LoadGame()
+    /// <summary>
+    /// This method lets you get a value from a property of a scene
+    /// </summary>
+    /// <typeparam name="T">Type of value you return</typeparam>
+    /// <param name="nameOfGameObject">Name of the game object</param>
+    /// <param name="nameOfProperty">Name of the property</param>
+    /// <param name="sceneName">Name of the scene, default it's null, so it'll get the current scene.  
+    /// If you want to access properties from a different scene other then your current, pass the scene name.
+    /// </param>
+    /// <returns>Return the value from the unique key combined of nameOfGameObject and nameOfProperty</returns>
+    public bool GetPropertyValueFromUniqueKey<T>(string nameOfGameObject, string nameOfProperty, out T propertyValue, string sceneName = null)
     {
-        return PlayerPrefs.GetString(_saveGame);
+        propertyValue = default;
+        bool isValueFound = false;
+        if(sceneName == null)
+        {
+            sceneName = SceneManager.GetActiveScene().name;
+        }
+        string uniqueKey = (nameOfGameObject + "_" + nameOfProperty).ToLower();
+
+        string sceneProperties = PlayerPrefs.GetString(sceneName);
+        if (!String.IsNullOrEmpty(sceneProperties))
+        {
+            Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(sceneProperties);
+            if (propertiesInScene.ContainsKey(uniqueKey))
+            {
+                propertyValue = (T)Convert.ChangeType(propertiesInScene[uniqueKey], typeof(T));
+                isValueFound = true;
+            }
+        }
+
+        return isValueFound;
     }
-
-    public void UpdateSaveGame<T>(T dataToAddToSaveGame)
+    
+    /// <summary>
+    /// This method is used to save the player settings
+    /// </summary>
+    /// <param name="settings">JSON string with the serialized player settings</param>
+    public void SaveSettings(PlayerSettings settings)
     {
-        string saveGameString = PlayerPrefs.GetString(_saveGame);
-        List<object> saveGameData = JsonConvert.DeserializeObject<List<object>>(saveGameString);
-
-        saveGameData.Add(dataToAddToSaveGame);
-        saveGameString = JsonConvert.SerializeObject(saveGameData);
-
-        PlayerPrefs.SetString(_saveGame, saveGameString);
+        PlayerSettings.ValidatePlayerSettings(settings);
+        string playerSettingsString = JsonConvert.SerializeObject(settings);
+        PlayerPrefs.SetString(_playerSettingsSafeKey, playerSettingsString);
         PlayerPrefs.Save();
     }
 
-    public void SaveSettings(string settings)
+    /// <summary>
+    /// This method is used to load the player settings.
+    /// Since there are multiple values in the settings, I expect you to dezerialize it yourself
+    /// using JsonConvert.DezerializeObject();
+    /// </summary>
+    /// <returns>JSON string with the player settings</returns>
+    public PlayerSettings LoadSettings()
     {
-        PlayerPrefs.SetString(_playerSettings, settings);
-        PlayerPrefs.Save();
+        string playerSettingsString = PlayerPrefs.GetString(_playerSettingsSafeKey);
+        PlayerSettings playerSettings = JsonConvert.DeserializeObject<PlayerSettings>(playerSettingsString);
+        return playerSettings;
     }
 
-    public string LoadSettings()
-    {
-        return PlayerPrefs.GetString(_playerSettings);
-    }
-
+    /// <summary>
+    /// This method is used to check if there is a PlayerSettings playerprefs available.
+    /// Should be called everytime the settings tab is accessed
+    /// </summary>
+    /// <returns>True or false depending if player settings is available</returns>
     public bool IsPlayerSettingsAvailable()
     {
-        return PlayerPrefs.GetString("PlayerSettings") != null ||
-           PlayerPrefs.GetString("PlayerSettings") != "";
+        return !String.IsNullOrEmpty(PlayerPrefs.GetString(_playerSettingsSafeKey));
     }
 }

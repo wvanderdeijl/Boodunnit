@@ -20,9 +20,14 @@ public class CluesPanel : MonoBehaviour
     void Awake()
     {
         Clues = Resources.LoadAll<Clue>("ScriptableObjects/Clues").ToList();
-
-        // TODO Intialize collected from saved data and/or update when collected
-        _collectedClueNames = new List<string>() { "Clue 1" };
+        _collectedClueNames = new List<string>();
+        foreach (Clue clue in Clues)
+        {
+            if (SaveHandler.Instance.DoesPlayerHaveClue(clue.Name))
+            {
+                _collectedClueNames.Add(clue.Name);
+            }
+        }
     }
 
     public void ShowClue(string clueName)

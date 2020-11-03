@@ -25,7 +25,7 @@ public class SaveHandler
         }
     }
 
-    private readonly string _playerSettings = "PlayerSettings";
+    private readonly string _playerSettingsSafeKey = "PlayerSettings";
 
     /// <summary>
     /// This method will remove the current save game.
@@ -109,9 +109,11 @@ public class SaveHandler
     /// This method is used to save the player settings
     /// </summary>
     /// <param name="settings">JSON string with the serialized player settings</param>
-    public void SaveSettings(string settings)
+    public void SaveSettings(PlayerSettings settings)
     {
-        PlayerPrefs.SetString(_playerSettings, settings);
+        PlayerSettings.ValidatePlayerSettings(settings);
+        string playerSettingsString = JsonConvert.SerializeObject(settings);
+        PlayerPrefs.SetString(_playerSettingsSafeKey, playerSettingsString);
         PlayerPrefs.Save();
     }
 
@@ -121,9 +123,11 @@ public class SaveHandler
     /// using JsonConvert.DezerializeObject();
     /// </summary>
     /// <returns>JSON string with the player settings</returns>
-    public string LoadSettings()
+    public PlayerSettings LoadSettings()
     {
-        return PlayerPrefs.GetString(_playerSettings);
+        string playerSettingsString = PlayerPrefs.GetString(_playerSettingsSafeKey);
+        PlayerSettings playerSettings = JsonConvert.DeserializeObject<PlayerSettings>(playerSettingsString);
+        return playerSettings;
     }
 
     /// <summary>
@@ -133,7 +137,6 @@ public class SaveHandler
     /// <returns>True or false depending if player settings is available</returns>
     public bool IsPlayerSettingsAvailable()
     {
-        return PlayerPrefs.GetString("PlayerSettings") != null ||
-           PlayerPrefs.GetString("PlayerSettings") != "";
+        return !String.IsNullOrEmpty(PlayerPrefs.GetString(_playerSettingsSafeKey));
     }
 }

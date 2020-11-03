@@ -74,13 +74,7 @@ public class LoadingScreen : MonoBehaviour
     {
         LoadingBackground.sprite = _loadingBackgroundSprite;
     }
-
-    private string GetRandomHintFromArray()
-    {
-        int randomIndex = Random.Range (0, HintTextArray.Length);
-        return HintTextArray[randomIndex];
-    }
-
+    
     public void SetSceneToLoadAsynchronously(string sceneName)
     {
         _sceneName = sceneName;
@@ -89,5 +83,11 @@ public class LoadingScreen : MonoBehaviour
     public void SetLoadingBackgroundSprite(Sprite backgroundSprite)
     {
         _loadingBackgroundSprite = backgroundSprite;
+    }
+    
+    private string GetRandomHintFromArray()
+    {
+        int randomIndex = Random.Range (0, HintTextArray.Length);
+        return HintTextArray[randomIndex];
     }
 }

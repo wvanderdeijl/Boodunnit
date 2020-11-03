@@ -25,7 +25,8 @@ public class SaveHandler
         }
     }
 
-    private readonly string _playerSettingsSafeKey = "PlayerSettings";
+    private readonly string _playerSettingsSaveKey = "PlayerSettings";
+    private readonly string _cluesSaveKey = "PlayerClues";
 
     /// <summary>
     /// This method will remove the current save game.
@@ -113,7 +114,7 @@ public class SaveHandler
     {
         PlayerSettings.ValidatePlayerSettings(settings);
         string playerSettingsString = JsonConvert.SerializeObject(settings);
-        PlayerPrefs.SetString(_playerSettingsSafeKey, playerSettingsString);
+        PlayerPrefs.SetString(_playerSettingsSaveKey, playerSettingsString);
         PlayerPrefs.Save();
     }
 
@@ -125,7 +126,7 @@ public class SaveHandler
     /// <returns>JSON string with the player settings</returns>
     public PlayerSettings LoadSettings()
     {
-        string playerSettingsString = PlayerPrefs.GetString(_playerSettingsSafeKey);
+        string playerSettingsString = PlayerPrefs.GetString(_playerSettingsSaveKey);
         PlayerSettings playerSettings = JsonConvert.DeserializeObject<PlayerSettings>(playerSettingsString);
         return playerSettings;
     }
@@ -137,6 +138,45 @@ public class SaveHandler
     /// <returns>True or false depending if player settings is available</returns>
     public bool IsPlayerSettingsAvailable()
     {
-        return !String.IsNullOrEmpty(PlayerPrefs.GetString(_playerSettingsSafeKey));
+        return !String.IsNullOrEmpty(PlayerPrefs.GetString(_playerSettingsSaveKey));
+    }
+
+    /// <summary>
+    /// Save a clue the player found.
+    /// </summary>
+    /// <param name="nameOfClue">name of the clue you want to save</param>
+    public void SaveClue(string nameOfClue)
+    {
+        List<string> clueList;
+        string clues = PlayerPrefs.GetString(_cluesSaveKey);
+        if (!String.IsNullOrEmpty(clues))
+        {
+            clueList = new List<string>();
+            clueList.Add(nameOfClue);
+            return;
+        }
+
+        clueList = JsonConvert.DeserializeObject<List<string>>(clues);
+        if (!clueList.Contains(nameOfClue))
+        {
+            clueList.Add(nameOfClue);
+        }
+    }
+
+    /// <summary>
+    /// Check if the player found the clue
+    /// </summary>
+    /// <param name="nameOfClue">Name of the clue</param>
+    /// <returns>boolean if the player found the clue</returns>
+    public bool doesPlayerHaveClue(string nameOfClue)
+    {
+        string clues = PlayerPrefs.GetString(_cluesSaveKey);
+        if (!String.IsNullOrEmpty(clues))
+        {
+            List<string> clueList = JsonConvert.DeserializeObject<List<string>>(clues);
+            return clueList.Contains(nameOfClue) ? true : false;       
+        }
+
+        return false;
     }
 }

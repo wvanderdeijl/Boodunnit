@@ -25,6 +25,7 @@ public class CluesPanel : MonoBehaviour
         {
             if (SaveHandler.Instance.DoesPlayerHaveClue(clue.Name))
             {
+                print(_collectedClueNames);
                 _collectedClueNames.Add(clue.Name);
             }
         }

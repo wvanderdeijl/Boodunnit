@@ -151,16 +151,21 @@ public class SaveHandler
         string clues = PlayerPrefs.GetString(_cluesSaveKey);
         if (!String.IsNullOrEmpty(clues))
         {
-            clueList = new List<string>();
-            clueList.Add(nameOfClue);
-            return;
+            clueList = JsonConvert.DeserializeObject<List<string>>(clues);
+            if (!clueList.Contains(nameOfClue))
+            {
+                clueList.Add(nameOfClue);
+                PlayerPrefs.SetString(_cluesSaveKey, JsonConvert.SerializeObject(clueList));
+                PlayerPrefs.Save();
+                return;
+            }
         }
 
-        clueList = JsonConvert.DeserializeObject<List<string>>(clues);
-        if (!clueList.Contains(nameOfClue))
-        {
-            clueList.Add(nameOfClue);
-        }
+        clueList = new List<String>();
+        clueList.Add(nameOfClue);
+
+        PlayerPrefs.SetString(_cluesSaveKey, JsonConvert.SerializeObject(clueList));
+        PlayerPrefs.Save();
     }
 
     /// <summary>

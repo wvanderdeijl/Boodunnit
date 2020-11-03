@@ -29,8 +29,8 @@ public class LoadingScreen : MonoBehaviour
 
     private void InitializeLoadingScene()
     {
-        // todo: Get scene from daryl's save script
-        // todo: Get background from daryl's save script
+        // todo: Get next scene from daryl's SaveHandler script
+        // todo: Get background sprite from daryl's SaveHandler script
         
         SetSceneToLoadAsynchronously("LevitateScene"); // mockup
         SetLoadingBackgroundSprite(_backgroundSpriteMockup); // mockup

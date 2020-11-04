@@ -56,7 +56,7 @@ public class PlayerBehaviour : BaseMovement
         LevitateBehaviour.PushOrPullLevitateableObject();
         
         //Move player with BaseMovement.
-        if (!DashBehaviour.IsDashing && PossessionBehaviour.IsPossessing == false)
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing)
         {
             Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraController.transform.forward +
                                     Input.GetAxis("Horizontal") * _cameraController.transform.right;

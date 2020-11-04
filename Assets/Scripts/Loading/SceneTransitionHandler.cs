@@ -19,7 +19,7 @@ public class SceneTransitionHandler
 
     public void GoToScene(string sceneNameToLoad)
     {
-        // todo: daryl's SaveHandler saves next scene to load with param
+        SaveHandler.Instance.SaveCurrentScene(sceneNameToLoad);
         SceneManager.LoadScene("LoadingScene");
     }
 }

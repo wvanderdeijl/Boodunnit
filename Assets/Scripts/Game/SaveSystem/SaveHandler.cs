@@ -27,6 +27,8 @@ public class SaveHandler
 
     private readonly string _playerSettingsSaveKey = "PlayerSettings";
     private readonly string _cluesSaveKey = "PlayerClues";
+    private readonly string _currentSceneSaveKey = "CurrentScene";
+    private readonly string _playerDataSaveKey = "PlayerData";
 
     /// <summary>
     /// This method will remove the current save game.
@@ -183,5 +185,29 @@ public class SaveHandler
         }
 
         return false;
+    }
+
+    public void SaveCurrentScene(string currentScene)
+    {
+        PlayerPrefs.SetString(_currentSceneSaveKey, currentScene);
+        PlayerPrefs.Save();
+    }
+
+    public string LoadCurrentScene()
+    {
+        string currentScene = PlayerPrefs.GetString(_currentSceneSaveKey);
+        return !String.IsNullOrEmpty(currentScene) ? currentScene : null;
+    }
+
+    public void SavePlayerData(PlayerData playerData)
+    {
+        PlayerPrefs.SetString(_playerDataSaveKey, JsonConvert.SerializeObject(playerData));
+        PlayerPrefs.Save();
+    }
+
+    public PlayerData LoadPlayerData()
+    {
+        string playerData = PlayerPrefs.GetString(_playerDataSaveKey);
+        return !String.IsNullOrEmpty(playerData) ? JsonConvert.DeserializeObject<PlayerData>(playerData) : null;
     }
 }

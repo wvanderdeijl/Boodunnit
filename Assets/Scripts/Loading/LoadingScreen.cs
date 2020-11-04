@@ -29,10 +29,9 @@ public class LoadingScreen : MonoBehaviour
 
     private void InitializeLoadingScene()
     {
-        // todo: Get next scene from daryl's SaveHandler script
         // todo: Get background sprite from list of sprites for chosen scene
-        
-        SetSceneToLoadAsynchronously("LevitateScene"); // mockup
+        _sceneName = SaveHandler.Instance.LoadCurrentScene();
+        SetSceneToLoadAsynchronously(_sceneName); // mockup
         SetLoadingBackgroundSprite(_backgroundSpriteMockup); // mockup
         
         ShowRandomHintInLoadScreen();

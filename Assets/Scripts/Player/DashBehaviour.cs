@@ -26,7 +26,7 @@ public class DashBehaviour : MonoBehaviour
     {
         _rigidbodyPlayer = GetComponent<Rigidbody>();
         _dashSpeed = _dashDistance / _dashDuration;
-        _endPositionRadius = GetComponent<Collider>().bounds.extents.z;
+        _endPositionRadius = GetComponent<Collider>().bounds.extents.z * 0.9f;
     }
 
     public void Dash()
@@ -38,16 +38,21 @@ public class DashBehaviour : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (IsDashing)
+        Vector3 normal = collision.contacts[0].normal;
+        Vector3 vel = _rigidbodyPlayer.velocity;
+
+        if (Vector3.Angle(vel, -normal) < 50 && IsDashing && !DashOnCooldown)
         {
             StopCoroutine(_dashCoroutine);
-            IsDashing = false;
+            StopDash();
         }
     }
 
     private IEnumerator PerformDash()
     {
         IsDashing = true;
+
+        _rigidbodyPlayer.useGravity = false;
 
         Vector3 oldVelocity = _rigidbodyPlayer.velocity;
         Vector3 newVelocity = transform.forward * _dashSpeed;
@@ -64,8 +69,13 @@ public class DashBehaviour : MonoBehaviour
         _rigidbodyPlayer.velocity = oldVelocity;
         gameObject.layer = 8;
 
+        StopDash();
+    }
+    private void StopDash()
+    {
         DashOnCooldown = true;
         IsDashing = false;
+        _rigidbodyPlayer.useGravity = true;
     }
 
     private bool CheckDashEndPosition()
@@ -73,6 +83,7 @@ public class DashBehaviour : MonoBehaviour
         Vector3 endPosition = transform.position + (transform.forward * _dashDistance);
 
         Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _endPositionRadius);
+
         if (endPositionColliderArray != null)
         {
             return endPositionColliderArray.Length == 0;

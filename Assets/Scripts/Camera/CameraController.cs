@@ -181,7 +181,7 @@ public class CameraController : MonoBehaviour
     {
         Vector3 slerpPos = _pointToSlerpTo;
         RotateCamera(Input.GetAxisRaw("Vertical") != 0 ? Input.GetAxis("Horizontal") : 0);
-        _pointToSlerpTo = Vector3.Slerp(slerpPos, _pointToSlerpTo, Time.deltaTime * RotationSpeed / 6);
+        _pointToSlerpTo = Vector3.Slerp(slerpPos, _pointToSlerpTo, Time.deltaTime * 20 / 6);
 
     }
 

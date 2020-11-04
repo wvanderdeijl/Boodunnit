@@ -83,9 +83,9 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftAlt)) Cursor.lockState = ToggleLockMode();
         if (_cameraLock)
         {
-            _rotationInput.x = Input.GetAxis("Mouse X");
-            _rotationInput.y = -Input.GetAxis("Mouse Y");
-            _scrollingInput = -Input.GetAxis("Mouse ScrollWheel");
+            _rotationInput.x = Input.GetAxisRaw("Mouse X");
+            _rotationInput.y = -Input.GetAxisRaw("Mouse Y");
+            _scrollingInput = -Input.GetAxisRaw("Mouse ScrollWheel");
         }
         else
         {

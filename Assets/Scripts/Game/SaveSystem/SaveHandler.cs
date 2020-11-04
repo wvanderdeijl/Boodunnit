@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,8 +26,8 @@ public class SaveHandler
         }
     }
 
-    private readonly string _playerSettingsSaveKey = "PlayerSettings";
     private readonly string _cluesSaveKey = "PlayerClues";
+    private readonly string _currentSceneSaveKey = "CurrentScene";
 
     /// <summary>
     /// This method will remove the current save game.
@@ -105,41 +106,6 @@ public class SaveHandler
 
         return isValueFound;
     }
-    
-    /// <summary>
-    /// This method is used to save the player settings
-    /// </summary>
-    /// <param name="settings">JSON string with the serialized player settings</param>
-    public void SaveSettings(PlayerSettings settings)
-    {
-        PlayerSettings.ValidatePlayerSettings(settings);
-        string playerSettingsString = JsonConvert.SerializeObject(settings);
-        PlayerPrefs.SetString(_playerSettingsSaveKey, playerSettingsString);
-        PlayerPrefs.Save();
-    }
-
-    /// <summary>
-    /// This method is used to load the player settings.
-    /// Since there are multiple values in the settings, I expect you to dezerialize it yourself
-    /// using JsonConvert.DezerializeObject();
-    /// </summary>
-    /// <returns>JSON string with the player settings</returns>
-    public PlayerSettings LoadSettings()
-    {
-        string playerSettingsString = PlayerPrefs.GetString(_playerSettingsSaveKey);
-        PlayerSettings playerSettings = JsonConvert.DeserializeObject<PlayerSettings>(playerSettingsString);
-        return playerSettings;
-    }
-
-    /// <summary>
-    /// This method is used to check if there is a PlayerSettings playerprefs available.
-    /// Should be called everytime the settings tab is accessed
-    /// </summary>
-    /// <returns>True or false depending if player settings is available</returns>
-    public bool IsPlayerSettingsAvailable()
-    {
-        return !String.IsNullOrEmpty(PlayerPrefs.GetString(_playerSettingsSaveKey));
-    }
 
     /// <summary>
     /// Save a clue the player found.
@@ -183,5 +149,49 @@ public class SaveHandler
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Save the current scene
+    /// </summary>
+    /// <param name="currentScene">Name of scene you want to save</param>
+    public void SaveCurrentScene(string currentScene)
+    {
+        PlayerPrefs.SetString(_currentSceneSaveKey, currentScene);
+        PlayerPrefs.Save();
+    }
+
+    /// <summary>
+    /// Load the current scene
+    /// </summary>
+    /// <returns>Name of the current scene to load</returns>
+    public string LoadCurrentScene()
+    {
+        string currentScene = PlayerPrefs.GetString(_currentSceneSaveKey);
+        return !String.IsNullOrEmpty(currentScene) ? currentScene : null;
+    }
+
+    /// <summary>
+    /// Method to save any data containing a data container.
+    /// </summary>
+    /// <param name="containerToSave">Container you want to save</param>
+    public void SaveDataContainer(BaseDataContainer containerToSave)
+    {
+        string saveKey = containerToSave.GetType().Name;
+        containerToSave.ValidateData();
+        PlayerPrefs.SetString(saveKey, JsonConvert.SerializeObject(containerToSave));
+        PlayerPrefs.Save();
+    }
+
+    /// <summary>
+    /// Generic method to load any data that has a data container.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public T LoadDataContainer<T>()
+    {
+        string saveKey = typeof(T).Name;
+        string containerData = PlayerPrefs.GetString(saveKey);
+        return !String.IsNullOrEmpty(containerData) ? JsonConvert.DeserializeObject<T>(containerData) : default;
     }
 }

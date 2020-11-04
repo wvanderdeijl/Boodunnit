@@ -87,4 +87,19 @@ public class PlayerBehaviour : BaseMovement
     {
         Gizmos.DrawWireSphere(InteractPoint.position, InteractRadius);
     }
+
+    private void OnApplicationQuit()
+    {
+        PlayerData player = new PlayerData
+        {
+            PlayerPositionX = transform.position.x,
+            PlayerPositionY = transform.position.y,
+            PlayerPositionZ = transform.position.z,
+            PlayerRotationX = transform.rotation.x,
+            PlayerRotationY = transform.rotation.y,
+            PlayerRotationZ = transform.rotation.z,
+        };
+
+        SaveHandler.Instance.SaveDataContainer(player);
+    }
 }

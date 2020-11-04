@@ -38,7 +38,7 @@ public class Settings : MonoBehaviour
         _playerSettings.MusicVolume = (int) MusicSlider.value;
         _playerSettings.SoundEffectVolume = (int)SoundEffectSlider.value;
         _playerSettings.TextSpeed = TextSpeedDropdown.value;
-        SaveHandler.Instance.SaveSettings(_playerSettings);
+        SaveHandler.Instance.SaveDataContainer(_playerSettings);
     }
 
     private void AddOptionsToDropdown()
@@ -54,9 +54,10 @@ public class Settings : MonoBehaviour
 
     private void CheckIfPlayerSettingsExist()
     {
-        if (SaveHandler.Instance.IsPlayerSettingsAvailable())
+        PlayerSettings settings = SaveHandler.Instance.LoadDataContainer<PlayerSettings>();
+        if (settings != null)
         {
-            OnLoadPlayerSettings();
+            OnLoadPlayerSettings(settings);
         } else
         {
             ChangeSlidersToDefaultValues();
@@ -72,13 +73,12 @@ public class Settings : MonoBehaviour
         TextSpeedDropdown.value = 0;
     }
 
-    private void OnLoadPlayerSettings()
+    private void OnLoadPlayerSettings(PlayerSettings settings)
     {
-        _playerSettings = SaveHandler.Instance.LoadSettings();
-        SoundEffectValueText.text = _playerSettings.SoundEffectVolume.ToString();
-        MusicValueText.text = _playerSettings.MusicVolume.ToString();
-        SoundEffectSlider.value = _playerSettings.SoundEffectVolume;
-        MusicSlider.value = _playerSettings.MusicVolume;
-        TextSpeedDropdown.value = _playerSettings.TextSpeed;
+        SoundEffectValueText.text = settings.SoundEffectVolume.ToString();
+        MusicValueText.text = settings.MusicVolume.ToString();
+        SoundEffectSlider.value = settings.SoundEffectVolume;
+        MusicSlider.value = settings.MusicVolume;
+        TextSpeedDropdown.value = settings.TextSpeed;
     }
 }

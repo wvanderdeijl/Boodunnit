@@ -64,8 +64,6 @@ public class PlayerBehaviour : BaseMovement
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
                 MoveEntityInDirection(moveDirection);
             else Rigidbody.velocity = Vector3.zero;
-
-            _cameraController.RotateCamera(0);
         }
     }
 

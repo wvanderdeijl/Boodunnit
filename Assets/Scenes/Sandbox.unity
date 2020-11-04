@@ -2202,7 +2202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9699bdd0701f9c643846b62f74d2da7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 3
+  Sensitivity: 5
   MaxDistance: 7
   MinDistance: 1.255763
   _distance: 0

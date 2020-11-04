@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿
+using Enums;
 using Interfaces;
 using System;
 using System.Collections;
@@ -7,14 +8,13 @@ using UnityEngine;
 
 public class Police : MonoBehaviour, IHuman
 {
+    [Header("Conversation")]
+    public string M_name;
     public Dialogue M_dialogue;
-    public Dialogue Dialogue
-    {
-        get
-        {
-            return M_dialogue;
-        }
-    }
+    public Question M_question;
+    public Dialogue Dialogue { get { return M_dialogue; } }
+    public Question Question { get { return M_question; } }
+    public string Name { get { return M_name; } }
 
     public float FearThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FearDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

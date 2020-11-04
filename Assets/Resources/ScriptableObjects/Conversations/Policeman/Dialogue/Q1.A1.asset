@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
-  m_Name: OpeningDialogue
+  m_Name: Q1.A1
   m_EditorClassIdentifier: 
   sentences:
-  - Text: Oh! It's you!
-  - Text: I haven't seen you in... gosh it must have been 12 years already!
-  question: {fileID: 11400000, guid: 69e4925ed6d67d54d95ba11e5807fb17, type: 2}
+  - Text: Last Tuesday, let me think... oh, that must have been the horrid day that
+      Julia passed away. Such an awful thing to happen. Sweet girl, she was.
+  question: {fileID: 11400000, guid: 72293926f089f8942954bc68e8ccbf89, type: 2}

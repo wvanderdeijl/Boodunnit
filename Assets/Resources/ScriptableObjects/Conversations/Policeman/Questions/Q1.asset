@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
-  m_Name: Question1
+  m_Name: Q1
   m_EditorClassIdentifier: 
-  Text: Tell me where do you want to talk about?
+  Text: Tell me, what do you want to talk about?
   choices:
   - Text: What were you doing last Tuesday night?
-    dialogue: {fileID: 0}
+    dialogue: {fileID: 11400000, guid: 52c62e7290288774cb8c73de7914e025, type: 2}
+    question: {fileID: 0}
   - Text: Did you ever find out what happened to your son?
-    dialogue: {fileID: 0}
+    dialogue: {fileID: 11400000, guid: 52c62e7290288774cb8c73de7914e025, type: 2}
+    question: {fileID: 0}
   - Text: Nothing, at the moment.
-    dialogue: {fileID: 0}
+    dialogue: {fileID: 11400000, guid: 52c62e7290288774cb8c73de7914e025, type: 2}
+    question: {fileID: 0}

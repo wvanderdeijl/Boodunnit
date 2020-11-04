@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 446759246}
   - component: {fileID: 446759250}
   m_Layer: 0
-  m_Name: Entity
+  m_Name: Policeman Barry Barnes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,7 +548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  M_name: Policeman Barry Barnes
   M_dialogue: {fileID: 11400000, guid: 19e7bf30af4a6fe4f83298e31bb03cf0, type: 2}
+  M_question: {fileID: 0}
 --- !u!1 &569565262
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +867,6 @@ MonoBehaviour:
   pools:
   - Tag: ChoiceButton
     Prefab: {fileID: 2239350686054090819, guid: 96a03ae65c4c2f245a2f5832bed98e47, type: 3}
-    ButtonParent: {fileID: 0}
     Size: 5
 --- !u!114 &826787612
 MonoBehaviour:
@@ -1039,7 +1040,6 @@ GameObject:
   - component: {fileID: 1062870043}
   - component: {fileID: 1062870045}
   - component: {fileID: 1062870046}
-  - component: {fileID: 1062870048}
   - component: {fileID: 1062870047}
   m_Layer: 0
   m_Name: Player
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   EntityName: {fileID: 1635397587}
   DialogueText: {fileID: 17596141}
   Animator: {fileID: 569565266}
-  QuestionManager: {fileID: 1062870048}
+  QuestionManager: {fileID: 0}
 --- !u!54 &1062870047
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1208,19 +1208,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1062870048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062870038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d172cf88d11cd494d990a8a3479009cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestionBox: {fileID: 826787609}
 --- !u!1 &1139291699
 GameObject:
   m_ObjectHideFlags: 0

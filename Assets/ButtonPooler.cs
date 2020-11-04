@@ -9,7 +9,6 @@ public class ButtonPooler : MonoBehaviour
     {
         public string Tag;
         public Button Prefab;
-        public GameObject ButtonParent;
         public int Size;
     }
 
@@ -44,7 +43,7 @@ public class ButtonPooler : MonoBehaviour
         }
     }
 
-    public Button SpawnFromPool(string tag, Vector3 position, Quaternion rotation, string text)
+    public Button SpawnFromPool(string tag, Vector3 position, Quaternion rotation, bool active, string text)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -53,7 +52,7 @@ public class ButtonPooler : MonoBehaviour
 
         Button objectToSpawn = poolDictionary[tag].Dequeue();
 
-        objectToSpawn.gameObject.SetActive(true);
+        objectToSpawn.gameObject.SetActive(active);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
         objectToSpawn.GetComponentInChildren<Text>().text = text;

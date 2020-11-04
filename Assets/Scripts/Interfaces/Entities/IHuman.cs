@@ -7,5 +7,15 @@ namespace Interfaces
         {
             get;
         }
+
+        Question Question
+        {
+            get;
+        }
+
+        string Name
+        {
+            get;
+        }
     }
 }

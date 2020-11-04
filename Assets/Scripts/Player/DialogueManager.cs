@@ -12,15 +12,9 @@ public class DialogueManager : MonoBehaviour
     public Text EntityName;
     public Text DialogueText;
     public Animator Animator;
-    public QuestionManager QuestionManager;
 
-    private Queue<string> _sentences;
-    private Question _question;
-
-    private void Start()
-    {
-        _sentences = new Queue<string>();
-    }
+    private Queue<string> _sentences = new Queue<string>();
+    private Question _question = null;
 
     public void TriggerDialogue(Transform radiusPoint, float radius)
     {
@@ -32,23 +26,41 @@ public class DialogueManager : MonoBehaviour
 
             if (entityGameobject.TryGetComponent(out IHuman human))
             {
-                //Start dialog with entity
                 hasDialogueStarted = true;
-                StartDialogue(human.Dialogue);
+                EntityName.text = human.Name;
+
+                ManageDialogue(human.Dialogue, human.Question);
             }
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    private void ManageDialogue(Dialogue dialogue, Question question) 
     {
         Animator.SetBool("IsOpen", true);
-        _question = dialogue.question;
+        ResetQuestions();
 
-        EntityName.text = dialogue.entityName;
+        if (dialogue)
+        {
+            StartDialogue(dialogue);
+        } 
+        
+        if (question)
+        {
+            AskQuestion(question);
+        }
+
+        if (!dialogue && !question)
+        {
+            EndConversation();
+        }
+    }
+
+    private void StartDialogue(Dialogue dialogue)
+    {
+        _question = dialogue.question;
 
         _sentences.Clear();
 
-        //Add all sentences to Queue -> FIFO
         foreach (Sentence sentence in dialogue.sentences)
         {
             _sentences.Enqueue(sentence.Text.ToString());
@@ -57,42 +69,53 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
-    public void DisplayNextSentence()
+    private void AskQuestion(Question question)
     {
-        if (_sentences.Count == 0)
-        {
-            if (_question)
-            {
-                QuestionManager.StartQuestion(_question, DialogueText);
-            } 
-            else
-            {
-                print("we dont have a question");
-                EndDialogue();
-            }
-        } else
-        {
-            string sentence = _sentences.Dequeue();
+        DialogueText.text = question.Text.ToString();
 
-            //Stop typing sentence before starting new coroutine
-            StopAllCoroutines();
+        foreach (Choice choice in question.choices)
+        {
+            Button buttonInstance = ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, true, choice.Text.ToString());
 
-            StartCoroutine(TypeSentence(sentence, 0));
+            buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.dialogue, choice.question); });
         }
     }
 
-    IEnumerator TypeSentence(string sentence, float _typeSpeed)
+    private void ResetQuestions()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, false, " ");
+        }
+    }
+
+    private void DisplayNextSentence()
+    {
+        if (_sentences.Count == 0 && _question)
+        {
+            ManageDialogue(null, _question);
+            return;
+        }
+
+        string sentence = _sentences.Dequeue();
+
+        StopAllCoroutines();
+
+        StartCoroutine(TypeSentence(sentence, 0));
+    }
+
+    IEnumerator TypeSentence(string sentence, int typespeed)
     {
         DialogueText.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
             DialogueText.text += letter;
-            yield return new WaitForSeconds(_typeSpeed);
+            yield return new WaitForSeconds(typespeed);
         }
     }
 
-    public void EndDialogue()
+    private void EndConversation()
     {
         Animator.SetBool("IsOpen", false);
         hasDialogueStarted = false;

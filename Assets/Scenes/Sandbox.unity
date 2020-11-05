@@ -6865,6 +6865,9 @@ MonoBehaviour:
   IsDashing: 0
   DashOnCooldown: 0
   DashCooldownImage: {fileID: 133733619}
+  _dashCooldown: 1
+  _dashDuration: 0.4
+  _dashDistance: 8
 --- !u!114 &1604041062
 MonoBehaviour:
   m_ObjectHideFlags: 0

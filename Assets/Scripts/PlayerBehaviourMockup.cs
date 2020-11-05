@@ -6,6 +6,16 @@ public class PlayerBehaviourMockup : MonoBehaviour
     
     private void Update()
     {
+        HandleLevitationInput();
+    }
+
+    private void FixedUpdate()
+    {
+        _levitateBehaviour.MoveLevitateableObject();
+    }
+
+    private void HandleLevitationInput()
+    {
         _levitateBehaviour.FindObjectInFrontOfPLayer();
         
         if (Input.GetMouseButtonDown(0))
@@ -15,14 +25,20 @@ public class PlayerBehaviourMockup : MonoBehaviour
         
         if (Input.GetMouseButton(1))
         {
-            _levitateBehaviour.RotateLevitateableObject();
+            RotationHandler(true);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            RotationHandler(false);
         }
 
         _levitateBehaviour.PushOrPullLevitateableObject();
     }
 
-    private void FixedUpdate()
+    private void RotationHandler(bool isRotating)
     {
-        _levitateBehaviour.MoveLevitateableObject();
+        _levitateBehaviour.IsRotating = isRotating;
+        Cursor.lockState = isRotating ? CursorLockMode.Locked : CursorLockMode.None;
+        _levitateBehaviour.RotateLevitateableObject();
     }
 }

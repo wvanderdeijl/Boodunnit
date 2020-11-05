@@ -9,6 +9,6 @@ public class PlayerData : BaseDataContainer
 
     public override void ValidateData()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

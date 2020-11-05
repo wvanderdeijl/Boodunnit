@@ -118,7 +118,7 @@ public class LevitateBehaviour : MonoBehaviour
         float yaxisRotation = Input.GetAxis("Mouse Y")* _rotationSpeed * Time.deltaTime;
             
         _selectedRigidbody.transform.RotateAround (Vector3.down, xaxisRotation);
-        _selectedRigidbody.transform.RotateAround (Vector3.right, yaxisRotation);
+        _selectedRigidbody.transform.RotateAround (_mainCamera.transform.rotation * Vector3.right, yaxisRotation);
     }
 
     private void GetRigidbodyAndChangeState()
@@ -135,9 +135,10 @@ public class LevitateBehaviour : MonoBehaviour
         }
     }
 
-    private void RemoveRigidbodyAndChangeState()
+    public void RemoveRigidbodyAndChangeState()
     {
-        ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+        ILevitateable levitateable =
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
 
         if (levitateable != null)
         {
@@ -239,7 +240,8 @@ public class LevitateBehaviour : MonoBehaviour
 
     private void ActivateLevitateCoRoutine()
     {
-        ILevitateable levitateable = _selectedRigidbody.transform.gameObject.GetComponent<ILevitateable>();
+        ILevitateable levitateable =
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
         
         if (_selectedRigidbody && levitateable != null)
         {

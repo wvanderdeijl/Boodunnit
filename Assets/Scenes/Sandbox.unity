@@ -2207,7 +2207,7 @@ MonoBehaviour:
   MaxDistance: 7
   MinDistance: 1.255763
   _distance: 0
-  RotationSpeed: 5
+  RotationSpeed: 20
   CameraRotationTarget: {fileID: 1604041060}
   LookAtTargetPosition: {x: 0, y: 0, z: 0}
   _scrollingInput: 0

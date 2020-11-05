@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = System.Numerics.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class CameraController : MonoBehaviour
 {
@@ -27,7 +32,7 @@ public class CameraController : MonoBehaviour
             if (value < MinElevation)
             {
                 value = MinElevation;
-                ScrollZoom(_rotationInput.y * Time.deltaTime);
+                // ScrollZoom(_rotationInput.y * Time.deltaTime);
             }
 
             _elevationRange = value;
@@ -47,6 +52,7 @@ public class CameraController : MonoBehaviour
     public float RotationSpeed = 20f;
 
     public Transform CameraRotationTarget;
+    public Vector3 LookAtTargetPosition;
     private Vector3 oldTargetPosition;
 
     private Vector3 _pointToSlerpTo;
@@ -63,19 +69,24 @@ public class CameraController : MonoBehaviour
     public float MinElevation = 0f;
 
     private bool _elevationOverflow;
+    private bool _isAligning;
     [SerializeField] private bool _cameraLock = true;
 
     [SerializeField] private float _elevationRange = 2f;
 
+    private Rigidbody _rigidbody;
+
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _pointToSlerpTo = transform.position;
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
         Cursor.lockState = CursorLockMode.Locked;
         Distance = MaxDistance;
         _minElevationOrigin = MinElevation;
         _maxElevationOrigin = MaxElevation;
-        ScrollZoom(-0.0001f);
+        LookAtTargetPosition = CameraRotationTarget.position;
+        ScrollZoom(-0.01f);
     }
 
     private void Update()
@@ -95,17 +106,21 @@ public class CameraController : MonoBehaviour
 
         float angleOffset = 0;
         _pointToSlerpTo.y = ElevationRange + CameraRotationTarget.position.y;
-
-        Debug.DrawRay(transform.position, _pointToSlerpTo - transform.position, Color.cyan);
-        if (Vector3.Distance(transform.position, _pointToSlerpTo) > 0.1)
+        float SensitivityMultiplier = Vector3.Distance(transform.position, _pointToSlerpTo);
+        if (SensitivityMultiplier > 1.1f)
         {
-            Vector3 slerpedPosition = Vector3.Slerp(transform.position, _pointToSlerpTo, Time.deltaTime * Sensitivity);
+            Vector3 slerpedPosition = Vector3.Slerp(
+                transform.position, 
+                CameraRotationTarget.position + _pointToSlerpTo, 
+                Time.deltaTime * Sensitivity * SensitivityMultiplier
+                );
             transform.position = slerpedPosition;
             transform.LookAt(CameraRotationTarget);
-            angleOffset = _rotationInput.x * RotationSpeed * Time.deltaTime * Sensitivity;
         }
+
         if (_rotationInput.x != 0)
         {
+            transform.LookAt(CameraRotationTarget);
             RotateCamera(_rotationInput.x);
         }
         else
@@ -117,12 +132,14 @@ public class CameraController : MonoBehaviour
         {
             ElevateCamera(_rotationInput.y);
         }
-        
+
+        if (Vector3.Distance(TwoDIfy(transform.position), TwoDIfy(CameraRotationTarget.position)) > Distance || 
+            Vector3.Distance(TwoDIfy(transform.position), TwoDIfy(CameraRotationTarget.position)) < Distance) 
+            AlignCameraWithTarget();
     }
 
     private void LateUpdate()
     {
-        AlignCameraWithTarget(); ;
         if (_scrollingInput != 0)
         {
             _scrollZoomActivation = true;
@@ -141,6 +158,12 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private void AlignCameraWithTarget()
+    {
+        _isAligning = true;
+        RotateCamera(0);
+    }
+
     private void ScrollZoom(float zoomAmount)
     {
         Distance += zoomAmount;
@@ -150,11 +173,12 @@ public class CameraController : MonoBehaviour
 
     public void RotateCamera(float rotationInput)
     {
+        _isAligning = false;
         _angle += (rotationInput * RotationSpeed * Time.deltaTime);
         if (_angle > 360) _angle -= 360;
         if (_angle < 0) _angle += 360;
 
-        _pointToSlerpTo = GetCirclePosition(CameraRotationTarget.position, _angle, Distance);
+        _pointToSlerpTo = GetCirclePosition( _angle, Distance);
     }
 
     private void ElevateCamera(float verticalInput)
@@ -162,8 +186,9 @@ public class CameraController : MonoBehaviour
         ElevationRange += verticalInput * Time.deltaTime;
     }
 
-    private Vector3 GetCirclePosition(Vector3 circlePosition, float angle, float radius)
+    private Vector3 GetCirclePosition(float angle, float radius)
     {
+        Vector3 circlePosition = Vector3.zero;
         angle *= (float) (Math.PI / 180f);
         float newX = (float) ((float) circlePosition.x + (radius * Math.Sin(angle)));
         float newZ = (float) ((float) circlePosition.z + (radius * Math.Cos(angle)));
@@ -177,12 +202,10 @@ public class CameraController : MonoBehaviour
         else return CursorLockMode.Confined;
     }
 
-    void AlignCameraWithTarget()
+    private Vector3 TwoDIfy(Vector3 input)
     {
-        Vector3 slerpPos = _pointToSlerpTo;
-        RotateCamera(Input.GetAxisRaw("Vertical") != 0 ? Input.GetAxis("Horizontal") : 0);
-        _pointToSlerpTo = Vector3.Slerp(slerpPos, _pointToSlerpTo, Time.deltaTime * 20 / 6);
-
+        input.y = 0;
+        return input;
     }
 
 }

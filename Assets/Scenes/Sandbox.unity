@@ -2118,6 +2118,7 @@ GameObject:
   - component: {fileID: 517911522}
   - component: {fileID: 517911521}
   - component: {fileID: 517911524}
+  - component: {fileID: 517911525}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2202,17 +2203,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9699bdd0701f9c643846b62f74d2da7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 5
+  Sensitivity: 1.6
   MaxDistance: 7
   MinDistance: 1.255763
   _distance: 0
-  RotationSpeed: 20
+  RotationSpeed: 5
   CameraRotationTarget: {fileID: 1604041060}
+  LookAtTargetPosition: {x: 0, y: 0, z: 0}
   _scrollingInput: 0
   MaxElevation: 8
   MinElevation: 0
   _cameraLock: 1
   _elevationRange: 2
+--- !u!54 &517911525
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517911520}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.5
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &519094162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6752,7 +6770,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1604041057
 CapsuleCollider:

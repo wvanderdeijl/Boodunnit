@@ -2212,7 +2212,7 @@ MonoBehaviour:
   LookAtTargetPosition: {x: 0, y: 0, z: 0}
   _scrollingInput: 0
   MaxElevation: 8
-  MinElevation: 0
+  MinElevation: -1.8
   _cameraLock: 1
   _elevationRange: 2
 --- !u!54 &517911525
@@ -6915,6 +6915,7 @@ MonoBehaviour:
   LevitateBehaviour: {fileID: 1604041065}
   _cameraController: {fileID: 517911524}
   input: {x: 0, y: 0, z: 0}
+  _levitateBehaviour: {fileID: 0}
 --- !u!114 &1604041065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6929,12 +6930,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1604041055}
   _mainCamera: {fileID: 517911522}
-  _mouseWheelSpeed: 300
-  _overlapSphereRadius: 5
-  _minimumSelectionDistance: 2
+  _overlapSphereRadiusInUnits: 5
+  _overlapSphereAngleInDegrees: 360
+  _velocitySpeedPercentage: 25
+  _pushPullSpeed: 300
   _rotationSpeed: 30
-  _frozenDuration: 5
-  _overlapSphereAngle: 45
+  _frozenDurationInSeconds: 5
+  _minimumSelectionDistanceInUnits: 2
 --- !u!1 &1608552973
 GameObject:
   m_ObjectHideFlags: 0

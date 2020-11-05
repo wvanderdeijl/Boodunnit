@@ -12,9 +12,9 @@ public class DashBehaviour : MonoBehaviour
 
     public Image DashCooldownImage;
 
-    private float _dashCooldown = 2f;
-    private float _dashDuration = 0.4f;
-    private float _dashDistance = 4f;
+    public float _dashCooldown = 2f;
+    public float _dashDuration = 0.4f;
+    public float _dashDistance = 4f;
     private float _dashSpeed;
     private float _endPositionRadius;
 

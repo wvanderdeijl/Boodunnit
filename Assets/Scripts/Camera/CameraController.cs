@@ -32,7 +32,8 @@ public class CameraController : MonoBehaviour
             if (value < MinElevation)
             {
                 value = MinElevation;
-                // ScrollZoom(_rotationInput.y * Time.deltaTime);
+                _elevationOverflow = true;
+                ScrollZoom(_rotationInput.y * Time.deltaTime);
             }
 
             _elevationRange = value;
@@ -68,25 +69,23 @@ public class CameraController : MonoBehaviour
     public float MaxElevation = 8f;
     public float MinElevation = 0f;
 
+    private Vector3 _collisionZoomPoint;
+    private Vector3 _collisionZoomDirection;
+
     private bool _elevationOverflow;
-    private bool _isAligning;
     [SerializeField] private bool _cameraLock = true;
 
     [SerializeField] private float _elevationRange = 2f;
 
-    private Rigidbody _rigidbody;
-
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
         _pointToSlerpTo = transform.position;
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
-        Cursor.lockState = CursorLockMode.Locked;
         Distance = MaxDistance;
         _minElevationOrigin = MinElevation;
         _maxElevationOrigin = MaxElevation;
         LookAtTargetPosition = CameraRotationTarget.position;
-        ScrollZoom(-0.01f);
     }
 
     private void Update()
@@ -133,34 +132,40 @@ public class CameraController : MonoBehaviour
             ElevateCamera(_rotationInput.y);
         }
 
-        if (Vector3.Distance(TwoDIfy(transform.position), TwoDIfy(CameraRotationTarget.position)) > Distance || 
-            Vector3.Distance(TwoDIfy(transform.position), TwoDIfy(CameraRotationTarget.position)) < Distance) 
+        Vector3 position2DIfied = TwoDIfy(transform.position);
+        Vector3 targetPosition2DIfied = TwoDIfy(CameraRotationTarget.position);
+        if (Vector3.Distance(position2DIfied, targetPosition2DIfied) > Distance || 
+            Vector3.Distance(position2DIfied, targetPosition2DIfied) < Distance) 
             AlignCameraWithTarget();
+        Debug.DrawRay(_collisionZoomPoint, _collisionZoomDirection, Color.magenta);
     }
 
     private void LateUpdate()
     {
-        if (_scrollingInput != 0)
-        {
-            _scrollZoomActivation = true;
-            ScrollZoom(_scrollingInput * 5 * Time.deltaTime * RotationSpeed);
-        }
-        else if (!_scrollZoomActivation && Distance < MaxDistance)
-        {
-            ScrollZoom(1f);
-        }
         Vector3 direction = (transform.position - CameraRotationTarget.position).normalized;
+        float zoomValue = 0;
         if (Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit raycastHit,
             Distance))
         {
-            ScrollZoom(-Vector3.Distance(transform.position, raycastHit.point));
+            _collisionZoomDirection = direction;
+            _collisionZoomPoint = raycastHit.point -= direction.normalized / 2f;
+            zoomValue = (-Vector3.Distance(transform.position, raycastHit.point) - 0.1f);
             _scrollZoomActivation = false;
         }
+        else if (!Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit hit, MaxDistance) && !_scrollZoomActivation)
+            zoomValue = 1f;
+        
+        if (_scrollingInput != 0)
+        {
+            _scrollZoomActivation = true;
+            zoomValue = (_scrollingInput * 5 * Time.deltaTime * RotationSpeed);
+        }
+        
+        ScrollZoom(zoomValue);
     }
 
     private void AlignCameraWithTarget()
     {
-        _isAligning = true;
         RotateCamera(0);
     }
 
@@ -173,7 +178,6 @@ public class CameraController : MonoBehaviour
 
     public void RotateCamera(float rotationInput)
     {
-        _isAligning = false;
         _angle += (rotationInput * RotationSpeed * Time.deltaTime);
         if (_angle > 360) _angle -= 360;
         if (_angle < 0) _angle += 360;

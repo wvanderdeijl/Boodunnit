@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using DefaultNamespace.Enums;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ using UnityEngine;
 public class LevitateableObject : MonoBehaviour, ILevitateable
 {
     private Rigidbody _rigidbody;
+    
     private void Awake()
     {
         CanBeLevitated = true;
@@ -19,28 +21,33 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     public bool IsInsideSphere { get; set; }
 
     public LevitationState State { get; set; }
-    
-    //TODO duplicate code
-    private void FreezeObject()
+
+    private void FreezeOrReleaseLevitateableObject(LevitationState levitationState)
     {
-        _rigidbody.useGravity = false;
-        _rigidbody.isKinematic = true;
-        CanBeLevitated = false;
-        State = LevitationState.Frozen;
+        //TODO: fix duplicate code
+        
+        switch (levitationState)
+        {
+            case LevitationState.NotLevitating:
+                _rigidbody.useGravity = false;
+                _rigidbody.isKinematic = true;
+                CanBeLevitated = false;
+                break;
+            
+            case LevitationState.Frozen:
+                _rigidbody.useGravity = true;
+                _rigidbody.isKinematic = false;
+                CanBeLevitated = true;
+                break;
+        }
+        
+        State = levitationState;
     }
 
-    private void ReleaseObject()
-    {
-        _rigidbody.useGravity = true;
-        _rigidbody.isKinematic = false;
-        CanBeLevitated = true;
-        State = LevitationState.NotLevitating;
-    }
-    
     public IEnumerator LevitateForSeconds(float seconds)
     {
-        FreezeObject();
+        FreezeOrReleaseLevitateableObject(LevitationState.NotLevitating);
         yield return new WaitForSeconds(seconds);
-        ReleaseObject();
+        FreezeOrReleaseLevitateableObject(LevitationState.Frozen);
     }
 }

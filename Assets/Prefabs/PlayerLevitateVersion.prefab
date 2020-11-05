@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7293939788650367250}
   - component: {fileID: 7293939788650367253}
   m_Layer: 0
-  m_Name: PlayerWithLevitatePowers
+  m_Name: PlayerLevitateVersion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levitateBehaviour: {fileID: 7293939788650367253}
-  _terrifyBehaviour: {fileID: 0}
 --- !u!114 &7293939788650367253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d5bbad97a653c48951722b094a3396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levitateRange: 10
   _player: {fileID: 7293939788650367251}
   _mainCamera: {fileID: 0}
+  _overlapSphereRadiusInUnits: 5
+  _overlapSphereAngleInDegrees: 360
+  _velocitySpeedPercentage: 30
+  _mouseWheelSpeed: 300
+  _rotationSpeed: 30
+  _frozenDurationInSeconds: 5
+  _minimumSelectionDistanceInUnits: 2

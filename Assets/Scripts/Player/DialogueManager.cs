@@ -75,11 +75,11 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueText.text = question.Text.ToString();
 
-        foreach (Choice choice in question.choices)
+        foreach (Choice choice in question.Choices)
         {
             Button buttonInstance = ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, true, choice.Text.ToString());
 
-            buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.dialogue, choice.question); });
+            buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.Dialogue, choice.Question); });
 
             //if entiry proffesion does not match disable button interaction
             if (_proffession != choice.ProffesionUnlocksChoice)

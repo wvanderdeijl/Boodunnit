@@ -10,14 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
-  m_Name: Q.B2
+  m_Name: New Question
   m_EditorClassIdentifier: 
-  Text: Alright then. Well, if you must know, I was in the rooftop garden, pruning
-    the roses. Mr Jones can vouch for me.
-  choices:
-  - Text: Pruning the roses...at night?
-    dialogue: {fileID: 0}
-    question: {fileID: 0}
-  - Text: That checks out. You weren't near the crime scene at all.
-    dialogue: {fileID: 0}
-    question: {fileID: 0}
+  Text: 
+  choices: []

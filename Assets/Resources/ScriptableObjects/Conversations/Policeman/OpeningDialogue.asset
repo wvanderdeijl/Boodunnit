@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: OpeningDialogue
   m_EditorClassIdentifier: 
-  sentences:
-  - Text: Oh! It's you!
-  - Text: I haven't seen you in... gosh it must have been 12 years already!
-  question: {fileID: 11400000, guid: 82ed04bda7c273048acd99daa122f3a4, type: 2}
+  sentences: []
+  question: {fileID: 0}

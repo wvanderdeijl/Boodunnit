@@ -869,6 +869,7 @@ MonoBehaviour:
   - Tag: ChoiceButton
     Prefab: {fileID: 2239350686054090819, guid: 96a03ae65c4c2f245a2f5832bed98e47, type: 3}
     Size: 5
+  poolSize: 0
 --- !u!114 &826787612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1043,7 @@ GameObject:
   - component: {fileID: 1062870045}
   - component: {fileID: 1062870046}
   - component: {fileID: 1062870047}
+  - component: {fileID: 1062870048}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1155,9 +1157,10 @@ MonoBehaviour:
   Rigidbody: {fileID: 1062870047}
   Speed: 0
   PauseMenu: {fileID: 0}
-  PossessionBehaviour: {fileID: 0}
+  PossessionBehaviour: {fileID: 1062870048}
   DashBehaviour: {fileID: 1062870045}
   HighlightBehaviour: {fileID: 1062870043}
+  LevitateBehaviour: {fileID: 0}
   DialogueManager: {fileID: 1062870046}
   InteractPoint: {fileID: 1879703368}
   InteractRadius: 1.27
@@ -1176,6 +1179,9 @@ MonoBehaviour:
   IsDashing: 0
   DashOnCooldown: 0
   DashCooldownImage: {fileID: 0}
+  _dashCooldown: 2
+  _dashDuration: 0.4
+  _dashDistance: 4
 --- !u!114 &1062870046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1208,6 +1214,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1062870048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062870038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e858929c9e79c4d4196bbfa80904cee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerMesh: {fileID: 1062870040}
+  IsPossessing: 1
+  CooldownImage: {fileID: 0}
+  CameraController: {fileID: 0}
 --- !u!1 &1139291699
 GameObject:
   m_ObjectHideFlags: 0

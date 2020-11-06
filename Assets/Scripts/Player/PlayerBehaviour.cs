@@ -77,6 +77,7 @@ public class PlayerBehaviour : BaseMovement
             Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraController.transform.forward +
                                     Input.GetAxis("Horizontal") * _cameraController.transform.right;
             moveDirection.y = 0;
+            
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
                 MoveEntityInDirection(moveDirection);
             else Rigidbody.velocity = Vector3.zero;
@@ -131,7 +132,7 @@ public class PlayerBehaviour : BaseMovement
     private void RotationHandler(bool isRotating)
     {
         LevitateBehaviour.IsRotating = isRotating;
-        Cursor.lockState = isRotating ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.lockState = isRotating ? CursorLockMode.Locked : CursorLockMode.Confined;
         LevitateBehaviour.RotateLevitateableObject();
     }
 }

@@ -104,7 +104,7 @@ public class CameraController : MonoBehaviour
         }
 
         float angleOffset = 0;
-        _pointToSlerpTo.y = ElevationRange + CameraRotationTarget.position.y;
+        _pointToSlerpTo.y = ElevationRange;
         float SensitivityMultiplier = Vector3.Distance(transform.position, _pointToSlerpTo);
         if (SensitivityMultiplier > 1.1f)
         {

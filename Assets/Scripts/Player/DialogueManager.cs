@@ -11,14 +11,11 @@ public class DialogueManager : MonoBehaviour
 
     public Text EntityName;
     public Text DialogueText;
-    public Animator animator;
+    public Animator Animator;
 
-    private Queue<string> _sentences;
-
-    private void Start()
-    {
-        _sentences = new Queue<string>();
-    }
+    private Queue<string> _sentences = new Queue<string>();
+    private Question _question = null;
+    private Proffesion _proffession;
 
     public void TriggerDialogue(Transform radiusPoint, float radius)
     {
@@ -30,22 +27,42 @@ public class DialogueManager : MonoBehaviour
 
             if (entityGameobject.TryGetComponent(out IHuman human))
             {
-                //Start dialog with entity
                 hasDialogueStarted = true;
-                StartDialogue(human.Dialogue);
+                _proffession = human.Proffesion;
+                EntityName.text = _proffession + " " + human.Name;
+
+                ManageDialogue(human.Dialogue, human.Question);
             }
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    private void ManageDialogue(Dialogue dialogue, Question question) 
     {
-        animator.SetBool("IsOpen", true);
+        Animator.SetBool("IsOpen", true);
+        ResetQuestions();
 
-        EntityName.text = dialogue.entityName;
+        if (dialogue)
+        {
+            StartDialogue(dialogue);
+        } 
+        
+        if (question)
+        {
+            AskQuestion(question);
+        }
+
+        if (!dialogue && !question)
+        {
+            EndConversation();
+        }
+    }
+
+    private void StartDialogue(Dialogue dialogue)
+    {
+        _question = dialogue.question;
 
         _sentences.Clear();
 
-        //Add all sentences to Queue -> FIFO
         foreach (Sentence sentence in dialogue.sentences)
         {
             _sentences.Enqueue(sentence.Text.ToString());
@@ -54,36 +71,65 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
-    public void DisplayNextSentence()
+    private void AskQuestion(Question question)
     {
-        if (_sentences.Count == 0)
+        DialogueText.text = question.Text.ToString();
+
+        foreach (Choice choice in question.Choices)
         {
-            EndDialogue();
+            Button buttonInstance = ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, true, choice.Text.ToString());
+
+            buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.Dialogue, choice.Question); });
+
+            //if entiry proffesion does not match disable button interaction
+            if (_proffession != choice.ProffesionUnlocksChoice)
+            {
+                buttonInstance.interactable = false;
+            }
+        }
+    }
+
+    private void ResetQuestions()
+    {
+        int poolSize = FindObjectOfType<ButtonPooler>().poolSize;
+
+        //Reset all buttons to orignial state if not used or there is a next question
+        for (int i = 0; i < poolSize; i++)
+        {
+            ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, false, " ");
+        }
+    }
+
+    private void DisplayNextSentence()
+    {
+        if (_sentences.Count == 0 && _question)
+        {
+            ManageDialogue(null, _question);
             return;
         }
 
         string sentence = _sentences.Dequeue();
 
-        //Stop typing sentence before starting new coroutine
         StopAllCoroutines();
 
+        //To-do: Add variable with typespeed from settings
         StartCoroutine(TypeSentence(sentence, 0));
     }
 
-    IEnumerator TypeSentence(string sentence, float _typeSpeed)
+    IEnumerator TypeSentence(string sentence, int typespeed)
     {
         DialogueText.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
             DialogueText.text += letter;
-            yield return new WaitForSeconds(_typeSpeed);
+            yield return new WaitForSeconds(typespeed);
         }
     }
 
-    public void EndDialogue()
+    private void EndConversation()
     {
-        animator.SetBool("IsOpen", false);
+        Animator.SetBool("IsOpen", false);
         hasDialogueStarted = false;
     }
 }

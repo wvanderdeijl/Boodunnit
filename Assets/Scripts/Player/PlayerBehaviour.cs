@@ -52,7 +52,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Dialogue behaviour
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F) && PossessionBehaviour.IsPossessing)
         {
             if (!DialogueManager.hasDialogueStarted)
             {
@@ -72,7 +72,7 @@ public class PlayerBehaviour : BaseMovement
         HandleLevitationInput();
         
         //Move player with BaseMovement.
-        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing)
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !DialogueManager.hasDialogueStarted)
         {
             Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraController.transform.forward +
                                     Input.GetAxis("Horizontal") * _cameraController.transform.right;

@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> _sentences = new Queue<string>();
     private Question _question = null;
+    private Proffesion _proffession;
 
     public void TriggerDialogue(Transform radiusPoint, float radius)
     {
@@ -27,7 +28,8 @@ public class DialogueManager : MonoBehaviour
             if (entityGameobject.TryGetComponent(out IHuman human))
             {
                 hasDialogueStarted = true;
-                EntityName.text = human.Name;
+                _proffession = human.Proffesion;
+                EntityName.text = _proffession + " " + human.Name;
 
                 ManageDialogue(human.Dialogue, human.Question);
             }
@@ -78,12 +80,19 @@ public class DialogueManager : MonoBehaviour
             Button buttonInstance = ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, true, choice.Text.ToString());
 
             buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.dialogue, choice.question); });
+
+            if (_proffession != choice.ProffesionUnlocksChoice)
+            {
+                buttonInstance.interactable = false;
+            }
         }
     }
 
     private void ResetQuestions()
     {
-        for (int i = 0; i < 5; i++)
+        int poolSize = FindObjectOfType<ButtonPooler>().poolSize;
+
+        for (int i = 0; i < poolSize; i++)
         {
             ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, false, " ");
         }

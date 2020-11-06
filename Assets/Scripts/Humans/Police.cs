@@ -9,12 +9,14 @@ using UnityEngine;
 public class Police : MonoBehaviour, IHuman
 {
     [Header("Conversation")]
+    public Proffesion M_Proffesion;
     public string M_name;
     public Dialogue M_dialogue;
     public Question M_question;
     public Dialogue Dialogue { get { return M_dialogue; } }
     public Question Question { get { return M_question; } }
     public string Name { get { return M_name; } }
+    public Proffesion Proffesion { get { return M_Proffesion; } }
 
     public float FearThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FearDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

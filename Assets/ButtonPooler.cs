@@ -21,6 +21,8 @@ public class ButtonPooler : MonoBehaviour
 
     public List<Pool> pools;
 
+    public int poolSize;
+
     public Dictionary<string, Queue<Button>> poolDictionary;
 
     private void Start()
@@ -30,6 +32,7 @@ public class ButtonPooler : MonoBehaviour
         foreach (Pool pool in pools)
         {
             Queue<Button> objectPool = new Queue<Button>();
+            poolSize = pool.Size;
 
             for(int i = 0; i < pool.Size; i++)
             {

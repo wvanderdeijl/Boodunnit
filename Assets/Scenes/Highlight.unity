@@ -548,7 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  M_name: Policeman Barry Barnes
+  M_Proffesion: 0
+  M_name: Barry Barnes
   M_dialogue: {fileID: 11400000, guid: 19e7bf30af4a6fe4f83298e31bb03cf0, type: 2}
   M_question: {fileID: 0}
 --- !u!1 &569565262
@@ -1191,7 +1192,6 @@ MonoBehaviour:
   EntityName: {fileID: 1635397587}
   DialogueText: {fileID: 17596141}
   Animator: {fileID: 569565266}
-  QuestionManager: {fileID: 0}
 --- !u!54 &1062870047
 Rigidbody:
   m_ObjectHideFlags: 0

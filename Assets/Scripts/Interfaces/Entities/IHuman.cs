@@ -1,5 +1,12 @@
 namespace Interfaces
 {
+    public enum Proffesion 
+    { 
+        Policeman,
+        Baker,
+        Beekeeper,
+        Fisherman
+    };
     public interface IHuman : IEntity
     {
         //Human distinct things.
@@ -14,6 +21,11 @@ namespace Interfaces
         }
 
         string Name
+        {
+            get;
+        }
+
+        Proffesion Proffesion
         {
             get;
         }

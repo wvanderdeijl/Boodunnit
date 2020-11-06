@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
-  m_Name: Q.A1.1A
+  m_Name: A1.Q
   m_EditorClassIdentifier: 
   Text: Say, you're not here because you think I did it, are you?
   choices:
   - Text: No, I would never think that!
     dialogue: {fileID: 0}
-    question: {fileID: 0}
+    question: {fileID: 11400000, guid: 9ae19dd19c1793846a4b1eb8c947ac43, type: 2}
   - Text: Well, where were you that night?
     dialogue: {fileID: 0}
-    question: {fileID: 0}
+    question: {fileID: 11400000, guid: e47e7edd8bd7a3745b3875bbf471f05c, type: 2}

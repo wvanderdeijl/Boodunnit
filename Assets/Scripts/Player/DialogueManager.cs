@@ -81,6 +81,7 @@ public class DialogueManager : MonoBehaviour
 
             buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.dialogue, choice.question); });
 
+            //if entiry proffesion does not match disable button interaction
             if (_proffession != choice.ProffesionUnlocksChoice)
             {
                 buttonInstance.interactable = false;
@@ -92,6 +93,7 @@ public class DialogueManager : MonoBehaviour
     {
         int poolSize = FindObjectOfType<ButtonPooler>().poolSize;
 
+        //Reset all buttons to orignial state if not used or there is a next question
         for (int i = 0; i < poolSize; i++)
         {
             ButtonPooler.Instance.SpawnFromPool("ChoiceButton", Vector3.zero, Quaternion.identity, false, " ");
@@ -110,6 +112,7 @@ public class DialogueManager : MonoBehaviour
 
         StopAllCoroutines();
 
+        //To-do: Add variable with typespeed from settings
         StartCoroutine(TypeSentence(sentence, 0));
     }
 

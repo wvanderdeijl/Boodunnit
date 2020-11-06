@@ -51,7 +51,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Dialogue behaviour
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F) && PossessionBehaviour.IsPossessing)
         {
             if (!DialogueManager.hasDialogueStarted)
             {
@@ -69,7 +69,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Levitate behaviour
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !DialogueManager.hasDialogueStarted)
         {
             print("Key H was hit");
         }

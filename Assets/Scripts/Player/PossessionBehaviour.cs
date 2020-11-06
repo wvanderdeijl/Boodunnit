@@ -12,19 +12,22 @@ public class PossessionBehaviour : MonoBehaviour
     public Image CooldownImage;
 
     private float _possessionRadius = 1;
-    private GameObject _possessionTarget;
+    public static GameObject PossessionTarget;
+    public CameraController CameraController;
 
     private float _cooldown = 2f;
     private bool _isOnCooldown = false;
+    
 
     public void LeavePossessedTarget()
     {
-        if (_possessionTarget && IsPossessing)
+        if (PossessionTarget && IsPossessing)
         {
             IsPossessing = false;
-            transform.position = _possessionTarget.transform.position;
+            transform.position = PossessionTarget.transform.position;
+            CameraController.CameraRotationTarget = transform;
             PlayerMesh.enabled = true;
-            _possessionTarget = null;
+            PossessionTarget = null;
             _isOnCooldown = true;
 
             StartCoroutine(PossessionTimer());
@@ -42,17 +45,18 @@ public class PossessionBehaviour : MonoBehaviour
         {
             GameObject possessionGameObject = raycastHit.transform.gameObject;
             IPossessable possessableInterface = possessionGameObject.GetComponent<IPossessable>();
-            if (possessionGameObject && possessableInterface != null && !_possessionTarget)
+            if (possessionGameObject && possessableInterface != null && !PossessionTarget)
             {
-                _possessionTarget = possessionGameObject;
+                PossessionTarget = possessionGameObject;
+                CameraController.CameraRotationTarget = possessionGameObject.transform;
                 IsPossessing = true;
-                transform.position = _possessionTarget.transform.position;
+                transform.position = PossessionTarget.transform.position;
                 PlayerMesh.enabled = false;
             }
         } 
-        else if (_possessionTarget)
+        else if (PossessionTarget)
         {
-            _possessionTarget = null;
+            PossessionTarget = null;
         }
     }
 

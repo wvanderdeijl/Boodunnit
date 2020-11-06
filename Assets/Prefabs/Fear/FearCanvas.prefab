@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9032906693830272860}
   - component: {fileID: 9032906693830272859}
   - component: {fileID: 9032906693830272858}
+  - component: {fileID: 136770740477136539}
   m_Layer: 0
   m_Name: FearCanvas
   m_TagString: Untagged
@@ -99,6 +100,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &136770740477136539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032906693830272856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e813ed5017ead3947a56088c597c0a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraTransform: {fileID: 0}
 --- !u!1 &9032906695522382315
 GameObject:
   m_ObjectHideFlags: 0

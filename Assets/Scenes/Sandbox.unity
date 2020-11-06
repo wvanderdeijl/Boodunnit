@@ -2207,7 +2207,7 @@ MonoBehaviour:
   MaxDistance: 7
   MinDistance: 1.255763
   _distance: 0
-  RotationSpeed: 100
+  RotationSpeed: 1
   CameraRotationTarget: {fileID: 1604041060}
   LookAtTargetPosition: {x: 0, y: 0, z: 0}
   _angle: 0
@@ -6755,6 +6755,7 @@ GameObject:
   - component: {fileID: 1604041062}
   - component: {fileID: 1604041061}
   - component: {fileID: 1604041065}
+  - component: {fileID: 1604041066}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6922,7 +6923,7 @@ MonoBehaviour:
   DashBehaviour: {fileID: 1604041061}
   HighlightBehaviour: {fileID: 1604041062}
   LevitateBehaviour: {fileID: 1604041065}
-  DialogueManager: {fileID: 0}
+  DialogueManager: {fileID: 1604041066}
   InteractPoint: {fileID: 0}
   InteractRadius: 0
 --- !u!114 &1604041065
@@ -6946,6 +6947,22 @@ MonoBehaviour:
   _rotationSpeed: 30
   _frozenDurationInSeconds: 5
   _minimumSelectionDistanceInUnits: 2
+--- !u!114 &1604041066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604041055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b269b9af6e84d4e901cee89cd3bccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasDialogueStarted: 0
+  EntityName: {fileID: 0}
+  DialogueText: {fileID: 0}
+  Animator: {fileID: 0}
 --- !u!1 &1608552973
 GameObject:
   m_ObjectHideFlags: 0

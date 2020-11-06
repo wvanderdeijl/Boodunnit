@@ -176,11 +176,20 @@ public class CameraController : MonoBehaviour
         MaxElevation = _maxElevationOrigin * Distance / 7;
     }
 
-    public void RotateCamera(float rotationInput)
+    public void RotateCamera(float input)
     {
-        float plusMinusMultiplier = rotationInput > 0 ? 1 : rotationInput < 0 ? -1 : 0;
-        float increment = plusMinusMultiplier  * ( RotationSpeed + (rotationInput * Sensitivity)) * Time.deltaTime;
+        StartCoroutine(RotateCam());
+    }
+    public IEnumerator RotateCam()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (_rotationInput.x == 0) yield break;
+        float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
+        float increment = plusMinusMultiplier * ( Math.Abs(_rotationInput.x) / (1f/ RotationSpeed));
+        print("increment: " + increment);
+        print("plusMinusMultiplier: " + plusMinusMultiplier);
         _angle += increment;
+        
         if (_angle > 360) _angle -= 360;
         if (_angle < 0) _angle += 360;
 

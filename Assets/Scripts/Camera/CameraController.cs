@@ -183,7 +183,6 @@ public class CameraController : MonoBehaviour
     public IEnumerator RotateCam()
     {
         yield return new WaitForSeconds(0.1f);
-        if (_rotationInput.x == 0) yield break;
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
         float increment = plusMinusMultiplier * ( Math.Abs(_rotationInput.x) / (1f/ RotationSpeed));
         print("increment: " + increment);
@@ -198,7 +197,13 @@ public class CameraController : MonoBehaviour
 
     private void ElevateCamera(float verticalInput)
     {
-        ElevationRange += verticalInput * Time.deltaTime;
+        StartCoroutine(ElevateCam());
+    }
+
+    private IEnumerator ElevateCam()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ElevationRange += _rotationInput.y / 20;
     }
 
     private Vector3 GetCirclePosition(float angle, float radius)

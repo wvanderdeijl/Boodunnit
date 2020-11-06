@@ -57,8 +57,8 @@ public class CameraController : MonoBehaviour
     private Vector3 oldTargetPosition;
 
     private Vector3 _pointToSlerpTo;
-    private float _angle;
-    private Vector2 _rotationInput;
+    [SerializeField]private float _angle;
+    [SerializeField] private Vector2 _rotationInput;
     [SerializeField] private float _scrollingInput;
 
     private bool _scrollZoomActivation;
@@ -178,7 +178,9 @@ public class CameraController : MonoBehaviour
 
     public void RotateCamera(float rotationInput)
     {
-        _angle += (rotationInput * RotationSpeed * Time.deltaTime);
+        float plusMinusMultiplier = rotationInput > 0 ? 1 : rotationInput < 0 ? -1 : 0;
+        float increment = plusMinusMultiplier  * ( RotationSpeed + (rotationInput * Sensitivity)) * Time.deltaTime;
+        _angle += increment;
         if (_angle > 360) _angle -= 360;
         if (_angle < 0) _angle += 360;
 

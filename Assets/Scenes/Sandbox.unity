@@ -2207,12 +2207,13 @@ MonoBehaviour:
   MaxDistance: 7
   MinDistance: 1.255763
   _distance: 0
-  RotationSpeed: 20
+  RotationSpeed: 40
   CameraRotationTarget: {fileID: 1604041060}
   LookAtTargetPosition: {x: 0, y: 0, z: 0}
+  _rotationInput: {x: 0, y: 0}
   _scrollingInput: 0
   MaxElevation: 8
-  MinElevation: -1.8
+  MinElevation: -0.5
   _cameraLock: 1
   _elevationRange: 2
 --- !u!54 &517911525
@@ -6397,6 +6398,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1953978964}
     m_Modifications:
+    - target: {fileID: 136770740477136539, guid: 6f8ff7c7bdee65d4aba21c90f015a367, type: 3}
+      propertyPath: CameraTransform
+      value: 
+      objectReference: {fileID: 517911523}
     - target: {fileID: 9032906693830272856, guid: 6f8ff7c7bdee65d4aba21c90f015a367, type: 3}
       propertyPath: m_Name
       value: FearCanvas

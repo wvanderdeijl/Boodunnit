@@ -203,7 +203,8 @@ public class CameraController : MonoBehaviour
     private IEnumerator ElevateCam()
     {
         yield return new WaitForSeconds(0.1f);
-        ElevationRange += _rotationInput.y / 20;
+        float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
+        ElevationRange += (0.1f * plusMinusMultiplier) + _rotationInput.y / 20;
     }
 
     private Vector3 GetCirclePosition(float angle, float radius)

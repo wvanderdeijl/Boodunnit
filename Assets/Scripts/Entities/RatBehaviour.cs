@@ -18,15 +18,28 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
     private void Awake()
     {
         _climbBehaviour.MinimumStamina = 0f;
-        _climbBehaviour.MaximumStamina = 10f;
-        _climbBehaviour.CurrentStamina = 10f;
+        _climbBehaviour.MaximumStamina = 50f;
+        _climbBehaviour.CurrentStamina = 50f;
         _climbBehaviour.Speed = 5f;
+
+        Rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        //if (_climbBehaviour.IsClimbing) _climbBehaviour.Climb(direction);
-        //else MoveEntityInDirection(direction);
+        Rigidbody.angularVelocity = Vector3.zero;
+    }
+
+    public void Move(Vector3 direction)
+    {
+        if (_climbBehaviour.IsClimbing)
+        {
+            direction = Input.GetAxis("Vertical") * transform.forward +
+                        Input.GetAxis("Horizontal") * transform.right;
+            _climbBehaviour.Climb(direction);
+            return;
+        }
+        MoveEntityInDirection(direction);
     }
 
     public void DealFearDamage(float amount)
@@ -52,10 +65,5 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
     public void UseFirstAbility()
     {
         _climbBehaviour.ToggleClimb();
-    }
-
-    public void UseSecondAbility()
-    {
-        throw new NotImplementedException();
     }
 }

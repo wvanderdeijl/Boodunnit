@@ -1,4 +1,5 @@
 ﻿using System;
+using Interfaces;
 using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
@@ -30,7 +31,7 @@ public class PlayerBehaviour : BaseMovement
         {
             PauseMenu.TogglePauseGame();
         }
-
+        
         //Return when the game is paused, so there can be no input buffer
         if (PauseMenu.IsPaused)
         {
@@ -75,12 +76,24 @@ public class PlayerBehaviour : BaseMovement
         }
         
         //Move player with BaseMovement.
-        if (!DashBehaviour.IsDashing)
+        Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraTransform.forward +
+                                Input.GetAxis("Horizontal") * _cameraTransform.right;
+        moveDirection.y = 0;
+
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing)
         {
-            Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraTransform.forward +
-                                    Input.GetAxis("Horizontal") * _cameraTransform.right;
-            moveDirection.y = 0;
             MoveEntityInDirection(moveDirection);   
+        } 
+        else if (PossessionBehaviour.IsPossessing)
+        {
+            PossessionBehaviour.TargetBehaviour.Move(moveDirection);
+            
+        }
+
+        //Use first ability.
+        if (PossessionBehaviour.IsPossessing && Input.GetKeyDown(KeyCode.K))
+        {
+            PossessionBehaviour.TargetBehaviour.UseFirstAbility();
         }
     }
     private void OnDrawGizmosSelected()

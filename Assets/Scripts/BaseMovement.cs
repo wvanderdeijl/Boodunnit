@@ -24,4 +24,8 @@ public abstract class BaseMovement : MonoBehaviour
                 Quaternion.LookRotation(direction.normalized), Time.deltaTime * _rotationSpeed);
         }
     }
+    private void FixedUpdate()
+    {
+        Rigidbody.AddForce(Vector3.down * (1000 * Rigidbody.mass));
+    }
 }

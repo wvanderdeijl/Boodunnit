@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Numerics;
 using UnityEngine;
-using Quaternion = System.Numerics.Quaternion;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 public class CameraController : MonoBehaviour
 {
@@ -32,7 +27,6 @@ public class CameraController : MonoBehaviour
             if (value < MinElevation)
             {
                 value = MinElevation;
-                _elevationOverflow = true;
                 ScrollZoom(_rotationInput.y * Time.deltaTime);
             }
 
@@ -40,42 +34,30 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Describes the speed at which the camera will move to a given new position along a circular axis
-    /// </summary>
-    public float Sensitivity = 5f;
-
     public float MaxDistance = 7;
     public float MinDistance = 1.255763f;
 
-    [SerializeField] private float _distance;
+    private float _distance;
 
-    public float RotationSpeed = 20f;
+    public float RotationSpeed = 1f;
 
     public Transform CameraRotationTarget;
     public Vector3 LookAtTargetPosition;
-    private Vector3 oldTargetPosition;
 
     private Vector3 _pointToSlerpTo;
     private float _angle;
     private Vector2 _rotationInput;
-    [SerializeField] private float _scrollingInput;
+    private float _scrollingInput;
 
     private bool _scrollZoomActivation;
-    private bool _isAligningCamera = false;
 
     private float _minElevationOrigin;
     private float _maxElevationOrigin;
     public float MaxElevation = 8f;
-    public float MinElevation = 0f;
+    public float MinElevation = -0.5f;
 
-    private Vector3 _collisionZoomPoint;
-    private Vector3 _collisionZoomDirection;
-
-    private bool _elevationOverflow;
-    [SerializeField] private bool _cameraLock = true;
-
-    [SerializeField] private float _elevationRange = 2f;
+    [SerializeField] private bool _cursorIsLocked = true;
+    private float _elevationRange = 2f;
 
     private void Awake()
     {
@@ -91,7 +73,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt)) Cursor.lockState = ToggleLockMode();
-        if (_cameraLock)
+        if (_cursorIsLocked)
         {
             _rotationInput.x = Input.GetAxisRaw("Mouse X");
             _rotationInput.y = -Input.GetAxisRaw("Mouse Y");
@@ -105,17 +87,9 @@ public class CameraController : MonoBehaviour
 
         float angleOffset = 0;
         _pointToSlerpTo.y = ElevationRange;
-        float SensitivityMultiplier = Vector3.Distance(transform.position, _pointToSlerpTo);
-        if (SensitivityMultiplier > 1.1f)
-        {
-            Vector3 slerpedPosition = Vector3.Slerp(
-                transform.position, 
-                CameraRotationTarget.position + _pointToSlerpTo, 
-                Time.deltaTime * Sensitivity * SensitivityMultiplier
-                );
-            transform.position = slerpedPosition;
-            transform.LookAt(CameraRotationTarget);
-        }
+
+        transform.position = CameraRotationTarget.position + _pointToSlerpTo;
+        transform.LookAt(CameraRotationTarget);
 
         if (_rotationInput.x != 0)
         {
@@ -129,15 +103,15 @@ public class CameraController : MonoBehaviour
 
         if (_rotationInput.y != 0)
         {
-            ElevateCamera(_rotationInput.y);
+            ElevationRange += (_rotationInput.y / 10f);
         }
 
-        Vector3 position2DIfied = TwoDIfy(transform.position);
-        Vector3 targetPosition2DIfied = TwoDIfy(CameraRotationTarget.position);
+        Vector3 position2DIfied = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 targetPosition2DIfied = new Vector3(CameraRotationTarget.position.x, 0, CameraRotationTarget.position.z);
+
         if (Vector3.Distance(position2DIfied, targetPosition2DIfied) > Distance || 
             Vector3.Distance(position2DIfied, targetPosition2DIfied) < Distance) 
             AlignCameraWithTarget();
-        Debug.DrawRay(_collisionZoomPoint, _collisionZoomDirection, Color.magenta);
     }
 
     private void LateUpdate()
@@ -147,8 +121,7 @@ public class CameraController : MonoBehaviour
         if (Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit raycastHit,
             Distance))
         {
-            _collisionZoomDirection = direction;
-            _collisionZoomPoint = raycastHit.point -= direction.normalized / 2f;
+            raycastHit.point -= direction.normalized / 2f;
             zoomValue = (-Vector3.Distance(transform.position, raycastHit.point) - 0.1f);
             _scrollZoomActivation = false;
         }
@@ -158,7 +131,7 @@ public class CameraController : MonoBehaviour
         if (_scrollingInput != 0)
         {
             _scrollZoomActivation = true;
-            zoomValue = (_scrollingInput * 5 * Time.deltaTime * RotationSpeed);
+            zoomValue = _scrollingInput * 3;
         }
         
         ScrollZoom(zoomValue);
@@ -176,40 +149,36 @@ public class CameraController : MonoBehaviour
         MaxElevation = _maxElevationOrigin * Distance / 7;
     }
 
-    public void RotateCamera(float rotationInput)
+    public void RotateCamera(float input)
     {
-        _angle += (rotationInput * RotationSpeed * Time.deltaTime);
+        StartCoroutine(RotateCam());
+    }
+    public IEnumerator RotateCam()
+    {
+        yield return new WaitForSeconds(0.1f);
+        float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
+        float increment = plusMinusMultiplier * (Mathf.Abs(_rotationInput.x) / (1f/ RotationSpeed));
+        _angle += increment;
+        
         if (_angle > 360) _angle -= 360;
         if (_angle < 0) _angle += 360;
 
         _pointToSlerpTo = GetCirclePosition( _angle, Distance);
     }
 
-    private void ElevateCamera(float verticalInput)
-    {
-        ElevationRange += verticalInput * Time.deltaTime;
-    }
-
     private Vector3 GetCirclePosition(float angle, float radius)
     {
         Vector3 circlePosition = Vector3.zero;
-        angle *= (float) (Math.PI / 180f);
-        float newX = (float) ((float) circlePosition.x + (radius * Math.Sin(angle)));
-        float newZ = (float) ((float) circlePosition.z + (radius * Math.Cos(angle)));
+        angle *= Mathf.PI / 180f;
+        float newX = circlePosition.x + (radius * Mathf.Sin(angle));
+        float newZ = circlePosition.z + (radius * Mathf.Cos(angle));
         return new Vector3(newX, circlePosition.y, newZ);
     }
 
     private CursorLockMode ToggleLockMode()
     {
-        _cameraLock = !_cameraLock;
-        if (_cameraLock) return CursorLockMode.Locked;
+        _cursorIsLocked = !_cursorIsLocked;
+        if (_cursorIsLocked) return CursorLockMode.Locked;
         else return CursorLockMode.Confined;
     }
-
-    private Vector3 TwoDIfy(Vector3 input)
-    {
-        input.y = 0;
-        return input;
-    }
-
 }

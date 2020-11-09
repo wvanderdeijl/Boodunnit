@@ -8,17 +8,18 @@ public class PlayerBehaviour : BaseMovement
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
+    public LevitateBehaviour LevitateBehaviour;
     public DialogueManager DialogueManager;
 
     [Header("Player Interaction Radius")]
     public Transform InteractPoint;
     public float InteractRadius;
 
-    private Transform _cameraTransform;
+    private CameraController _cameraController;
 
     private void Awake()
     {
-        _cameraTransform = Camera.main.transform;
+        _cameraController = Camera.main.GetComponent<CameraController>();
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Dialogue behaviour
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F) && PossessionBehaviour.IsPossessing)
         {
             if (!DialogueManager.hasDialogueStarted)
             {
@@ -69,18 +70,14 @@ public class PlayerBehaviour : BaseMovement
             }
         }
 
-        //Levitate behaviour
-        if (Input.GetMouseButtonDown(0))
-        {
-            print("Key H was hit");
-        }
+        HandleLevitationInput();
         
         //Move player with BaseMovement.
         Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraTransform.forward +
                                 Input.GetAxis("Horizontal") * _cameraTransform.right;
         moveDirection.y = 0;
 
-        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing)
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !DialogueManager.hasDialogueStarted)
         {
             MoveEntityInDirection(moveDirection);   
         } 
@@ -96,8 +93,56 @@ public class PlayerBehaviour : BaseMovement
             PossessionBehaviour.TargetBehaviour.UseFirstAbility();
         }
     }
+    private void FixedUpdate()
+    {
+        LevitateBehaviour.MoveLevitateableObject();
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(InteractPoint.position, InteractRadius);
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerData player = new PlayerData
+        {
+            PlayerPositionX = transform.position.x,
+            PlayerPositionY = transform.position.y,
+            PlayerPositionZ = transform.position.z,
+            PlayerRotationX = transform.rotation.x,
+            PlayerRotationY = transform.rotation.y,
+            PlayerRotationZ = transform.rotation.z,
+        };
+
+        SaveHandler.Instance.SaveDataContainer(player);
+    }
+    private void HandleLevitationInput()
+    {
+        LevitateBehaviour.FindObjectInFrontOfPLayer();
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            LevitateBehaviour.LevitationStateHandler();
+        }
+        
+        if (Input.GetMouseButton(1))
+        {
+            RotationHandler(true);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            RotationHandler(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt)) LevitateBehaviour.RemoveRigidbodyAndChangeState();
+
+        LevitateBehaviour.PushOrPullLevitateableObject();
+    }
+    private void RotationHandler(bool isRotating)
+    {
+        LevitateBehaviour.IsRotating = isRotating;
+        Cursor.lockState = isRotating ? CursorLockMode.Locked : CursorLockMode.Confined;
+        LevitateBehaviour.RotateLevitateableObject();
     }
 }

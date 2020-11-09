@@ -23,7 +23,7 @@ public class PossessionBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if(IsPossessing) transform.position = _possessionTarget.transform.position;
+        if(IsPossessing) transform.position = PossessionTarget.transform.position;
     }
 
     public void LeavePossessedTarget()

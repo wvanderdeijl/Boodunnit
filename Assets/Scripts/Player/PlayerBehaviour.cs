@@ -16,6 +16,7 @@ public class PlayerBehaviour : BaseMovement
     public float InteractRadius;
 
     private CameraController _cameraController;
+    [SerializeField] private Transform _cameraTransform;
 
     private void Awake()
     {

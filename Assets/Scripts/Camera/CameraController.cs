@@ -204,7 +204,7 @@ public class CameraController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
-        ElevationRange += (0.1f * plusMinusMultiplier) + _rotationInput.y / 20;
+        ElevationRange += (_rotationInput.y / 10);
     }
 
     private Vector3 GetCirclePosition(float angle, float radius)

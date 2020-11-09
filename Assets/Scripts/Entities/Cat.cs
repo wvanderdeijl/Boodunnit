@@ -43,6 +43,11 @@ namespace Entities
             CheckSurroundings();
         }
 
+        public void Move(Vector3 direction)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CheckSurroundings()
         {
             if (_hasFearCooldown) return;
@@ -115,6 +120,11 @@ namespace Entities
         {
             _fearMeter.fillAmount = FearDamage / FearThreshold;
             //_fearMeter.fillAmount = Mathf.MoveTowards(_fearMeter.fillAmount, FearDamage, 1);
+        }
+
+        public IEntity GetBehaviour()
+        {
+            return this;
         }
     }
 }

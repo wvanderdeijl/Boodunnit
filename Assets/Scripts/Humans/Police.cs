@@ -29,6 +29,11 @@ public class Police : MonoBehaviour, IHuman
         throw new NotImplementedException();
     }
 
+    public void Move(Vector3 direction)
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
         throw new NotImplementedException();
@@ -52,5 +57,10 @@ public class Police : MonoBehaviour, IHuman
     public void UseSecondAbility()
     {
         throw new NotImplementedException();
+    }
+
+    public IEntity GetBehaviour()
+    {
+        return this;
     }
 }

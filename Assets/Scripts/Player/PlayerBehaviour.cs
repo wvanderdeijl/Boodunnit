@@ -1,4 +1,5 @@
 ﻿using System;
+using Interfaces;
 using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
@@ -31,7 +32,7 @@ public class PlayerBehaviour : BaseMovement
         {
             PauseMenu.TogglePauseGame();
         }
-
+        
         //Return when the game is paused, so there can be no input buffer
         if (PauseMenu.IsPaused)
         {
@@ -72,15 +73,24 @@ public class PlayerBehaviour : BaseMovement
         HandleLevitationInput();
         
         //Move player with BaseMovement.
+        Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraTransform.forward +
+                                Input.GetAxis("Horizontal") * _cameraTransform.right;
+        moveDirection.y = 0;
+
         if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !DialogueManager.hasDialogueStarted)
         {
-            Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraController.transform.forward +
-                                    Input.GetAxis("Horizontal") * _cameraController.transform.right;
-            moveDirection.y = 0;
+            MoveEntityInDirection(moveDirection);   
+        } 
+        else if (PossessionBehaviour.IsPossessing)
+        {
+            PossessionBehaviour.TargetBehaviour.Move(moveDirection);
             
-            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-                MoveEntityInDirection(moveDirection);
-            else Rigidbody.velocity = Vector3.zero;
+        }
+
+        //Use first ability.
+        if (PossessionBehaviour.IsPossessing && Input.GetKeyDown(KeyCode.K))
+        {
+            PossessionBehaviour.TargetBehaviour.UseFirstAbility();
         }
     }
     private void FixedUpdate()

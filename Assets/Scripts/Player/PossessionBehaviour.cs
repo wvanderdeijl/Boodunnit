@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class PossessionBehaviour : MonoBehaviour
 {
     public MeshRenderer PlayerMesh;
     public bool IsPossessing = false;
+    public IEntity TargetBehaviour;
 
     public Image CooldownImage;
 
@@ -19,6 +21,11 @@ public class PossessionBehaviour : MonoBehaviour
     private bool _isOnCooldown = false;
     
 
+    private void Update()
+    {
+        if(IsPossessing) transform.position = _possessionTarget.transform.position;
+    }
+
     public void LeavePossessedTarget()
     {
         if (PossessionTarget && IsPossessing)
@@ -27,7 +34,10 @@ public class PossessionBehaviour : MonoBehaviour
             transform.position = PossessionTarget.transform.position;
             CameraController.CameraRotationTarget = transform;
             PlayerMesh.enabled = true;
+            
+            TargetBehaviour = null;
             PossessionTarget = null;
+            
             _isOnCooldown = true;
 
             StartCoroutine(PossessionTimer());
@@ -47,8 +57,10 @@ public class PossessionBehaviour : MonoBehaviour
             IPossessable possessableInterface = possessionGameObject.GetComponent<IPossessable>();
             if (possessionGameObject && possessableInterface != null && !PossessionTarget)
             {
+                TargetBehaviour = possessionGameObject.GetComponent<IEntity>();
                 PossessionTarget = possessionGameObject;
                 CameraController.CameraRotationTarget = possessionGameObject.transform;
+                
                 IsPossessing = true;
                 transform.position = PossessionTarget.transform.position;
                 PlayerMesh.enabled = false;

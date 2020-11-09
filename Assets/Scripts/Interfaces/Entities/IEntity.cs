@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Interfaces
 {
     public interface IEntity : IEmotion
@@ -7,10 +9,10 @@ namespace Interfaces
         //    get;
         //}
 
+        void Move(Vector3 direction);
+        
         void CheckSurroundings();
         
         void UseFirstAbility();
-
-        void UseSecondAbility();
     }
 }

@@ -30,6 +30,11 @@ namespace Entities
             throw new System.NotImplementedException();
         }
 
+        public void Move(Vector3 direction)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CheckSurroundings()
         {
             throw new System.NotImplementedException();
@@ -43,6 +48,11 @@ namespace Entities
         public void UseSecondAbility()
         {
             throw new System.NotImplementedException();
+        }
+
+        public IEntity GetBehaviour()
+        {
+            return this;
         }
     }
 }

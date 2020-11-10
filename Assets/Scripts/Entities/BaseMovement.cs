@@ -5,11 +5,16 @@ public abstract class BaseMovement : MonoBehaviour
     public Rigidbody Rigidbody;
     public float Speed;
 
+    public bool IsGrounded = true;
+
     private float _rotationSpeed = 10f;
     private float _gravity = 9.81f;
+
+    private float _jumpForce = 10.0f;
+
     private void FixedUpdate()
     {
-        Rigidbody.AddForce(Vector3.down * (_gravity * Rigidbody.mass));//ToDo: Why are you multiplying by .mass???, you can just pass a param to tell this method to ignore mass if you want that?
+        Rigidbody.AddForce(Vector3.down * _gravity);
     }
 
     public void MoveEntityInDirection(Vector3 direction)
@@ -22,6 +27,24 @@ public abstract class BaseMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, 
                 Quaternion.LookRotation(direction.normalized), Time.deltaTime * _rotationSpeed);
+        }
+    }
+
+    public void Jump()
+    {
+        IsGrounded = false;
+        Rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
+    }
+
+    public void CheckIfGrounded()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit raycastHitInfo, 1.2f))
+        {
+            IsGrounded = true;
+        }
+        else
+        {
+            IsGrounded = false;
         }
     }
 }

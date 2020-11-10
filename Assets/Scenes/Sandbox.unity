@@ -2465,7 +2465,6 @@ MonoBehaviour:
   LookAtTargetPosition: {x: 0, y: 0, z: 0}
   MaxElevation: 8
   MinElevation: -0.5
-  _cursorIsLocked: 1
 --- !u!54 &517911525
 Rigidbody:
   m_ObjectHideFlags: 0

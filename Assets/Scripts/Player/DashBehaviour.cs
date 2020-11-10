@@ -66,6 +66,7 @@ public class DashBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(_dashDuration);
 
+        oldVelocity.y = 0;
         _rigidbodyPlayer.velocity = oldVelocity;
         gameObject.layer = 8;
 

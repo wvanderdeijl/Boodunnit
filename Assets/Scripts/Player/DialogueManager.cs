@@ -9,29 +9,32 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector]
     public bool hasDialogueStarted;
 
-    public Text EntityName;
-    public Text DialogueText;
+    public Text EntityNameUIText;
+    public Text DialogueUIText;
     public Animator Animator;
 
     private Queue<string> _sentences = new Queue<string>();
     private Question _question = null;
     private Proffesion _proffession;
 
-    public void TriggerDialogue(Transform radiusPoint, float radius)
-    {
-        Collider[] hitColliderArray = Physics.OverlapSphere(radiusPoint.position, radius);
+    //This field is created by the lead dev, the way you interact with others must change in the future, the code on line 25 will act weird if there are more than 1 entity to talk to in range!, for now this will do. No more weird interaction point sphere stuff also please.
+    private float _dialogTriggerRadius = 1;//ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
 
+    public void TriggerDialogue()//ToDo; The way the world is interacted with will change, this means that line 25 will not do, this method will cause weird behaviour when more than 1 talkable entity is in range anyway.
+    {
+        Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, _dialogTriggerRadius);
         foreach (Collider entityCollider in hitColliderArray)
         {
-            GameObject entityGameobject = entityCollider.gameObject;
-
-            if (entityGameobject.TryGetComponent(out IHuman human))
+            if (entityCollider.TryGetComponent(out IHuman humanToTalkTo))
             {
                 hasDialogueStarted = true;
-                _proffession = human.Proffesion;
-                EntityName.text = _proffession + " " + human.Name;
+                _proffession = humanToTalkTo.Proffesion;
+                EntityNameUIText.text = $"{_proffession} {humanToTalkTo.Name}";
 
-                ManageDialogue(human.Dialogue, human.Question);
+                ManageDialogue(humanToTalkTo.Dialogue, humanToTalkTo.Question);
+
+                //This break is added by the lead dev
+                break;
             }
         }
     }
@@ -60,12 +63,11 @@ public class DialogueManager : MonoBehaviour
     private void StartDialogue(Dialogue dialogue)
     {
         _question = dialogue.question;
-
         _sentences.Clear();
 
         foreach (Sentence sentence in dialogue.sentences)
         {
-            _sentences.Enqueue(sentence.Text.ToString());
+            _sentences.Enqueue(sentence.Text.ToString());//ToDo: Is ToString() really needed?
         }
 
         DisplayNextSentence();
@@ -73,7 +75,7 @@ public class DialogueManager : MonoBehaviour
 
     private void AskQuestion(Question question)
     {
-        DialogueText.text = question.Text.ToString();
+        DialogueUIText.text = question.Text.ToString();
 
         foreach (Choice choice in question.Choices)
         {
@@ -118,11 +120,11 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence, int typespeed)
     {
-        DialogueText.text = "";
+        DialogueUIText.text = "";
 
         foreach (char letter in sentence.ToCharArray())
         {
-            DialogueText.text += letter;
+            DialogueUIText.text += letter;
             yield return new WaitForSeconds(typespeed);
         }
     }

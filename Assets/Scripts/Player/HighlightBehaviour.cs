@@ -23,11 +23,9 @@ public class HighlightBehaviour : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliderArray)
         {
-            GameObject otherGameobject = hitCollider.gameObject;
-
-            if (otherGameobject.TryGetComponent(out IPossessable possessable) || otherGameobject.TryGetComponent(out ILevitateable levitateable))
+            if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable))
             {
-                Renderer renderer = otherGameobject.GetComponent<Renderer>();
+                Renderer renderer = hitCollider.GetComponent<Renderer>();
 
                 if (renderer)
                 {

@@ -57,16 +57,19 @@ public class SaveHandler
             if (propertiesInScene.ContainsKey(uniqueKey))
             {
                 propertiesInScene[uniqueKey] = propertyValue;
-            } else
+            }
+            else
             {
                 propertiesInScene.Add(uniqueKey, propertyValue);
             }
 
             PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
-        } else
+        }
+        else
         {
             Dictionary<string, object> propertiesInScene = new Dictionary<string, object>();
             propertiesInScene.Add(uniqueKey, propertyValue);
+
             PlayerPrefs.SetString(sceneName, JsonConvert.SerializeObject(propertiesInScene));
         }
 
@@ -91,10 +94,11 @@ public class SaveHandler
         {
             sceneName = SceneManager.GetActiveScene().name;
         }
+
         string uniqueKey = (nameOfGameObject + "_" + nameOfProperty).ToLower();
 
         string sceneProperties = PlayerPrefs.GetString(sceneName);
-        if (!String.IsNullOrEmpty(sceneProperties))
+        if (!string.IsNullOrEmpty(sceneProperties))
         {
             Dictionary<string, object> propertiesInScene = JsonConvert.DeserializeObject<Dictionary<string, object>>(sceneProperties);
             if (propertiesInScene.ContainsKey(uniqueKey))
@@ -115,7 +119,7 @@ public class SaveHandler
     {
         List<string> clueList;
         string clues = PlayerPrefs.GetString(_cluesSaveKey);
-        if (!String.IsNullOrEmpty(clues))
+        if (!string.IsNullOrEmpty(clues))
         {
             clueList = JsonConvert.DeserializeObject<List<string>>(clues);
             if (!clueList.Contains(nameOfClue))
@@ -142,7 +146,7 @@ public class SaveHandler
     public bool DoesPlayerHaveClue(string nameOfClue)
     {
         string clues = PlayerPrefs.GetString(_cluesSaveKey);
-        if (!String.IsNullOrEmpty(clues))
+        if (!string.IsNullOrEmpty(clues))
         {
             List<string> clueList = JsonConvert.DeserializeObject<List<string>>(clues);
             return clueList.Contains(nameOfClue) ? true : false;       
@@ -192,6 +196,6 @@ public class SaveHandler
     {
         string saveKey = typeof(T).Name;
         string containerData = PlayerPrefs.GetString(saveKey);
-        return !String.IsNullOrEmpty(containerData) ? JsonConvert.DeserializeObject<T>(containerData) : default;
+        return !string.IsNullOrEmpty(containerData) ? JsonConvert.DeserializeObject<T>(containerData) : default;
     }
 }

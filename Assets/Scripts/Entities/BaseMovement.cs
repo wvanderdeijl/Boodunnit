@@ -9,7 +9,7 @@ public abstract class BaseMovement : MonoBehaviour
     private float _gravity = 9.81f;
     private void FixedUpdate()
     {
-        Rigidbody.AddForce(Vector3.down * (_gravity * Rigidbody.mass));
+        Rigidbody.AddForce(Vector3.down * (_gravity * Rigidbody.mass));//ToDo: Why are you multiplying by .mass???, you can just pass a param to tell this method to ignore mass if you want that?
     }
 
     public void MoveEntityInDirection(Vector3 direction)
@@ -23,9 +23,5 @@ public abstract class BaseMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, 
                 Quaternion.LookRotation(direction.normalized), Time.deltaTime * _rotationSpeed);
         }
-    }
-    private void FixedUpdate()
-    {
-        Rigidbody.AddForce(Vector3.down * (1000 * Rigidbody.mass));
     }
 }

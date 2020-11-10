@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
 {
-    public PauseMenu PauseMenu;
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
+
     public DialogueManager DialogueManager;
 
-    [Header("Player Interaction Radius")]
-    public Transform InteractPoint;
-    public float InteractRadius;
+    public PauseMenu PauseMenu;
 
-    private CameraController _cameraController;
-    [SerializeField] private Transform _cameraTransform;
+    private Transform _cameraTransform;
 
     private void Awake()
     {
-        _cameraController = Camera.main.GetComponent<CameraController>();
+        _cameraTransform = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -58,7 +55,7 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!DialogueManager.hasDialogueStarted)
             {
-                DialogueManager.TriggerDialogue(InteractPoint, InteractRadius);
+                DialogueManager.TriggerDialogue();
             }
         }
 
@@ -74,8 +71,9 @@ public class PlayerBehaviour : BaseMovement
         HandleLevitationInput();
         
         //Move player with BaseMovement.
-        Vector3 moveDirection = Input.GetAxis("Vertical") * _cameraTransform.forward +
-                                Input.GetAxis("Horizontal") * _cameraTransform.right;
+
+        Vector3 moveDirection = Input.GetAxisRaw("Vertical") * _cameraTransform.forward +
+                                Input.GetAxisRaw("Horizontal") * _cameraTransform.right;
         moveDirection.y = 0;
 
         if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !DialogueManager.hasDialogueStarted)
@@ -89,7 +87,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Use first ability.
-        if (PossessionBehaviour.IsPossessing && Input.GetKeyDown(KeyCode.K))
+        if (PossessionBehaviour.IsPossessing && Input.GetKeyDown(KeyCode.Q))
         {
             PossessionBehaviour.TargetBehaviour.UseFirstAbility();
         }
@@ -99,24 +97,20 @@ public class PlayerBehaviour : BaseMovement
         LevitateBehaviour.MoveLevitateableObject();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(InteractPoint.position, InteractRadius);
-    }
-
     private void OnApplicationQuit()
     {
-        PlayerData player = new PlayerData
+        PlayerData playerDataContainer = new PlayerData
         {
             PlayerPositionX = transform.position.x,
             PlayerPositionY = transform.position.y,
             PlayerPositionZ = transform.position.z,
+
             PlayerRotationX = transform.rotation.x,
             PlayerRotationY = transform.rotation.y,
             PlayerRotationZ = transform.rotation.z,
         };
 
-        SaveHandler.Instance.SaveDataContainer(player);
+        SaveHandler.Instance.SaveDataContainer(playerDataContainer);
     }
     private void HandleLevitationInput()
     {
@@ -136,14 +130,19 @@ public class PlayerBehaviour : BaseMovement
             RotationHandler(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt)) LevitateBehaviour.RemoveRigidbodyAndChangeState();
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            LevitateBehaviour.RemoveRigidbodyAndChangeState();
+        }
 
         LevitateBehaviour.PushOrPullLevitateableObject();
     }
+
     private void RotationHandler(bool isRotating)
     {
         LevitateBehaviour.IsRotating = isRotating;
-        Cursor.lockState = isRotating ? CursorLockMode.Locked : CursorLockMode.Confined;
+        GameManager.CursorIsLocked = isRotating;
+
         LevitateBehaviour.RotateLevitateableObject();
     }
 }

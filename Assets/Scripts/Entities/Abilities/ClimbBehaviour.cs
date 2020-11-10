@@ -9,17 +9,31 @@ using Vector3 = UnityEngine.Vector3;
 
 public class ClimbBehaviour : MonoBehaviour
 {
-
     public float MinimumStamina { get; set; }
     public float MaximumStamina { get; set; }
     public float CurrentStamina { get; set; }
+
+    public float StaminaConsumptionPerSecond, StaminaReplenishRatePerSecond;
+
     public float Speed { get; set; }
     
     public bool IsClimbing;
 
     [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private float _rotationSpeed = 300f;
+    [SerializeField] private float _rotationSpeed = 100f;
     [SerializeField] private Image _staminaRadialCircle;
+
+    private void Awake()
+    {
+        if (CurrentStamina > MaximumStamina)
+        {
+            CurrentStamina = MaximumStamina;
+        }
+        else if (CurrentStamina < MinimumStamina)
+        {
+            CurrentStamina = MinimumStamina;
+        }
+    }
 
     private void Update()
     {
@@ -35,6 +49,7 @@ public class ClimbBehaviour : MonoBehaviour
             DisableClimbing();
             return;
         }
+
         EnableClimbing();
     }
 
@@ -53,7 +68,7 @@ public class ClimbBehaviour : MonoBehaviour
 
     public void EnableClimbing()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f, 
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1f, 
             LayerMask.GetMask("Climbable")))
         {
             RotateToWallNormal(hit);
@@ -80,6 +95,7 @@ public class ClimbBehaviour : MonoBehaviour
             CloseDistanceToWall(hit);
             return;
         }
+
         DisableClimbing();
     }
     
@@ -92,7 +108,7 @@ public class ClimbBehaviour : MonoBehaviour
     private void CloseDistanceToWall(RaycastHit hit)
     {
         Vector3 offset = hit.point - transform.position;
-        offset -= -transform.up * transform.localScale.y / 2;
+        offset -= -transform.up * transform.localScale.y / 2f;
         transform.position += offset;
     }
 
@@ -100,21 +116,31 @@ public class ClimbBehaviour : MonoBehaviour
     {
         if (IsClimbing)
         {
-            CurrentStamina--;
-            _staminaRadialCircle.fillAmount -= (1f / MaximumStamina);
-            yield return new WaitForSeconds(0.1f);
-            if (CurrentStamina > MinimumStamina) StartCoroutine(DepleteStamina());   
+            CurrentStamina -= StaminaConsumptionPerSecond * Time.deltaTime;
+            _staminaRadialCircle.fillAmount = CurrentStamina / MaximumStamina;
+
+            yield return null;
+
+            if (CurrentStamina > MinimumStamina)
+            {
+                StartCoroutine(DepleteStamina());
+            }
         }
     }
 
     private IEnumerator ReplenishStamina()
     {
         if (!IsClimbing)
-        { 
-            CurrentStamina++;
-            _staminaRadialCircle.fillAmount += (1f / MaximumStamina);
-            yield return new WaitForSeconds(0.05f);
-            if (CurrentStamina < MaximumStamina) StartCoroutine(ReplenishStamina());
+        {
+            CurrentStamina += StaminaReplenishRatePerSecond * Time.deltaTime;
+            _staminaRadialCircle.fillAmount = CurrentStamina / MaximumStamina;
+
+            yield return null;
+
+            if (CurrentStamina < MaximumStamina)
+            {
+                StartCoroutine(ReplenishStamina());
+            }
         }
     }
 }

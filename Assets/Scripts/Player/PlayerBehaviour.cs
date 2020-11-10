@@ -32,7 +32,7 @@ public class PlayerBehaviour : BaseMovement
         }
         
         //Return when the game is paused, so there can be no input buffer
-        if (PauseMenu.IsPaused)
+        if (GameManager.IsPaused)
         {
             return;
         }

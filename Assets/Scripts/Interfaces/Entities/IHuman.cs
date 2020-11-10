@@ -28,6 +28,7 @@ namespace Interfaces
         Proffesion Proffesion
         {
             get;
+            set;
         }
     }
 }

@@ -91,6 +91,14 @@ public class PlayerBehaviour : BaseMovement
         {
             PossessionBehaviour.TargetBehaviour.UseFirstAbility();
         }
+
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        {
+            Jump();
+        }
+
+        CheckIfGrounded();
     }
     private void FixedUpdate()
     {

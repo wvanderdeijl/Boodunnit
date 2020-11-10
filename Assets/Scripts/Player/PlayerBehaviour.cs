@@ -26,7 +26,7 @@ public class PlayerBehaviour : BaseMovement
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             PauseMenu.TogglePauseGame();
         }

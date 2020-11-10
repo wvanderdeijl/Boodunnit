@@ -18,6 +18,7 @@ public class PauseMenu : MonoBehaviour
             ResetPanels();
         }
         GameManager.IsPaused = !GameManager.IsPaused;
+        GameManager.CursorIsLocked = !GameManager.IsPaused;
         Canvas.SetActive(GameManager.IsPaused);
         Time.timeScale = GameManager.IsPaused ? 0 : 1;
     }

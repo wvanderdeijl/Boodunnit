@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     private Proffesion _proffession;
 
     //This field is created by the lead dev, the way you interact with others must change in the future, the code on line 25 will act weird if there are more than 1 entity to talk to in range!, for now this will do. No more weird interaction point sphere stuff also please.
-    private float _dialogTriggerRadius = 1;//ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
+    private float _dialogTriggerRadius = 5;//ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
 
     public void TriggerDialogue()//ToDo; The way the world is interacted with will change, this means that line 25 will not do, this method will cause weird behaviour when more than 1 talkable entity is in range anyway.
     {
@@ -102,20 +102,27 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void DisplayNextSentence()
+    public void DisplayNextSentence()
     {
-        if (_sentences.Count == 0 && _question)
+        if (_sentences.Count == 0)
         {
-            ManageDialogue(null, _question);
-            return;
+            if (_question)
+            {
+                ManageDialogue(null, _question);
+                return;
+            }
+
+            ManageDialogue(null, null);
+        } 
+        else
+        {
+            string sentence = _sentences.Dequeue();
+
+            StopAllCoroutines();
+
+            //To-do: Add variable with typespeed from settings
+            StartCoroutine(TypeSentence(sentence, 0));
         }
-
-        string sentence = _sentences.Dequeue();
-
-        StopAllCoroutines();
-
-        //To-do: Add variable with typespeed from settings
-        StartCoroutine(TypeSentence(sentence, 0));
     }
 
     IEnumerator TypeSentence(string sentence, int typespeed)
@@ -133,5 +140,10 @@ public class DialogueManager : MonoBehaviour
     {
         Animator.SetBool("IsOpen", false);
         hasDialogueStarted = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+         Gizmos.DrawWireSphere(transform.position, _dialogTriggerRadius);
     }
 }

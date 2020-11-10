@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8306a78f09f5d404a9eb991c69bf3797
+guid: 0bfab5cb34d5de348a426325548f6707
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
@@ -7,23 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Beuk_Blad
-    second: {fileID: 2100000, guid: 4238033c9b96ec340a77c06f7cb78a04, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Beuk_Blad
-    second: {fileID: 2800000, guid: 703cea45d96b0c4418301a64b3360e77, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Beuk_Stam
-    second: {fileID: 2800000, guid: 1c9f307bc100a9b4f9aaec0ad243ec3c, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Tree_Wood
-    second: {fileID: 2800000, guid: 1da5ab835b5853447839c0a9372e4195, type: 3}
+      name: Stoep
+    second: {fileID: 2100000, guid: 178d572337dc6bf4781f39147d11296b, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

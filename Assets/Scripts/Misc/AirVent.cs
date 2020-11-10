@@ -7,16 +7,17 @@ public class AirVent : MonoBehaviour
     public int AirPower;
     private void OnTriggerStay(Collider other)
     {
-        other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * AirPower, ForceMode.VelocityChange);
-        /**
-        GlideBehaviour glideBehaviour = PossessionBehaviour.PossessionTarget.GetComponent<GlideBehaviour>();
-        if (glideBehaviour != null)
+        GlideBehaviour glideBehaviour = other.gameObject.GetComponent<GlideBehaviour>();
+        if (glideBehaviour && glideBehaviour.IsGliding)
         {
-            if (glideBehaviour.IsGliding)
+            if(other.gameObject == PossessionBehaviour.PossessionTarget)
             {
-                other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * AirPower, ForceMode.VelocityChange);
+                Rigidbody otherRigidBody = other.gameObject.GetComponent<Rigidbody>();
+                if (otherRigidBody)
+                {
+                    otherRigidBody.AddForce(transform.forward * AirPower, ForceMode.Acceleration);
+                }
             }
         }
-        **/
     }
 }

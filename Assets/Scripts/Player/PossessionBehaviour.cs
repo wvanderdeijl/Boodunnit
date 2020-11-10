@@ -114,27 +114,6 @@ public class PossessionBehaviour : MonoBehaviour
         {
             PossessionTarget = null;
         }
-
-        //if (Physics.SphereCast(transform.position, _possessionRadius, transform.forward, out RaycastHit raycastHit, 1))
-        //{
-        //    GameObject possessionGameObject = raycastHit.transform.gameObject;
-        //    IPossessable possessableInterface = possessionGameObject.GetComponent<IPossessable>();
-        //    if (possessionGameObject && possessableInterface != null && !PossessionTarget)
-        //    {
-        //        TargetBehaviour = possessionGameObject.GetComponent<IEntity>();
-        //        PossessionTarget = possessionGameObject;
-        //        CameraController.CameraRotationTarget = possessionGameObject.transform;
-
-        //        IsPossessing = true;
-        //        transform.position = PossessionTarget.transform.position;
-        //        EnableOrDisablePlayerMeshRenderers(false);
-        //        EnableOrDisablePlayerColliders(false);
-        //    }
-        //} 
-        //else if (PossessionTarget)
-        //{
-        //    PossessionTarget = null;
-        //}
     }
 
     private IEnumerator PossessionTimer()

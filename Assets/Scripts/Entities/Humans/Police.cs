@@ -16,7 +16,11 @@ public class Police : MonoBehaviour, IHuman
     public Dialogue Dialogue { get { return M_dialogue; } }
     public Question Question { get { return M_question; } }
     public string Name { get { return M_name; } }
-    public Proffesion Proffesion { get { return M_Proffesion; } }
+    public Proffesion Proffesion
+    {
+        get { return M_Proffesion; }
+        set => M_Proffesion = value;
+    }
 
     public float FearThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FearDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

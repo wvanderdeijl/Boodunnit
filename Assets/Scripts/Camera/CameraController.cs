@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -56,12 +54,13 @@ public class CameraController : MonoBehaviour
     public float MaxElevation = 8f;
     public float MinElevation = -0.5f;
 
-    [SerializeField] private bool _cursorIsLocked = true;
     private float _elevationRange = 2f;
 
     private void Awake()
     {
+        //ToDo: This is hacky, this should be done by the GameManager
         Cursor.lockState = CursorLockMode.Locked;
+
         _pointToSlerpTo = transform.position;
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
         Distance = MaxDistance;
@@ -72,8 +71,12 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt)) Cursor.lockState = ToggleLockMode();
-        if (_cursorIsLocked)
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
+        }
+    
+        if (GameManager.CursorIsLocked)
         {
             _rotationInput.x = Input.GetAxisRaw("Mouse X");
             _rotationInput.y = -Input.GetAxisRaw("Mouse Y");
@@ -155,7 +158,7 @@ public class CameraController : MonoBehaviour
     }
     public IEnumerator RotateCam()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return null;// I changed this to null (To let it coroutine occur every frame) this is changed from: WaitForSeconds(0.1f);
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
         float increment = plusMinusMultiplier * (Mathf.Abs(_rotationInput.x) / (1f/ RotationSpeed));
         _angle += increment;
@@ -173,12 +176,5 @@ public class CameraController : MonoBehaviour
         float newX = circlePosition.x + (radius * Mathf.Sin(angle));
         float newZ = circlePosition.z + (radius * Mathf.Cos(angle));
         return new Vector3(newX, circlePosition.y, newZ);
-    }
-
-    private CursorLockMode ToggleLockMode()
-    {
-        _cursorIsLocked = !_cursorIsLocked;
-        if (_cursorIsLocked) return CursorLockMode.Locked;
-        else return CursorLockMode.Confined;
     }
 }

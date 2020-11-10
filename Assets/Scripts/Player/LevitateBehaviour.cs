@@ -199,8 +199,7 @@ public class LevitateBehaviour : MonoBehaviour
         {
             foreach (var hitCollider in _cachedHitColliders)
             {
-                ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();
-                
+                ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();        
                 if (levitateable != null)
                 {
                     ToggleIsInsideSphereBool(hitCollider, false);
@@ -210,8 +209,7 @@ public class LevitateBehaviour : MonoBehaviour
 
         foreach (var hitCollider in _hitColliders)
         {
-            ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();
-            
+            ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();        
             if (levitateable != null)
             {
                 ToggleIsInsideSphereBool(hitCollider, true);
@@ -230,7 +228,6 @@ public class LevitateBehaviour : MonoBehaviour
         if (angle > -(_overlapSphereAngleInDegrees / 2) && angle < _overlapSphereAngleInDegrees / 2)
         {
             ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();
-
             if (levitateable != null)
             {
                 levitateable.IsInsideSphere = isInsideSphere;
@@ -240,9 +237,7 @@ public class LevitateBehaviour : MonoBehaviour
 
     private void ActivateLevitateCoRoutine()
     {
-        ILevitateable levitateable =
-            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
-        
+        ILevitateable levitateable =_selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;     
         if (_selectedRigidbody && levitateable != null)
         {
             StartCoroutine(levitateable.LevitateForSeconds(_frozenDurationInSeconds));

@@ -98,7 +98,7 @@ public class DashBehaviour : MonoBehaviour
 
         while (currentTime < interval)
         {
-            yield return new WaitForEndOfFrame();
+            yield return null;
             currentTime += Time.deltaTime;
             DashCooldownImage.fillAmount = currentTime / interval;
         }

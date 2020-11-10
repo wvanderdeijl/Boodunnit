@@ -1,0 +1,35 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager
+{
+    /// <summary>
+    /// If the game paused?
+    /// </summary>
+    public static bool IsPaused { get; set; }
+
+    private static bool _cursorIsLocked = true;
+
+    /// <summary>
+    /// Is the Cursor locked or not
+    /// </summary>
+    public static bool CursorIsLocked
+    {
+        get
+        {
+            return _cursorIsLocked;
+        }
+        set
+        {
+            _cursorIsLocked = value;
+            SetCursorIsLocked();
+        }
+    }
+
+    private static void SetCursorIsLocked()
+    {
+        CursorLockMode newCursorLockModus = CursorIsLocked ? CursorLockMode.Locked : CursorLockMode.Confined;
+        Cursor.lockState = newCursorLockModus;
+    }
+}

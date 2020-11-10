@@ -51,7 +51,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Dialogue behaviour
-        if (Input.GetKey(KeyCode.F) && PossessionBehaviour.IsPossessing)
+        if (Input.GetKey(KeyCode.F))
         {
             if (!DialogueManager.hasDialogueStarted)
             {

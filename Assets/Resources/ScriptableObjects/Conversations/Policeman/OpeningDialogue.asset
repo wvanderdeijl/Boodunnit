@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: OpeningDialogue
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: 1
+  - Text: 2
+  - Text: 3
   question: {fileID: 0}

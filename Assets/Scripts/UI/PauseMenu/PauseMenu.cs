@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool IsPaused = false;
-
     public GameObject Canvas;
     public GameObject SettingsCanvas;
 
@@ -15,13 +13,13 @@ public class PauseMenu : MonoBehaviour
 
     public void TogglePauseGame()
     {
-        if (IsPaused)
+        if (GameManager.IsPaused)
         {
             ResetPanels();
         }
-        IsPaused = !IsPaused;
-        Canvas.SetActive(IsPaused);
-        Time.timeScale = IsPaused ? 0 : 1;
+        GameManager.IsPaused = !GameManager.IsPaused;
+        Canvas.SetActive(GameManager.IsPaused);
+        Time.timeScale = GameManager.IsPaused ? 0 : 1;
     }
 
     public void OnQuitToMainMenu()

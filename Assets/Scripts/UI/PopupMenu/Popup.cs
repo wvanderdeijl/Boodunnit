@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PopupMenu : MonoBehaviour
+public class Popup : MonoBehaviour
 {
     public GameObject PopupMenuUI;
 

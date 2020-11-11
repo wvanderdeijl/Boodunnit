@@ -5,18 +5,40 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class LevitateableObject : MonoBehaviour, ILevitateable
 {
+    [SerializeField] private bool _canRespawnWhenOutOfRange;
+    public float PlayerDespawnDistance = 10f;
+    public float SpawnLocationDistance = 3f;
+    private Vector3 _spawnLocation;
+    private Quaternion _spawnRotation;
+
     private Rigidbody _rigidbody;
-    
+
     private void Awake()
     {
         CanBeLevitated = true;
         IsInsideSphere = false;
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
+        
+        _spawnLocation = transform.position;
+        _spawnRotation = transform.rotation;
+        StartCoroutine(CheckForDistance());
     }
 
     public bool CanBeLevitated { get; set; }
-    
+
+    public bool CanRespawnWhenOutOfRange
+    {
+        get
+        {
+            return _canRespawnWhenOutOfRange;
+        }
+        set
+        {
+            _canRespawnWhenOutOfRange = value;
+        }
+    }
+
     public bool IsInsideSphere { get; set; }
 
     public LevitationState State { get; set; }
@@ -48,5 +70,24 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         FreezeOrReleaseLevitateableObject(LevitationState.NotLevitating);
         yield return new WaitForSeconds(seconds);
         FreezeOrReleaseLevitateableObject(LevitationState.Frozen);
+    }
+
+    private IEnumerator CheckForDistance()
+    {
+        yield return new WaitForSeconds(3f);
+        if (CanRespawnWhenOutOfRange && 
+            Vector3.Distance(transform.position, _spawnLocation) > SpawnLocationDistance &&
+            Vector3.Distance(transform.position, CameraController.RotationTarget.position) > PlayerDespawnDistance)
+        {
+            Despawn();
+        }
+        StartCoroutine(CheckForDistance());
+    }
+    
+    public void Despawn()
+    {
+        transform.position = _spawnLocation;
+        transform.rotation = _spawnRotation;
+        _rigidbody.velocity = Vector3.zero;
     }
 }

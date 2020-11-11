@@ -112,6 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f258dcafd797a479e19f02f4018f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDeSpawnDistance: 10
+  SpawnLocationDistance: 5
+  SelfPrefab: {fileID: 2747568577191671548}
 --- !u!135 &2747568577191671489
 SphereCollider:
   m_ObjectHideFlags: 0

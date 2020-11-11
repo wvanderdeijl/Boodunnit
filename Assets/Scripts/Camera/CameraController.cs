@@ -40,6 +40,12 @@ public class CameraController : MonoBehaviour
     public float RotationSpeed = 1f;
 
     public Transform CameraRotationTarget;
+    /// <summary>
+    /// DO NOT reasign  this. only meant for reading by other classes.
+    /// To reassign use non static public Transform CameraRotationTarget
+    /// </summary>
+    public static Transform RotationTarget;
+    
     public Vector3 LookAtTargetPosition;
 
     private Vector3 _pointToSlerpTo;
@@ -65,12 +71,14 @@ public class CameraController : MonoBehaviour
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
         Distance = MaxDistance;
         _minElevationOrigin = MinElevation;
-        _maxElevationOrigin = MaxElevation;
+        _maxElevationOrigin = MaxElevation;  
         LookAtTargetPosition = CameraRotationTarget.position;
     }
 
     private void Update()
     {
+        RotationTarget = CameraRotationTarget;
+        
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
             GameManager.CursorIsLocked = !GameManager.CursorIsLocked;

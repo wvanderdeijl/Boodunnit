@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 {
+    public Mesh NotGlidingMesh, GlidingMesh;
+
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
@@ -44,5 +46,14 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
     public void UseFirstAbility()
     {
         _glideBehaviour.ToggleGlide();
+
+        if (_glideBehaviour.IsGliding)
+        {
+            GetComponent<MeshFilter>().mesh = GlidingMesh;
+        }
+        else
+        {
+            GetComponent<MeshFilter>().mesh = NotGlidingMesh;
+        }
     }
 }

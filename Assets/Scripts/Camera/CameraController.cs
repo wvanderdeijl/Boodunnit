@@ -158,7 +158,7 @@ public class CameraController : MonoBehaviour
     }
     public IEnumerator RotateCam()
     {
-        yield return null;// I changed this to null (To let it coroutine occur every frame) this is changed from: WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);// I changed this to null (To let it coroutine occur every frame) this is changed from: WaitForSeconds(0.1f);
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
         float increment = plusMinusMultiplier * (Mathf.Abs(_rotationInput.x) / (1f/ RotationSpeed));
         _angle += increment;

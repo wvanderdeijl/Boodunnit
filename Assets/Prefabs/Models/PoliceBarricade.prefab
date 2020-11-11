@@ -1,0 +1,221 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4748030263385666315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1481305480324817623}
+  m_Layer: 0
+  m_Name: PoliceBarricade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1481305480324817623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4748030263385666315}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.971585, y: 35.75852, z: 208.38226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6367233230134640817}
+  - {fileID: 8474780906066189023}
+  - {fileID: 4266678339210743227}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4376637003312130640
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1481305480324817623}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.064585686
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.055519104
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9872589
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_PoliceBarricade_LeftStand
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+--- !u!4 &4266678339210743227 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8ea23dfdd88e1634d9c0f424f0788588, type: 3}
+  m_PrefabInstance: {fileID: 4376637003312130640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6905792420600899418
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1481305480324817623}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09058571
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.073516846
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.6472626
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_PoliceBarricade_RightStand
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+--- !u!4 &6367233230134640817 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
+  m_PrefabInstance: {fileID: 6905792420600899418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8220970548728692020
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1481305480324817623}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.050585747
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42048264
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.8482666
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.711507
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.022295328
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.012237426
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70221865
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_PoliceBarricade_Plank
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+--- !u!4 &8474780906066189023 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6dac1959a95a3e54ea8e978938574150, type: 3}
+  m_PrefabInstance: {fileID: 8220970548728692020}
+  m_PrefabAsset: {fileID: 0}

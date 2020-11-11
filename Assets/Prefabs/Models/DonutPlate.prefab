@@ -1,0 +1,359 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1743877344142209268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970018535471835587}
+  m_Layer: 0
+  m_Name: DonutPlate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970018535471835587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743877344142209268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.953434, y: 27.76617, z: 202.15176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5027952936361835744}
+  - {fileID: 5447114502372496587}
+  - {fileID: 9069707732757061237}
+  - {fileID: 855751676259004245}
+  - {fileID: 3581031208598624687}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &894673577517877438
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 970018535471835587}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.06943321
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0521698
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.053756714
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_Donut (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+--- !u!4 &855751676259004245 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+  m_PrefabInstance: {fileID: 894673577517877438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3907111907506961988
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 970018535471835587}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.08785248
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.030828476
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.024765015
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.22735736
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97381145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -26.283
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_Donut (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+--- !u!4 &3581031208598624687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+  m_PrefabInstance: {fileID: 3907111907506961988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4777292205239294731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 970018535471835587}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0069084167
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.06174469
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.030014038
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_Plate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+--- !u!4 &5027952936361835744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7fa5d84563a1fd04695d33f8ce11bb46, type: 3}
+  m_PrefabInstance: {fileID: 4777292205239294731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5481638013039014688
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 970018535471835587}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.014734268
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.035970688
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.08076477
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.1825176
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00028064192
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.2024455
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96213466
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -20.568
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 4.494
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -24.581
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.407834
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.407833
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_Donut (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+--- !u!4 &5447114502372496587 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+  m_PrefabInstance: {fileID: 5481638013039014688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8814857684213070238
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 970018535471835587}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.021566391
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.05517006
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.038238525
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+      propertyPath: m_Name
+      value: CrimeScene_Donut
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+--- !u!4 &9069707732757061237 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f484e8b65537a954b97709d17a6b8c74, type: 3}
+  m_PrefabInstance: {fileID: 8814857684213070238}
+  m_PrefabAsset: {fileID: 0}

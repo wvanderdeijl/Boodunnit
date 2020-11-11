@@ -30,7 +30,7 @@ public class PossessionBehaviour : MonoBehaviour
         if (PossessionTarget && IsPossessing)
         {
             IsPossessing = false;
-            transform.position = PossessionTarget.transform.position;
+            transform.position = PossessionTarget.transform.position + (Vector3.up * 2);
             CameraController.CameraRotationTarget = transform;
 
             EnableOrDisablePlayerMeshRenderers(true);
@@ -40,6 +40,9 @@ public class PossessionBehaviour : MonoBehaviour
             PossessionTarget = null;
             
             IsOnCooldown = true;
+
+            //ToDo: This code is left by the lead dev, change this to how it should be!, but right now i dont care
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             StartCoroutine(PossessionTimer());
         }

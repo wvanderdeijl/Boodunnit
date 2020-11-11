@@ -6,8 +6,7 @@ using UnityEngine;
 public class LevitateableObject : MonoBehaviour, ILevitateable
 {
     [SerializeField] private bool _canRespawnWhenOutOfRange;
-    public float PlayerDespawnDistance = 10f;
-    public float SpawnLocationDistance = 3f;
+    public float DespawnDistance = 10f;
     private Vector3 _spawnLocation;
     private Quaternion _spawnRotation;
 
@@ -76,8 +75,8 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         yield return new WaitForSeconds(3f);
         if (CanRespawnWhenOutOfRange && 
-            Vector3.Distance(transform.position, _spawnLocation) > SpawnLocationDistance &&
-            Vector3.Distance(transform.position, CameraController.RotationTarget.position) > PlayerDespawnDistance)
+            Vector3.Distance(transform.position, CameraController.RotationTarget.position) > DespawnDistance &&
+            Vector3.Distance(_spawnLocation, CameraController.RotationTarget.position) > DespawnDistance)
         {
             Despawn();
         }

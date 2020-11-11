@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Vines
-    second: {fileID: 2100000, guid: 5d89dec148898504689fb06d93d703ee, type: 2}
+    second: {fileID: 2100000, guid: 3683a8076af5ea140888002f0be8ed25, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

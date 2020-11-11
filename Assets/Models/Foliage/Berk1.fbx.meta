@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Berk_Blad
-    second: {fileID: 2100000, guid: 474b41a2a680f5b4baf00b704e94267b, type: 2}
+    second: {fileID: 2100000, guid: f25cf91865de8574f9d541fbe0587b9b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Berk_Stam
-    second: {fileID: 2100000, guid: 4296044bf33a0e44d8bea546292bebba, type: 2}
+    second: {fileID: 2100000, guid: 46e6eb36c906a994a9904ee4d8589312, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: BErk_Blad
-    second: {fileID: 2800000, guid: 91b080b49ff4a2e42bf79dcc53636c0b, type: 3}
+    second: {fileID: 2800000, guid: 9832017a98824554a918f20cc2ea3d18, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Berk_Stam
-    second: {fileID: 2800000, guid: 431d5a90c61bb5d429f877e9e05131f0, type: 3}
+    second: {fileID: 2800000, guid: daba1ce6b9b6f2d4ba9ae7c10c60825a, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -54,7 +54,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -105,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

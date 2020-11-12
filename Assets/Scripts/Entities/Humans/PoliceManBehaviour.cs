@@ -18,7 +18,7 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 
     private void Awake()
     {
-        Proffesion = Proffesion.Policeman;
+        Character = NPCCharacter.Policeman;
     }
 
     private void Update()
@@ -92,5 +92,5 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
     
     public string Name { get; }
     
-    public Proffesion Proffesion { get; set; }
+    public NPCCharacter Character { get; set; }
 }

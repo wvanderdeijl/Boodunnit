@@ -1,11 +1,12 @@
 namespace Interfaces
 {
-    public enum Proffesion 
+    public enum NPCCharacter
     { 
-        Policeman,
-        Baker,
-        Beekeeper,
-        Fisherman
+        Emmie ,
+        SirBoonkle,
+        BusinessTycoon,
+        Policeman
+
     };
     public interface IHuman : IEntity
     {
@@ -20,12 +21,7 @@ namespace Interfaces
             get;
         }
 
-        string Name
-        {
-            get;
-        }
-
-        Proffesion Proffesion
+        NPCCharacter Character
         {
             get;
             set;

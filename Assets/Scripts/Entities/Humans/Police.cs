@@ -6,20 +6,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Police : MonoBehaviour, IHuman
+public class Police : BaseMovement, IHuman, IPossessable
 {
+    private Transform _cameraTransform;
+
     [Header("Conversation")]
-    public Proffesion M_Proffesion;
-    public string M_name;
+    public NPCCharacter M_character;
     public Dialogue M_dialogue;
     public Question M_question;
     public Dialogue Dialogue { get { return M_dialogue; } }
     public Question Question { get { return M_question; } }
-    public string Name { get { return M_name; } }
-    public Proffesion Proffesion
+    public NPCCharacter Character
     {
-        get { return M_Proffesion; }
-        set => M_Proffesion = value;
+        get { return M_character; }
+        set => M_character = value;
+    }
+
+    private void Awake()
+    {
+        _cameraTransform = Camera.main.transform;
     }
 
     public float FearThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -35,7 +40,7 @@ public class Police : MonoBehaviour, IHuman
 
     public void Move(Vector3 direction)
     {
-        throw new NotImplementedException();
+        MoveEntityInDirection(direction);
     }
 
     public void CheckSurroundings()

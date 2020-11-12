@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OpeningDialogue
   m_EditorClassIdentifier: 
   sentences:
-  - Text: 1
-  - Text: 2
-  - Text: 3
+  - Text: 'Hello my name is Sir Boonkle
+
+'
   question: {fileID: 0}

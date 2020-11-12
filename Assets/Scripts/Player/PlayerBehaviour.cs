@@ -1,6 +1,4 @@
-﻿using System;
-using Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -55,7 +53,7 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!DialogueManager.hasDialogueStarted)
             {
-                DialogueManager.TriggerDialogue();
+                DialogueManager.TriggerDialogue(PossessionBehaviour.IsPossessing);
             }
         }
 

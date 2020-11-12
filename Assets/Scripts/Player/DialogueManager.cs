@@ -15,25 +15,24 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> _sentences = new Queue<string>();
     private Question _question = null;
-    private Proffesion _proffession;
+    private NPCCharacter _character;
 
     //This field is created by the lead dev, the way you interact with others must change in the future, the code on line 25 will act weird if there are more than 1 entity to talk to in range!, for now this will do. No more weird interaction point sphere stuff also please.
     private float _dialogTriggerRadius = 5;//ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
 
-    public void TriggerDialogue()//ToDo; The way the world is interacted with will change, this means that line 25 will not do, this method will cause weird behaviour when more than 1 talkable entity is in range anyway.
+    public void TriggerDialogue(bool isPossesing)//ToDo; The way the world is interacted with will change, this means that line 25 will not do, this method will cause weird behaviour when more than 1 talkable entity is in range anyway.
     {
         Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, _dialogTriggerRadius);
         foreach (Collider entityCollider in hitColliderArray)
         {
-            if (entityCollider.TryGetComponent(out IHuman humanToTalkTo))
+            if (entityCollider.TryGetComponent(out IHuman humanToTalkTo) && isPossesing)
             {
                 hasDialogueStarted = true;
-                _proffession = humanToTalkTo.Proffesion;
-                EntityNameUIText.text = $"{_proffession} {humanToTalkTo.Name}";
+                _character = humanToTalkTo.Character;
+                EntityNameUIText.text = $"{_character}";
 
                 ManageDialogue(humanToTalkTo.Dialogue, humanToTalkTo.Question);
 
-                //This break is added by the lead dev
                 break;
             }
         }
@@ -67,7 +66,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach (Sentence sentence in dialogue.sentences)
         {
-            _sentences.Enqueue(sentence.Text.ToString());//ToDo: Is ToString() really needed?
+            _sentences.Enqueue(sentence.Text.ToString());
         }
 
         DisplayNextSentence();
@@ -84,7 +83,7 @@ public class DialogueManager : MonoBehaviour
             buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.Dialogue, choice.Question); });
 
             //if entiry proffesion does not match disable button interaction
-            if (_proffession != choice.ProffesionUnlocksChoice)
+            if (_character != choice.ProffesionUnlocksChoice)
             {
                 buttonInstance.interactable = false;
             }

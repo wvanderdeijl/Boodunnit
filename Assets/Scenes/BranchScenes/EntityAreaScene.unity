@@ -358,7 +358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497731014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.92, y: 5.25, z: -18.96}
+  m_LocalPosition: {x: -0.32, y: 5.25, z: -0.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -376,13 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntitiesAllowedInThisArea:
-  - NameOfEntity: Jaap
-    EntityTimeSpentInAreaInSeconds: 100
-    ChanceThatEntityPicksThisArea: 30
-  - NameOfEntity: 
-    EntityTimeSpentInAreaInSeconds: 100
-    ChanceThatEntityPicksThisArea: 80
+  EntitiesAllowedInThisArea: []
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
   MaximumEntitiesAllowedInArea: 10
@@ -443,13 +437,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntitiesAllowedInThisArea:
-  - NameOfEntity: jaap
-    EntityTimeSpentInAreaInSeconds: 50
-    ChanceThatEntityPicksThisArea: 40
-  EntitiesInArea: []
-  MinimumEntitiesRequiredInArea: 1
-  MaximumEntitiesAllowedInArea: 3
+  EntitiesAllowedInThisArea: []
+  EntitiesInArea:
+  - {fileID: 0}
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 1
 --- !u!1 &1376026164
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,8 +641,6 @@ GameObject:
   - component: {fileID: 2070884928}
   - component: {fileID: 2070884927}
   - component: {fileID: 2070884929}
-  - component: {fileID: 2070884931}
-  - component: {fileID: 2070884930}
   m_Layer: 0
   m_Name: Area 1
   m_TagString: Untagged
@@ -666,7 +656,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070884926}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 10}
@@ -698,42 +688,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntitiesAllowedInThisArea:
-  - NameOfEntity: jaap
-    EntityTimeSpentInAreaInSeconds: 300
-    ChanceThatEntityPicksThisArea: 30
   - NameOfEntity: 
-    EntityTimeSpentInAreaInSeconds: 10
-    ChanceThatEntityPicksThisArea: 20
-  EntitiesInArea: []
+    EntityTimeSpentInAreaInSeconds: 0
+    OdssEntityPicksThisAreaInWeight: 0
+  EntitiesInArea:
+  - {fileID: 0}
   MinimumEntitiesRequiredInArea: 3
   MaximumEntitiesAllowedInArea: 7
---- !u!114 &2070884930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070884926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _donutDetectionRadius: 10
-  _donutDetectionAngle: 90
---- !u!114 &2070884931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070884926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  M_Proffesion: 0
-  M_name: 
-  M_dialogue: {fileID: 0}
-  M_question: {fileID: 0}

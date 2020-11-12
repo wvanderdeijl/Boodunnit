@@ -11,6 +11,8 @@ public class Settings : MonoBehaviour
     public Slider SoundEffectSlider;
     public Text MusicValueText;
     public Slider MusicSlider;
+    public Text SensivityValueText;
+    public Slider SensitivitySlider;
 
     public Dropdown TextSpeedDropdown;
 
@@ -33,11 +35,20 @@ public class Settings : MonoBehaviour
         MusicValueText.text = volumeValue.ToString();
     }
 
+    public void OnValueChangedSensitivitySlider(float volumeValue)
+    {
+        SensivityValueText.text = volumeValue.ToString();
+    }
+
     public void OnClickSaveChanges()
     {
         _playerSettings.MusicVolume = (int) MusicSlider.value;
-        _playerSettings.SoundEffectVolume = (int)SoundEffectSlider.value;
+        _playerSettings.SoundEffectVolume = (int) SoundEffectSlider.value;
+        _playerSettings.CameraSensitivity = (int) (SensitivitySlider.value / 12.5f);
         _playerSettings.TextSpeed = TextSpeedDropdown.value;
+
+        _playerSettings.ValidateData();
+
         SaveHandler.Instance.SaveDataContainer(_playerSettings);
     }
 
@@ -68,8 +79,10 @@ public class Settings : MonoBehaviour
     {
         SoundEffectValueText.text = "100";
         MusicValueText.text = "100";
+        SensivityValueText.text = "1";
         SoundEffectSlider.value = 100;
         MusicSlider.value = 100;
+        SensitivitySlider.value = 1;
         TextSpeedDropdown.value = 0;
     }
 
@@ -77,8 +90,10 @@ public class Settings : MonoBehaviour
     {
         SoundEffectValueText.text = settings.SoundEffectVolume.ToString();
         MusicValueText.text = settings.MusicVolume.ToString();
+        SensivityValueText.text = (settings.CameraSensitivity * 12.5f).ToString();
         SoundEffectSlider.value = settings.SoundEffectVolume;
         MusicSlider.value = settings.MusicVolume;
+        SensitivitySlider.value = settings.CameraSensitivity * 12.5f;
         TextSpeedDropdown.value = settings.TextSpeed;
     }
 }

@@ -4195,6 +4195,10 @@ PrefabInstance:
       propertyPath: SettingsCanvas
       value: 
       objectReference: {fileID: 1587606646}
+    - target: {fileID: 8886725898800993840, guid: 27e04bdad15ba7e499c9a7409479539b, type: 3}
+      propertyPath: CameraController
+      value: 
+      objectReference: {fileID: 517911524}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27e04bdad15ba7e499c9a7409479539b, type: 3}
 --- !u!1 &949436586

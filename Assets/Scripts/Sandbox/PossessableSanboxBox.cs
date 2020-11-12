@@ -23,7 +23,7 @@ public class PossessableSanboxBox : BaseMovement, IPossessable
                 MoveEntityInDirection(moveDirection);
             else Rigidbody.velocity = Vector3.zero;
 
-            _cameraController.RotateCamera(0);
+            _cameraController.RotateCamera();
         } 
     }
 }

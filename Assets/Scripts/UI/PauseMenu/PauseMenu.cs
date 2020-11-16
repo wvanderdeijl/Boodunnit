@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject Canvas;
     public GameObject SettingsCanvas;
+    public CameraController CameraController;
 
     public List<GameObject> CanvasPanels;
 
@@ -20,6 +21,8 @@ public class PauseMenu : MonoBehaviour
         GameManager.IsPaused = !GameManager.IsPaused;
         Canvas.SetActive(GameManager.IsPaused);
         Time.timeScale = GameManager.IsPaused ? 0 : 1;
+
+        CameraController.RotationSpeed = SaveHandler.Instance.LoadDataContainer<PlayerSettings>().CameraSensitivity;
     }
 
     public void OnQuitToMainMenu()

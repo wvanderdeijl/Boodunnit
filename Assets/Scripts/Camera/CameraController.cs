@@ -77,6 +77,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (LevitateBehaviour.IsRotating) { return; }
+
         RotationTarget = CameraRotationTarget;
         
         if (Input.GetKeyDown(KeyCode.LeftAlt))

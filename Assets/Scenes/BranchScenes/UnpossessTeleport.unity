@@ -960,7 +960,7 @@ MonoBehaviour:
   IsPossessing: 0
   CooldownImage: {fileID: 554746775}
   CameraController: {fileID: 374799659}
-  UnpossessRadius: 5
+  UnpossessRadius: 2
   UnPossessRetriesOnYAxis: 10
   Cooldown: 1
   IsOnCooldown: 0

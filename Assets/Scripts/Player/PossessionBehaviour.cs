@@ -14,11 +14,19 @@ public class PossessionBehaviour : MonoBehaviour
 
     public static GameObject PossessionTarget;
     public CameraController CameraController;
-    private float _possessionRadius = 1;
+    public float UnpossessRadius;
 
     public float Cooldown = 1f;
     public bool IsOnCooldown = false;
-    
+
+    private float _playerEndPositionRadius;
+    private PlayerBehaviour _playerBehaviour;
+
+    private void Awake()
+    {
+        _playerEndPositionRadius = GetComponent<Collider>().bounds.extents.z;
+        _playerBehaviour = GetComponent<PlayerBehaviour>();
+    }
 
     private void Update()
     {
@@ -40,6 +48,8 @@ public class PossessionBehaviour : MonoBehaviour
             PossessionTarget = null;
             
             IsOnCooldown = true;
+
+            TeleportPlayerToRandomPosition();
 
             //ToDo: This code is left by the lead dev, change this to how it should be!, but right now i dont care
             GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -119,6 +129,43 @@ public class PossessionBehaviour : MonoBehaviour
         }
     }
 
+    private void TeleportPlayerToRandomPosition() {
+        /**
+            * 1. Create a random point for the player to teleport to.
+            * 2. Check if this point is valid, does the player collide with any object?
+            * 3. If point found is invalid, retry.
+            * 4. Update player position to random position in radius.
+        **/
+
+        float minNewPlayerPositionInRadiusX = transform.position.x - UnpossessRadius;
+        float minNewPlayerPositionInRadiusZ = transform.position.z - UnpossessRadius;
+
+        float maxNewPlayerPositionInRadiusX = transform.position.x + UnpossessRadius;
+        float maxNewPlayerPositionInRadiusY = transform.position.y + UnpossessRadius; // Questionable?
+        float maxNewPlayerPositionInRadiusZ = transform.position.z + UnpossessRadius;
+
+        bool isPositionValid = false;
+        while (!isPositionValid)
+        {
+            Vector3 playerNewPositionAfterUnpossessing = new Vector3(
+                Random.Range(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX),
+                Random.Range(transform.position.y, maxNewPlayerPositionInRadiusY),
+                //transform.position.y,
+                Random.Range(minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ)
+            );
+
+            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius);
+            if(newPositionCollision != null)
+            {
+                if(newPositionCollision.Length == 0)
+                {
+                    transform.position = playerNewPositionAfterUnpossessing;
+                    isPositionValid = true;
+                }
+            }
+        }
+    }
+
     private IEnumerator PossessionTimer()
     {
         float currentTime = 0;
@@ -130,5 +177,10 @@ public class PossessionBehaviour : MonoBehaviour
         }
 
         IsOnCooldown = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, UnpossessRadius);
     }
 }

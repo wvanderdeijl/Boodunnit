@@ -17,6 +17,7 @@ public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
     public Question Question { get; }
     public string Name { get; }
     public Proffesion Proffesion { get; set; }
+    public bool IsPossessed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private float _radius;
     [SerializeField] private float _angle;

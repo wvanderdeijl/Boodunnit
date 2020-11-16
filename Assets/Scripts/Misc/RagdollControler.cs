@@ -30,7 +30,6 @@ public class RagdollControler : MonoBehaviour
 
     public void ToggleRagdoll(bool isRagdoll)
     {
-
         if (_characterAnimator)
         {
             _characterAnimator.enabled = !isRagdoll;

@@ -18,11 +18,17 @@ public class PauseMenu : MonoBehaviour
         {
             ResetPanels();
         }
+
         GameManager.IsPaused = !GameManager.IsPaused;
         Canvas.SetActive(GameManager.IsPaused);
         Time.timeScale = GameManager.IsPaused ? 0 : 1;
 
-        CameraController.RotationSpeed = SaveHandler.Instance.LoadDataContainer<PlayerSettings>().CameraSensitivity;
+        //Hint: dont forget to check if player settings is not null, this just threw an error because it was not checked
+        PlayerSettings playerSettings = SaveHandler.Instance.LoadDataContainer<PlayerSettings>();
+        if (playerSettings != null)
+        {
+            CameraController.RotationSpeed = playerSettings.CameraSensitivity;
+        }
     }
 
     public void OnQuitToMainMenu()
@@ -38,6 +44,7 @@ public class PauseMenu : MonoBehaviour
         {
             panel.SetActive(false);
         }
+
         CanvasPanels[0].SetActive(true);
     }
 }

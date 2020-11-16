@@ -5,16 +5,16 @@ using UnityEngine.AI;
 
 public abstract class BaseMovement : MonoBehaviour
 {
-    public Rigidbody Rigidbody;
-    public float Speed;
-    public bool IsGrounded = true;
     public GameObject Target;
     public NavMeshAgent NavMeshAgent;
+    public Rigidbody Rigidbody;
+
     public float MinimumFollowRange, MaximumFollowRange;
+    public float Speed;
+    public bool IsGrounded = true;
 
     [SerializeField] private PathFindingState _pathFindingState;
     private float _rotationSpeed = 10f;
-    private float _gravity = 9.81f;
     private float _jumpForce = 10.0f;
     private bool _isPathFinding;
     private Quaternion _spawnRotation;
@@ -22,9 +22,13 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void Start()
     {
-        NavMeshAgent.autoBraking = true;
-        _spawnRotation = transform.rotation;
-        _spawnLocation = transform.position;
+        if (NavMeshAgent)
+        {
+            NavMeshAgent.autoBraking = true;
+
+            _spawnRotation = transform.rotation;
+            _spawnLocation = transform.position;
+        }
     }
 
     public void MoveEntityInDirection(Vector3 direction, float speed)
@@ -89,6 +93,7 @@ public abstract class BaseMovement : MonoBehaviour
                 NavMeshAgent.SetDestination(Target.transform.position);
                 return;
             }
+
             NavMeshAgent.isStopped = true;
         }
     }

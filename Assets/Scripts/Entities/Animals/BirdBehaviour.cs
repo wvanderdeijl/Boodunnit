@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 {
+    public bool IsPossessed { get; set; }
     public Mesh NotGlidingMesh, GlidingMesh;
-
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }

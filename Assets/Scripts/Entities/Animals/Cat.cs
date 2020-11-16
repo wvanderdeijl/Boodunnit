@@ -10,6 +10,7 @@ namespace Entities
 {
     public class Cat : MonoBehaviour, IAnimal
     {
+        public bool IsPossessed { get; set; }
         public float FearThreshold { get; set; }
         public float FearDamage { get; set; }
         public float FaintDuration { get; set; }

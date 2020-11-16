@@ -43,6 +43,7 @@ public class PossessionBehaviour : MonoBehaviour
             EnableOrDisablePlayerMeshRenderers(true);
             EnableOrDisablePlayerColliders(true);
 
+            TargetBehaviour.IsPossessed = false;
             TargetBehaviour = null;
             PossessionTarget = null;
             
@@ -110,6 +111,7 @@ public class PossessionBehaviour : MonoBehaviour
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 CameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
 
+                TargetBehaviour.IsPossessed = true;
                 IsPossessing = true;
                 transform.position = gameObjectInRangeCollider.gameObject.transform.position;
 

@@ -16,9 +16,8 @@ public class RagdollControler : MonoBehaviour
 
     private void InitializeRagdollControler()
     {
-        if (GetComponentsInChildren<Rigidbody>() == null) return;
-        if (GetComponentsInChildren<Collider>() == null) return;
-        
+        if (GetComponentsInChildren<Rigidbody>() == null || GetComponentsInChildren<Collider>() == null) return;
+
         GetRigidbodiesAndColliders();
         ToggleRagdoll(false);
     }

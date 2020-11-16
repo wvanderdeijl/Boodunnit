@@ -10,18 +10,19 @@ public abstract class BaseMovement : MonoBehaviour
     public bool IsGrounded = true;
     public GameObject Target;
     public NavMeshAgent NavMeshAgent;
+    public float MinimumFollowRange, MaximumFollowRange;
 
+    [SerializeField] private PathFindingState _pathFindingState;
     private float _rotationSpeed = 10f;
     private float _gravity = 9.81f;
     private float _jumpForce = 10.0f;
-    private PathFindingState _pathFindingState = PathFindingState.Stationary;
     private bool _isPathFinding;
-
     private Quaternion _spawnRotation;
     private Vector3 _spawnLocation;
 
     private void Start()
     {
+        NavMeshAgent.autoBraking = true;
         _spawnRotation = transform.rotation;
         _spawnLocation = transform.position;
     }
@@ -49,12 +50,12 @@ public abstract class BaseMovement : MonoBehaviour
         switch (_pathFindingState)
         {
             case PathFindingState.Stationary:
-                if(transform.position != _spawnLocation) ReturnToSpawn();
+                ReturnToSpawn();
                 break;
             case PathFindingState.Patrolling:
                 break;
             case PathFindingState.Following:
-                if(Target) FollowTarget();
+                FollowTarget();
                 break;
         }
     }
@@ -79,32 +80,35 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void FollowTarget()
     {
-        float distanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
-        if (distanceToTarget > 3f && distanceToTarget < 10f)
+        if (Target)
         {
-            NavMeshAgent.isStopped = false;
-            NavMeshAgent.SetDestination(Target.transform.position);
-            return;
+            float distanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+            if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
+            {
+                NavMeshAgent.isStopped = false;
+                NavMeshAgent.SetDestination(Target.transform.position);
+                return;
+            }
+            NavMeshAgent.isStopped = true;
         }
-        NavMeshAgent.isStopped = true;
-        _pathFindingState = PathFindingState.Stationary;
     }
 
     private void ReturnToSpawn()
     {
-        float distanceToDestination = Vector3.Distance(transform.position, NavMeshAgent.destination);
+        float distanceToDestination = Vector3.Distance(transform.position, _spawnLocation);
         if (distanceToDestination > 0.5f)
         {
             NavMeshAgent.isStopped = false;
             NavMeshAgent.destination = _spawnLocation;
             return;
         }
+        
         Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation, 
             Time.deltaTime * 5f);
         transform.rotation = lerpToRotation;
     }
 
-    public void ChangeState(PathFindingState pathFindingState)
+    public void ChangePathFindingState(PathFindingState pathFindingState)
     {
         _pathFindingState = pathFindingState;
     }

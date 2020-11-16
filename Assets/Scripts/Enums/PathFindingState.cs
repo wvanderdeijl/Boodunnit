@@ -1,5 +1,3 @@
-using UnityEngine.UIElements;
-
 namespace Enums
 {
     public enum PathFindingState

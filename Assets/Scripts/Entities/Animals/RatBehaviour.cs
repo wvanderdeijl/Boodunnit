@@ -25,10 +25,9 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
         _climbBehaviour.Speed = 5f;
 
         Rigidbody = GetComponent<Rigidbody>();
-        
         NavMeshAgent.GetComponent<NavMeshAgent>();
 
-        ChangeState(PathFindingState.Following);
+        ChangePathFindingState(PathFindingState.Following);
         
         Target = GameObject.Find("Player");
     }

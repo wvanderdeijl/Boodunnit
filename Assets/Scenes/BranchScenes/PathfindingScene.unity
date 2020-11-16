@@ -261,6 +261,9 @@ MonoBehaviour:
   IsGrounded: 1
   Target: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  _pathFindingState: 0
   PossessionBehaviour: {fileID: 863418408}
   DashBehaviour: {fileID: 863418407}
   HighlightBehaviour: {fileID: 863418406}
@@ -328,7 +331,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863418397}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -4671425934770842150, guid: 787214f43e3aafd46b9ea676105d2983, type: 3}
 --- !u!4 &863418402
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +613,9 @@ MonoBehaviour:
   IsGrounded: 1
   Target: {fileID: 863418397}
   NavMeshAgent: {fileID: 1535686888}
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  _pathFindingState: 0
   _climbBehaviour: {fileID: 1535686882}
 --- !u!65 &1535686884
 BoxCollider:

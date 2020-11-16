@@ -4,12 +4,20 @@ public class Popup : MonoBehaviour
 {
     public GameObject PopupMenuUI;
 
-    void Start()
+    void Awake()
     {
-        OpenPopup();
+
     }
 
-    private void OpenPopup()
+    private void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            ClosePopup();
+        }
+    }
+
+    public void OpenPopup()
     {
         PopupMenuUI.SetActive(true);
         Time.timeScale = 0f;

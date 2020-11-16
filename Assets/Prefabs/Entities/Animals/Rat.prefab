@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1097548279662457390}
   - component: {fileID: 1097548279662457385}
   - component: {fileID: 1097548279662457387}
+  - component: {fileID: 1371556504}
   m_Layer: 11
   m_Name: Rat
   m_TagString: Untagged
@@ -113,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc8fdbdd34b57b42a9cdb0dd7480939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StaminaConsumptionPerSecond: 10
-  StaminaReplenishRatePerSecond: 10
+  StaminaConsumptionPerSecond: 5
+  StaminaReplenishRatePerSecond: 20
   IsClimbing: 0
   _rigidbody: {fileID: 1097548279662457384}
   _rotationSpeed: 100
@@ -131,9 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed47abad56540ed4bb3b57611391ed9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  NavMeshAgent: {fileID: 1371556504}
   Rigidbody: {fileID: 1097548279662457384}
+  MinimumFollowRange: 1
+  MaximumFollowRange: 20
   Speed: 10
   IsGrounded: 1
+  _pathFindingState: 0
   _climbBehaviour: {fileID: 1097548279662457390}
 --- !u!65 &1097548279662457387
 BoxCollider:
@@ -148,3 +154,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25804216, y: 0.2660572, z: 0.87581074}
   m_Center: {x: 0.0071258545, y: 0.1288805, z: -0.09025113}
+--- !u!195 &1371556504
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097548279662457391}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.4
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a87fdf7dec06ae4b9e5dae250dc42ed, type: 3}
-  m_Name: Clue1
+  m_Name: CoatScrap
   m_EditorClassIdentifier: 
-  Name: Clue 1
+  Name: A Coat scap
   Details: Details Clue 1
   Location: Location Clue 1
   Description: Description Clue 1

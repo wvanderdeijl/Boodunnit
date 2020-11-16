@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Enums;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 {
@@ -17,6 +18,18 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 
     [SerializeField] private GlideBehaviour _glideBehaviour;
     
+    private void Awake()
+    {
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Update()
+    {
+        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
+
+        if (!IsPossessed) MoveWithPathFinding();
+    }
+
     public void DealFearDamage(float amount)
     {
         throw new NotImplementedException();

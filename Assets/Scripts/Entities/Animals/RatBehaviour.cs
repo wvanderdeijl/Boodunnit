@@ -25,16 +25,12 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
         _climbBehaviour.Speed = 5f;
 
         Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent.GetComponent<NavMeshAgent>();
-
-        ChangePathFindingState(PathFindingState.Following);
-        
-        Target = GameObject.Find("Player");
+        NavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;
+        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
 
         if(!IsPossessed) MoveWithPathFinding();
     }
@@ -46,6 +42,7 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
             _climbBehaviour.Climb();
             return;
         }
+
         MoveEntityInDirection(direction);
     }
 

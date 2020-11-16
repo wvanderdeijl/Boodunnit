@@ -14,6 +14,7 @@ public class PossessableSanboxBox : BaseMovement, IEntity, IPossessable
     public float FaintDuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public EmotionalState EmotionalState { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public Dictionary<Type, float> ScaredOfGameObjects { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool IsPossessed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     private void Awake()
     {

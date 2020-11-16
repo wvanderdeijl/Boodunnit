@@ -15,7 +15,8 @@ public class DialogueManager : MonoBehaviour
 
     private Queue<string> _sentences = new Queue<string>();
     private Question _question = null;
-    private NPCCharacter _character;
+    private string _character;
+    private IEntity _currentPossedNPC = null;
 
     //This field is created by the lead dev, the way you interact with others must change in the future, the code on line 25 will act weird if there are more than 1 entity to talk to in range!, for now this will do. No more weird interaction point sphere stuff also please.
     private float _dialogTriggerRadius = 5;//ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
@@ -25,15 +26,24 @@ public class DialogueManager : MonoBehaviour
         Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, _dialogTriggerRadius);
         foreach (Collider entityCollider in hitColliderArray)
         {
-            if (entityCollider.TryGetComponent(out IHuman humanToTalkTo) && isPossesing)
+            if (isPossesing)
             {
-                hasDialogueStarted = true;
-                _character = humanToTalkTo.Character;
-                EntityNameUIText.text = $"{_character}";
+                _currentPossedNPC = PossessionBehaviour.PossessionTarget.GetComponent<IEntity>();
+            }
 
-                ManageDialogue(humanToTalkTo.Dialogue, humanToTalkTo.Question);
+            if (entityCollider.TryGetComponent(out IEntity entityToTalkTo))
+            {
+                //if not possesing boolea can only talk to emmie
+                if ((entityToTalkTo != _currentPossedNPC && isPossesing) || !isPossesing && (entityToTalkTo.CharacterName.ToLower() == "emmie"))
+                {
+                    hasDialogueStarted = true;
+                    _character = entityToTalkTo.CharacterName;
+                    EntityNameUIText.text = $"{_character}";
 
-                break;
+                    ManageDialogue(entityToTalkTo.Dialogue, entityToTalkTo.Question);
+
+                    break;
+                }
             }
         }
     }
@@ -83,7 +93,7 @@ public class DialogueManager : MonoBehaviour
             buttonInstance.onClick.AddListener(delegate () { ManageDialogue(choice.Dialogue, choice.Question); });
 
             //if entiry proffesion does not match disable button interaction
-            if (_character != choice.ProffesionUnlocksChoice)
+            if (_character != choice.CharacterUnlocksChoice)
             {
                 buttonInstance.interactable = false;
             }

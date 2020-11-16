@@ -11,15 +11,18 @@ public class Police : BaseMovement, IHuman, IPossessable
     private Transform _cameraTransform;
 
     [Header("Conversation")]
-    public NPCCharacter M_character;
+    public string Name;
     public Dialogue M_dialogue;
     public Question M_question;
+
+    public List<CharacterList> Relationships;
+
     public Dialogue Dialogue { get { return M_dialogue; } }
     public Question Question { get { return M_question; } }
-    public NPCCharacter Character
+    public string CharacterName
     {
-        get { return M_character; }
-        set => M_character = value;
+        get { return Name; }
+        set => Name = value;
     }
 
     private void Awake()

@@ -410,7 +410,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundEffectValueText: {fileID: 6899861822186566697}
+  SoundEffectSlider: {fileID: 6899861823527476751}
   MusicValueText: {fileID: 6899861821870125855}
+  MusicSlider: {fileID: 6899861823314293152}
+  TextSpeedDropdown: {fileID: 6899861822004644178}
 --- !u!1 &6899861821719572632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,13 +1203,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 2
   m_Options:
-    m_Options:
-    - m_Text: SLOW
-      m_Image: {fileID: 0}
-    - m_Text: NORMAL
-      m_Image: {fileID: 0}
-    - m_Text: FAST
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

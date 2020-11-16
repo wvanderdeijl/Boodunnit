@@ -347,7 +347,7 @@ Transform:
   m_Children:
   - {fileID: 1085185615}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &367803968
 GameObject:
@@ -661,10 +661,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 446759251}
   Speed: 10
-  IsGrounded: 1
-  M_character: 3
+  IsGrounded: 0
+  Name: Barry Barnes
   M_dialogue: {fileID: 11400000, guid: e8a81db1a1d248c4db5d4595935c6a3d, type: 2}
   M_question: {fileID: 0}
+  Relationships: 
 --- !u!54 &446759251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -679,7 +680,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &470730729
 GameObject:
@@ -816,7 +817,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567339098}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.54, y: -1.7132175, z: 2.2632394}
+  m_LocalPosition: {x: -11.79, y: -1.7132175, z: 2.26}
   m_LocalScale: {x: 1, y: 2.29321, z: 1}
   m_Children:
   - {fileID: 367803969}
@@ -837,7 +838,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &567339101
 MonoBehaviour:
@@ -854,9 +855,10 @@ MonoBehaviour:
   Rigidbody: {fileID: 567339100}
   Speed: 10
   IsGrounded: 1
-  M_character: 0
+  Name: Emmie
   M_dialogue: {fileID: 11400000, guid: d379e404ab0472346926aac0e3e9ae47, type: 2}
   M_question: {fileID: 0}
+  Relationships: 01000000
 --- !u!65 &567339102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1031,7 +1033,7 @@ Transform:
   - {fileID: 1856822482}
   - {fileID: 446759249}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756409170
 GameObject:
@@ -1173,7 +1175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085185614
 GameObject:
@@ -1536,7 +1538,7 @@ RectTransform:
   - {fileID: 596905649}
   - {fileID: 756409171}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1673,9 +1675,10 @@ MonoBehaviour:
   Rigidbody: {fileID: 1856822487}
   Speed: 10
   IsGrounded: 1
-  M_character: 1
+  Name: Sir Boonkle
   M_dialogue: {fileID: 11400000, guid: 2a960141df3fd2341803b999071db35e, type: 2}
   M_question: {fileID: 0}
+  Relationships: 
 --- !u!65 &1856822484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1752,7 +1755,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &1878085289
 GameObject:
@@ -1847,7 +1850,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1915735962 stripped
 MonoBehaviour:
@@ -1968,7 +1971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5983738245050748849, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5983738245050748849, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
       propertyPath: m_AnchorMax.x

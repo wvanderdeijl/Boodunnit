@@ -16,6 +16,12 @@ namespace Entities
         public EmotionalState EmotionalState { get; set; }
         public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
 
+        public Dialogue Dialogue => throw new NotImplementedException();
+
+        public Question Question => throw new NotImplementedException();
+
+        public string CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         [SerializeField] private float _radius;
         [SerializeField] private float _angle;
         [SerializeField] private Image _fearMeter;

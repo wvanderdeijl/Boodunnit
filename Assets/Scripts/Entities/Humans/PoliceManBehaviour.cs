@@ -7,18 +7,20 @@ using UnityEngine;
 
 public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 {
+    public string Name;
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
+    public string CharacterName { get; set; }
 
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
 
     private void Awake()
     {
-        Character = NPCCharacter.Policeman;
+        CharacterName = Name;
     }
 
     private void Update()
@@ -89,8 +91,4 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
     public Dialogue Dialogue { get; }
     
     public Question Question { get; }
-    
-    public string Name { get; }
-    
-    public NPCCharacter Character { get; set; }
 }

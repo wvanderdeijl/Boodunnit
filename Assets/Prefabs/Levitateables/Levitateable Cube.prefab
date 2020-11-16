@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1264127919153647637}
   - component: {fileID: 1264127919153647636}
   - component: {fileID: 1264127919153647635}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Levitateable Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f258dcafd797a479e19f02f4018f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canRespawnWhenOutOfRange: 0
+  DespawnDistance: 10
 --- !u!54 &1264127919153647635
 Rigidbody:
   m_ObjectHideFlags: 0

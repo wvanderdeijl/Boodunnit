@@ -17,6 +17,8 @@ namespace Entities
         public EmotionalState EmotionalState { get; set; }
         public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
 
+        private RagdollControler _ragdollControler;
+
         [SerializeField] private float _radius;
         [SerializeField] private float _angle;
         [SerializeField] private Image _fearMeter;
@@ -25,6 +27,8 @@ namespace Entities
         
         private void Awake()
         {
+            _ragdollControler = GetComponent<RagdollControler>();
+            
             FearThreshold = 20;
             FearDamage = 0;
             FaintDuration = 10;
@@ -99,11 +103,13 @@ namespace Entities
             yield return new WaitForSeconds(FaintDuration);
             EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
+            _ragdollControler.ToggleRagdoll(false);
         }
 
         public void Faint()
         {
             EmotionalState = EmotionalState.Fainted;
+            _ragdollControler.ToggleRagdoll(true);
             StartCoroutine(CalmDown());
         }
 

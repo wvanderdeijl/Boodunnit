@@ -15,17 +15,16 @@ public class PossessionBehaviour : MonoBehaviour
     public static GameObject PossessionTarget;
     public CameraController CameraController;
     public float UnpossessRadius;
+    public int UnPossessRetriesOnYAxis;
 
     public float Cooldown = 1f;
     public bool IsOnCooldown = false;
 
     private float _playerEndPositionRadius;
-    private PlayerBehaviour _playerBehaviour;
 
     private void Awake()
     {
         _playerEndPositionRadius = GetComponent<Collider>().bounds.extents.z;
-        _playerBehaviour = GetComponent<PlayerBehaviour>();
     }
 
     private void Update()
@@ -129,7 +128,8 @@ public class PossessionBehaviour : MonoBehaviour
         }
     }
 
-    private void TeleportPlayerToRandomPosition() {
+    private void TeleportPlayerToRandomPosition()
+    {
         /**
             * 1. Create a random point for the player to teleport to.
             * 2. Check if this point is valid, does the player collide with any object?
@@ -141,29 +141,53 @@ public class PossessionBehaviour : MonoBehaviour
         float minNewPlayerPositionInRadiusZ = transform.position.z - UnpossessRadius;
 
         float maxNewPlayerPositionInRadiusX = transform.position.x + UnpossessRadius;
-        float maxNewPlayerPositionInRadiusY = transform.position.y + UnpossessRadius; // Questionable?
+        float maxNewPlayerPositionInRadiusY = transform.position.y + UnpossessRadius;
         float maxNewPlayerPositionInRadiusZ = transform.position.z + UnpossessRadius;
 
         bool isPositionValid = false;
-        while (!isPositionValid)
+        int newPositionTries = 0;
+
+        while (!isPositionValid || newPositionTries <= UnPossessRetriesOnYAxis)
         {
-            Vector3 playerNewPositionAfterUnpossessing = new Vector3(
-                Random.Range(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX),
-                Random.Range(transform.position.y, maxNewPlayerPositionInRadiusY),
-                //transform.position.y,
-                Random.Range(minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ)
-            );
+            Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y,
+                minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
 
             Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius);
-            if(newPositionCollision != null)
+            if (newPositionCollision != null)
             {
-                if(newPositionCollision.Length == 0)
+                if (newPositionCollision.Length == 0)
                 {
                     transform.position = playerNewPositionAfterUnpossessing;
                     isPositionValid = true;
                 }
             }
+            newPositionTries++;
         }
+
+        if(newPositionTries >= UnPossessRetriesOnYAxis)
+        {
+            Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y, maxNewPlayerPositionInRadiusY,
+                minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
+            transform.position = playerNewPositionAfterUnpossessing;
+        }
+    }
+
+    private Vector3 GetNewPlayerVector3Position(float minPositionX, float maxPositionX, float minPositionY, float maxPositionY, float minPositionZ, float maxPositionZ)
+    {
+        return new Vector3(
+            Random.Range(minPositionX, maxPositionX),
+            Random.Range(minPositionY, maxPositionY),
+            Random.Range(minPositionZ, maxPositionZ)
+        );
+    }
+
+    private Vector3 GetNewPlayerVector3Position(float minPositionX, float maxPositionX, float positionY, float minPositionZ, float maxPositionZ)
+    {
+        return new Vector3(
+            Random.Range(minPositionX, maxPositionX),
+            positionY,
+            Random.Range(minPositionZ, maxPositionZ)
+        );
     }
 
     private IEnumerator PossessionTimer()

@@ -87,7 +87,6 @@ public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
 
     public void DealFearDamage(float amount)
     {
-        Debug.Log(FearDamage);
         if (EmotionalState == EmotionalState.Fainted) return;
 
         FearDamage += amount;

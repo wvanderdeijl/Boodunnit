@@ -9,7 +9,7 @@ public class PossessableSanboxBox : BaseMovement, IPossessable
     [SerializeField] private PossessionBehaviour _possessionBehaviour;
     private void Awake()
     {
-        _cameraController = Camera.main.GetComponent<CameraController>();
+        _cameraController = UnityEngine.Camera.main.GetComponent<CameraController>();
     }
 
     private void Update()

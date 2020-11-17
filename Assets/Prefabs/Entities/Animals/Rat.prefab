@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1097548279662457390}
   - component: {fileID: 1097548279662457385}
   - component: {fileID: 1097548279662457387}
+  - component: {fileID: 6267253183563679202}
   m_Layer: 11
   m_Name: Rat
   m_TagString: Untagged
@@ -99,7 +100,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1097548279662457390
 MonoBehaviour:
@@ -134,6 +135,9 @@ MonoBehaviour:
   Rigidbody: {fileID: 1097548279662457384}
   Speed: 10
   IsGrounded: 1
+  JumpForce: 10
+  _hasCollidedWithWall: 0
+  Collider: {fileID: 1097548279662457387}
   _climbBehaviour: {fileID: 1097548279662457390}
 --- !u!65 &1097548279662457387
 BoxCollider:
@@ -148,3 +152,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25804216, y: 0.2660572, z: 0.87581074}
   m_Center: {x: 0.0071258545, y: 0.1288805, z: -0.09025113}
+--- !u!136 &6267253183563679202
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097548279662457391}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.108314514
+  m_Height: 0.21662903
+  m_Direction: 1
+  m_Center: {x: 0.009979248, y: 0.023004353, z: -0.09025115}

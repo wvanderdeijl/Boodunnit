@@ -17,7 +17,7 @@ public class PlayerBehaviour : BaseMovement
 
     private void Awake()
     {
-        _cameraTransform = Camera.main.transform;
+        _cameraTransform = UnityEngine.Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -83,7 +83,6 @@ public class PlayerBehaviour : BaseMovement
         else if (PossessionBehaviour.IsPossessing)
         {
             PossessionBehaviour.TargetBehaviour.Move(moveDirection);
-            
         }
 
         //Use first ability.
@@ -97,8 +96,6 @@ public class PlayerBehaviour : BaseMovement
         {
             Jump();
         }
-
-        CheckIfGrounded();
     }
     private void FixedUpdate()
     {

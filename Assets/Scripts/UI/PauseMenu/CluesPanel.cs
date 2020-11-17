@@ -16,8 +16,7 @@ public class CluesPanel : MonoBehaviour
     private List<string> _collectedClueNames = new List<string>();
     private string _hiddenClueName = "???";
 
-    // Start is called before the first frame update
-    void Awake()//ToDo: This cannot be called in awake. this should be called when the panel is opened. Refactor this script lead dev
+    private void GetAllCollectedClues()
     {
         Clues = Resources.LoadAll<Clue>("ScriptableObjects/Clues").ToList();
         foreach (Clue clue in Clues)
@@ -31,6 +30,8 @@ public class CluesPanel : MonoBehaviour
 
     public void ShowClue(string clueName)
     {
+        GetAllCollectedClues();
+
         Clue activeClue = Clues.FirstOrDefault(c => c.Name == clueName);
         if (_collectedClueNames.Contains(clueName))
         {
@@ -49,6 +50,5 @@ public class CluesPanel : MonoBehaviour
             Description.text = hiddenClue.Description;
             Image.sprite = hiddenClue.Image;
         }
-        
     }
 }

@@ -4,6 +4,7 @@
     {
         Levitating,
         NotLevitating,
-        Frozen
+        Frozen,
+        SnappedIntoPlace
     }
 }

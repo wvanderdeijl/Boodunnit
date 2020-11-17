@@ -1,12 +1,13 @@
 ﻿using DefaultNamespace.Enums;
+using Interfaces;
 using UnityEngine;
 
 public class LevitateBehaviour : MonoBehaviour
 {
-    [Header("Player and Camera")]
+    [Header("References")]
     [SerializeField] private GameObject _player;
     [SerializeField] private Camera _mainCamera;
-    
+
     [Header("OverlapSphere")]
     [SerializeField][Range(0, 30)] private float _overlapSphereRadiusInUnits = 5f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
@@ -140,8 +141,17 @@ public class LevitateBehaviour : MonoBehaviour
         ILevitateable levitateable =
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
 
+        ISnappable iSnappable = _selectedRigidbody.gameObject.GetComponent<ISnappable>();
+        
         if (levitateable != null)
         {
+            if (iSnappable != null)
+            {
+                iSnappable.Snap();
+                _selectedRigidbody = null;
+                return;
+            }
+            
             levitateable.State = LevitationState.Frozen;
         }
 
@@ -149,7 +159,7 @@ public class LevitateBehaviour : MonoBehaviour
         
         _selectedRigidbody = null;
     }
-    
+
     private Rigidbody GetRigidbodyFromMouseClick()
     {
         if (_selectedRigidbody)

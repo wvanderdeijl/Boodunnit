@@ -30,6 +30,11 @@ public class PossessableSanboxBox : BaseMovement, IEntity, IPossessable
         yield return null;
     }
 
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
     }

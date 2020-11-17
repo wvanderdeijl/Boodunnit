@@ -35,6 +35,11 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
         if(!IsPossessed) MoveWithPathFinding();
     }
 
+    public void EntityJump()
+    {
+        Jump();
+    }
+
     public void Move(Vector3 direction)
     {
         if (_climbBehaviour.IsClimbing)

@@ -218,6 +218,70 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &349347198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 349347200}
+  - component: {fileID: 349347199}
+  - component: {fileID: 349347201}
+  m_Layer: 0
+  m_Name: Area2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &349347199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349347198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &349347200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349347198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.9, y: 10, z: 27.09}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &349347201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349347198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesAllowedInThisArea:
+  - NameOfEntity: Rat
+    EntityTimeSpentInAreaInSeconds: 200
+    OdssEntityPicksThisAreaInWeight: 1
+  EntitiesInArea: []
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 10
 --- !u!1 &863418397
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,13 +320,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61aa2981fb2c0ce43872593267e80272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 863418403}
-  Speed: 5
-  IsGrounded: 1
   Target: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  Rigidbody: {fileID: 863418403}
   MinimumFollowRange: 0
   MaximumFollowRange: 0
+  Speed: 5
+  IsGrounded: 1
   _pathFindingState: 0
   PossessionBehaviour: {fileID: 863418408}
   DashBehaviour: {fileID: 863418407}
@@ -411,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda64b232a8ed564b8fd5097cf3494e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0
+  Radius: 3
 --- !u!114 &863418407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +509,8 @@ MonoBehaviour:
   IsPossessing: 0
   CooldownImage: {fileID: 0}
   CameraController: {fileID: 1899694588}
+  UnpossessRadius: 0
+  UnPossessRetriesOnYAxis: 0
   Cooldown: 1
   IsOnCooldown: 0
 --- !u!1 &1493256695
@@ -576,7 +642,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1535686882
 MonoBehaviour:
@@ -608,13 +674,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed47abad56540ed4bb3b57611391ed9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 1535686881}
-  Speed: 5
-  IsGrounded: 1
   Target: {fileID: 863418397}
   NavMeshAgent: {fileID: 1535686888}
+  Rigidbody: {fileID: 1535686881}
   MinimumFollowRange: 0
   MaximumFollowRange: 0
+  Speed: 5
+  IsGrounded: 1
   _pathFindingState: 0
   _climbBehaviour: {fileID: 1535686882}
 --- !u!65 &1535686884
@@ -715,6 +781,70 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1 &1693912966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693912968}
+  - component: {fileID: 1693912967}
+  - component: {fileID: 1693912969}
+  m_Layer: 0
+  m_Name: Area1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1693912967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693912966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1693912968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693912966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.3, y: 10, z: 27.09}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1693912969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693912966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesAllowedInThisArea:
+  - NameOfEntity: Rat
+    EntityTimeSpentInAreaInSeconds: 200
+    OdssEntityPicksThisAreaInWeight: 1
+  EntitiesInArea: []
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 10
 --- !u!1 &1783427214
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,3 +1044,67 @@ MonoBehaviour:
   LookAtTargetPosition: {x: 0, y: 0, z: 0}
   MaxElevation: 8
   MinElevation: -0.5
+--- !u!1 &1923635002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1923635004}
+  - component: {fileID: 1923635003}
+  - component: {fileID: 1923635005}
+  m_Layer: 0
+  m_Name: Area3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1923635003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923635002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1923635004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923635002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.9, y: 10, z: -34}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1923635005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923635002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesAllowedInThisArea:
+  - NameOfEntity: Rat
+    EntityTimeSpentInAreaInSeconds: 200
+    OdssEntityPicksThisAreaInWeight: 1
+  EntitiesInArea: []
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 10

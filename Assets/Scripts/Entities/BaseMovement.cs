@@ -17,8 +17,10 @@ public abstract class BaseMovement : MonoBehaviour
     private float _rotationSpeed = 10f;
     private float _jumpForce = 10.0f;
     private bool _isPathFinding;
+    private bool _hasPositionInArea;
     private Quaternion _spawnRotation;
     private Vector3 _spawnLocation;
+    private Vector3 _patrolDestination;
 
     private void Start()
     {
@@ -57,6 +59,7 @@ public abstract class BaseMovement : MonoBehaviour
                 ReturnToSpawn();
                 break;
             case PathFindingState.Patrolling:
+                PatrolArea();
                 break;
             case PathFindingState.Following:
                 FollowTarget();
@@ -100,8 +103,7 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void ReturnToSpawn()
     {
-        float distanceToDestination = Vector3.Distance(transform.position, _spawnLocation);
-        if (distanceToDestination > 0.5f)
+        if (HasReachedDestination(_spawnLocation))
         {
             NavMeshAgent.isStopped = false;
             NavMeshAgent.destination = _spawnLocation;
@@ -113,8 +115,30 @@ public abstract class BaseMovement : MonoBehaviour
         transform.rotation = lerpToRotation;
     }
 
+    private void PatrolArea()
+    {
+        if (!_hasPositionInArea)
+        {
+            EntityArea roamArea = EntityAreaHandler.Instance.GetAreaForSpecificEntity(gameObject);
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(roamArea, gameObject);
+            NavMeshAgent.destination = _patrolDestination;
+            _hasPositionInArea = true;
+        }
+
+        if (HasReachedDestination(_patrolDestination))
+        {
+            _hasPositionInArea = false;
+        }
+    }
+
     public void ChangePathFindingState(PathFindingState pathFindingState)
     {
         _pathFindingState = pathFindingState;
+    }
+
+    private bool HasReachedDestination(Vector3 destination)
+    {
+        float distanceToDestination = Vector3.Distance(transform.position, destination);
+        return distanceToDestination < 0.5f;
     }
 }

@@ -36,6 +36,11 @@ namespace Entities
             throw new NotImplementedException();
         }
 
+        public void EntityJump()
+        {
+            throw new NotImplementedException();
+        }
+
         public void CheckSurroundings()
         {
             throw new System.NotImplementedException();

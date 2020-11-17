@@ -45,6 +45,11 @@ public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
         CheckSurroundings();
     }
 
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
         if (_hasFearCooldown) return;

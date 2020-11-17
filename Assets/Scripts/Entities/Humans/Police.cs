@@ -39,6 +39,11 @@ public class Police : MonoBehaviour, IHuman
         throw new NotImplementedException();
     }
 
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
         throw new NotImplementedException();

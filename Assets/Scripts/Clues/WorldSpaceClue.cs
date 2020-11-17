@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldSpaceClue : MonoBehaviour
 {
     public Clue ClueScriptableObject;
+    public Popup Popup;
 
     private void Awake()
     {
@@ -18,6 +19,9 @@ public class WorldSpaceClue : MonoBehaviour
     {
         //Add this clue to the inventory of the player
         SaveHandler.Instance.SaveClue(ClueScriptableObject.Name);
+        if(Popup)
+            Popup.OpenPopup();
+
         Destroy(gameObject);
     }
 }

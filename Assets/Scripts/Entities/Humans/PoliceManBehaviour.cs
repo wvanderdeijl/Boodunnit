@@ -8,6 +8,7 @@ using UnityEngine;
 public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 {
     public CharacterList Name;
+    public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }

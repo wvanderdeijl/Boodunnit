@@ -18,7 +18,7 @@ TagManager:
   - Dashable
   - Possessable
   - Climbable
-  - 
+  - IgnoreCameraZoom
   - 
   - 
   - 

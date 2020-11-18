@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using Enums;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RatBehaviour : BaseMovement, IEntity, IPossessable
 {
+    public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
@@ -33,22 +35,24 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
         _climbBehaviour.Speed = 5f;
 
         Rigidbody = GetComponent<Rigidbody>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;
+        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
+
+        if(!IsPossessed) MoveWithPathFinding();
     }
 
     public void Move(Vector3 direction)
     {
         if (_climbBehaviour.IsClimbing)
         {
-            direction = Input.GetAxis("Vertical") * transform.forward +
-                        Input.GetAxis("Horizontal") * transform.right;
-            _climbBehaviour.Climb(direction);
+            _climbBehaviour.Climb();
             return;
         }
+
         MoveEntityInDirection(direction);
     }
 

@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -18,9 +21,29 @@ public class PlayerBehaviour : BaseMovement
         _cameraTransform = Camera.main.transform;
     }
 
-    // Update is called once per frame
+    //This method is used for now, the way of picking up clues has to be thought of still. For now we use this
+    private void PickupClueInRange()
+    {
+        float clueDetectionRadius = 4;
+        List<Collider> listGameObjectsInRangeOrderedByRange = Physics.OverlapSphere(transform.position, clueDetectionRadius).OrderBy(c => Vector3.Distance(transform.position, c.transform.position)).ToList();
+        foreach (Collider collider in listGameObjectsInRangeOrderedByRange)
+        {
+            WorldSpaceClue worldSpaceClue = collider.GetComponent<WorldSpaceClue>();
+            if (worldSpaceClue)
+            {
+                worldSpaceClue.AddToInventory();
+                break;
+            }
+        }
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveHandler.Instance.DeleteSaveGame();
+        }
+
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
@@ -33,6 +56,11 @@ public class PlayerBehaviour : BaseMovement
         if (GameManager.IsPaused)
         {
             return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            PickupClueInRange();
         }
 
         //Posses behaviour
@@ -120,7 +148,7 @@ public class PlayerBehaviour : BaseMovement
     }
     private void HandleLevitationInput()
     {
-        LevitateBehaviour.FindObjectInFrontOfPLayer();
+        LevitateBehaviour.FindObjectInFrontOfPLayer();//ToDo: This throws errors when a gameobject is destroy while in range
         
         if (Input.GetMouseButtonDown(0))
         {

@@ -105,7 +105,7 @@ public class CameraController : MonoBehaviour
         if (_rotationInput.x != 0)
         {
             transform.LookAt(CameraRotationTarget);
-            RotateCamera(_rotationInput.x);
+            RotateCamera();
         }
         else
         {
@@ -114,7 +114,10 @@ public class CameraController : MonoBehaviour
 
         if (_rotationInput.y != 0)
         {
-            ElevationRange += (_rotationInput.y / 10f);
+            if (!LevitateBehaviour.IsRotating)
+            {
+                ElevationRange += (_rotationInput.y / 10f);
+            }
         }
 
         Vector3 position2DIfied = new Vector3(transform.position.x, 0, transform.position.z);
@@ -130,13 +133,14 @@ public class CameraController : MonoBehaviour
         Vector3 direction = (transform.position - CameraRotationTarget.position).normalized;
         float zoomValue = 0;
         if (Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit raycastHit,
-            Distance))
+            Distance, LayerMask.GetMask("Default")))
         {
             raycastHit.point -= direction.normalized / 2f;
             zoomValue = (-Vector3.Distance(transform.position, raycastHit.point) - 0.1f);
             _scrollZoomActivation = false;
         }
-        else if (!Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit hit, MaxDistance) && !_scrollZoomActivation)
+        else if (!Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit hit, MaxDistance, 
+                 LayerMask.GetMask("Default")) && !_scrollZoomActivation)
             zoomValue = 1f;
         
         if (_scrollingInput != 0)
@@ -150,7 +154,7 @@ public class CameraController : MonoBehaviour
 
     private void AlignCameraWithTarget()
     {
-        RotateCamera(0);
+        RotateCamera();
     }
 
     private void ScrollZoom(float zoomAmount)
@@ -160,13 +164,10 @@ public class CameraController : MonoBehaviour
         MaxElevation = _maxElevationOrigin * Distance / 7;
     }
 
-    public void RotateCamera(float input)
+    public void RotateCamera()
     {
-        StartCoroutine(RotateCam());
-    }
-    public IEnumerator RotateCam()
-    {
-        yield return new WaitForSeconds(0.1f);// I changed this to null (To let it coroutine occur every frame) this is changed from: WaitForSeconds(0.1f);
+        if (LevitateBehaviour.IsRotating) { return; }
+
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
         float increment = plusMinusMultiplier * (Mathf.Abs(_rotationInput.x) / (1f/ RotationSpeed));
         _angle += increment;

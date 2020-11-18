@@ -40,6 +40,7 @@ public class Police : BaseMovement, IHuman, IPossessable
         _cameraTransform = Camera.main.transform;
     }
 
+    public bool IsPossessed { get; set; }
     public float FearThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FearDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FaintDuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

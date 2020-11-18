@@ -18,7 +18,7 @@ public class PossessableSanboxBox : BaseMovement, IEntity, IPossessable
 
     private void Awake()
     {
-        _cameraController = Camera.main.GetComponent<CameraController>();
+        _cameraController = UnityEngine.Camera.main.GetComponent<CameraController>();
     }
 
     private void Update()

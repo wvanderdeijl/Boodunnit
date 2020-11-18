@@ -18,7 +18,7 @@ public class PlayerBehaviour : BaseMovement
 
     private void Awake()
     {
-        _cameraTransform = Camera.main.transform;
+        _cameraTransform = UnityEngine.Camera.main.transform;
     }
 
     //This method is used for now, the way of picking up clues has to be thought of still. For now we use this
@@ -109,7 +109,6 @@ public class PlayerBehaviour : BaseMovement
         else if (PossessionBehaviour.IsPossessing)
         {
             PossessionBehaviour.TargetBehaviour.Move(moveDirection);
-            
         }
 
         //Use first ability.
@@ -123,8 +122,6 @@ public class PlayerBehaviour : BaseMovement
         {
             Jump();
         }
-
-        CheckIfGrounded();
     }
     private void FixedUpdate()
     {

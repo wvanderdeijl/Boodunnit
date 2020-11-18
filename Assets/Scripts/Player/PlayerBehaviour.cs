@@ -120,6 +120,11 @@ public class PlayerBehaviour : BaseMovement
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
+            if (PossessionBehaviour.IsPossessing)
+            {
+                PossessionBehaviour.TargetBehaviour.EntityJump();
+                return;
+            }
             Jump();
         }
     }

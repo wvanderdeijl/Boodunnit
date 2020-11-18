@@ -36,13 +36,18 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
 
         Rigidbody = GetComponent<Rigidbody>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        
+        ChangePathFindingState(PathFindingState.Patrolling);
     }
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
-
         if(!IsPossessed) MoveWithPathFinding();
+    }
+
+    public void EntityJump()
+    {
+        Jump();
     }
 
     public void Move(Vector3 direction)

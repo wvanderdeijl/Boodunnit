@@ -61,6 +61,11 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
         else MoveEntityInDirection(direction);
     }
 
+    public void EntityJump()
+    {
+        Jump();
+    }
+
     public void CheckSurroundings()
     {
         throw new NotImplementedException();

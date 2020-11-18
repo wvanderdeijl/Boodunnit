@@ -9,6 +9,8 @@ namespace Interfaces
         bool IsPossessed { get; set; }
         
         void Move(Vector3 direction);
+
+        void EntityJump();
         
         void CheckSurroundings();
         

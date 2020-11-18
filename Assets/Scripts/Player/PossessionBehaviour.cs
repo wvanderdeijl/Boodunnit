@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PossessionBehaviour : MonoBehaviour
@@ -44,6 +45,8 @@ public class PossessionBehaviour : MonoBehaviour
             EnableOrDisablePlayerColliders(true);
 
             TargetBehaviour.IsPossessed = false;
+            PossessionTarget.GetComponent<NavMeshAgent>().enabled = true;
+            PossessionTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             TargetBehaviour = null;
             PossessionTarget = null;
             
@@ -111,6 +114,8 @@ public class PossessionBehaviour : MonoBehaviour
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 CameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
 
+                PossessionTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                PossessionTarget.GetComponent<NavMeshAgent>().enabled = false;
                 TargetBehaviour.IsPossessed = true;
                 IsPossessing = true;
                 transform.position = gameObjectInRangeCollider.gameObject.transform.position;

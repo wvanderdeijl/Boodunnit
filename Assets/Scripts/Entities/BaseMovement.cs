@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Enums;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public abstract class BaseMovement : MonoBehaviour
     public float MinimumFollowRange, MaximumFollowRange;
     public float Speed;
     public bool IsGrounded = true;
+    public bool IsOnCountdown;
 
     [SerializeField] private PathFindingState _pathFindingState;
     private float _rotationSpeed = 10f;
@@ -21,8 +23,11 @@ public abstract class BaseMovement : MonoBehaviour
     public Collider Collider;
     private ContactPoint[] _contacts;
     private bool _isPathFinding;
+    private bool _hasPositionInArea;
     private Quaternion _spawnRotation;
     private Vector3 _spawnLocation;
+    private Vector3 _patrolDestination;
+    private EntityArea _currentArea;
 
     private void Start()
     {
@@ -97,6 +102,7 @@ public abstract class BaseMovement : MonoBehaviour
                 ReturnToSpawn();
                 break;
             case PathFindingState.Patrolling:
+                PatrolArea();
                 break;
             case PathFindingState.Following:
                 FollowTarget();
@@ -155,8 +161,7 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void ReturnToSpawn()
     {
-        float distanceToDestination = Vector3.Distance(transform.position, _spawnLocation);
-        if (distanceToDestination > 0.5f)
+        if (HasReachedDestination(_spawnLocation))
         {
             NavMeshAgent.isStopped = false;
             NavMeshAgent.destination = _spawnLocation;
@@ -168,8 +173,48 @@ public abstract class BaseMovement : MonoBehaviour
         transform.rotation = lerpToRotation;
     }
 
+    private void PatrolArea()
+    {
+        if (!_currentArea) MoveToNextArea();
+
+        if (!_hasPositionInArea)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            NavMeshAgent.destination = _patrolDestination;
+            _hasPositionInArea = true;
+        }
+
+        if (HasReachedDestination(_patrolDestination))
+        {
+            _hasPositionInArea = false;
+        }
+    }
+
     public void ChangePathFindingState(PathFindingState pathFindingState)
     {
         _pathFindingState = pathFindingState;
+    }
+
+    private bool HasReachedDestination(Vector3 destination)
+    {
+        float distanceToDestination = Vector3.Distance(transform.position, destination);
+        return distanceToDestination < 0.5f;
+    }
+
+    public IEnumerator StartCountdownInArea(float amountOfTime)
+    {
+        Debug.Log("Timer start.");
+        yield return new WaitForSeconds(amountOfTime);
+        Debug.Log("Timer is done!");
+        _currentArea = null;
+        IsOnCountdown = false;
+    }
+
+    private void MoveToNextArea()
+    {
+        Debug.Log("Going to a new area.");
+        _currentArea = EntityAreaHandler.Instance.GetAreaForSpecificEntity(gameObject);
+        _hasPositionInArea = false;
+        NavMeshAgent.ResetPath();
     }
 }

@@ -57,6 +57,11 @@ public class Police : BaseMovement, IHuman, IPossessable
         MoveEntityInDirection(direction);
     }
 
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
         throw new NotImplementedException();

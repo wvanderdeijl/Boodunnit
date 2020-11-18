@@ -63,6 +63,11 @@ namespace Entities
             throw new NotImplementedException();
         }
 
+        public void EntityJump()
+        {
+            throw new NotImplementedException();
+        }
+
         public void CheckSurroundings()
         {
             if (_hasFearCooldown) return;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Enums;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public abstract class BaseMovement : MonoBehaviour
     public float MinimumFollowRange, MaximumFollowRange;
     public float Speed;
     public bool IsGrounded = true;
+    public bool IsOnCountdown;
 
     [SerializeField] private PathFindingState _pathFindingState;
     private float _rotationSpeed = 10f;
@@ -21,6 +23,7 @@ public abstract class BaseMovement : MonoBehaviour
     private Quaternion _spawnRotation;
     private Vector3 _spawnLocation;
     private Vector3 _patrolDestination;
+    private EntityArea _currentArea;
 
     private void Start()
     {
@@ -117,10 +120,11 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void PatrolArea()
     {
+        if (!_currentArea) MoveToNextArea();
+
         if (!_hasPositionInArea)
         {
-            EntityArea roamArea = EntityAreaHandler.Instance.GetAreaForSpecificEntity(gameObject);
-            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(roamArea, gameObject);
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
             NavMeshAgent.destination = _patrolDestination;
             _hasPositionInArea = true;
         }
@@ -140,5 +144,22 @@ public abstract class BaseMovement : MonoBehaviour
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
         return distanceToDestination < 0.5f;
+    }
+
+    public IEnumerator StartCountdownInArea(float amountOfTime)
+    {
+        Debug.Log("Timer start.");
+        yield return new WaitForSeconds(amountOfTime);
+        Debug.Log("Timer is done!");
+        _currentArea = null;
+        IsOnCountdown = false;
+    }
+
+    private void MoveToNextArea()
+    {
+        Debug.Log("Going to a new area.");
+        _currentArea = EntityAreaHandler.Instance.GetAreaForSpecificEntity(gameObject);
+        _hasPositionInArea = false;
+        NavMeshAgent.ResetPath();
     }
 }

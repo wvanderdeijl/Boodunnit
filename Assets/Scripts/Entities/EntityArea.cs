@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityArea : MonoBehaviour
@@ -49,5 +50,31 @@ public class EntityArea : MonoBehaviour
     {
         if (EntitiesInArea.Contains(entity))
             EntitiesInArea.Remove(entity);
+    }
+
+    public int GetEntityTimeInArea(GameObject entity)
+    {
+        foreach (EntitiesAllowed allowedEntity in EntitiesAllowedInThisArea)
+        {
+            if (entity.name.ToLower().Equals(allowedEntity.NameOfEntity.ToLower()))
+                return allowedEntity.EntityTimeSpentInAreaInSeconds;
+        }
+        return default;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("Ok bois, I'm in!");
+        GameObject collidedObject = other.gameObject;
+        if (EntitiesInArea.Contains(collidedObject))
+        {
+            if (!collidedObject.GetComponent<BaseMovement>().IsOnCountdown)
+            {
+                collidedObject.GetComponent<BaseMovement>().IsOnCountdown = true;
+                StartCoroutine(
+                    collidedObject.GetComponent<BaseMovement>().StartCountdownInArea(
+                        GetEntityTimeInArea(collidedObject)));
+            }
+        }
     }
 }

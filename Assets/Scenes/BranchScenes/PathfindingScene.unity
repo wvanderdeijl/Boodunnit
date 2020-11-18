@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntitiesAllowedInThisArea:
   - NameOfEntity: Rat
-    EntityTimeSpentInAreaInSeconds: 200
+    EntityTimeSpentInAreaInSeconds: 20
     OdssEntityPicksThisAreaInWeight: 1
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntitiesAllowedInThisArea:
   - NameOfEntity: Rat
-    EntityTimeSpentInAreaInSeconds: 200
+    EntityTimeSpentInAreaInSeconds: 20
     OdssEntityPicksThisAreaInWeight: 1
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntitiesAllowedInThisArea:
   - NameOfEntity: Rat
-    EntityTimeSpentInAreaInSeconds: 200
+    EntityTimeSpentInAreaInSeconds: 20
     OdssEntityPicksThisAreaInWeight: 1
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0

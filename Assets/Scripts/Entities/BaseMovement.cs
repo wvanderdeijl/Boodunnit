@@ -13,17 +13,6 @@ public abstract class BaseMovement : MonoBehaviour
     [SerializeField] private bool _hasCollidedWithWall;
     public Collider Collider;
     private ContactPoint[] _contacts;
-
-    private void LateUpdate()
-    {
-        foreach (var contact in _contacts)
-        {
-            
-            Vector3 contactDirection = (contact.point - transform.position);
-            Debug.DrawRay(transform.position, contactDirection, Color.red);
-        }
-    }
-
     public void MoveEntityInDirection(Vector3 direction, float speed)
     {
         if (_hasCollidedWithWall)

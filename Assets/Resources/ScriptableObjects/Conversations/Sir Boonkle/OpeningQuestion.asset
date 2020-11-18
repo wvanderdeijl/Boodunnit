@@ -10,7 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
-  m_Name: New Question
+  m_Name: OpeningQuestion
   m_EditorClassIdentifier: 
-  Text: 
-  choices: []
+  Text: Wat is een vogel?
+  Choices:
+  - Text: Amfibie
+    CharacterUnlocksChoice: 
+    Dialogue: {fileID: 0}
+    Question: {fileID: 0}
+  - Text: Waterbeest
+    CharacterUnlocksChoice: 02000000
+    Dialogue: {fileID: 0}
+    Question: {fileID: 0}
+  - Text: Alien
+    CharacterUnlocksChoice: 
+    Dialogue: {fileID: 0}
+    Question: {fileID: 0}

@@ -22,7 +22,7 @@ public class LevitateBehaviour : MonoBehaviour
     [Header("Distances")]
     [SerializeField] private float _minimumSelectionDistanceInUnits = 2f;
     
-    public bool IsRotating { get; set; }
+    public static bool IsRotating { get; set; }
 
     private Rigidbody _selectedRigidbody;
     private float _selectionDistance;

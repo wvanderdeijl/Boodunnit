@@ -17,4 +17,4 @@ MonoBehaviour:
 
 '
   - Text: 22222222222222222222222
-  question: {fileID: 0}
+  question: {fileID: 11400000, guid: 819380e1a3753ca49a815ead54d8e621, type: 2}

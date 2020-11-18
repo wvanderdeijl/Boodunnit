@@ -25,6 +25,7 @@ public class ConversationManager : MonoBehaviour
     private bool _isSentenceFinished = true;
     private bool _hasNoRelation;
     private float _typeSpeed;
+    private int _keepCount = 0;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class ConversationManager : MonoBehaviour
     public void TriggerConversation(bool isPossesing)
     {
         _hasNoRelation = false;
+        _keepCount = 0;
 
         //Get textspeed from the playersettings
         PlayerSettings playerSettings = SaveHandler.Instance.LoadDataContainer<PlayerSettings>();
@@ -95,7 +97,7 @@ public class ConversationManager : MonoBehaviour
             StartDefaultDialogue(_defaultAnswers);
         }
 
-        if (!question && !dialogue)
+        if (!question && !dialogue || _keepCount == 1)
         {
             CloseConversation();
         }
@@ -133,7 +135,7 @@ public class ConversationManager : MonoBehaviour
         {
             int randomNumber = Random.Range(0, dialogue.Length);
             sentence = dialogue[randomNumber].Text.ToString();
-        } 
+        }
         else
         {
             sentence = "...";
@@ -141,6 +143,7 @@ public class ConversationManager : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence, _typeSpeed));
+        print("hoi");
     }
 
     public void DisplayNextSentence()
@@ -193,7 +196,7 @@ public class ConversationManager : MonoBehaviour
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();
             choiceButton.onClick.AddListener(delegate () { ManageConversation(choice.Dialogue, choice.Question); });
 
-            if (!choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
+            if (_currentPossedEntity != null && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
             {
                 choiceButton.interactable = false;
             }

@@ -850,7 +850,7 @@ MonoBehaviour:
   Name: 1
   dialogue: {fileID: 11400000, guid: d379e404ab0472346926aac0e3e9ae47, type: 2}
   question: {fileID: 0}
-  relationships: 03000000
+  relationships: 
   DefaultAnswersList:
   - Text: Fuck off
   - Text: Nee..

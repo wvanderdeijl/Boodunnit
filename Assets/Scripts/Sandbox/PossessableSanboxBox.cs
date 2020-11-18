@@ -16,6 +16,16 @@ public class PossessableSanboxBox : BaseMovement, IEntity, IPossessable
     public Dictionary<Type, float> ScaredOfGameObjects { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public bool IsPossessed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+    public Dialogue Dialogue => throw new NotImplementedException();
+
+    public Question Question => throw new NotImplementedException();
+
+    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public List<CharacterList> Relationships => throw new NotImplementedException();
+
+    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     private void Awake()
     {
         _cameraController = UnityEngine.Camera.main.GetComponent<CameraController>();

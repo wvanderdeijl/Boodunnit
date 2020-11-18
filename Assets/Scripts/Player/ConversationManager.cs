@@ -61,8 +61,7 @@ public class ConversationManager : MonoBehaviour
                 }
 
                 //Start conversation when boolia is taling to emmie || ispossing and has relationship with NPC
-                if ((!isPossesing && entityToTalkTo.CharacterName == CharacterList.EmmieLawson) || 
-                    (isPossesing && entityToTalkTo != _currentPossedEntity))
+                if ((!isPossesing && entityToTalkTo.CharacterName == CharacterList.EmmieLawson) || (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     hasConversationStarted = true;
                     EntityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);

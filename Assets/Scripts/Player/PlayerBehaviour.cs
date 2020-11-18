@@ -77,7 +77,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Dialogue behaviour
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (!ConversationManager.hasConversationStarted)
             {

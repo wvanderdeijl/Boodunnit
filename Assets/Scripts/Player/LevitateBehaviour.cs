@@ -145,16 +145,19 @@ public class LevitateBehaviour : MonoBehaviour
         
         if (levitateable != null)
         {
-            iSnappable.InstantiateNearestSnapLocation();
-            iSnappable.IsSnapLocationValid();
-            
-            
-            if (iSnappable != null && IsSnapLocationAvailable(_selectedRigidbody))
+
+            if (iSnappable != null)
             {
-                iSnappable.Snap();
-                _selectedRigidbody = null;
-                levitateable.State = LevitationState.SnappedIntoPlace;
-                return;
+                iSnappable.InstantiateNearestSnapLocation();
+                iSnappable.IsSnapLocationValid();
+
+                if (IsSnapLocationAvailable(_selectedRigidbody))
+                {
+                    iSnappable.Snap();
+                    _selectedRigidbody = null;
+                    levitateable.State = LevitationState.SnappedIntoPlace;
+                    return;
+                }
             }
             
             levitateable.State = LevitationState.Frozen;

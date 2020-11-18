@@ -17,7 +17,7 @@ public abstract class BaseMovement : MonoBehaviour
     private float _rotationSpeed = 10f;
     private float _gravity = 9.81f;
     public float JumpForce = 10.0f;
-    [SerializeField] private bool _hasCollidedWithWall;
+    private bool _hasCollidedWithWall;
     public Collider Collider;
     private ContactPoint[] _contacts;
     private bool _isPathFinding;

@@ -5882,7 +5882,7 @@ MonoBehaviour:
   Name: 1
   dialogue: {fileID: 11400000, guid: a26e0eaf0a372c743b3d000cc09f2e0d, type: 2}
   question: {fileID: 0}
-  relationships: 00000000
+  relationships: 
   DefaultAnswersList:
   - Text: Yeet skeet weg uit mij zicht
   - Text: 'Ik mag je niet!

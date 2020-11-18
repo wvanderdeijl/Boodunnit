@@ -6,21 +6,21 @@ public class SnappableObject : MonoBehaviour, ISnappable
     [Header("Overlap Sphere")]
     [SerializeField] private float _overlapSphereRadius = 5f;
 
-    private Collider GetClosestSnaplocation()
+    public SnapLocation NearestSnapLocation { get; set; }
+
+    private Collider FindClosestSnaplocation()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _overlapSphereRadius);
-
         Collider closestCollider = null;
         float currentClosestDistance = _overlapSphereRadius;
         
         foreach (Collider hitCollider in hitColliders)
         {
             float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+            SnapLocation snapLocation = hitCollider.GetComponent<SnapLocation>();
 
-            if (distance < currentClosestDistance && hitCollider.GetComponent<SnapLocation>() != null)
+            if (distance < currentClosestDistance && snapLocation != null)
             {
-                Debug.Log(hitCollider.gameObject);
-                
                 currentClosestDistance = distance;
                 closestCollider = hitCollider;
             }
@@ -28,20 +28,40 @@ public class SnappableObject : MonoBehaviour, ISnappable
         
         return closestCollider;
     }
-    
+
+    public void InstantiateNearestSnapLocation()
+    {
+        Collider collider = FindClosestSnaplocation();
+        
+        if (collider)
+        {
+            SnapLocation snapLocation = collider.GetComponent<SnapLocation>();
+            NearestSnapLocation = snapLocation;
+        }
+    }
+
+    public bool IsSnapLocationValid()
+    {
+        if (NearestSnapLocation)
+        {
+            SnappableObject snappableObject = GetComponent<SnappableObject>();
+            return NearestSnapLocation.IsSnappableObjectValid(snappableObject);
+        }
+
+        return false;
+    }
+
     public void Snap()
     {
-        Collider collider = GetClosestSnaplocation();
-
-        SnapLocation snapLocation = collider.GetComponent<SnapLocation>();
-
-        if (snapLocation)
+        if (NearestSnapLocationExists())
         {
-            Rigidbody myRigidboyd = GetComponent<Rigidbody>();
-            
-            snapLocation.SnapGameObject(gameObject.GetComponent<SnappableObject>());
-            myRigidboyd.isKinematic = true;
-            myRigidboyd.useGravity = false;
+            SnappableObject snappableObject = GetComponent<SnappableObject>();
+            NearestSnapLocation.SnapThisGameObject(snappableObject);
         }
+    }
+
+    private bool NearestSnapLocationExists()
+    {
+        return NearestSnapLocation;
     }
 }

@@ -145,10 +145,15 @@ public class LevitateBehaviour : MonoBehaviour
         
         if (levitateable != null)
         {
-            if (iSnappable != null)
+            iSnappable.InstantiateNearestSnapLocation();
+            iSnappable.IsSnapLocationValid();
+            
+            
+            if (iSnappable != null && IsSnapLocationAvailable(_selectedRigidbody))
             {
                 iSnappable.Snap();
                 _selectedRigidbody = null;
+                levitateable.State = LevitationState.SnappedIntoPlace;
                 return;
             }
             
@@ -158,6 +163,19 @@ public class LevitateBehaviour : MonoBehaviour
         ActivateLevitateCoRoutine();
         
         _selectedRigidbody = null;
+    }
+
+    private bool IsSnapLocationAvailable(Rigidbody selectedRigidboy)
+    {
+        SnappableObject snappableObject = selectedRigidboy.gameObject.GetComponent<SnappableObject>();
+        SnapLocation snapLocation = snappableObject.NearestSnapLocation;
+
+        if (snapLocation)
+        {
+            return snappableObject.NearestSnapLocation.IsSnapLocationAvailable;
+        }
+
+        return false;
     }
 
     private Rigidbody GetRigidbodyFromMouseClick()

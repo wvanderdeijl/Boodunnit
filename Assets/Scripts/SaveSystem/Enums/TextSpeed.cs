@@ -1,6 +1,6 @@
 ﻿public enum TextSpeed
 {
-    Slow,
-    Normal,
-    Fast
+    Slow = 5,
+    Normal = 35,
+    Fast = 1
 }

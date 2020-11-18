@@ -13,19 +13,16 @@ public class CluesPanel : MonoBehaviour
     public Text Description;
     public Image Image;
 
-    private List<string> _collectedClueNames;
+    private List<string> _collectedClueNames = new List<string>();
     private string _hiddenClueName = "???";
 
-    // Start is called before the first frame update
-    void Awake()
+    private void GetAllCollectedClues()
     {
         Clues = Resources.LoadAll<Clue>("ScriptableObjects/Clues").ToList();
-        _collectedClueNames = new List<string>();
         foreach (Clue clue in Clues)
         {
             if (SaveHandler.Instance.DoesPlayerHaveClue(clue.Name))
             {
-                print(_collectedClueNames);
                 _collectedClueNames.Add(clue.Name);
             }
         }
@@ -33,6 +30,8 @@ public class CluesPanel : MonoBehaviour
 
     public void ShowClue(string clueName)
     {
+        GetAllCollectedClues();
+
         Clue activeClue = Clues.FirstOrDefault(c => c.Name == clueName);
         if (_collectedClueNames.Contains(clueName))
         {
@@ -51,6 +50,5 @@ public class CluesPanel : MonoBehaviour
             Description.text = hiddenClue.Description;
             Image.sprite = hiddenClue.Image;
         }
-        
     }
 }

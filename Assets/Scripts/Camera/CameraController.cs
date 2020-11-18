@@ -114,7 +114,10 @@ public class CameraController : MonoBehaviour
 
         if (_rotationInput.y != 0)
         {
-            ElevationRange += (_rotationInput.y / 10f);
+            if (!LevitateBehaviour.IsRotating)
+            {
+                ElevationRange += (_rotationInput.y / 10f);
+            }
         }
 
         Vector3 position2DIfied = new Vector3(transform.position.x, 0, transform.position.z);
@@ -163,6 +166,8 @@ public class CameraController : MonoBehaviour
 
     public void RotateCamera()
     {
+        if (LevitateBehaviour.IsRotating) { return; }
+
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
         float increment = plusMinusMultiplier * (Mathf.Abs(_rotationInput.x) / (1f/ RotationSpeed));
         _angle += increment;

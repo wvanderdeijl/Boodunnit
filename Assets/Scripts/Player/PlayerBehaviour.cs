@@ -1,6 +1,7 @@
-﻿using System;
-using Interfaces;
+﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -9,7 +10,7 @@ public class PlayerBehaviour : BaseMovement
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
 
-    public DialogueManager DialogueManager;
+    public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
 
@@ -20,9 +21,29 @@ public class PlayerBehaviour : BaseMovement
         _cameraTransform = UnityEngine.Camera.main.transform;
     }
 
-    // Update is called once per frame
+    //This method is used for now, the way of picking up clues has to be thought of still. For now we use this
+    private void PickupClueInRange()
+    {
+        float clueDetectionRadius = 4;
+        List<Collider> listGameObjectsInRangeOrderedByRange = Physics.OverlapSphere(transform.position, clueDetectionRadius).OrderBy(c => Vector3.Distance(transform.position, c.transform.position)).ToList();
+        foreach (Collider collider in listGameObjectsInRangeOrderedByRange)
+        {
+            WorldSpaceClue worldSpaceClue = collider.GetComponent<WorldSpaceClue>();
+            if (worldSpaceClue)
+            {
+                worldSpaceClue.AddToInventory();
+                break;
+            }
+        }
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveHandler.Instance.DeleteSaveGame();
+        }
+
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
@@ -35,6 +56,11 @@ public class PlayerBehaviour : BaseMovement
         if (GameManager.IsPaused)
         {
             return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            PickupClueInRange();
         }
 
         //Posses behaviour
@@ -53,9 +79,9 @@ public class PlayerBehaviour : BaseMovement
         //Dialogue behaviour
         if (Input.GetKey(KeyCode.F))
         {
-            if (!DialogueManager.hasDialogueStarted)
+            if (!ConversationManager.hasConversationStarted)
             {
-                DialogueManager.TriggerDialogue();
+                ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
         }
 
@@ -76,7 +102,7 @@ public class PlayerBehaviour : BaseMovement
                                 Input.GetAxisRaw("Horizontal") * _cameraTransform.right;
         moveDirection.y = 0;
 
-        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !DialogueManager.hasDialogueStarted)
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.hasConversationStarted)
         {
             MoveEntityInDirection(moveDirection);   
         } 
@@ -119,7 +145,7 @@ public class PlayerBehaviour : BaseMovement
     }
     private void HandleLevitationInput()
     {
-        LevitateBehaviour.FindObjectInFrontOfPLayer();
+        LevitateBehaviour.FindObjectInFrontOfPLayer();//ToDo: This throws errors when a gameobject is destroy while in range
         
         if (Input.GetMouseButtonDown(0))
         {

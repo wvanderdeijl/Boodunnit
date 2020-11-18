@@ -10,11 +10,24 @@ namespace Entities
 {
     public class Cat : MonoBehaviour, IAnimal
     {
+        public bool IsPossessed { get; set; }
         public float FearThreshold { get; set; }
         public float FearDamage { get; set; }
         public float FaintDuration { get; set; }
         public EmotionalState EmotionalState { get; set; }
         public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
+
+        public Dialogue Dialogue => throw new NotImplementedException();
+
+        public Question Question => throw new NotImplementedException();
+
+        public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public List<CharacterList> Relationships => throw new NotImplementedException();
+
+        public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        private RagdollControler _ragdollControler;
 
         [SerializeField] private float _radius;
         [SerializeField] private float _angle;
@@ -24,6 +37,8 @@ namespace Entities
         
         private void Awake()
         {
+            _ragdollControler = GetComponent<RagdollControler>();
+            
             FearThreshold = 20;
             FearDamage = 0;
             FaintDuration = 10;
@@ -98,11 +113,13 @@ namespace Entities
             yield return new WaitForSeconds(FaintDuration);
             EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
+            _ragdollControler.ToggleRagdoll(false);
         }
 
         public void Faint()
         {
             EmotionalState = EmotionalState.Fainted;
+            _ragdollControler.ToggleRagdoll(true);
             StartCoroutine(CalmDown());
         }
 

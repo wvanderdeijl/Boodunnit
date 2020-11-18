@@ -53,10 +53,11 @@ public class ClimbBehaviour : MonoBehaviour
         EnableClimbing();
     }
 
-    public void Climb(Vector3 direction)
+    public void Climb()
     {
         _rigidbody.angularVelocity = Vector3.zero;
-        direction = direction.normalized;
+        Vector3 direction = Input.GetAxis("Vertical") * transform.forward +
+                            Input.GetAxis("Horizontal") * transform.right;
         _rigidbody.velocity = direction * Speed;
         
         if (direction != Vector3.zero)

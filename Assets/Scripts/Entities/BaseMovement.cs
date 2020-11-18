@@ -1,18 +1,40 @@
 using System;
+using Enums;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class BaseMovement : MonoBehaviour
 {
+    public GameObject Target;
+    public NavMeshAgent NavMeshAgent;
     public Rigidbody Rigidbody;
+
+    public float MinimumFollowRange, MaximumFollowRange;
     public float Speed;
     public bool IsGrounded = true;
 
+    [SerializeField] private PathFindingState _pathFindingState;
     private float _rotationSpeed = 10f;
     private float _gravity = 9.81f;
     public float JumpForce = 10.0f;
     [SerializeField] private bool _hasCollidedWithWall;
     public Collider Collider;
     private ContactPoint[] _contacts;
+    private bool _isPathFinding;
+    private Quaternion _spawnRotation;
+    private Vector3 _spawnLocation;
+
+    private void Start()
+    {
+        if (NavMeshAgent)
+        {
+            NavMeshAgent.autoBraking = true;
+
+            _spawnRotation = transform.rotation;
+            _spawnLocation = transform.position;
+        }
+    }
+
     public void MoveEntityInDirection(Vector3 direction, float speed)
     {
         if (_hasCollidedWithWall)
@@ -37,7 +59,6 @@ public abstract class BaseMovement : MonoBehaviour
                     {
                         float angle = contactAngle > 0 ? 90 : contactAngle < 0 ? -90 : 0;
                         direction = Quaternion.Euler(0, angle, 0) * hit.normal * (Math.Abs(contactAngle)/90);
-                        print("angle: " + contactAngle +  "direction: " + direction);
                     }    
                     else if (Math.Abs(contactAngle) > 90)
                     {
@@ -47,12 +68,11 @@ public abstract class BaseMovement : MonoBehaviour
                     else
                     {
                         direction = Vector3.zero;
-                        print("no movement allowed");
                     }
                 }
             }
         }
-        print("moving");
+        
         float yVelocity = Rigidbody.velocity.y;
         Rigidbody.velocity = direction * speed;
         Rigidbody.velocity += new Vector3(0f, yVelocity, 0f);
@@ -67,6 +87,21 @@ public abstract class BaseMovement : MonoBehaviour
     public void MoveEntityInDirection(Vector3 direction)
     {
         MoveEntityInDirection(direction, Speed);
+    }
+
+    public void MoveWithPathFinding()
+    {
+        switch (_pathFindingState)
+        {
+            case PathFindingState.Stationary:
+                ReturnToSpawn();
+                break;
+            case PathFindingState.Patrolling:
+                break;
+            case PathFindingState.Following:
+                FollowTarget();
+                break;
+        }
     }
     
     public void Jump()
@@ -100,5 +135,41 @@ public abstract class BaseMovement : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         IsGrounded = false;
+    }
+
+    private void FollowTarget()
+    {
+        if (Target)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+            if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
+            {
+                NavMeshAgent.isStopped = false;
+                NavMeshAgent.SetDestination(Target.transform.position);
+                return;
+            }
+
+            NavMeshAgent.isStopped = true;
+        }
+    }
+
+    private void ReturnToSpawn()
+    {
+        float distanceToDestination = Vector3.Distance(transform.position, _spawnLocation);
+        if (distanceToDestination > 0.5f)
+        {
+            NavMeshAgent.isStopped = false;
+            NavMeshAgent.destination = _spawnLocation;
+            return;
+        }
+        
+        Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation, 
+            Time.deltaTime * 5f);
+        transform.rotation = lerpToRotation;
+    }
+
+    public void ChangePathFindingState(PathFindingState pathFindingState)
+    {
+        _pathFindingState = pathFindingState;
     }
 }

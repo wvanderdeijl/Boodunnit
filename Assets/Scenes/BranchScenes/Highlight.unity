@@ -158,13 +158,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 234956944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b269b9af6e84d4e901cee89cd3bccc, type: 3}
+  m_Script: {fileID: 11500000, guid: f297e70c516d38e4884946def3587320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasDialogueStarted: 0
-  EntityNameUIText: {fileID: 541230956}
-  DialogueUIText: {fileID: 1915735962}
-  Animator: {fileID: 707846837}
+  Animator: {fileID: 7513762997864975166}
+  EntityNameTextbox: {fileID: 2078781583}
+  DialogueTextbox: {fileID: 771629570}
+  ContinueButton: {fileID: 1115133763}
+  QuestionPool: {fileID: 1519019719}
+  ButtonPrefab: {fileID: 2239350686054090819, guid: 96a03ae65c4c2f245a2f5832bed98e47, type: 3}
 --- !u!114 &234956946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +255,7 @@ MonoBehaviour:
   DashBehaviour: {fileID: 234956947}
   HighlightBehaviour: {fileID: 234956948}
   LevitateBehaviour: {fileID: 234956946}
-  DialogueManager: {fileID: 234956945}
+  ConversationManager: {fileID: 234956945}
   PauseMenu: {fileID: 0}
 --- !u!54 &234956951
 Rigidbody:
@@ -662,10 +664,11 @@ MonoBehaviour:
   Rigidbody: {fileID: 446759251}
   Speed: 10
   IsGrounded: 0
-  Name: Barry Barnes
-  M_dialogue: {fileID: 11400000, guid: e8a81db1a1d248c4db5d4595935c6a3d, type: 2}
-  M_question: {fileID: 0}
-  Relationships: 
+  Name: 7
+  dialogue: {fileID: 11400000, guid: 2a960141df3fd2341803b999071db35e, type: 2}
+  question: {fileID: 0}
+  relationships: 
+  DefaultAnswersList: []
 --- !u!54 &446759251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -777,17 +780,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &541230956 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8865184559746011298, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
-  m_PrefabInstance: {fileID: 7513762997864975165}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &567339098
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,10 +847,14 @@ MonoBehaviour:
   Rigidbody: {fileID: 567339100}
   Speed: 10
   IsGrounded: 1
-  Name: Emmie
-  M_dialogue: {fileID: 11400000, guid: d379e404ab0472346926aac0e3e9ae47, type: 2}
-  M_question: {fileID: 0}
-  Relationships: 01000000
+  Name: 1
+  dialogue: {fileID: 11400000, guid: d379e404ab0472346926aac0e3e9ae47, type: 2}
+  question: {fileID: 0}
+  relationships: 03000000
+  DefaultAnswersList:
+  - Text: Fuck off
+  - Text: Nee..
+  - Text: Talk to the hand
 --- !u!65 &567339102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -997,11 +993,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596905648}
   m_CullTransparentMesh: 0
---- !u!95 &707846837 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5164886252949149408, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
-  m_PrefabInstance: {fileID: 7513762997864975165}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &717412441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1102,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756409170}
   m_CullTransparentMesh: 0
+--- !u!114 &771629570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5525946429461874157, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+  m_PrefabInstance: {fileID: 7513762997864975165}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &776571577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1355,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1115133763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5029282558167473761, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+  m_PrefabInstance: {fileID: 7513762997864975165}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1139291699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,8 +1456,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1519019719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 616198191019434247, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+  m_PrefabInstance: {fileID: 7513762997864975165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1616668345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856822481}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.07, y: -1.7132175, z: 2.2632394}
+  m_LocalPosition: {x: -26.06, y: -1.7132175, z: 2.2632394}
   m_LocalScale: {x: 1, y: 2.2932062, z: 1}
   m_Children:
   - {fileID: 1105406206}
@@ -1675,10 +1693,14 @@ MonoBehaviour:
   Rigidbody: {fileID: 1856822487}
   Speed: 10
   IsGrounded: 1
-  Name: Sir Boonkle
-  M_dialogue: {fileID: 11400000, guid: 2a960141df3fd2341803b999071db35e, type: 2}
-  M_question: {fileID: 0}
-  Relationships: 
+  Name: 3
+  dialogue: {fileID: 0}
+  question: {fileID: 11400000, guid: 9487f6c324378644bb7c3fb7238aac13, type: 2}
+  relationships: 01000000
+  DefaultAnswersList:
+  - Text: A
+  - Text: 'B '
+  - Text: C
 --- !u!65 &1856822484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1850,19 +1872,8 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1915735962 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5525946429461874157, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
-  m_PrefabInstance: {fileID: 7513762997864975165}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1983769230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,6 +1953,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983769230}
   m_CullTransparentMesh: 0
+--- !u!114 &2078781583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8865184559746011298, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+  m_PrefabInstance: {fileID: 7513762997864975165}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7513762997864975165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1961,6 +1983,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DisplayNextSentence
       objectReference: {fileID: 0}
+    - target: {fileID: 5029282558167473761, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ConversationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5983738245050748849, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1971,7 +1997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5983738245050748849, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5983738245050748849, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2047,3 +2073,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+--- !u!95 &7513762997864975166 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5164886252949149408, guid: 2c5952459bbb40449aed865aba3df38f, type: 3}
+  m_PrefabInstance: {fileID: 7513762997864975165}
+  m_PrefabAsset: {fileID: 0}

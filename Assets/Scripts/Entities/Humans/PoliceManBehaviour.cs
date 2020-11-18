@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 {
-    public string Name;
+    public CharacterList Name;
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-    public string CharacterName { get; set; }
+    public CharacterList CharacterName { get; set; }
 
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
@@ -91,4 +91,8 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
     public Dialogue Dialogue { get; }
     
     public Question Question { get; }
+
+    public List<CharacterList> Relationships => throw new NotImplementedException();
+
+    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }

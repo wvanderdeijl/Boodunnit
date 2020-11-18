@@ -1,3 +1,5 @@
+using Enums;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Interfaces
@@ -20,7 +22,18 @@ namespace Interfaces
             get;
         }
 
-        string CharacterName
+        CharacterList CharacterName
+        {
+            get;
+            set;
+        }
+
+        List<CharacterList> Relationships
+        {
+            get;
+        }
+
+        Sentence[] DefaultAnswers
         {
             get;
             set;

@@ -7,7 +7,7 @@ public class PlayerBehaviour : BaseMovement
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
 
-    public DialogueManager DialogueManager;
+    public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
 
@@ -51,9 +51,9 @@ public class PlayerBehaviour : BaseMovement
         //Dialogue behaviour
         if (Input.GetKey(KeyCode.F))
         {
-            if (!DialogueManager.hasDialogueStarted)
+            if (!ConversationManager.hasConversationStarted)
             {
-                DialogueManager.TriggerDialogue(PossessionBehaviour.IsPossessing);
+                ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
         }
 
@@ -74,7 +74,7 @@ public class PlayerBehaviour : BaseMovement
                                 Input.GetAxisRaw("Horizontal") * _cameraTransform.right;
         moveDirection.y = 0;
 
-        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !DialogueManager.hasDialogueStarted)
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.hasConversationStarted)
         {
             MoveEntityInDirection(moveDirection);   
         } 

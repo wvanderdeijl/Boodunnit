@@ -11,15 +11,25 @@ public class Police : BaseMovement, IHuman, IPossessable
     private Transform _cameraTransform;
 
     [Header("Conversation")]
-    public string Name;
-    public Dialogue M_dialogue;
-    public Question M_question;
+    public CharacterList Name;
+    public Dialogue dialogue;
+    public Question question;
+    public List<CharacterList> relationships;
 
-    public List<CharacterList> Relationships;
+    [Header("Default Answers")]
+    public Sentence[] DefaultAnswersList;
 
-    public Dialogue Dialogue { get { return M_dialogue; } }
-    public Question Question { get { return M_question; } }
-    public string CharacterName
+    public Dialogue Dialogue { get { return dialogue; } }
+    public Question Question { get { return question; } }
+
+    public List<CharacterList> Relationships { get { return relationships; } }
+
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+    public CharacterList CharacterName
     {
         get { return Name; }
         set => Name = value;

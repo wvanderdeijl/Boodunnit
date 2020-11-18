@@ -2,7 +2,7 @@
 {
     public enum CharacterList
     {
-        None,
+        Boolia,
         EmmieLawson,
         RichardCash,
         SirBartholomeusBoonkle,

@@ -19,7 +19,11 @@ namespace Entities
 
         public Question Question => throw new NotImplementedException();
 
-        public string CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public List<CharacterList> Relationships => throw new NotImplementedException();
+
+        public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void DealFearDamage(float amount)
         {

@@ -4,11 +4,11 @@ using UnityEngine;
 public class SnapLocation : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private SnappableObject _snappableObject;
+    [SerializeField] private SnappableLevitationObject _snappableLevitationObject;
     
     [Header("Position & Rotation")]
     [SerializeField] private Transform _snapPosition;
-    [SerializeField] private Quaternion _rotation;
+    [SerializeField] private Vector3 _rotation;
 
     private SnapLocationState _currentState = SnapLocationState.NotOccupied;
     
@@ -19,9 +19,12 @@ public class SnapLocation : MonoBehaviour
         _currentState = SnapLocationState.Occupied;
     }
 
-    public bool IsSnappableObjectValid(SnappableObject snappableObject)
+    public bool IsSnappableObjectValid(SnappableLevitationObject snappableLevitationObjectParam)
     {
-        bool isValid = _snappableObject.GetInstanceID() == snappableObject.GetInstanceID();
+        if (!_snappableLevitationObject) return false;
+        if (!snappableLevitationObjectParam) return false;
+        
+        bool isValid = _snappableLevitationObject.GetInstanceID() == snappableLevitationObjectParam.GetInstanceID();
 
         switch (isValid)
         {
@@ -36,21 +39,21 @@ public class SnapLocation : MonoBehaviour
         return isValid;
     }
 
-    public void SnapThisGameObject(SnappableObject snappableObject)
+    public void SnapThisGameObject(SnappableLevitationObject snappableLevitationObject)
     {
         if (_currentState == SnapLocationState.Occupied) return;
 
-        if (IsSnappableObjectValid(snappableObject))
+        if (IsSnappableObjectValid(snappableLevitationObject))
         {
-            snappableObject.transform.position = new Vector3(
+            snappableLevitationObject.transform.position = new Vector3(
                 _snapPosition.position.x,
                 _snapPosition.position.y,
                 _snapPosition.position.z
             );
             
-            snappableObject.transform.localRotation = _rotation;
+            snappableLevitationObject.transform.eulerAngles = _rotation;
 
-            Rigidbody snappableObjectRigidbody = _snappableObject.gameObject.GetComponent<Rigidbody>();
+            Rigidbody snappableObjectRigidbody = _snappableLevitationObject.gameObject.GetComponent<Rigidbody>();
 
             snappableObjectRigidbody.isKinematic = true;
             snappableObjectRigidbody.useGravity = false;

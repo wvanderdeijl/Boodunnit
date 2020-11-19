@@ -49,6 +49,8 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
         set => DefaultAnswersList = value;
     }
 
+    private Canvas _staminaBarCanvas;
+
     public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
@@ -67,13 +69,35 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
 
         Rigidbody = GetComponent<Rigidbody>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+
+        _staminaBarCanvas = GameObject.Find("StaminaBarCanvas").GetComponent<Canvas>();
     }
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
 
-        if(!IsPossessed) MoveWithPathFinding();
+        if (_staminaBarCanvas)
+        {
+            _staminaBarCanvas.enabled = IsPossessed;
+        }
+    }
+
+    public void EntityJump()
+    {
+        //Jump
+        if (IsGrounded)
+        {
+            Jump();
+        }
     }
 
     public void Move(Vector3 direction)

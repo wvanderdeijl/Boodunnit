@@ -18,23 +18,7 @@ public class PlayerBehaviour : BaseMovement
 
     private void Awake()
     {
-        _cameraTransform = Camera.main.transform;
-    }
-
-    //This method is used for now, the way of picking up clues has to be thought of still. For now we use this
-    private void PickupClueInRange()
-    {
-        float clueDetectionRadius = 4;
-        List<Collider> listGameObjectsInRangeOrderedByRange = Physics.OverlapSphere(transform.position, clueDetectionRadius).OrderBy(c => Vector3.Distance(transform.position, c.transform.position)).ToList();
-        foreach (Collider collider in listGameObjectsInRangeOrderedByRange)
-        {
-            WorldSpaceClue worldSpaceClue = collider.GetComponent<WorldSpaceClue>();
-            if (worldSpaceClue)
-            {
-                worldSpaceClue.AddToInventory();
-                break;
-            }
-        }
+        _cameraTransform = UnityEngine.Camera.main.transform;
     }
 
     void Update()
@@ -58,11 +42,6 @@ public class PlayerBehaviour : BaseMovement
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PickupClueInRange();
-        }
-
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -77,7 +56,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Dialogue behaviour
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (!ConversationManager.hasConversationStarted)
             {
@@ -109,7 +88,6 @@ public class PlayerBehaviour : BaseMovement
         else if (PossessionBehaviour.IsPossessing)
         {
             PossessionBehaviour.TargetBehaviour.Move(moveDirection);
-            
         }
 
         //Use first ability.
@@ -121,10 +99,14 @@ public class PlayerBehaviour : BaseMovement
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
+            if (PossessionBehaviour.IsPossessing)
+            {
+                PossessionBehaviour.TargetBehaviour.EntityJump();
+                return;
+            }
+
             Jump();
         }
-
-        CheckIfGrounded();
     }
     private void FixedUpdate()
     {

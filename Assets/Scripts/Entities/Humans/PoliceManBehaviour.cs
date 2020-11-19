@@ -112,6 +112,11 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
         
     }
 
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
         

@@ -55,6 +55,11 @@ public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
     public bool IsPossessed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public List<CharacterList> Relationships => throw new NotImplementedException();
+
+    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private float _radius;
     [SerializeField] private float _angle;
@@ -80,6 +85,11 @@ public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
     void Update()
     {
         CheckSurroundings();
+    }
+
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
     }
 
     public void CheckSurroundings()

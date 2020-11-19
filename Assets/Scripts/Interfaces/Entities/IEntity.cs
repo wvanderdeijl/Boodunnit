@@ -11,6 +11,8 @@ namespace Interfaces
         bool CanTalkToBoolia { get; set; }
         
         void Move(Vector3 direction);
+
+        void EntityJump();
         
         void CheckSurroundings();
         

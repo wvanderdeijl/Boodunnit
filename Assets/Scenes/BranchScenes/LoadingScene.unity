@@ -259,7 +259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 8365f2340ecadc443a4a3ef542ec3b86, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -560,7 +560,7 @@ MonoBehaviour:
   HintTextArray:
   - Did you know that Boolia likes pancakes?
   - Boolia is actually a horse with a ghost's head and body
-  _backgroundSpriteMockup: {fileID: 21300000, guid: e211e787efc6f3542aed1bf662b8b737, type: 3}
+  _backgroundSpriteMockup: {fileID: 21300000, guid: 8365f2340ecadc443a4a3ef542ec3b86, type: 3}
 --- !u!1 &980051438
 GameObject:
   m_ObjectHideFlags: 0

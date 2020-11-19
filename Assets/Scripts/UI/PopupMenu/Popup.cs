@@ -5,13 +5,13 @@ public class Popup : MonoBehaviour
     public GameObject PopupMenuUI;
     public static bool isPopUpOpen;
 
-    private void Update()
-    {
-        if (Input.anyKeyDown)
-        {
-            ClosePopup();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.anyKeyDown)
+    //    {
+    //        ClosePopup();
+    //    }
+    //}
 
     public void OpenPopup()
     {

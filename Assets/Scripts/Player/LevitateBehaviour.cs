@@ -5,7 +5,7 @@ public class LevitateBehaviour : MonoBehaviour
 {
     [Header("Player and Camera")]
     [SerializeField] private GameObject _player;
-    [SerializeField] private Camera _mainCamera;
+    private Camera _mainCamera;
     
     [Header("OverlapSphere")]
     [SerializeField][Range(0, 30)] private float _overlapSphereRadiusInUnits = 5f;
@@ -33,6 +33,11 @@ public class LevitateBehaviour : MonoBehaviour
     private Collider[] _hitColliders;
     private Collider[] _cachedHitColliders;
     private int _colliderCount;
+
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+    }
     
     public void LevitationStateHandler()
     {

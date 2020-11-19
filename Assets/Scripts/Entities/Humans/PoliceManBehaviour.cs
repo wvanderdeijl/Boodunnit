@@ -7,22 +7,55 @@ using UnityEngine;
 
 public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 {
-    public CharacterList Name;
+    [Header("Conversation Settings")]
+    public bool PolicemanCanTalkToBoolia;
+    public CharacterList PolicemanName;
+    public Dialogue PolicemanDialogue;
+    public Question PolicemanQuestion;
+    public List<CharacterList> PolicemanRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return PolicemanCanTalkToBoolia; }
+        set => PolicemanCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return PolicemanName; }
+        set => PolicemanName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return PolicemanDialogue; }
+        set => PolicemanDialogue = value;
+    }
+    public Question Question
+    {
+        get { return PolicemanQuestion; }
+        set => PolicemanQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return PolicemanRelationships; }
+        set => PolicemanRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
     public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-    public CharacterList CharacterName { get; set; }
 
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
-
-    private void Awake()
-    {
-        CharacterName = Name;
-    }
 
     private void Update()
     {
@@ -88,12 +121,4 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
     {
         
     }
-
-    public Dialogue Dialogue { get; }
-    
-    public Question Question { get; }
-
-    public List<CharacterList> Relationships => throw new NotImplementedException();
-
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }

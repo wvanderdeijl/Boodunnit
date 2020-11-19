@@ -10,22 +10,52 @@ namespace Entities
 {
     public class Cat : MonoBehaviour, IAnimal
     {
+        [Header("Conversation Settings")]
+        public bool CatCanTalkToBoolia;
+        public CharacterList CatName;
+        public Dialogue CatDialogue;
+        public Question CatQuestion;
+        public List<CharacterList> CatRelationships;
+
+        [Header("Default Dialogue Answers")]
+        public Sentence[] DefaultAnswersList;
+
+        public bool CanTalkToBoolia
+        {
+            get { return CatCanTalkToBoolia; }
+            set => CatCanTalkToBoolia = value;
+        }
+        public CharacterList CharacterName
+        {
+            get { return CatName; }
+            set => CatName = value;
+        }
+        public Dialogue Dialogue
+        {
+            get { return CatDialogue; }
+            set => CatDialogue = value;
+        }
+        public Question Question
+        {
+            get { return CatQuestion; }
+            set => CatQuestion = value;
+        }
+        public List<CharacterList> Relationships
+        {
+            get { return CatRelationships; }
+            set => CatRelationships = value;
+        }
+        public Sentence[] DefaultAnswers
+        {
+            get { return DefaultAnswersList; }
+            set => DefaultAnswersList = value;
+        }
         public bool IsPossessed { get; set; }
         public float FearThreshold { get; set; }
         public float FearDamage { get; set; }
         public float FaintDuration { get; set; }
         public EmotionalState EmotionalState { get; set; }
         public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-
-        public Dialogue Dialogue => throw new NotImplementedException();
-
-        public Question Question => throw new NotImplementedException();
-
-        public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public List<CharacterList> Relationships => throw new NotImplementedException();
-
-        public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private RagdollControler _ragdollControler;
 

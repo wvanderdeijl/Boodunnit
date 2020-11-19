@@ -8,22 +8,53 @@ using UnityEngine.AI;
 
 public class RatBehaviour : BaseMovement, IEntity, IPossessable
 {
+    [Header("Conversation Settings")]
+    public bool RatCanTalkToBoolia;
+    public CharacterList RatName;
+    public Dialogue RatDialogue;
+    public Question RatQuestion;
+    public List<CharacterList> RatRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return RatCanTalkToBoolia; }
+        set => RatCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return RatName; }
+        set => RatName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return RatDialogue; }
+        set => RatDialogue = value;
+    }
+    public Question Question
+    {
+        get { return RatQuestion; }
+        set => RatQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return RatRelationships; }
+        set => RatRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
     public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-
-    public Dialogue Dialogue => throw new NotImplementedException();
-
-    public Question Question => throw new NotImplementedException();
-
-    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public List<CharacterList> Relationships => throw new NotImplementedException();
-
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private ClimbBehaviour _climbBehaviour;
 

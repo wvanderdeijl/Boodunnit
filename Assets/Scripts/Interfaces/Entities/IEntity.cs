@@ -7,6 +7,8 @@ namespace Interfaces
     public interface IEntity : IEmotion
     {
         bool IsPossessed { get; set; }
+
+        bool CanTalkToBoolia { get; set; }
         
         void Move(Vector3 direction);
         
@@ -17,11 +19,13 @@ namespace Interfaces
         Dialogue Dialogue
         {
             get;
+            set;
         }
 
         Question Question
         {
             get;
+            set;
         }
 
         CharacterList CharacterName
@@ -33,6 +37,7 @@ namespace Interfaces
         List<CharacterList> Relationships
         {
             get;
+            set;
         }
 
         Sentence[] DefaultAnswers

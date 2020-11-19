@@ -10,29 +10,45 @@ public class Police : BaseMovement, IHuman, IPossessable
 {
     private Transform _cameraTransform;
 
-    [Header("Conversation")]
-    public CharacterList Name;
-    public Dialogue dialogue;
-    public Question question;
-    public List<CharacterList> relationships;
+    [Header("Conversation Settings")]
+    public bool PoliceCanTalkToBoolia;
+    public CharacterList PoliceName;
+    public Dialogue PoliceDialogue;
+    public Question PoliceQuestion;
+    public List<CharacterList> PoliceRelationships;
 
-    [Header("Default Answers")]
+    [Header("Default Dialogue Answers")]
     public Sentence[] DefaultAnswersList;
 
-    public Dialogue Dialogue { get { return dialogue; } }
-    public Question Question { get { return question; } }
-
-    public List<CharacterList> Relationships { get { return relationships; } }
-
+    public bool CanTalkToBoolia
+    {
+        get { return PoliceCanTalkToBoolia; }
+        set => PoliceCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return PoliceName; }
+        set => PoliceName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return PoliceDialogue; }
+        set => PoliceDialogue = value;
+    }
+    public Question Question
+    {
+        get { return PoliceQuestion; }
+        set => PoliceQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return PoliceRelationships; }
+        set => PoliceRelationships = value;
+    }
     public Sentence[] DefaultAnswers
     {
         get { return DefaultAnswersList; }
         set => DefaultAnswersList = value;
-    }
-    public CharacterList CharacterName
-    {
-        get { return Name; }
-        set => Name = value;
     }
 
     private void Awake()

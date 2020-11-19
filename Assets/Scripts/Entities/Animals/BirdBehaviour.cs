@@ -8,6 +8,47 @@ using UnityEngine.AI;
 
 public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 {
+    [Header("Conversation Settings")]
+    public bool BirdCanTalkToBoolia;
+    public CharacterList BirdName;
+    public Dialogue BirdDialogue;
+    public Question BirdQuestion;
+    public List<CharacterList> BirdRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return BirdCanTalkToBoolia; }
+        set => BirdCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return BirdName; }
+        set => BirdName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return BirdDialogue; }
+        set => BirdDialogue = value;
+    }
+    public Question Question
+    {
+        get { return BirdQuestion; }
+        set => BirdQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return BirdRelationships; }
+        set => BirdRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
     public bool IsPossessed { get; set; }
     public Mesh NotGlidingMesh, GlidingMesh;
     public float FearThreshold { get; set; }
@@ -15,16 +56,6 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-
-    public Dialogue Dialogue => throw new NotImplementedException();
-
-    public Question Question => throw new NotImplementedException();
-
-    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public List<CharacterList> Relationships => throw new NotImplementedException();
-
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private GlideBehaviour _glideBehaviour;
     

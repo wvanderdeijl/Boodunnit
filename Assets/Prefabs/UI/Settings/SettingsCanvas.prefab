@@ -304,7 +304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 1072.871}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &832793515853423334
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1281627034421034005}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.61070406
+  m_Size: 0.60200447
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1282,7 +1282,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 857895317505424299}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeAudio
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3126663723968125964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1413,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4533822676316149158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeTextSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3277651732061359396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1778,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8531346554588647331}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeMusic
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3917457165875636882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,7 +2496,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 811613060566969132}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeCameraSensitivity
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6284511564882140898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,8 +2542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_AnchoredPosition: {x: 0, y: -32.1}
+  m_SizeDelta: {x: -20, y: 44.239624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6417638935083752808
 GameObject:
@@ -2615,7 +2663,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7841996944645852656}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeScreenResolution
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6899861821569794485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,11 +2788,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb08c19a577be5246a077756442da40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioValueText: {fileID: 0}
+  AudioValueText: {fileID: 7275879794902495455}
   MusicValueText: {fileID: 341672716298877789}
   CameraSensivityValueText: {fileID: 9053506639312693387}
   ScreenResolutionValueText: {fileID: 6861920145676209516}
   TextSpeedValueText: {fileID: 5540845948877985788}
+  ScreenResolutions:
+  - ScreenHeight: 1080
+    ScreenWidth: 1920
+  - ScreenHeight: 900
+    ScreenWidth: 1600
 --- !u!1 &6899861822557173541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,7 +3229,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6966658043768818007}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeMusic
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7084731580541625256
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,7 +3401,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5454044447376532878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnClickSaveChanges
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7584932675496082971
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,7 +3532,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8232367378862465318}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeCameraSensitivity
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7736859516627016553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,7 +3740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5353782818294854748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794485}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7889830970092227984
 GameObject:
   m_ObjectHideFlags: 0
@@ -3758,7 +3871,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1343971229051587798}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeAudio
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7953001092690085459
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,7 +4002,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3646133629523990290}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeTextSpeed
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8126627817214571352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4233,4 +4370,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4303493982082374426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6899861821569794488}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+        m_MethodName: OnChangeScreenResolution
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

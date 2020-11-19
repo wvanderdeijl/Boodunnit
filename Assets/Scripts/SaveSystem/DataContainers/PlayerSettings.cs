@@ -7,6 +7,7 @@ public class PlayerSettings : BaseDataContainer
     public int AudioVolume;
     public int CameraSensitivity;
     public int TextSpeed;
+    public int ScreenResolution;
 
     public override void ValidateData()
     {
@@ -28,6 +29,11 @@ public class PlayerSettings : BaseDataContainer
         if (TextSpeed < 0 || TextSpeed > Enum.GetNames(typeof(TextSpeed)).Length)
         {
             TextSpeed = 0;
+        }
+
+        if (ScreenResolution < 0 || ScreenResolution > 1)
+        {
+            ScreenResolution = 0;
         }
     }
 }

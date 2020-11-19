@@ -457,17 +457,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f941876dc4cf1049b7ac848fe645614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StepsInCutscene:
-  - ActionsInThisStep:
-    - ObjectForCutscene: {fileID: 1865034209}
-      StartPosition: {x: 0, y: 0, z: 0}
-      StartRotation: {x: 0, y: 0, z: 0, w: 0}
-      EndPosition: {x: 6.6, y: 0, z: 6.9}
-      EndRotation: {x: 0, y: 0, z: 0, w: 0}
-      TransitionSpeed: 5
-      Popup: {fileID: 0}
-      IsBlockingAction: 0
-      shouldUseCurrentObjectPosition: 1
+  ActionsInCutscene:
+  - ObjectForCutscene: {fileID: 1865034209}
+    EndPosition: {x: -6.61, y: 1.96, z: 9.93}
+    EndRotation: {x: 0, y: 0, z: 0, w: 0}
+    Popup: {fileID: 0}
+    ActionType: 0
+    TransitionSpeed: 0
+    IsInstant: 0
+    IsExecuting: 0
+  - ObjectForCutscene: {fileID: 1865034209}
+    EndPosition: {x: -6.61, y: 1.96, z: -13.89}
+    EndRotation: {x: 0, y: 0, z: 0, w: 0}
+    Popup: {fileID: 0}
+    ActionType: 0
+    TransitionSpeed: 0
+    IsInstant: 0
+    IsExecuting: 0
 --- !u!1 &1865034209
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865034209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.61, y: 1.69, z: -13.06}
+  m_LocalPosition: {x: -6.61, y: 1.96, z: -13.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

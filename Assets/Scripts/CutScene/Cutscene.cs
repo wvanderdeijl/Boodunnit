@@ -4,48 +4,92 @@ using UnityEngine;
 
 public class Cutscene : MonoBehaviour
 {
-    public List<Step> StepsInCutscene;
+    public List<Action> ActionsInCutscene;
     public static bool IsCutSceneFinished;
+
+    /**
+        * 1. Check if a gameobject is set.
+        *      1.1 Set begin position and rotation.
+        *      1.2 Set end position and rotation.
+        *      1.3 Keep in mind the time to transition.
+        * 2. Check if action contains a Popup.
+        *      2.1 Trigger Popup.
+        * 3. Check if action contains a dialogue.
+        *      3.1 Trigger Dialogue.
+        * 4. Check if action is a blocking action. ???
+    **/
 
     private void Awake()
     {
-        StartCutscene();
-    }
-
-    public void StartCutscene()
-    {
-        if (!GameManager.IsCutscenePlaying)
-        {
-            GameManager.IsCutscenePlaying = true;
-            IsCutSceneFinished = false;
-            DisableOrEnablePlayer(false);
-            DisableOrEnablePlayerCamera(false);
-        }
-    }
-
-    public void StopCutscene()
-    {
-        GameManager.IsCutscenePlaying = false;
-
-        DisableOrEnablePlayer(true);
-        DisableOrEnablePlayerCamera(true);
+        GameManager.IsCutscenePlaying = true;
+        DisableOrEnablePlayer(false);
+        DisableOrEnablePlayerCamera(false);
     }
 
     private void Update()
     {
-        if (GameManager.IsCutscenePlaying)
+        StartCoroutine(StartCutscene());
+    }
+
+    public IEnumerator StartCutscene()
+    {
+        int actionCounter = 0;
+        if (ActionsInCutscene == null && ActionsInCutscene.Count == 0)
         {
-            PerformStepsInCutscene();
+            yield break;
+        }
+
+        Action action = ActionsInCutscene[actionCounter];
+        action.IsExecuting = true;
+
+        while (GameManager.IsCutscenePlaying)
+        {
+            switch (action.ActionType)
+            {
+                case ActionType.Position:
+                    StartCoroutine(ChangePositionOfGameObject(action));
+                    break;
+            }
+
+            if (!action.IsExecuting)
+            {
+                actionCounter++;
+
+                if (actionCounter <= ActionsInCutscene.Count - 1)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
+                else
+                {
+                    GameManager.IsCutscenePlaying = false;
+                    yield break;
+                }
+            }
+            yield return null;
         }
     }
 
-    private void PerformStepsInCutscene()
+    private IEnumerator ChangePositionOfGameObject(Action currentAction)
     {
-        foreach (Step currentStep in StepsInCutscene)
+        while (currentAction.IsExecuting)
         {
-            StartCoroutine(currentStep.PerformActionsInCutscene());
+            GameObject gameObject = currentAction.ObjectForCutscene;
+            if (currentAction.IsInstant)
+            {
+                gameObject.transform.position = currentAction.EndPosition;
+                currentAction.IsExecuting = false;
+            }
+
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, currentAction.EndPosition, currentAction.TransitionSpeed * Time.deltaTime);
+            if(gameObject.transform.position == currentAction.EndPosition)
+            {
+                currentAction.IsExecuting = false;
+            }
+
+            yield return null;
         }
     }
+
 
     /// <summary>
     /// Enable or disable everything bound the player movement and ability.

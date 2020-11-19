@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public struct Action
+public class Action
 {
     public GameObject ObjectForCutscene;
-    public Vector3 StartPosition;
-    public Quaternion StartRotation;
     public Vector3 EndPosition;
     public Quaternion EndRotation;
+    public Popup Popup;
+
+    public ActionType ActionType;
 
     public int TransitionSpeed;
-
-    public Popup Popup;
+    public bool IsInstant;
+    public bool IsExecuting;
     // Dialogue?
-
-    public bool IsBlockingAction;
-    public bool shouldUseCurrentObjectPosition;
 }

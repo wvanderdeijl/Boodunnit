@@ -7,62 +7,66 @@ using System;
 
 public class Settings : MonoBehaviour
 {
-    public Text SoundEffectValueText;
-    public Slider SoundEffectSlider;
+    public Text AudioValueText;
+    private int _audioValue;
     public Text MusicValueText;
-    public Slider MusicSlider;
-    public Text SensivityValueText;
-    public Slider SensitivitySlider;
-
-    public Dropdown TextSpeedDropdown;
+    private int _musicValue;
+    public Text CameraSensivityValueText;
+    private int _cameraSensivityValue;
+    public Text ScreenResolutionValueText;
+    private int _screenResolutionValueHeight;
+    private int _screenResolutionValueWidth;
+    public Text TextSpeedValueText;
+    private int _textSpeedValue;
 
     private PlayerSettings _playerSettings;
-    private float _sensivityPercentage;
 
-    private void Awake()
+    public void Awake()
     {
+        SetDefaultValues();
+
         _playerSettings = new PlayerSettings();
-        AddOptionsToDropdown();
         CheckIfPlayerSettingsExist();
-        _sensivityPercentage = 12.5f;
-    }
 
-    public void OnValueChangedSoundEffectSlider(float volumeValue)
+        UpdateCanvasValues();
+    }
+    public void OnIncrementClicked()
     {
-        SoundEffectValueText.text = volumeValue.ToString();
-    }
 
-    public void OnValueChangedMusicSlider(float volumeValue)
+    }
+    public void OnDecrementClicked()
     {
-        MusicValueText.text = volumeValue.ToString();
-    }
 
-    public void OnValueChangedSensitivitySlider(float volumeValue)
-    {
-        SensivityValueText.text = ((int) (volumeValue / _sensivityPercentage)).ToString();
     }
-
     public void OnClickSaveChanges()
     {
-        _playerSettings.MusicVolume = (int) MusicSlider.value;
-        _playerSettings.SoundEffectVolume = (int) SoundEffectSlider.value;
-        _playerSettings.CameraSensitivity = (int) (SensitivitySlider.value / _sensivityPercentage);
-        _playerSettings.TextSpeed = TextSpeedDropdown.value;
+        _playerSettings.AudioVolume = _audioValue;
+        _playerSettings.MusicVolume = _musicValue;
+        _playerSettings.CameraSensitivity = _cameraSensivityValue;
+        _playerSettings.TextSpeed = 0;
 
         _playerSettings.ValidateData();
 
         SaveHandler.Instance.SaveDataContainer(_playerSettings);
     }
 
-    private void AddOptionsToDropdown()
+    private void SetDefaultValues()
     {
-        List<string> textSpeedOptions = new List<string>();
-        foreach(TextSpeed textSpeed in Enum.GetValues(typeof(TextSpeed)))
-        {
-            textSpeedOptions.Add(textSpeed.ToString());
-        }
+        _audioValue = 100;
+        _musicValue = 100;
+        _cameraSensivityValue = 1;
+        _screenResolutionValueHeight = 1080;
+        _screenResolutionValueWidth = 1920;
+        _textSpeedValue = 0;
+    }
 
-        TextSpeedDropdown.AddOptions(textSpeedOptions);
+    private void UpdateCanvasValues()
+    {
+        AudioValueText.text = _audioValue + "%";
+        MusicValueText.text = _musicValue + "%";
+        CameraSensivityValueText.text = _cameraSensivityValue.ToString();
+        ScreenResolutionValueText.text = _screenResolutionValueWidth + " x " + _screenResolutionValueHeight;
+        TextSpeedValueText.text = ((string) Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
     }
 
     private void CheckIfPlayerSettingsExist()
@@ -71,31 +75,16 @@ public class Settings : MonoBehaviour
         if (settings != null)
         {
             OnLoadPlayerSettings(settings);
-        } else
-        {
-            ChangeSlidersToDefaultValues();
         }
-    }
-
-    private void ChangeSlidersToDefaultValues()
-    {
-        SoundEffectValueText.text = "100";
-        MusicValueText.text = "100";
-        SensivityValueText.text = "1";
-        SoundEffectSlider.value = 100;
-        MusicSlider.value = 100;
-        SensitivitySlider.value = 1;
-        TextSpeedDropdown.value = 0;
     }
 
     private void OnLoadPlayerSettings(PlayerSettings settings)
     {
-        SoundEffectValueText.text = settings.SoundEffectVolume.ToString();
-        MusicValueText.text = settings.MusicVolume.ToString();
-        SensivityValueText.text = (settings.CameraSensitivity * _sensivityPercentage).ToString();
-        SoundEffectSlider.value = settings.SoundEffectVolume;
-        MusicSlider.value = settings.MusicVolume;
-        SensitivitySlider.value = settings.CameraSensitivity * _sensivityPercentage;
-        TextSpeedDropdown.value = settings.TextSpeed;
+        _audioValue = settings.AudioVolume;
+        _musicValue = settings.MusicVolume;
+        _cameraSensivityValue = settings.CameraSensitivity;
+        _screenResolutionValueHeight = 1080;
+        _screenResolutionValueWidth = 1920;
+        _textSpeedValue = settings.TextSpeed;
     }
 }

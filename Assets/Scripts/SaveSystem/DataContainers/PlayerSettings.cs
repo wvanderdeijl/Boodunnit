@@ -4,7 +4,7 @@ using System.Diagnostics;
 public class PlayerSettings : BaseDataContainer
 {
     public int MusicVolume;
-    public int SoundEffectVolume;
+    public int AudioVolume;
     public int CameraSensitivity;
     public int TextSpeed;
 
@@ -15,9 +15,9 @@ public class PlayerSettings : BaseDataContainer
             MusicVolume = 100;
         }
 
-        if (SoundEffectVolume < 0 || SoundEffectVolume > 100)
+        if (AudioVolume < 0 || AudioVolume > 100)
         {
-            SoundEffectVolume = 100;
+            AudioVolume = 100;
         }
 
         if (CameraSensitivity < 1 || CameraSensitivity > 8)

@@ -10,11 +10,11 @@ public class ConversationManager : MonoBehaviour
 {
     public static bool hasConversationStarted;
 
-    public Animator Animator;
-    public Text EntityNameTextbox;
-    public Text DialogueTextbox;
-    public Button ContinueButton;
-    public GameObject QuestionPool;
+    private Animator Animator;
+    private Text EntityNameTextbox;
+    private Text DialogueTextbox;
+    private Button ContinueButton;
+    private GameObject QuestionPool;
     public Button ButtonPrefab;
 
     private IEntity _currentPossedEntity;
@@ -29,7 +29,13 @@ public class ConversationManager : MonoBehaviour
 
     private void Awake()
     {
-        //To-do assign Dialogue UI variables in Awake
+        //To NOT change the gameobject names of the Dialog[Canvas] gameobject, that will break the below code
+        GameObject conversationCanvasGO = GameObject.Find("Dialogue[Canvas]");
+        Animator = conversationCanvasGO.GetComponentInChildren<Animator>();
+        EntityNameTextbox = conversationCanvasGO.transform.Find("DialogBox").Find("NameBK").Find("Name").GetComponent<Text>();
+        DialogueTextbox = conversationCanvasGO.transform.Find("DialogBox").Find("Dialog").GetComponent<Text>();
+        ContinueButton = conversationCanvasGO.transform.Find("DialogBox").Find("Continue").GetComponent<Button>();
+        QuestionPool = conversationCanvasGO.transform.Find("QuestionPool").gameObject;
     }
 
     public void TriggerConversation(bool isPossesing)
@@ -142,7 +148,6 @@ public class ConversationManager : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence, _typeSpeed));
-        print("hoi");
     }
 
     public void DisplayNextSentence()

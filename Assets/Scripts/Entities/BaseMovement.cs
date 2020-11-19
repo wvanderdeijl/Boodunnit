@@ -42,41 +42,40 @@ public abstract class BaseMovement : MonoBehaviour
 
     public void MoveEntityInDirection(Vector3 direction, float speed)
     {
-        if (_hasCollidedWithWall)
-        {
-            foreach (var contact in _contacts)
-            {
-                Vector3 contactDirection = (contact.point - transform.position);
+        //if (_hasCollidedWithWall)
+        //{
+        //    foreach (var contact in _contacts)
+        //    {
+        //        Vector3 contactDirection = (contact.point - transform.position);
                 
-                bool raycast = Physics.Raycast(transform.position, contactDirection, out RaycastHit hit,
-                    Vector3.Distance(transform.position, contact.point) + 0.2f, ~LayerMask.GetMask("Player", "PlayerDash", "Possessable"));
-                  if (raycast)
-                  {
-                    if ((hit.normal.y > 0.75 && contact.point.y < transform.position.y - Collider.bounds.size.y/2)) continue;
+        //        bool raycast = Physics.Raycast(transform.position, contactDirection, out RaycastHit hit,
+        //            Vector3.Distance(transform.position, contact.point) + 0.2f, ~LayerMask.GetMask("Player", "PlayerDash", "Possessable"));
+        //          if (raycast)
+        //          {
+        //            if ((hit.normal.y > 0.75 && contact.point.y < transform.position.y - Collider.bounds.size.y/2)) continue;
                     
-                    float contactAngle = Vector3.Angle(IgnoreY(direction), IgnoreY(contactDirection));
-                    Vector3 contactCross = Vector3.Cross(IgnoreY(direction), IgnoreY(contactDirection));
+        //            float contactAngle = Vector3.Angle(IgnoreY(direction), IgnoreY(contactDirection));
+        //            Vector3 contactCross = Vector3.Cross(IgnoreY(direction), IgnoreY(contactDirection));
 
-                    if (contactCross.y < 0) contactAngle = -contactAngle;
+        //            if (contactCross.y < 0) contactAngle = -contactAngle;
                     
                     
-                    if (Math.Abs(contactAngle) > 10 && Math.Abs(contactAngle) <= 90)
-                    {
-                        float angle = contactAngle > 0 ? 90 : contactAngle < 0 ? -90 : 0;
-                        direction = Quaternion.Euler(0, angle, 0) * hit.normal * (Math.Abs(contactAngle)/90);
-                    }    
-                    else if (Math.Abs(contactAngle) > 90)
-                    {
-                        print(contactAngle);
-                        continue;
-                    }
-                    else
-                    {
-                        direction = Vector3.zero;
-                    }
-                }
-            }
-        }
+        //            if (Math.Abs(contactAngle) > 10 && Math.Abs(contactAngle) <= 90)
+        //            {
+        //                float angle = contactAngle > 0 ? 90 : contactAngle < 0 ? -90 : 0;
+        //                direction = Quaternion.Euler(0, angle, 0) * hit.normal * (Math.Abs(contactAngle)/90);
+        //            }    
+        //            else if (Math.Abs(contactAngle) > 90)
+        //            {
+        //                continue;
+        //            }
+        //            else
+        //            {
+        //                direction = Vector3.zero;
+        //            }
+        //        }
+        //    }
+        //}
         
         float yVelocity = Rigidbody.velocity.y;
         Rigidbody.velocity = direction * speed;
@@ -130,16 +129,31 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.name == "GameObject Air flow")
+        {
+            return;
+        }
+
         IsGrounded = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.name == "GameObject Air flow")
+        {
+            return;
+        }
+
         IsGrounded = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.name == "GameObject Air flow")
+        {
+            return;
+        }
+
         IsGrounded = false;
     }
 
@@ -203,17 +217,14 @@ public abstract class BaseMovement : MonoBehaviour
 
     public IEnumerator StartCountdownInArea(float amountOfTime)
     {
-        Debug.Log("Timer start.");
         yield return new WaitForSeconds(amountOfTime);
-        Debug.Log("Timer is done!");
         _currentArea = null;
         IsOnCountdown = false;
     }
 
     private void MoveToNextArea()
     {
-        Debug.Log("Going to a new area.");
-        _currentArea = EntityAreaHandler.Instance.GetAreaForSpecificEntity(gameObject);
+        _currentArea = EntityAreaHandler.Instance.GetRandomAreaForEntity(gameObject);
         _hasPositionInArea = false;
         NavMeshAgent.ResetPath();
     }

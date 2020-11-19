@@ -61,11 +61,12 @@ public class HighlightBehaviour : MonoBehaviour
 
     private void ChangeShader(Renderer renderer, Shader shader)
     {
-        renderer.material.shader = shader;
-    }
+        //If the player is possessing
+        if (PossessionBehaviour.PossessionTarget != null && shader == _outlineShader)
+        {
+            return;
+        }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, Radius);
+        renderer.material.shader = shader;
     }
 }

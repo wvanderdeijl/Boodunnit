@@ -5,14 +5,13 @@ using UnityEngine;
 public class EntityArea : MonoBehaviour
 {
     public List<EntitiesAllowed> EntitiesAllowedInThisArea;
-    public List<GameObject> EntitiesInArea;
+    public List<GameObject> EntitiesInArea = new List<GameObject>();
 
     public int MinimumEntitiesRequiredInArea;
     public int MaximumEntitiesAllowedInArea;
 
     private void Awake()
     {
-        EntitiesInArea = new List<GameObject>();
         // Any time a new area is added, we will add it to the area list in the EntityAreaHandler.
         EntityAreaHandler.Instance.AddNewEntityArea(this);
     }
@@ -59,21 +58,20 @@ public class EntityArea : MonoBehaviour
             if (entity.name.ToLower().Equals(allowedEntity.NameOfEntity.ToLower()))
                 return allowedEntity.EntityTimeSpentInAreaInSeconds;
         }
+
         return default;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Ok bois, I'm in!");
         GameObject collidedObject = other.gameObject;
         if (EntitiesInArea.Contains(collidedObject))
         {
-            if (!collidedObject.GetComponent<BaseMovement>().IsOnCountdown)
+            BaseMovement baseMovementOfCollidedObject = collidedObject.GetComponent<BaseMovement>();
+            if (!baseMovementOfCollidedObject.IsOnCountdown)
             {
-                collidedObject.GetComponent<BaseMovement>().IsOnCountdown = true;
-                StartCoroutine(
-                    collidedObject.GetComponent<BaseMovement>().StartCountdownInArea(
-                        GetEntityTimeInArea(collidedObject)));
+                baseMovementOfCollidedObject.IsOnCountdown = true;
+                StartCoroutine(baseMovementOfCollidedObject.StartCountdownInArea(GetEntityTimeInArea(collidedObject)));
             }
         }
     }

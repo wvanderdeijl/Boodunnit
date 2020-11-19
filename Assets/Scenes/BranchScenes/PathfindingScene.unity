@@ -327,12 +327,15 @@ MonoBehaviour:
   MaximumFollowRange: 0
   Speed: 5
   IsGrounded: 1
+  IsOnCountdown: 0
   _pathFindingState: 0
+  JumpForce: 10
+  Collider: {fileID: 0}
   PossessionBehaviour: {fileID: 863418408}
   DashBehaviour: {fileID: 863418407}
   HighlightBehaviour: {fileID: 863418406}
   LevitateBehaviour: {fileID: 863418405}
-  DialogueManager: {fileID: 863418404}
+  ConversationManager: {fileID: 0}
   PauseMenu: {fileID: 0}
 --- !u!65 &863418399
 BoxCollider:
@@ -438,10 +441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b269b9af6e84d4e901cee89cd3bccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasDialogueStarted: 0
-  EntityNameUIText: {fileID: 0}
-  DialogueUIText: {fileID: 0}
-  Animator: {fileID: 0}
 --- !u!114 &863418405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +680,10 @@ MonoBehaviour:
   MaximumFollowRange: 0
   Speed: 5
   IsGrounded: 1
+  IsOnCountdown: 0
   _pathFindingState: 0
+  JumpForce: 10
+  Collider: {fileID: 0}
   _climbBehaviour: {fileID: 1535686882}
 --- !u!65 &1535686884
 BoxCollider:

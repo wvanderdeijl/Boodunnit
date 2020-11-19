@@ -45,7 +45,7 @@ namespace Entities
             EmotionalState = EmotionalState.Calm;
             ScaredOfGameObjects = new Dictionary<Type, float>()
             {
-                [typeof(Dog)] = 3f,
+                [typeof(RatBehaviour)] = 3f,
                 [typeof(IHuman)] = 2f,
                 [typeof(ILevitateable)] = 5f
             };
@@ -124,7 +124,12 @@ namespace Entities
         public void Faint()
         {
             EmotionalState = EmotionalState.Fainted;
-            _ragdollControler.ToggleRagdoll(true);
+
+            if (_ragdollControler)
+            {
+                _ragdollControler.ToggleRagdoll(true);
+            }
+
             StartCoroutine(CalmDown());
         }
 

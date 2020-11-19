@@ -32,16 +32,12 @@ Shader "Outlined/Highlight" {
 
 		o.pos = UnityObjectToClipPos(v.vertex);
 
-		//float3 norm   = normalize(mul ((float3x3)UNITY_MATRIX_IT_MV, v.normal));
-		//float2 offset = TransformViewToProjection(norm.xy);
-
 		o.color = _OutlineColor;
 		return o;
 	}
 	ENDCG
 
 		SubShader{
-		//Tags {"Queue" = "Geometry+100" }
 CGPROGRAM
 #pragma surface surf Lambert
 
@@ -67,7 +63,6 @@ Pass {
 	ZWrite On
 	ColorMask RGB
 	Blend SrcAlpha OneMinusSrcAlpha
-	//Offset 50,50
 
 	CGPROGRAM
 	#pragma vertex vert

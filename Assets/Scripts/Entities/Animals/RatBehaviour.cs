@@ -8,6 +8,8 @@ using UnityEngine.AI;
 
 public class RatBehaviour : BaseMovement, IEntity, IPossessable
 {
+    private Canvas _staminaBarCanvas;
+
     public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
@@ -15,15 +17,30 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
 
-    public Dialogue Dialogue => throw new NotImplementedException();
+    [Header("Conversation")]
+    public CharacterList Name;
+    public Dialogue dialogue;
+    public Question question;
+    public List<CharacterList> relationships;
 
-    public Question Question => throw new NotImplementedException();
+    [Header("Default Answers")]
+    public Sentence[] DefaultAnswersList;
 
-    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Dialogue Dialogue { get { return dialogue; } }
+    public Question Question { get { return question; } }
 
-    public List<CharacterList> Relationships => throw new NotImplementedException();
+    public List<CharacterList> Relationships { get { return relationships; } }
 
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return Name; }
+        set => Name = value;
+    }
 
     [SerializeField] private ClimbBehaviour _climbBehaviour;
 
@@ -36,18 +53,35 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
 
         Rigidbody = GetComponent<Rigidbody>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        
-        ChangePathFindingState(PathFindingState.Patrolling);
+
+        _staminaBarCanvas = GameObject.Find("StaminaBarCanvas").GetComponent<Canvas>();
     }
 
     private void Update()
     {
-        if(!IsPossessed) MoveWithPathFinding();
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
+
+        if (_staminaBarCanvas)
+        {
+            _staminaBarCanvas.enabled = IsPossessed;
+        }
     }
 
     public void EntityJump()
     {
-        Jump();
+        //Jump
+        if (IsGrounded)
+        {
+            Jump();
+        }
     }
 
     public void Move(Vector3 direction)

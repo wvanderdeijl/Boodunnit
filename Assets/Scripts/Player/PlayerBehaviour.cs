@@ -21,22 +21,6 @@ public class PlayerBehaviour : BaseMovement
         _cameraTransform = UnityEngine.Camera.main.transform;
     }
 
-    //This method is used for now, the way of picking up clues has to be thought of still. For now we use this
-    private void PickupClueInRange()
-    {
-        float clueDetectionRadius = 4;
-        List<Collider> listGameObjectsInRangeOrderedByRange = Physics.OverlapSphere(transform.position, clueDetectionRadius).OrderBy(c => Vector3.Distance(transform.position, c.transform.position)).ToList();
-        foreach (Collider collider in listGameObjectsInRangeOrderedByRange)
-        {
-            WorldSpaceClue worldSpaceClue = collider.GetComponent<WorldSpaceClue>();
-            if (worldSpaceClue)
-            {
-                worldSpaceClue.AddToInventory();
-                break;
-            }
-        }
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -56,11 +40,6 @@ public class PlayerBehaviour : BaseMovement
         if (GameManager.IsPaused)
         {
             return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PickupClueInRange();
         }
 
         //Posses behaviour
@@ -125,6 +104,7 @@ public class PlayerBehaviour : BaseMovement
                 PossessionBehaviour.TargetBehaviour.EntityJump();
                 return;
             }
+
             Jump();
         }
     }

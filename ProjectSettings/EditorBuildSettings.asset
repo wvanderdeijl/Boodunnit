@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
-    guid: a209ced2e97118e41ab084447c2507cc
+    path: Assets/Scenes/BranchScenes/MainMenu.unity
+    guid: 4daa28be64e20764c9355adc5379806d
+  - enabled: 1
+    path: Assets/Scenes/DevSandbox.unity
+    guid: 30a8c8d3a6bd2a54aac8788cc83f7533
   - enabled: 1
     path: Assets/Scenes/BranchScenes/CrimeSceneQuest.unity
     guid: d4758a8a77b337b448a0edbf43461fbd
   - enabled: 1
-    path: Assets/Scenes/BranchScenes/MainMenu.unity
-    guid: 4daa28be64e20764c9355adc5379806d
+    path: Assets/Scenes/BranchScenes/LoadingScene.unity
+    guid: 080349b04d7ac7b49bdedeab11e69fb4
   m_configObjects: {}

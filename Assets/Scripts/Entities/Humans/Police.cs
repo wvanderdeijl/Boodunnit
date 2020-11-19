@@ -5,8 +5,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Police : BaseMovement, IHuman, IPossessable
+public class Police : BaseMovement, IEntity, IPossessable
 {
     private Transform _cameraTransform;
 
@@ -38,6 +39,8 @@ public class Police : BaseMovement, IHuman, IPossessable
     private void Awake()
     {
         _cameraTransform = Camera.main.transform;
+        Rigidbody = GetComponent<Rigidbody>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public bool IsPossessed { get; set; }
@@ -49,46 +52,64 @@ public class Police : BaseMovement, IHuman, IPossessable
 
     public IEnumerator CalmDown()
     {
-        throw new NotImplementedException();
+        yield return null;
+    }
+
+    private void Update()
+    {
+        if (ConversationManager.hasConversationStarted)
+        {
+            return;
+        }
+
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
     }
 
     public void Move(Vector3 direction)
     {
+        if (ConversationManager.hasConversationStarted)
+        {
+            return;
+        }
+
         MoveEntityInDirection(direction);
     }
 
     public void EntityJump()
     {
-        throw new NotImplementedException();
+
     }
 
     public void CheckSurroundings()
     {
-        throw new NotImplementedException();
+
     }
 
     public void DealFearDamage(float amount)
     {
-        throw new NotImplementedException();
+
     }
 
     public void Faint()
     {
-        throw new NotImplementedException();
+
     }
 
     public void UseFirstAbility()
     {
-        throw new NotImplementedException();
+
     }
 
     public void UseSecondAbility()
     {
-        throw new NotImplementedException();
-    }
 
-    public IEntity GetBehaviour()
-    {
-        return this;
     }
 }

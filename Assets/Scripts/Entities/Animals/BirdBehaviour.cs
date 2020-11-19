@@ -35,9 +35,15 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
-
-        if (!IsPossessed) MoveWithPathFinding();
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
     }
 
     public void DealFearDamage(float amount)
@@ -57,13 +63,17 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 
     public void Move(Vector3 direction)
     {
-        if(_glideBehaviour.IsGliding) MoveEntityInDirection(direction, Speed / 2f);
+        if(_glideBehaviour.IsGliding) MoveEntityInDirection(direction, Speed / 1.5f);
         else MoveEntityInDirection(direction);
     }
 
     public void EntityJump()
     {
-        Jump();
+        //Jump
+        if (IsGrounded)
+        {
+            Jump();
+        }
     }
 
     public void CheckSurroundings()

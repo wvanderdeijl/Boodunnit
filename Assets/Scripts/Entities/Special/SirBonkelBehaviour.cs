@@ -102,4 +102,9 @@ public class SirBonkelBehaviour : MonoBehaviour, IEntity
     public void UseFirstAbility()
     {
     }
+
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
 }

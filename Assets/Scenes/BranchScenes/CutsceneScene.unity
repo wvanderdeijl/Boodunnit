@@ -464,16 +464,18 @@ MonoBehaviour:
     Popup: {fileID: 0}
     ActionType: 0
     TransitionSpeed: 0
-    IsInstant: 0
+    IsInstant: 1
     IsExecuting: 0
+    TimeBeforeNextAction: 4
   - ObjectForCutscene: {fileID: 1865034209}
     EndPosition: {x: -6.61, y: 1.96, z: -13.89}
     EndRotation: {x: 0, y: 0, z: 0, w: 0}
     Popup: {fileID: 0}
     ActionType: 0
     TransitionSpeed: 0
-    IsInstant: 0
+    IsInstant: 1
     IsExecuting: 0
+    TimeBeforeNextAction: 3
 --- !u!1 &1865034209
 GameObject:
   m_ObjectHideFlags: 0

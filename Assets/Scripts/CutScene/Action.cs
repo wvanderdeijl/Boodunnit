@@ -13,5 +13,6 @@ public class Action
     public int TransitionSpeed;
     public bool IsInstant;
     public bool IsExecuting;
+    public float TimeBeforeNextAction;
     // Dialogue?
 }

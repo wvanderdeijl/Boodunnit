@@ -39,11 +39,11 @@ public class Cutscene : MonoBehaviour
             yield break;
         }
 
-        Action action = ActionsInCutscene[actionCounter];
-        action.IsExecuting = true;
-
         while (GameManager.IsCutscenePlaying)
         {
+            Action action = ActionsInCutscene[actionCounter];
+            action.IsExecuting = true;
+
             switch (action.ActionType)
             {
                 case ActionType.Position:
@@ -57,7 +57,7 @@ public class Cutscene : MonoBehaviour
 
                 if (actionCounter <= ActionsInCutscene.Count - 1)
                 {
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(action.TimeBeforeNextAction);
                 }
                 else
                 {
@@ -79,13 +79,6 @@ public class Cutscene : MonoBehaviour
                 gameObject.transform.position = currentAction.EndPosition;
                 currentAction.IsExecuting = false;
             }
-
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, currentAction.EndPosition, currentAction.TransitionSpeed * Time.deltaTime);
-            if(gameObject.transform.position == currentAction.EndPosition)
-            {
-                currentAction.IsExecuting = false;
-            }
-
             yield return null;
         }
     }

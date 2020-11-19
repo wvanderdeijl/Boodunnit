@@ -591,6 +591,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1281627034421034005, guid: 25e0e30623a9cb04e803a803682144fb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281627034421034005, guid: 25e0e30623a9cb04e803a803682144fb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281627034421034005, guid: 25e0e30623a9cb04e803a803682144fb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6899861821569794485, guid: 25e0e30623a9cb04e803a803682144fb, type: 3}
       propertyPath: m_Name
       value: SettingsCanvas

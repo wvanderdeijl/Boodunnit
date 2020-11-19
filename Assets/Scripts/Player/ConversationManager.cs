@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ConversationManager : MonoBehaviour
 {
     public static bool hasConversationStarted;
-
+    public static Transform ConversationTarget;
     private Animator Animator;
     private Text EntityNameTextbox;
     private Text DialogueTextbox;
@@ -26,6 +26,8 @@ public class ConversationManager : MonoBehaviour
     private bool _hasNoRelation;
     private float _typeSpeed;
     private int _keepCount = 0;
+    
+    
 
     private void Awake()
     {
@@ -72,6 +74,7 @@ public class ConversationManager : MonoBehaviour
                 if ((!isPossesing && entityToTalkTo.CharacterName == CharacterList.EmmieLawson) || (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     hasConversationStarted = true;
+                    ConversationTarget = entityCollider.gameObject.transform;
                     EntityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
                     Animator.SetBool("IsOpen", true);
                     GameManager.CursorIsLocked = false;
@@ -112,6 +115,7 @@ public class ConversationManager : MonoBehaviour
     {
         Animator.SetBool("IsOpen", false);
         hasConversationStarted = false;
+        ConversationTarget = null;
         GameManager.CursorIsLocked = true;
     }
 

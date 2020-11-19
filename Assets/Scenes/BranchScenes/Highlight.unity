@@ -234,6 +234,8 @@ MonoBehaviour:
   IsPossessing: 0
   CooldownImage: {fileID: 596905650}
   CameraController: {fileID: 371767403}
+  UnpossessRadius: 0
+  UnPossessRetriesOnYAxis: 0
   Cooldown: 1
   IsOnCooldown: 0
 --- !u!114 &234956950
@@ -248,9 +250,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61aa2981fb2c0ce43872593267e80272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   Rigidbody: {fileID: 234956951}
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
   Speed: 12
   IsGrounded: 1
+  _pathFindingState: 0
   PossessionBehaviour: {fileID: 234956949}
   DashBehaviour: {fileID: 234956947}
   HighlightBehaviour: {fileID: 234956948}
@@ -661,13 +668,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   Rigidbody: {fileID: 446759251}
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
   Speed: 10
   IsGrounded: 0
-  Name: 7
-  dialogue: {fileID: 11400000, guid: 2a960141df3fd2341803b999071db35e, type: 2}
-  question: {fileID: 0}
-  relationships: 
+  _pathFindingState: 0
+  PoliceCanTalkToBoolia: 0
+  PoliceName: 10
+  PoliceDialogue: {fileID: 11400000, guid: e8a81db1a1d248c4db5d4595935c6a3d, type: 2}
+  PoliceQuestion: {fileID: 0}
+  PoliceRelationships: 
   DefaultAnswersList: []
 --- !u!54 &446759251
 Rigidbody:
@@ -844,13 +857,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   Rigidbody: {fileID: 567339100}
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
   Speed: 10
   IsGrounded: 1
-  Name: 1
-  dialogue: {fileID: 11400000, guid: d379e404ab0472346926aac0e3e9ae47, type: 2}
-  question: {fileID: 0}
-  relationships: 
+  _pathFindingState: 0
+  PoliceCanTalkToBoolia: 1
+  PoliceName: 1
+  PoliceDialogue: {fileID: 11400000, guid: d379e404ab0472346926aac0e3e9ae47, type: 2}
+  PoliceQuestion: {fileID: 0}
+  PoliceRelationships: 03000000
   DefaultAnswersList:
   - Text: Fuck off
   - Text: Nee..
@@ -1690,13 +1709,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   Rigidbody: {fileID: 1856822487}
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
   Speed: 10
   IsGrounded: 1
-  Name: 3
-  dialogue: {fileID: 0}
-  question: {fileID: 11400000, guid: 9487f6c324378644bb7c3fb7238aac13, type: 2}
-  relationships: 01000000
+  _pathFindingState: 0
+  PoliceCanTalkToBoolia: 0
+  PoliceName: 3
+  PoliceDialogue: {fileID: 0}
+  PoliceQuestion: {fileID: 11400000, guid: 9487f6c324378644bb7c3fb7238aac13, type: 2}
+  PoliceRelationships: 01000000
   DefaultAnswersList:
   - Text: A
   - Text: 'B '

@@ -9,6 +9,47 @@ public class PossessableSanboxBox : BaseMovement, IEntity, IPossessable
 {
     private CameraController _cameraController;
 
+    [Header("Conversation Settings")]
+    public bool SandboxCanTalkToBoolia;
+    public CharacterList SandboxName;
+    public Dialogue SandboxDialogue;
+    public Question SandboxQuestion;
+    public List<CharacterList> SandboxRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return SandboxCanTalkToBoolia; }
+        set => SandboxCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return SandboxName; }
+        set => SandboxName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return SandboxDialogue; }
+        set => SandboxDialogue = value;
+    }
+    public Question Question
+    {
+        get { return SandboxQuestion; }
+        set => SandboxQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return SandboxRelationships; }
+        set => SandboxRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
     public float FearThreshold { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FearDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float FaintDuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

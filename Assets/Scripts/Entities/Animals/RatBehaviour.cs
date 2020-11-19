@@ -8,6 +8,47 @@ using UnityEngine.AI;
 
 public class RatBehaviour : BaseMovement, IEntity, IPossessable
 {
+    [Header("Conversation Settings")]
+    public bool RatCanTalkToBoolia;
+    public CharacterList RatName;
+    public Dialogue RatDialogue;
+    public Question RatQuestion;
+    public List<CharacterList> RatRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return RatCanTalkToBoolia; }
+        set => RatCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return RatName; }
+        set => RatName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return RatDialogue; }
+        set => RatDialogue = value;
+    }
+    public Question Question
+    {
+        get { return RatQuestion; }
+        set => RatQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return RatRelationships; }
+        set => RatRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
     private Canvas _staminaBarCanvas;
 
     public bool IsPossessed { get; set; }
@@ -16,31 +57,6 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-
-    [Header("Conversation")]
-    public CharacterList Name;
-    public Dialogue dialogue;
-    public Question question;
-    public List<CharacterList> relationships;
-
-    [Header("Default Answers")]
-    public Sentence[] DefaultAnswersList;
-
-    public Dialogue Dialogue { get { return dialogue; } }
-    public Question Question { get { return question; } }
-
-    public List<CharacterList> Relationships { get { return relationships; } }
-
-    public Sentence[] DefaultAnswers
-    {
-        get { return DefaultAnswersList; }
-        set => DefaultAnswersList = value;
-    }
-    public CharacterList CharacterName
-    {
-        get { return Name; }
-        set => Name = value;
-    }
 
     [SerializeField] private ClimbBehaviour _climbBehaviour;
 

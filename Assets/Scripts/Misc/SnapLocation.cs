@@ -55,6 +55,8 @@ public class SnapLocation : MonoBehaviour
             snappableObjectRigidbody.isKinematic = true;
             snappableObjectRigidbody.useGravity = false;
             
+            Destroy(snappableObjectRigidbody);
+            
             DisableSnapLocation();
         }
     }

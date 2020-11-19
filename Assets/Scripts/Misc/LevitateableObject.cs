@@ -2,7 +2,6 @@
 using DefaultNamespace.Enums;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class LevitateableObject : MonoBehaviour, ILevitateable
 {
     [SerializeField] private bool _canRespawnWhenOutOfRange;
@@ -22,7 +21,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         _spawnLocation = transform.position;
         _spawnRotation = transform.rotation;
         StartCoroutine(CheckForDistance());
-    }
+    } 
 
     public bool CanBeLevitated { get; set; }
 

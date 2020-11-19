@@ -125,9 +125,9 @@ public class LevitateBehaviour : MonoBehaviour
     private void GetRigidbodyAndChangeState()
     {
         _selectedRigidbody = GetRigidbodyFromMouseClick();
-        
-        if (!_selectedRigidbody) return;
 
+        if (!_selectedRigidbody) return;
+        
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
 
         if (levitateable != null)

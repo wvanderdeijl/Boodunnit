@@ -141,15 +141,15 @@ public class LevitateBehaviour : MonoBehaviour
         ILevitateable levitateable =
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
 
-        SnappableLevitationObject snappableLevitationObject = _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>();
+        SnappableLevitationObject snappableLevitationObject = 
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>() : null;
         
         if (levitateable != null)
         {
 
             if (snappableLevitationObject != null)
             {
-                snappableLevitationObject.InstantiateNearestSnapLocation();
-                snappableLevitationObject.IsSnapLocationValid();
+                snappableLevitationObject.InstantiateNearestValidSnapLocation();
 
                 if (IsSnapLocationAvailable(_selectedRigidbody))
                 {

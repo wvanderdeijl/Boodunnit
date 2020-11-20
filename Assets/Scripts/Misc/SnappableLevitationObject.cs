@@ -4,22 +4,26 @@ using System.Linq;
 public class SnappableLevitationObject : MonoBehaviour
 {
     [Header("Overlap Sphere")]
-    [SerializeField] private float _overlapSphereRadius = 5f;
-
+    [SerializeField] private float _overlapSphereRadius = 2f;
     public SnapLocation NearestSnapLocation { get; set; }
 
-    private Collider FindClosestSnaplocation()
+    private Collider FindClosestValidSnaplocation()
     {
         return Physics
             .OverlapSphere(transform.position, _overlapSphereRadius)
             .OrderBy(c => Vector3.Distance(transform.position, c.transform.position))
-            .Where(c => c.GetComponent<SnapLocation>())
+            .Where(c =>
+            {
+                SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();
+                SnapLocation snapLocation = c.GetComponent<SnapLocation>();
+                return snapLocation != null && snapLocation.IsSnappableObjectValid(snappableLevitationObject);
+            })
             .FirstOrDefault();
     }
 
-    public void InstantiateNearestSnapLocation()
+    public void InstantiateNearestValidSnapLocation()
     {
-        Collider collider = FindClosestSnaplocation();
+        Collider collider = FindClosestValidSnaplocation();
         
         if (collider)
         {
@@ -28,28 +32,12 @@ public class SnappableLevitationObject : MonoBehaviour
         }
     }
 
-    public bool IsSnapLocationValid()
+    public void Snap()
     {
         if (NearestSnapLocation)
         {
             SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();
-            return NearestSnapLocation.IsSnappableObjectValid(snappableLevitationObject);
+            NearestSnapLocation.SnapGameObject(snappableLevitationObject);
         }
-
-        return false;
-    }
-
-    public void Snap()
-    {
-        if (NearestSnapLocationExists())
-        {
-            SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();
-            NearestSnapLocation.SnapThisGameObject(snappableLevitationObject);
-        }
-    }
-
-    private bool NearestSnapLocationExists()
-    {
-        return NearestSnapLocation;
     }
 }

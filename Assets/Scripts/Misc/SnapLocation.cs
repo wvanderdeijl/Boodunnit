@@ -14,16 +14,10 @@ public class SnapLocation : MonoBehaviour
     
     public bool IsSnapLocationAvailable { get; set; }
 
-    private void DisableSnapLocation()
-    {
-        _currentState = SnapLocationState.Occupied;
-    }
-
     public bool IsSnappableObjectValid(SnappableLevitationObject snappableLevitationObjectParam)
     {
-        if (!_snappableLevitationObject) return false;
-        if (!snappableLevitationObjectParam) return false;
-        
+        if (!_snappableLevitationObject || !snappableLevitationObjectParam) return false;
+
         bool isValid = _snappableLevitationObject.GetInstanceID() == snappableLevitationObjectParam.GetInstanceID();
 
         switch (isValid)
@@ -31,6 +25,7 @@ public class SnapLocation : MonoBehaviour
             case true:
                 IsSnapLocationAvailable = true;
                 break;
+            
             case false:
                 IsSnapLocationAvailable = false;
                 break;
@@ -39,10 +34,10 @@ public class SnapLocation : MonoBehaviour
         return isValid;
     }
 
-    public void SnapThisGameObject(SnappableLevitationObject snappableLevitationObject)
+    public void SnapGameObject(SnappableLevitationObject snappableLevitationObject)
     {
         if (_currentState == SnapLocationState.Occupied) return;
-
+        
         if (IsSnappableObjectValid(snappableLevitationObject))
         {
             snappableLevitationObject.transform.position = new Vector3(
@@ -50,17 +45,14 @@ public class SnapLocation : MonoBehaviour
                 _snapPosition.position.y,
                 _snapPosition.position.z
             );
-            
             snappableLevitationObject.transform.eulerAngles = _rotation;
 
             Rigidbody snappableObjectRigidbody = _snappableLevitationObject.gameObject.GetComponent<Rigidbody>();
-
             snappableObjectRigidbody.isKinematic = true;
             snappableObjectRigidbody.useGravity = false;
             
             Destroy(snappableObjectRigidbody);
-            
-            DisableSnapLocation();
+            _currentState = SnapLocationState.Occupied;
         }
     }
 }

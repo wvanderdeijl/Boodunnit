@@ -23,7 +23,7 @@ public class HighlightBehaviour : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliderArray)
         {
-            if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable))
+            if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable) || hitCollider.TryGetComponent(out WorldSpaceClue worldSpaceClue))
             {
                 Renderer renderer = hitCollider.GetComponent<Renderer>();
 

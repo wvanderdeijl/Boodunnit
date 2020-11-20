@@ -6,9 +6,6 @@ public class Cutscene : MonoBehaviour
 {
     public List<Action> ActionsInCutscene;
     public static bool IsCutSceneFinished;
-    private bool _canPopupOpen;
-
-
 
     /**
         * 1. Check if a gameobject is set.
@@ -27,11 +24,12 @@ public class Cutscene : MonoBehaviour
         GameManager.IsCutscenePlaying = true;
         DisableOrEnablePlayer(false);
         DisableOrEnablePlayerCamera(false);
+        StartCoroutine(StartCutscene());
+
     }
 
     private void Update()
     {
-        StartCoroutine(StartCutscene());
     }
 
     public IEnumerator StartCutscene()
@@ -47,24 +45,20 @@ public class Cutscene : MonoBehaviour
             Action action = ActionsInCutscene[actionCounter];
             action.IsExecuting = true;
 
-            if (action.IsExecuting)
+            switch (action.ActionType)
             {
-                switch (action.ActionType)
-                {
-                    case ActionType.Position:
-                        StartCoroutine(ChangePositionOfGameObject(action));
-                        break;
-                    case ActionType.Rotation:
-                        StartCoroutine(ChangeRotationOfGameObject(action));
-                        break;
-                    case ActionType.Popup:
-                        StartCoroutine(OpenPopUp(action));
-                        StopAllCoroutines();
-                        break;
-                    case ActionType.Dialogue:
-                        StartCoroutine(StartDialogue(action));
-                        break;
-                }
+                case ActionType.Position:
+                    yield return StartCoroutine(ChangePositionOfGameObject(action));
+                    break;
+                case ActionType.Rotation:
+                    yield return StartCoroutine(ChangeRotationOfGameObject(action));
+                    break;
+                case ActionType.Popup:
+                    yield return StartCoroutine(OpenPopUp(action));
+                    break;
+                case ActionType.Dialogue:
+                    yield return StartCoroutine(StartDialogue(action));
+                    break;
             }
            
             if (!action.IsExecuting)
@@ -97,7 +91,12 @@ public class Cutscene : MonoBehaviour
                 gameObject.transform.position = currentAction.EndPosition;
                 currentAction.IsExecuting = false;
             }
-            
+
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, currentAction.EndPosition, currentAction.TransitionSpeed * Time.deltaTime);
+
+            if (gameObject.transform.position == currentAction.EndPosition)
+                currentAction.IsExecuting = false;
+
             yield return null;
         }
     }
@@ -110,6 +109,13 @@ public class Cutscene : MonoBehaviour
             if (currentAction.IsInstant)
             {
                 gameObject.transform.rotation = currentAction.EndRotation;
+                currentAction.IsExecuting = false;
+            }
+
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, currentAction.EndRotation, currentAction.TransitionSpeed * Time.deltaTime);
+
+            if (Quaternion.Angle(gameObject.transform.rotation, currentAction.EndRotation) <= 0.01f)
+            {
                 currentAction.IsExecuting = false;
             }
 
@@ -139,11 +145,13 @@ public class Cutscene : MonoBehaviour
         if (!currentAction.ObjectForCutscene)
             yield break;
 
-        DialogueManager dialogueManager = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>().DialogueManager;
-        dialogueManager.TriggerDialogue();
+        ConversationManager conversationManager = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>().ConversationManager;
+        bool isPossessing = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>().PossessionBehaviour.IsPossessing;
+        conversationManager.TriggerConversation(isPossessing);
+
         while (currentAction.IsExecuting)
         {
-            if (!dialogueManager.hasDialogueStarted)
+            if (!ConversationManager.hasConversationStarted)
             {
                 currentAction.IsExecuting = false;
             }

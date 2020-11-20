@@ -14,5 +14,4 @@ public class Action
     public bool IsInstant;
     public bool IsExecuting;
     public float TimeBeforeNextAction;
-    // Dialogue?
 }

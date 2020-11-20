@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5851866027811616660}
   - component: {fileID: 5851866027811616659}
   - component: {fileID: 5851866027811616658}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Button stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 5851866028104870292}
   - component: {fileID: 5851866028104870291}
   - component: {fileID: 5851866028104870290}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

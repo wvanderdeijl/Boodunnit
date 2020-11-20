@@ -23,7 +23,7 @@ public class HighlightBehaviour : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliderArray)
         {
-            if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable))
+            if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable) || hitCollider.TryGetComponent(out WorldSpaceClue worldSpaceClue))
             {
                 Renderer renderer = hitCollider.GetComponent<Renderer>();
 
@@ -61,11 +61,12 @@ public class HighlightBehaviour : MonoBehaviour
 
     private void ChangeShader(Renderer renderer, Shader shader)
     {
-        renderer.material.shader = shader;
-    }
+        //If the player is possessing
+        if (PossessionBehaviour.PossessionTarget != null && shader == _outlineShader)
+        {
+            return;
+        }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, Radius);
+        renderer.material.shader = shader;
     }
 }

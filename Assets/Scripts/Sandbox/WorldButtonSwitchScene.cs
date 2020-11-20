@@ -59,6 +59,7 @@ public class WorldButtonSwitchScene : MonoBehaviour
 
     private void SwitchScene()
     {
+        //SceneTransitionHandler.Instance.GoToScene("CrimeSceneQuest");
         SceneManager.LoadScene("CrimeSceneQuest");
     }
 }

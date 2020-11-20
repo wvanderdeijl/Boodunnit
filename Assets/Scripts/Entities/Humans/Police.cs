@@ -5,21 +5,58 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Police : MonoBehaviour, IHuman
+public class Police : BaseMovement, IEntity, IPossessable
 {
-    [Header("Conversation")]
-    public Proffesion M_Proffesion;
-    public string M_name;
-    public Dialogue M_dialogue;
-    public Question M_question;
-    public Dialogue Dialogue { get { return M_dialogue; } }
-    public Question Question { get { return M_question; } }
-    public string Name { get { return M_name; } }
-    public Proffesion Proffesion
+    private Transform _cameraTransform;
+
+    [Header("Conversation Settings")]
+    public bool PoliceCanTalkToBoolia;
+    public CharacterList PoliceName;
+    public Dialogue PoliceDialogue;
+    public Question PoliceQuestion;
+    public List<CharacterList> PoliceRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
     {
-        get { return M_Proffesion; }
-        set => M_Proffesion = value;
+        get { return PoliceCanTalkToBoolia; }
+        set => PoliceCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return PoliceName; }
+        set => PoliceName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return PoliceDialogue; }
+        set => PoliceDialogue = value;
+    }
+    public Question Question
+    {
+        get { return PoliceQuestion; }
+        set => PoliceQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return PoliceRelationships; }
+        set => PoliceRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
+    private void Awake()
+    {
+        _cameraTransform = Camera.main.transform;
+        Rigidbody = GetComponent<Rigidbody>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public bool IsPossessed { get; set; }
@@ -31,41 +68,64 @@ public class Police : MonoBehaviour, IHuman
 
     public IEnumerator CalmDown()
     {
-        throw new NotImplementedException();
+        yield return null;
+    }
+
+    private void Update()
+    {
+        if (ConversationManager.hasConversationStarted)
+        {
+            return;
+        }
+
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
     }
 
     public void Move(Vector3 direction)
     {
-        throw new NotImplementedException();
+        if (ConversationManager.hasConversationStarted)
+        {
+            return;
+        }
+
+        MoveEntityInDirection(direction);
+    }
+
+    public void EntityJump()
+    {
+
     }
 
     public void CheckSurroundings()
     {
-        throw new NotImplementedException();
+
     }
 
     public void DealFearDamage(float amount)
     {
-        throw new NotImplementedException();
+
     }
 
     public void Faint()
     {
-        throw new NotImplementedException();
+
     }
 
     public void UseFirstAbility()
     {
-        throw new NotImplementedException();
+
     }
 
     public void UseSecondAbility()
     {
-        throw new NotImplementedException();
-    }
 
-    public IEntity GetBehaviour()
-    {
-        return this;
     }
 }

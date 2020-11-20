@@ -74,17 +74,17 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private IEnumerator CheckForDistance()
     {
         yield return new WaitForSeconds(3f);
-        if (CanRespawnWhenOutOfRange && 
-            Vector3.Distance(transform.position, CameraController.RotationTarget.position) > DespawnDistance &&
-            Vector3.Distance(_spawnLocation, CameraController.RotationTarget.position) > DespawnDistance)
+        if (CanRespawnWhenOutOfRange && Mathf.Abs(Vector3.Distance(transform.position, _spawnLocation)) >= DespawnDistance && Mathf.Abs(Vector3.Distance(transform.position, CameraController.RotationTarget.position)) >= DespawnDistance && Mathf.Abs(Vector3.Distance(_spawnLocation, CameraController.RotationTarget.position)) >= DespawnDistance)
         {
             Despawn();
         }
+
         StartCoroutine(CheckForDistance());
     }
     
     public void Despawn()
     {
+        print("yeet");
         transform.position = _spawnLocation;
         transform.rotation = _spawnRotation;
         _rigidbody.velocity = Vector3.zero;

@@ -10,6 +10,46 @@ namespace Entities
 {
     public class Cat : MonoBehaviour, IAnimal
     {
+        [Header("Conversation Settings")]
+        public bool CatCanTalkToBoolia;
+        public CharacterList CatName;
+        public Dialogue CatDialogue;
+        public Question CatQuestion;
+        public List<CharacterList> CatRelationships;
+
+        [Header("Default Dialogue Answers")]
+        public Sentence[] DefaultAnswersList;
+
+        public bool CanTalkToBoolia
+        {
+            get { return CatCanTalkToBoolia; }
+            set => CatCanTalkToBoolia = value;
+        }
+        public CharacterList CharacterName
+        {
+            get { return CatName; }
+            set => CatName = value;
+        }
+        public Dialogue Dialogue
+        {
+            get { return CatDialogue; }
+            set => CatDialogue = value;
+        }
+        public Question Question
+        {
+            get { return CatQuestion; }
+            set => CatQuestion = value;
+        }
+        public List<CharacterList> Relationships
+        {
+            get { return CatRelationships; }
+            set => CatRelationships = value;
+        }
+        public Sentence[] DefaultAnswers
+        {
+            get { return DefaultAnswersList; }
+            set => DefaultAnswersList = value;
+        }
         public bool IsPossessed { get; set; }
         public float FearThreshold { get; set; }
         public float FearDamage { get; set; }
@@ -35,7 +75,7 @@ namespace Entities
             EmotionalState = EmotionalState.Calm;
             ScaredOfGameObjects = new Dictionary<Type, float>()
             {
-                [typeof(Dog)] = 3f,
+                [typeof(RatBehaviour)] = 3f,
                 [typeof(IHuman)] = 2f,
                 [typeof(ILevitateable)] = 5f
             };
@@ -49,6 +89,11 @@ namespace Entities
         }
 
         public void Move(Vector3 direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EntityJump()
         {
             throw new NotImplementedException();
         }
@@ -109,7 +154,12 @@ namespace Entities
         public void Faint()
         {
             EmotionalState = EmotionalState.Fainted;
-            _ragdollControler.ToggleRagdoll(true);
+
+            if (_ragdollControler)
+            {
+                _ragdollControler.ToggleRagdoll(true);
+            }
+
             StartCoroutine(CalmDown());
         }
 
@@ -125,7 +175,11 @@ namespace Entities
 
         public void UpdateFearMeter()
         {
-            _fearMeter.fillAmount = FearDamage / FearThreshold;
+            if (_fearMeter)
+            {
+                _fearMeter.fillAmount = FearDamage / FearThreshold;
+            }
+
             //_fearMeter.fillAmount = Mathf.MoveTowards(_fearMeter.fillAmount, FearDamage, 1);
         }
 

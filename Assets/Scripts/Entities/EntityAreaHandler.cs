@@ -35,7 +35,7 @@ public class EntityAreaHandler
     /// </summary>
     /// <param name="entity">Entity</param>
     /// <returns>Area that entity can move to.</returns>
-    public EntityArea GetAreaForSpecificEntity(GameObject entity)
+    public EntityArea GetRandomAreaForEntity(GameObject entity)
     {
         List<EntityArea> allowedAreasForEntity = GetAvailableAreasAndTotalAreaWeight(entity, out int totalAreaWeight);
         int randomAreaNumber = Random.Next(0, totalAreaWeight);
@@ -44,7 +44,7 @@ public class EntityAreaHandler
         {
             foreach(EntitiesAllowed allowedEntity in area.EntitiesAllowedInThisArea)
             {
-                if((randomAreaNumber -= allowedEntity.OdssEntityPicksThisAreaInWeight) < 0)
+                if(allowedEntity.NameOfEntity.ToLower() == entity.name.ToLower() && (randomAreaNumber -= allowedEntity.OdssEntityPicksThisAreaInWeight) < 0)
                 {
                     area.EntitiesInArea.Add(entity);
                     return area;
@@ -98,7 +98,7 @@ public class EntityAreaHandler
             Bounds bounds = collider.bounds;
             return new Vector3(
                 UnityEngine.Random.Range(bounds.min.x, bounds.max.x),
-                entity.transform.position.y,
+                bounds.min.y,
                 UnityEngine.Random.Range(bounds.min.z, bounds.max.z)
             );
         }

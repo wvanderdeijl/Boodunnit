@@ -81,7 +81,7 @@ public class ClimbBehaviour : MonoBehaviour
 
     public void DisableClimbing()
     {
-        transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.LookAt(transform.position -transform.up);
         _rigidbody.useGravity = true;
         IsClimbing = false;
         StartCoroutine(ReplenishStamina());

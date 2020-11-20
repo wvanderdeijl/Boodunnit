@@ -7,6 +7,46 @@ using UnityEngine;
 
 public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 {
+    [Header("Conversation Settings")]
+    public bool PolicemanCanTalkToBoolia;
+    public CharacterList PolicemanName;
+    public Dialogue PolicemanDialogue;
+    public Question PolicemanQuestion;
+    public List<CharacterList> PolicemanRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return PolicemanCanTalkToBoolia; }
+        set => PolicemanCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return PolicemanName; }
+        set => PolicemanName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return PolicemanDialogue; }
+        set => PolicemanDialogue = value;
+    }
+    public Question Question
+    {
+        get { return PolicemanQuestion; }
+        set => PolicemanQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return PolicemanRelationships; }
+        set => PolicemanRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
     public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
@@ -16,11 +56,6 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
 
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
-
-    private void Awake()
-    {
-        Proffesion = Proffesion.Policeman;
-    }
 
     private void Update()
     {
@@ -77,6 +112,11 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
         
     }
 
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
+    }
+
     public void CheckSurroundings()
     {
         
@@ -86,12 +126,4 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
     {
         
     }
-
-    public Dialogue Dialogue { get; }
-    
-    public Question Question { get; }
-    
-    public string Name { get; }
-    
-    public Proffesion Proffesion { get; set; }
 }

@@ -8,6 +8,47 @@ using UnityEngine.AI;
 
 public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 {
+    [Header("Conversation Settings")]
+    public bool BirdCanTalkToBoolia;
+    public CharacterList BirdName;
+    public Dialogue BirdDialogue;
+    public Question BirdQuestion;
+    public List<CharacterList> BirdRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return BirdCanTalkToBoolia; }
+        set => BirdCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return BirdName; }
+        set => BirdName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return BirdDialogue; }
+        set => BirdDialogue = value;
+    }
+    public Question Question
+    {
+        get { return BirdQuestion; }
+        set => BirdQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return BirdRelationships; }
+        set => BirdRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
     public bool IsPossessed { get; set; }
     public Mesh NotGlidingMesh, GlidingMesh;
     public float FearThreshold { get; set; }
@@ -25,9 +66,15 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
-
-        if (!IsPossessed) MoveWithPathFinding();
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
     }
 
     public void DealFearDamage(float amount)
@@ -47,8 +94,17 @@ public class BirdBehaviour : BaseMovement, IEntity, IPossessable
 
     public void Move(Vector3 direction)
     {
-        if(_glideBehaviour.IsGliding) MoveEntityInDirection(direction, Speed / 2f);
+        if(_glideBehaviour.IsGliding) MoveEntityInDirection(direction, Speed / 1.5f);
         else MoveEntityInDirection(direction);
+    }
+
+    public void EntityJump()
+    {
+        //Jump
+        if (IsGrounded)
+        {
+            Jump();
+        }
     }
 
     public void CheckSurroundings()

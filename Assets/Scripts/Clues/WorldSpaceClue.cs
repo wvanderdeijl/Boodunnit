@@ -11,7 +11,7 @@ public class WorldSpaceClue : MonoBehaviour
     {
         if (SaveHandler.Instance.DoesPlayerHaveClue(ClueScriptableObject.Name))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -20,8 +20,15 @@ public class WorldSpaceClue : MonoBehaviour
         //Add this clue to the inventory of the player
         SaveHandler.Instance.SaveClue(ClueScriptableObject.Name);
         if(Popup)
+        {
             Popup.OpenPopup();
+        }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    void OnMouseDown()
+    {
+        AddToInventory();
     }
 }

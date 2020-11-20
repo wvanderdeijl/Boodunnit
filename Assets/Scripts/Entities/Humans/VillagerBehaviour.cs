@@ -8,15 +8,52 @@ using UnityEngine.UI;
 
 public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
 {
+    [Header("Conversation Settings")]
+    public bool VillagerCanTalkToBoolia;
+    public CharacterList VillagerName;
+    public Dialogue VillagerDialogue;
+    public Question VillagerQuestion;
+    public List<CharacterList> VillagerRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return VillagerCanTalkToBoolia; }
+        set => VillagerCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return VillagerName; }
+        set => VillagerName = value;
+    }
+    public Dialogue Dialogue 
+    { 
+        get { return VillagerDialogue; }
+        set => VillagerDialogue = value;
+    }
+    public Question Question
+    {
+        get { return VillagerQuestion; }
+        set => VillagerQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return VillagerRelationships; }
+        set => VillagerRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
     public float FaintDuration { get; set; }
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-    public Dialogue Dialogue { get; }
-    public Question Question { get; }
-    public string Name { get; }
-    public Proffesion Proffesion { get; set; }
     public bool IsPossessed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private float _radius;
@@ -43,6 +80,11 @@ public class VillagerBehaviour : BaseMovement, IPossessable, IHuman
     void Update()
     {
         CheckSurroundings();
+    }
+
+    public void EntityJump()
+    {
+        throw new NotImplementedException();
     }
 
     public void CheckSurroundings()

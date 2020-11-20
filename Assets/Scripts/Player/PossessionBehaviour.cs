@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PossessionBehaviour : MonoBehaviour
@@ -13,7 +14,7 @@ public class PossessionBehaviour : MonoBehaviour
     public Image CooldownImage;
 
     public static GameObject PossessionTarget;
-    public CameraController CameraController;
+    private CameraController _cameraController;
     public float UnpossessRadius;
     public int UnPossessRetriesOnYAxis;
 
@@ -25,6 +26,7 @@ public class PossessionBehaviour : MonoBehaviour
     private void Awake()
     {
         _playerEndPositionRadius = GetComponent<Collider>().bounds.extents.z;
+        _cameraController = Camera.main.GetComponent<CameraController>();
     }
 
     private void Update()
@@ -38,12 +40,17 @@ public class PossessionBehaviour : MonoBehaviour
         {
             IsPossessing = false;
             transform.position = PossessionTarget.transform.position + (Vector3.up * 2);
-            CameraController.CameraRotationTarget = transform;
+            _cameraController.CameraRotationTarget = transform;
 
             EnableOrDisablePlayerMeshRenderers(true);
             EnableOrDisablePlayerColliders(true);
 
             TargetBehaviour.IsPossessed = false;
+            PossessionTarget.GetComponent<NavMeshAgent>().enabled = true;
+            PossessionTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+            PossessionTarget.GetComponent<Rigidbody>().isKinematic = true;
+
             TargetBehaviour = null;
             PossessionTarget = null;
             
@@ -109,8 +116,9 @@ public class PossessionBehaviour : MonoBehaviour
             {
                 TargetBehaviour = gameObjectInRangeCollider.GetComponent<IEntity>();
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
-                CameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
-
+                _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
+                PossessionTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                PossessionTarget.GetComponent<NavMeshAgent>().enabled = false;
                 TargetBehaviour.IsPossessed = true;
                 IsPossessing = true;
                 transform.position = gameObjectInRangeCollider.gameObject.transform.position;

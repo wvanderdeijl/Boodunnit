@@ -8,6 +8,49 @@ using UnityEngine.AI;
 
 public class RatBehaviour : BaseMovement, IEntity, IPossessable
 {
+    [Header("Conversation Settings")]
+    public bool RatCanTalkToBoolia;
+    public CharacterList RatName;
+    public Dialogue RatDialogue;
+    public Question RatQuestion;
+    public List<CharacterList> RatRelationships;
+
+    [Header("Default Dialogue Answers")]
+    public Sentence[] DefaultAnswersList;
+
+    public bool CanTalkToBoolia
+    {
+        get { return RatCanTalkToBoolia; }
+        set => RatCanTalkToBoolia = value;
+    }
+    public CharacterList CharacterName
+    {
+        get { return RatName; }
+        set => RatName = value;
+    }
+    public Dialogue Dialogue
+    {
+        get { return RatDialogue; }
+        set => RatDialogue = value;
+    }
+    public Question Question
+    {
+        get { return RatQuestion; }
+        set => RatQuestion = value;
+    }
+    public List<CharacterList> Relationships
+    {
+        get { return RatRelationships; }
+        set => RatRelationships = value;
+    }
+    public Sentence[] DefaultAnswers
+    {
+        get { return DefaultAnswersList; }
+        set => DefaultAnswersList = value;
+    }
+
+    private Canvas _staminaBarCanvas;
+
     public bool IsPossessed { get; set; }
     public float FearThreshold { get; set; }
     public float FearDamage { get; set; }
@@ -26,13 +69,35 @@ public class RatBehaviour : BaseMovement, IEntity, IPossessable
 
         Rigidbody = GetComponent<Rigidbody>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+
+        _staminaBarCanvas = GameObject.Find("StaminaBarCanvas").GetComponent<Canvas>();
     }
 
     private void Update()
     {
-        Rigidbody.angularVelocity = Vector3.zero;//ToDO: Tim what is this used for?
+        if (!IsPossessed)
+        {
+            Rigidbody.isKinematic = true;
+            MoveWithPathFinding();
+        }
+        else
+        {
+            Rigidbody.isKinematic = false;
+        }
 
-        if(!IsPossessed) MoveWithPathFinding();
+        if (_staminaBarCanvas)
+        {
+            _staminaBarCanvas.enabled = IsPossessed;
+        }
+    }
+
+    public void EntityJump()
+    {
+        //Jump
+        if (IsGrounded)
+        {
+            Jump();
+        }
     }
 
     public void Move(Vector3 direction)

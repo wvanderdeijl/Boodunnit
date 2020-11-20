@@ -6,6 +6,9 @@ public class Cutscene : MonoBehaviour
 {
     public List<Action> ActionsInCutscene;
     public static bool IsCutSceneFinished;
+    private bool _canPopupOpen;
+
+
 
     /**
         * 1. Check if a gameobject is set.
@@ -44,17 +47,29 @@ public class Cutscene : MonoBehaviour
             Action action = ActionsInCutscene[actionCounter];
             action.IsExecuting = true;
 
-            switch (action.ActionType)
+            if (action.IsExecuting)
             {
-                case ActionType.Position:
-                    StartCoroutine(ChangePositionOfGameObject(action));
-                    break;
+                switch (action.ActionType)
+                {
+                    case ActionType.Position:
+                        StartCoroutine(ChangePositionOfGameObject(action));
+                        break;
+                    case ActionType.Rotation:
+                        StartCoroutine(ChangeRotationOfGameObject(action));
+                        break;
+                    case ActionType.Popup:
+                        StartCoroutine(OpenPopUp(action));
+                        StopAllCoroutines();
+                        break;
+                    case ActionType.Dialogue:
+                        StartCoroutine(StartDialogue(action));
+                        break;
+                }
             }
-
+           
             if (!action.IsExecuting)
             {
                 actionCounter++;
-
                 if (actionCounter <= ActionsInCutscene.Count - 1)
                 {
                     yield return new WaitForSeconds(action.TimeBeforeNextAction);
@@ -62,9 +77,12 @@ public class Cutscene : MonoBehaviour
                 else
                 {
                     GameManager.IsCutscenePlaying = false;
+                    DisableOrEnablePlayer(true);
+                    DisableOrEnablePlayerCamera(true);
                     yield break;
                 }
             }
+
             yield return null;
         }
     }
@@ -79,11 +97,61 @@ public class Cutscene : MonoBehaviour
                 gameObject.transform.position = currentAction.EndPosition;
                 currentAction.IsExecuting = false;
             }
+            
             yield return null;
         }
     }
 
+    private IEnumerator ChangeRotationOfGameObject(Action currentAction)
+    {
+        while (currentAction.IsExecuting)
+        {
+            GameObject gameObject = currentAction.ObjectForCutscene;
+            if (currentAction.IsInstant)
+            {
+                gameObject.transform.rotation = currentAction.EndRotation;
+                currentAction.IsExecuting = false;
+            }
 
+            yield return null;
+        }
+    }
+
+    private IEnumerator OpenPopUp(Action currentAction)
+    {
+        if (currentAction.Popup == null) 
+            yield break;
+
+        currentAction.Popup.OpenPopup();
+        
+        while (currentAction.IsExecuting)
+        {
+            if (!Popup.isPopUpOpen)
+            {
+                currentAction.IsExecuting = false;
+            }
+            yield return null;
+        }
+    }
+
+    private IEnumerator StartDialogue(Action currentAction)
+    {
+        if (!currentAction.ObjectForCutscene)
+            yield break;
+
+        DialogueManager dialogueManager = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>().DialogueManager;
+        dialogueManager.TriggerDialogue();
+        while (currentAction.IsExecuting)
+        {
+            if (!dialogueManager.hasDialogueStarted)
+            {
+                currentAction.IsExecuting = false;
+            }
+            yield return null;
+        }
+    }
+
+    
     /// <summary>
     /// Enable or disable everything bound the player movement and ability.
     /// </summary>

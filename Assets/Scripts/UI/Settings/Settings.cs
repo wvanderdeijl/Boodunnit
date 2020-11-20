@@ -7,11 +7,12 @@ using System;
 
 public class Settings : MonoBehaviour
 {
-    public Text AudioValueText;
-    public Text MusicValueText;
-    public Text CameraSensivityValueText;
-    public Text ScreenResolutionValueText;
-    public Text TextSpeedValueText;
+    public Text AudioText;
+    public Text MusicText;
+    public Text CameraSensivityText;
+    public Text ScreenResolutionText;
+    public Text FullscreenText;
+    public Text TextSpeedText;
 
     public List<ScreenResolution> ScreenResolutions;
 
@@ -20,8 +21,11 @@ public class Settings : MonoBehaviour
     private int _cameraSensivityValue;
     private int _screenResolutionValue;
     private int _textSpeedValue;
+    private bool _isFullscreen;
 
     private PlayerSettings _playerSettings;
+
+    private ScreenResolution _currentScreenResolution;
 
     public void Awake()
     {
@@ -32,120 +36,100 @@ public class Settings : MonoBehaviour
 
         UpdateCanvasValues();
     }
-    public void OnChangeAudio(int increment)
-    {
-        if (_audioValue + increment > 100)
-        {
-            _audioValue = 0;
-        }
-        else if (_audioValue + increment < 0)
-        {
-            _audioValue = 100;
-        }
-        else
-        {
-            _audioValue += increment;
-        }
-        AudioValueText.text = _audioValue + "%";
-    }
-    public void OnChangeMusic(int increment)
-    {
-        if (_musicValue + increment > 100)
-        {
-            _musicValue = 0;
-        }
-        else if (_musicValue + increment < 0)
-        {
-            _musicValue = 100;
-        }
-        else
-        {
-            _musicValue += increment;
-        }
-        MusicValueText.text = _musicValue + "%";
-    }
-    public void OnChangeCameraSensitivity(int increment)
-    {
-        if (_cameraSensivityValue + increment > 8)
-        {
-            _cameraSensivityValue = 1;
-        }
-        else if (_cameraSensivityValue + increment < 1)
-        {
-            _cameraSensivityValue = 8;
-        }
-        else
-        {
-            _cameraSensivityValue += increment;
-        }
-        CameraSensivityValueText.text = _cameraSensivityValue.ToString();
-    }
-    public void OnChangeScreenResolution(int increment)
-    {
-        if (_screenResolutionValue + increment > ScreenResolutions.Count - 1)
-        {
-            _screenResolutionValue = 0;
-        }
-        else if (_screenResolutionValue + increment < 0)
-        {
-            _screenResolutionValue = ScreenResolutions.Count - 1;
-        }
-        else
-        {
-            _screenResolutionValue += increment;
-        }
-        ScreenResolution screenResolution = ScreenResolutions[_screenResolutionValue];
-        ScreenResolutionValueText.text = screenResolution.ScreenWidth + " x " + screenResolution.ScreenHeight;
-    }
-    public void OnChangeTextSpeed(int increment)
-    {
-        if (_textSpeedValue + increment > 2)
-        {
-            _textSpeedValue = 0;
-        }
-        else if (_textSpeedValue + increment < 0)
-        {
-            _textSpeedValue = 3;
-        }
-        else
-        {
-            _textSpeedValue += increment;
-        }
-        TextSpeedValueText.text = ((string)Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
-    }
-
-    public void OnClickSaveChanges()
-    {
-        _playerSettings.AudioVolume = _audioValue;
-        _playerSettings.MusicVolume = _musicValue;
-        _playerSettings.CameraSensitivity = _cameraSensivityValue;
-        _playerSettings.ScreenResolution = _screenResolutionValue;
-        _playerSettings.TextSpeed = _textSpeedValue;
-
-        _playerSettings.ValidateData();
-
-        SaveHandler.Instance.SaveDataContainer(_playerSettings);
-    }
-
     private void SetDefaultValues()
     {
         _audioValue = 100;
         _musicValue = 100;
         _cameraSensivityValue = 1;
         _screenResolutionValue = 0;
+        _currentScreenResolution = ScreenResolutions[0];
+        _isFullscreen = true;
         _textSpeedValue = 0;
     }
 
     private void UpdateCanvasValues()
     {
-        AudioValueText.text = _audioValue + "%";
-        MusicValueText.text = _musicValue + "%";
-        CameraSensivityValueText.text = _cameraSensivityValue.ToString();
+        AudioText.text = _audioValue + "%";
+        MusicText.text = _musicValue + "%";
+        CameraSensivityText.text = _cameraSensivityValue.ToString();
+        ScreenResolutionText.text = _currentScreenResolution.ScreenWidth + " x " + _currentScreenResolution.ScreenHeight;
 
-        ScreenResolution screenResolution = ScreenResolutions[_screenResolutionValue];
-        ScreenResolutionValueText.text = screenResolution.ScreenWidth + " x " + screenResolution.ScreenHeight;
+        ChangeFullscreenText();
 
-        TextSpeedValueText.text = ((string) Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
+        TextSpeedText.text = ((string)Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
+    }
+
+    public void OnChangeAudio(int increment)
+    {
+        _audioValue = IncrementValues(increment, 100, 0, _audioValue);
+        AudioText.text = _audioValue + "%";
+    }
+    public void OnChangeMusic(int increment)
+    {
+        _musicValue = IncrementValues(increment, 100, 0, _musicValue);
+        MusicText.text = _musicValue + "%";
+    }
+    public void OnChangeCameraSensitivity(int increment)
+    {
+        _cameraSensivityValue = IncrementValues(increment, 8, 1, _cameraSensivityValue);
+        CameraSensivityText.text = _cameraSensivityValue.ToString();
+    }
+    public void OnChangeScreenResolution(int increment)
+    {
+        _screenResolutionValue = IncrementValues(increment, ScreenResolutions.Count - 1, 0, _screenResolutionValue);
+        _currentScreenResolution = ScreenResolutions[_screenResolutionValue];
+        ScreenResolutionText.text = _currentScreenResolution.ScreenWidth + " x " + _currentScreenResolution.ScreenHeight;
+    }
+
+    public void OnChangeFullscreen()
+    {
+        _isFullscreen = !_isFullscreen;
+        ChangeFullscreenText();
+    }
+
+    public void OnChangeTextSpeed(int increment)
+    {
+        _textSpeedValue = IncrementValues(increment, 2, 0, _textSpeedValue);
+        TextSpeedText.text = ((string)Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
+    }
+
+    private int IncrementValues(int increment, int maxValue, int minValue, int changedValue)
+    {
+        if (changedValue + increment > maxValue)
+        {
+            changedValue = minValue;
+        }
+        else if (changedValue + increment < minValue)
+        {
+            changedValue = maxValue;
+        }
+        else
+        {
+            changedValue += increment;
+        }
+        return changedValue;
+    }
+
+    private void ChangeFullscreenText()
+    {
+        FullscreenText.text = _isFullscreen ? "yes" : "no";
+    }
+
+    // Daryl's save system
+    public void OnClickSaveChanges()
+    {
+        Screen.SetResolution(_currentScreenResolution.ScreenWidth, _currentScreenResolution.ScreenHeight, _isFullscreen);
+
+        _playerSettings.AudioVolume = _audioValue;
+        _playerSettings.MusicVolume = _musicValue;
+        _playerSettings.CameraSensitivity = _cameraSensivityValue;
+        _playerSettings.ScreenResolution = _screenResolutionValue;
+        _playerSettings.IsFullscreen = _isFullscreen;
+        _playerSettings.TextSpeed = _textSpeedValue;
+
+        _playerSettings.ValidateData();
+
+        SaveHandler.Instance.SaveDataContainer(_playerSettings);
     }
 
     private void CheckIfPlayerSettingsExist()
@@ -164,5 +148,9 @@ public class Settings : MonoBehaviour
         _cameraSensivityValue = settings.CameraSensitivity;
         _screenResolutionValue = settings.ScreenResolution;
         _textSpeedValue = settings.TextSpeed;
+        _isFullscreen = settings.IsFullscreen;
+
+        _currentScreenResolution = ScreenResolutions[_screenResolutionValue];
+        Screen.SetResolution(_currentScreenResolution.ScreenWidth, _currentScreenResolution.ScreenHeight, _isFullscreen);
     }
 }

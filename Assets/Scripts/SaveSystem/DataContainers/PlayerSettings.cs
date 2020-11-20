@@ -6,8 +6,9 @@ public class PlayerSettings : BaseDataContainer
     public int MusicVolume;
     public int AudioVolume;
     public int CameraSensitivity;
-    public int TextSpeed;
     public int ScreenResolution;
+    public int TextSpeed;
+    public bool IsFullscreen;
 
     public override void ValidateData()
     {
@@ -26,14 +27,14 @@ public class PlayerSettings : BaseDataContainer
             CameraSensitivity = 1;
         }
 
+        if (ScreenResolution < 0 || ScreenResolution > 15)
+        {
+            ScreenResolution = 0;
+        }
+
         if (TextSpeed < 0 || TextSpeed > Enum.GetNames(typeof(TextSpeed)).Length)
         {
             TextSpeed = 0;
-        }
-
-        if (ScreenResolution < 0 || ScreenResolution > 1)
-        {
-            ScreenResolution = 0;
         }
     }
 }

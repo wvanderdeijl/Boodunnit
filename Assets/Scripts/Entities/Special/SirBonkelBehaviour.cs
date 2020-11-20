@@ -55,16 +55,6 @@ public class SirBonkelBehaviour : MonoBehaviour, IEntity
     public EmotionalState EmotionalState { get; set; }
     public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
 
-    public Dialogue Dialogue => throw new NotImplementedException();
-
-    public Question Question => throw new NotImplementedException();
-
-    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public List<CharacterList> Relationships => throw new NotImplementedException();
-
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
     public float FadeDuration = 1f;
 
     private Transform _newSpawnTransform;

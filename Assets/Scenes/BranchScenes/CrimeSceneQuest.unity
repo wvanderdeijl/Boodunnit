@@ -7545,6 +7545,10 @@ PrefabInstance:
       propertyPath: DashCooldownImage
       value: 
       objectReference: {fileID: 1066312862}
+    - target: {fileID: 2832741858228525859, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525860, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: CooldownImage
       value: 
@@ -7583,11 +7587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525882, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525882, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.99
+      value: -26.38
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525882, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_LocalRotation.w

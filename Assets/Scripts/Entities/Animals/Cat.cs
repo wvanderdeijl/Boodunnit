@@ -175,7 +175,11 @@ namespace Entities
 
         public void UpdateFearMeter()
         {
-            _fearMeter.fillAmount = FearDamage / FearThreshold;
+            if (_fearMeter)
+            {
+                _fearMeter.fillAmount = FearDamage / FearThreshold;
+            }
+
             //_fearMeter.fillAmount = Mathf.MoveTowards(_fearMeter.fillAmount, FearDamage, 1);
         }
 

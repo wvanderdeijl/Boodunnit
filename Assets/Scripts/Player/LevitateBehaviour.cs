@@ -1,5 +1,4 @@
 ﻿using DefaultNamespace.Enums;
-using Interfaces;
 using UnityEngine;
 
 public class LevitateBehaviour : MonoBehaviour

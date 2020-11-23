@@ -10,33 +10,22 @@ public class SnapLocation : MonoBehaviour
     [SerializeField] private Transform _snapPosition;
     [SerializeField] private Vector3 _rotation;
 
-    private SnapLocationState _currentState = SnapLocationState.NotOccupied;
-    
-    public bool IsSnapLocationAvailable { get; set; }
+    public SnapLocationState CurrentState { get; set; }
+
+    private void Awake()
+    {
+        CurrentState = SnapLocationState.NotOccupied;
+    }
 
     public bool IsSnappableObjectValid(SnappableLevitationObject snappableLevitationObjectParam)
     {
         if (!_snappableLevitationObject || !snappableLevitationObjectParam) return false;
-
-        bool isValid = _snappableLevitationObject.GetInstanceID() == snappableLevitationObjectParam.GetInstanceID();
-
-        switch (isValid)
-        {
-            case true:
-                IsSnapLocationAvailable = true;
-                break;
-            
-            case false:
-                IsSnapLocationAvailable = false;
-                break;
-        }
-
-        return isValid;
+        return _snappableLevitationObject.GetInstanceID() == snappableLevitationObjectParam.GetInstanceID();
     }
 
     public void SnapGameObject(SnappableLevitationObject snappableLevitationObject)
     {
-        if (_currentState == SnapLocationState.Occupied) return;
+        if (CurrentState == SnapLocationState.Occupied) return;
         
         if (IsSnappableObjectValid(snappableLevitationObject))
         {
@@ -52,7 +41,7 @@ public class SnapLocation : MonoBehaviour
             snappableObjectRigidbody.useGravity = false;
             
             Destroy(snappableObjectRigidbody);
-            _currentState = SnapLocationState.Occupied;
+            CurrentState = SnapLocationState.Occupied;
         }
     }
 }

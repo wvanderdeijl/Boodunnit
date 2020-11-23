@@ -5,39 +5,32 @@ public class SnappableLevitationObject : MonoBehaviour
 {
     [Header("Overlap Sphere")]
     [SerializeField] private float _overlapSphereRadius = 2f;
-    public SnapLocation NearestSnapLocation { get; set; }
-
-    private Collider FindClosestValidSnaplocation()
+    
+    public SnapLocation FindClosestValidSnaplocation()
     {
-        return Physics
+        SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();
+        
+        Collider potentialSnapLocationCollider =  Physics
             .OverlapSphere(transform.position, _overlapSphereRadius)
             .OrderBy(c => Vector3.Distance(transform.position, c.transform.position))
             .Where(c =>
             {
-                SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();
                 SnapLocation snapLocation = c.GetComponent<SnapLocation>();
                 return snapLocation != null && snapLocation.IsSnappableObjectValid(snappableLevitationObject);
             })
             .FirstOrDefault();
+
+        return potentialSnapLocationCollider ? potentialSnapLocationCollider.GetComponent<SnapLocation>() : null;
     }
 
-    public void InstantiateNearestValidSnapLocation()
+    public void SnapThisObject()
     {
-        Collider collider = FindClosestValidSnaplocation();
+        SnapLocation closestSnapLocation = FindClosestValidSnaplocation();
         
-        if (collider)
-        {
-            SnapLocation snapLocation = collider.GetComponent<SnapLocation>();
-            NearestSnapLocation = snapLocation;
-        }
-    }
-
-    public void Snap()
-    {
-        if (NearestSnapLocation)
+        if (closestSnapLocation)
         {
             SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();
-            NearestSnapLocation.SnapGameObject(snappableLevitationObject);
+            closestSnapLocation.SnapGameObject(snappableLevitationObject);
         }
     }
 }

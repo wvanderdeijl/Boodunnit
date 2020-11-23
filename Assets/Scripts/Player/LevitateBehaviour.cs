@@ -140,19 +140,22 @@ public class LevitateBehaviour : MonoBehaviour
         ILevitateable levitateable =
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
 
+        SnapLocation validSnapLocation = 
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>()
+                .FindClosestValidSnaplocation() : null;
+        
         SnappableLevitationObject snappableLevitationObject = 
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>() : null;
         
         if (levitateable != null)
         {
 
-            if (snappableLevitationObject != null)
+            if (validSnapLocation != null)
             {
-                snappableLevitationObject.InstantiateNearestValidSnapLocation();
 
-                if (IsSnapLocationAvailable(_selectedRigidbody))
+                if (snappableLevitationObject)
                 {
-                    snappableLevitationObject.Snap();
+                    snappableLevitationObject.SnapThisObject();
                     _selectedRigidbody = null;
                     levitateable.State = LevitationState.SnappedIntoPlace;
                     return;
@@ -165,19 +168,6 @@ public class LevitateBehaviour : MonoBehaviour
         ActivateLevitateCoRoutine();
         
         _selectedRigidbody = null;
-    }
-
-    private bool IsSnapLocationAvailable(Rigidbody selectedRigidboy)
-    {
-        SnappableLevitationObject snappableLevitationObject = selectedRigidboy.gameObject.GetComponent<SnappableLevitationObject>();
-        SnapLocation snapLocation = snappableLevitationObject.NearestSnapLocation;
-
-        if (snapLocation)
-        {
-            return snappableLevitationObject.NearestSnapLocation.IsSnapLocationAvailable;
-        }
-
-        return false;
     }
 
     private Rigidbody GetRigidbodyFromMouseClick()

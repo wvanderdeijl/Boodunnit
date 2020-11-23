@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DefaultNamespace.Enums;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         _spawnLocation = transform.position;
         _spawnRotation = transform.rotation;
         StartCoroutine(CheckForDistance());
-    } 
+    }
 
     public bool CanBeLevitated { get; set; }
 

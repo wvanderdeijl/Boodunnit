@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class LevitateBehaviour : MonoBehaviour
 {
-    [Header("Player and Camera")]
+    [Header("References")]
     [SerializeField] private GameObject _player;
-    private Camera _mainCamera;
-    
+    [SerializeField] private Camera _mainCamera;
+
     [Header("OverlapSphere")]
     [SerializeField][Range(0, 30)] private float _overlapSphereRadiusInUnits = 5f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
@@ -33,11 +33,6 @@ public class LevitateBehaviour : MonoBehaviour
     private Collider[] _hitColliders;
     private Collider[] _cachedHitColliders;
     private int _colliderCount;
-
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
-    }
     
     public void LevitationStateHandler()
     {
@@ -129,9 +124,9 @@ public class LevitateBehaviour : MonoBehaviour
     private void GetRigidbodyAndChangeState()
     {
         _selectedRigidbody = GetRigidbodyFromMouseClick();
-        
-        if (!_selectedRigidbody) return;
 
+        if (!_selectedRigidbody) return;
+        
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
 
         if (levitateable != null)
@@ -145,8 +140,28 @@ public class LevitateBehaviour : MonoBehaviour
         ILevitateable levitateable =
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
 
+        SnapLocation validSnapLocation = 
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>()
+                .FindClosestValidSnaplocation() : null;
+        
+        SnappableLevitationObject snappableLevitationObject = 
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>() : null;
+        
         if (levitateable != null)
         {
+
+            if (validSnapLocation != null)
+            {
+
+                if (snappableLevitationObject)
+                {
+                    snappableLevitationObject.SnapThisObject();
+                    _selectedRigidbody = null;
+                    levitateable.State = LevitationState.SnappedIntoPlace;
+                    return;
+                }
+            }
+            
             levitateable.State = LevitationState.Frozen;
         }
 
@@ -154,7 +169,7 @@ public class LevitateBehaviour : MonoBehaviour
         
         _selectedRigidbody = null;
     }
-    
+
     private Rigidbody GetRigidbodyFromMouseClick()
     {
         if (_selectedRigidbody)

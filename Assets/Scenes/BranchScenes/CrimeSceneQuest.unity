@@ -1475,23 +1475,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e69754049193c47931469d5824c6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 71585664}
   Rigidbody: {fileID: 71585658}
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
+  JumpForce: 4
   Speed: 10
+  Collider: {fileID: 71585660}
   IsGrounded: 1
+  TargetToFollow: {fileID: 0}
+  NavMeshAgent: {fileID: 71585664}
   IsOnCountdown: 0
   _pathFindingState: 1
-  JumpForce: 4
-  Collider: {fileID: 71585660}
-  BirdCanTalkToBoolia: 0
-  BirdName: 0
-  BirdDialogue: {fileID: 0}
-  BirdQuestion: {fileID: 0}
-  BirdRelationships: 
-  DefaultAnswersList: []
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  Dialogue: {fileID: 0}
+  Question: {fileID: 0}
+  Relationships: 
+  DefaultAnswers: []
+  CharacterName: 0
+  CanTalkToBoolia: 0
+  FearThreshold: 0
+  FearDamage: 0
+  FaintDuration: 0
+  EmotionalState: 0
+  HasFearCooldown: 0
+  FearRadius: 0
+  FearAngle: 0
+  _ragdollController: {fileID: 0}
   NotGlidingMesh: {fileID: 4158664722518695437, guid: f7e3617cb1a69fc4a8c4bd6b4d95b98c, type: 3}
   GlidingMesh: {fileID: 5029941002934114284, guid: bb49278a6f8c8524bbe5eac8806ce19c, type: 3}
   _glideBehaviour: {fileID: 71585659}
@@ -2287,26 +2295,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 132955847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
+  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 132955848}
-  Rigidbody: {fileID: 132955851}
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  Speed: 10
+  Rigidbody: {fileID: 0}
+  JumpForce: 10
+  Speed: 6
+  Collider: {fileID: 132955850}
   IsGrounded: 1
+  TargetToFollow: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
-  JumpForce: 0
-  Collider: {fileID: 132955850}
-  PoliceCanTalkToBoolia: 0
-  PoliceName: 10
-  PoliceDialogue: {fileID: 0}
-  PoliceQuestion: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
-  PoliceRelationships: 0a000000
-  DefaultAnswersList: []
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  Dialogue: {fileID: 0}
+  Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
+  Relationships: 0a000000
+  DefaultAnswers: []
+  CharacterName: 10
+  CanTalkToBoolia: 0
+  FearThreshold: 0
+  FearDamage: 0
+  FaintDuration: 0
+  EmotionalState: 0
+  HasFearCooldown: 0
+  FearRadius: 0
+  FearAngle: 0
+  _ragdollController: {fileID: 0}
+  _donutDetectionRadius: 10
+  _donutDetectionAngle: 90
 --- !u!136 &132955850
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15038,10 +15056,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntitiesAllowedInThisArea:
   - NameOfEntity: NPC_PoliceMan1_ArmsDown (1)
-    EntityTimeSpentInAreaInSeconds: 5
+    EntityTimeSpentInAreaInSeconds: 4
     OdssEntityPicksThisAreaInWeight: 4
   - NameOfEntity: NPC_PoliceMan1_ArmsDown (3)
-    EntityTimeSpentInAreaInSeconds: 4
+    EntityTimeSpentInAreaInSeconds: 3
     OdssEntityPicksThisAreaInWeight: 9
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
@@ -17073,26 +17091,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1686607864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
+  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 1686607868}
-  Rigidbody: {fileID: 1686607867}
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  Speed: 10
+  Rigidbody: {fileID: 0}
+  JumpForce: 10
+  Speed: 6
+  Collider: {fileID: 132955850}
   IsGrounded: 1
+  TargetToFollow: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
-  JumpForce: 0
-  Collider: {fileID: 1686607865}
-  PoliceCanTalkToBoolia: 0
-  PoliceName: 10
-  PoliceDialogue: {fileID: 0}
-  PoliceQuestion: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
-  PoliceRelationships: 0a000000
-  DefaultAnswersList: []
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  Dialogue: {fileID: 0}
+  Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
+  Relationships: 0a000000
+  DefaultAnswers: []
+  CharacterName: 10
+  CanTalkToBoolia: 0
+  FearThreshold: 0
+  FearDamage: 0
+  FaintDuration: 0
+  EmotionalState: 0
+  HasFearCooldown: 0
+  FearRadius: 0
+  FearAngle: 0
+  _ragdollController: {fileID: 0}
+  _donutDetectionRadius: 10
+  _donutDetectionAngle: 90
 --- !u!54 &1686607867
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18550,26 +18578,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835016664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
+  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 1835016666}
-  Rigidbody: {fileID: 1835016668}
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  Speed: 10
+  Rigidbody: {fileID: 0}
+  JumpForce: 10
+  Speed: 6
+  Collider: {fileID: 132955850}
   IsGrounded: 1
+  TargetToFollow: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
-  JumpForce: 0
-  Collider: {fileID: 1835016667}
-  PoliceCanTalkToBoolia: 0
-  PoliceName: 10
-  PoliceDialogue: {fileID: 0}
-  PoliceQuestion: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
-  PoliceRelationships: 0a000000
-  DefaultAnswersList: []
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  Dialogue: {fileID: 0}
+  Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
+  Relationships: 0a000000
+  DefaultAnswers: []
+  CharacterName: 10
+  CanTalkToBoolia: 0
+  FearThreshold: 0
+  FearDamage: 0
+  FaintDuration: 0
+  EmotionalState: 0
+  HasFearCooldown: 0
+  FearRadius: 0
+  FearAngle: 0
+  _ragdollController: {fileID: 0}
+  _donutDetectionRadius: 10
+  _donutDetectionAngle: 90
 --- !u!195 &1835016666
 NavMeshAgent:
   m_ObjectHideFlags: 0

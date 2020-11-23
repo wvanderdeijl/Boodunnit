@@ -11,6 +11,8 @@ public class PoliceManBehaviour : BaseEntity
 
     private void Awake()
     {
+        InitBaseEntity();
+
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;

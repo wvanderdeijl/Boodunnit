@@ -13,15 +13,18 @@ public class ClimbBehaviour : MonoBehaviour
     public float StaminaConsumptionPerSecond, StaminaReplenishRatePerSecond;
 
     public float Speed { get; set; }
-    
     public bool IsClimbing;
-
-    [SerializeField] private Rigidbody _rigidbody;
+    public Canvas StaminaBarCanvas;
+    
     [SerializeField] private float _rotationSpeed = 100f;
     [SerializeField] private Image _staminaRadialCircle;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody>();
+        StaminaBarCanvas = GameObject.Find("StaminaBarCanvas").GetComponent<Canvas>();
+        
         if (CurrentStamina > MaximumStamina) CurrentStamina = MaximumStamina;
         else if (CurrentStamina < MinimumStamina) CurrentStamina = MinimumStamina;
     }

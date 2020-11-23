@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Entities
 {
-    public abstract class BaseEntity : BaseEntityMovement
+    public abstract class BaseEntity : BaseEntityMovement, IPossessable
     {
         //Property regarding Possession mechanic.
         public bool IsPossessed { get; set; }
@@ -42,12 +42,13 @@ namespace Entities
 
         private void Start()
         {
-            _fearMeter = GetComponent<Image>();
+            Initialize();
+            _fearMeter = GetComponentInChildren<Image>();
         }
 
         public abstract void UseFirstAbility();
         
-        public virtual void CheckSurroundings()
+        protected virtual void CheckSurroundings()
         {
             if (HasFearCooldown) return;
             StartCoroutine(ActivateCooldown());
@@ -76,14 +77,14 @@ namespace Entities
             }
         }
         
-        public virtual IEnumerator ActivateCooldown()
+        protected virtual IEnumerator ActivateCooldown()
         { 
             HasFearCooldown = true;
             yield return new WaitForSeconds(0.5f);
             HasFearCooldown = false;
         }
 
-        public virtual void DealFearDamage(float amount)
+        protected virtual void DealFearDamage(float amount)
         {
             if (EmotionalState == EmotionalState.Fainted) return;
 
@@ -92,7 +93,7 @@ namespace Entities
             if (FearDamage >= FearThreshold) Faint();
         }
 
-        public virtual IEnumerator CalmDown()
+        protected virtual IEnumerator CalmDown()
         {
             yield return new WaitForSeconds(FaintDuration);
             EmotionalState = EmotionalState.Calm;
@@ -100,14 +101,14 @@ namespace Entities
             _ragdollController.ToggleRagdoll(false);
         }
 
-        public virtual void Faint()
+        protected virtual void Faint()
         {
             EmotionalState = EmotionalState.Fainted;
             if (_ragdollController) _ragdollController.ToggleRagdoll(true);
             StartCoroutine(CalmDown());
         }
         
-        public virtual void UpdateFearMeter()
+        protected virtual void UpdateFearMeter()
         {
             _fearMeter.fillAmount = FearDamage / FearThreshold;
         }

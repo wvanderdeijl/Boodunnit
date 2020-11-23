@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using Enums;
 using UnityEngine;
-using UnityEngine.AI;
 
 public abstract class BaseMovement : MonoBehaviour
 {
-    public Rigidbody Rigidbody;
+    [HideInInspector] public Rigidbody Rigidbody;
     public float Speed;
     public bool IsGrounded = true;
     public float JumpForce = 10.0f;
@@ -17,6 +13,11 @@ public abstract class BaseMovement : MonoBehaviour
     private bool _hasCollidedWithWall;
     private ContactPoint[] _contacts;
 
+    protected void Initialize()
+    {
+        Rigidbody = GetComponent<Rigidbody>();
+    }
+    
     public void MoveEntityInDirection(Vector3 direction, float speed)
     {
         //if (_hasCollidedWithWall)

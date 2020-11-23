@@ -9,9 +9,6 @@ public class CatBehaviour : BaseEntity
 {
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;

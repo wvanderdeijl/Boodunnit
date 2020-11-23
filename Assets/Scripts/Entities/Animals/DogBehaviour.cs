@@ -2,16 +2,11 @@ using System;
 using System.Collections.Generic;
 using Entities;
 using Enums;
-using UnityEngine;
-using UnityEngine.AI;
 
 public class DogBehaviour : BaseEntity
 {
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;

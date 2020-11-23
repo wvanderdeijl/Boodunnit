@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using Entities;
 using Enums;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class PoliceManBehaviour : BaseEntity, IPossessable
+public class PoliceManBehaviour : BaseEntity
 {
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
 
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;

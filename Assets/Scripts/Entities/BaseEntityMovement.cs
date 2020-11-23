@@ -1,4 +1,3 @@
-
 using System.Collections;
 using Enums;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class BaseEntityMovement : BaseMovement
 {
-    public GameObject Target;
+    public GameObject TargetToFollow;
     public NavMeshAgent NavMeshAgent;
     public bool IsOnCountdown;
     
@@ -19,8 +18,12 @@ public abstract class BaseEntityMovement : BaseMovement
     private Vector3 _patrolDestination;
     private EntityArea _currentArea;
     
-    private void Start()
+    protected void Initialize()
     {
+        Initialize();
+        
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        
         if (NavMeshAgent)
         {
             NavMeshAgent.autoBraking = true;
@@ -47,13 +50,13 @@ public abstract class BaseEntityMovement : BaseMovement
     }
     private void FollowTarget()
     {
-        if (Target)
+        if (TargetToFollow)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
+            float distanceToTarget = Vector3.Distance(transform.position, TargetToFollow.transform.position);
             if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
             {
                 NavMeshAgent.isStopped = false;
-                NavMeshAgent.SetDestination(Target.transform.position);
+                NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
 

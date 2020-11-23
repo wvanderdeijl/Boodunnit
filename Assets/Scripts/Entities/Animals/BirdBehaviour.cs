@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using Entities;
 using Enums;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class BirdBehaviour : BaseEntity, IPossessable
+public class BirdBehaviour : BaseEntity
 {
     public Mesh NotGlidingMesh, GlidingMesh;
     
@@ -13,9 +12,6 @@ public class BirdBehaviour : BaseEntity, IPossessable
     
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
-        
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;

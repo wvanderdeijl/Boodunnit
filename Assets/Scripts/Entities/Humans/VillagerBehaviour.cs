@@ -5,13 +5,11 @@ using Entities;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class VillagerBehaviour : BaseEntity, IPossessable
+public class VillagerBehaviour : BaseEntity
 {
     void Awake()
     {
         // Todo give Name and Profession
-        Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
 
         FearThreshold = 20;
         FearDamage = 0;

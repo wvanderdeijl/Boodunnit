@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-public class PossessableSanboxBox : BaseEntity, IPossessable
+public class PossessableSanboxBox : BaseEntity
 {
     private CameraController _cameraController;
 

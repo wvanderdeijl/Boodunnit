@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using Entities;
 using Enums;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class RatBehaviour : BaseEntity, IPossessable
+public class RatBehaviour : BaseEntity
 {
     private ClimbBehaviour _climbBehaviour;
-    private Canvas _staminaBarCanvas;
 
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
         _climbBehaviour = GetComponent<ClimbBehaviour>();
-        _staminaBarCanvas = GameObject.Find("StaminaBarCanvas").GetComponent<Canvas>();
-        
+
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;
@@ -39,7 +34,7 @@ public class RatBehaviour : BaseEntity, IPossessable
     {
         Rigidbody.isKinematic = !IsPossessed;
         if (!IsPossessed) MoveWithPathFinding();
-        if (_staminaBarCanvas) _staminaBarCanvas.enabled = IsPossessed;
+        if (_climbBehaviour.StaminaBarCanvas) _climbBehaviour.StaminaBarCanvas.enabled = IsPossessed;
     }
     
     public override void MoveEntityInDirection(Vector3 direction)

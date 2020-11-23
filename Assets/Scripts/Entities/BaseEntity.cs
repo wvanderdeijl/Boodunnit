@@ -38,7 +38,7 @@ namespace Entities
         [SerializeField] private float _radius;
         [SerializeField] private float _angle;
         [SerializeField] private Image _fearMeter;
-        [SerializeField] private RagdollControler _ragdollController;
+        [SerializeField] private RagdollController _ragdollController;
 
         private void Start()
         {

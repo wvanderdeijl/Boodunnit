@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 
 public class EntityArea : MonoBehaviour
@@ -67,11 +68,11 @@ public class EntityArea : MonoBehaviour
         GameObject collidedObject = other.gameObject;
         if (EntitiesInArea.Contains(collidedObject))
         {
-            BaseMovement baseMovementOfCollidedObject = collidedObject.GetComponent<BaseMovement>();
-            if (!baseMovementOfCollidedObject.IsOnCountdown)
+            BaseEntity entity = collidedObject.GetComponent<BaseEntity>();
+            if (!entity.IsOnCountdown)
             {
-                baseMovementOfCollidedObject.IsOnCountdown = true;
-                StartCoroutine(baseMovementOfCollidedObject.StartCountdownInArea(GetEntityTimeInArea(collidedObject)));
+                entity.IsOnCountdown = true;
+                StartCoroutine(entity.StartCountdownInArea(GetEntityTimeInArea(collidedObject)));
             }
         }
     }

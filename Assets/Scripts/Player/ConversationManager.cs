@@ -1,8 +1,8 @@
 ﻿using Enums;
-using Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +17,7 @@ public class ConversationManager : MonoBehaviour
     private GameObject QuestionPool;
     public Button ButtonPrefab;
 
-    private IEntity _currentPossedEntity;
+    private BaseEntity _currentPossedEntity;
     private Queue<string> _sentences = new Queue<string>();
     private Queue<Button> _choiceButtons = new Queue<Button>();
     private Question _dialogueContainedQuestion;
@@ -57,10 +57,10 @@ public class ConversationManager : MonoBehaviour
             //Get the entity boolia is currently possesing
             if (isPossesing)
             {
-                _currentPossedEntity = PossessionBehaviour.PossessionTarget.GetComponent<IEntity>();
+                _currentPossedEntity = PossessionBehaviour.PossessionTarget.GetComponent<BaseEntity>();
             }
 
-            if (entityCollider.TryGetComponent(out IEntity entityToTalkTo))
+            if (entityCollider.TryGetComponent(out BaseEntity entityToTalkTo))
             {
                 if (isPossesing && entityToTalkTo != _currentPossedEntity && !entityToTalkTo.Relationships.Contains(_currentPossedEntity.CharacterName) && entityToTalkTo.Relationships.Count != 0)
                 {

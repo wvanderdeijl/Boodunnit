@@ -1,31 +1,35 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using Enums;
-using Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
+public class PoliceManBehaviour : BaseEntity, IPossessable
 {
-    public CharacterList Name;
-    public bool IsPossessed { get; set; }
-    public float FearThreshold { get; set; }
-    public float FearDamage { get; set; }
-    public float FaintDuration { get; set; }
-    public EmotionalState EmotionalState { get; set; }
-    public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-    public CharacterList CharacterName { get; set; }
-
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
 
     private void Awake()
     {
+        Rigidbody = GetComponent<Rigidbody>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        
+        FearThreshold = 20;
+        FearDamage = 0;
+        FaintDuration = 10;
+        EmotionalState = EmotionalState.Calm;
+        ScaredOfGameObjects = new Dictionary<Type, float>()
+        {
+            [typeof(ILevitateable)] = 3f
+        };
+        
         CharacterName = Name;
     }
 
     private void Update()
     {
+        if (!IsPossessed && !ConversationManager.hasConversationStarted) MoveWithPathFinding();
         CheckDonutsInSurrounding();
     }
 
@@ -58,47 +62,13 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
         }
     }
 
-
-    public void DealFearDamage(float amount)
+    public override void MoveEntityInDirection(Vector3 direction)
     {
-        
+        if (!ConversationManager.hasConversationStarted) base.MoveEntityInDirection(direction);
     }
 
-    public IEnumerator CalmDown()
+    public override void UseFirstAbility()
     {
-        yield return null;
+        //TODO implement PoliceManBehaviour.
     }
-
-    public void Faint()
-    {
-        
-    }
-
-    public void Move(Vector3 direction)
-    {
-        
-    }
-
-    public void EntityJump()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void CheckSurroundings()
-    {
-        
-    }
-
-    public void UseFirstAbility()
-    {
-        
-    }
-
-    public Dialogue Dialogue { get; }
-    
-    public Question Question { get; }
-
-    public List<CharacterList> Relationships => throw new NotImplementedException();
-
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }

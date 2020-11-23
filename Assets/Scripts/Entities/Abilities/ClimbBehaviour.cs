@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
@@ -25,14 +22,8 @@ public class ClimbBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        if (CurrentStamina > MaximumStamina)
-        {
-            CurrentStamina = MaximumStamina;
-        }
-        else if (CurrentStamina < MinimumStamina)
-        {
-            CurrentStamina = MinimumStamina;
-        }
+        if (CurrentStamina > MaximumStamina) CurrentStamina = MaximumStamina;
+        else if (CurrentStamina < MinimumStamina) CurrentStamina = MinimumStamina;
     }
 
     private void Update()
@@ -44,18 +35,12 @@ public class ClimbBehaviour : MonoBehaviour
     //Call this method in an ability function (f.e. UseFirstAbility() in IEntity).
     public void ToggleClimb()
     {
-        if (IsClimbing)
-        {
-            DisableClimbing();
-            return;
-        }
-
-        EnableClimbing();
+        if (IsClimbing) DisableClimbing();
+        else EnableClimbing();
     }
 
     public void Climb()
     {
-        _rigidbody.angularVelocity = Vector3.zero;
         Vector3 direction = Input.GetAxis("Vertical") * transform.forward +
                             Input.GetAxis("Horizontal") * transform.right;
         _rigidbody.velocity = direction * Speed;

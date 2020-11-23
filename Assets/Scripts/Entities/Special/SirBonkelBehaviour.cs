@@ -1,29 +1,9 @@
-﻿using Enums;
-using Interfaces;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Entities;
 using UnityEngine;
 
-public class SirBonkelBehaviour : MonoBehaviour, IEntity
+public class SirBonkelBehaviour : BaseEntity
 {
-    public bool IsPossessed { get; set; }
-    public float FearThreshold { get; set; }
-    public float FearDamage { get; set; }
-    public float FaintDuration { get; set; }
-    public EmotionalState EmotionalState { get; set; }
-    public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-
-    public Dialogue Dialogue => throw new NotImplementedException();
-
-    public Question Question => throw new NotImplementedException();
-
-    public CharacterList CharacterName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    public List<CharacterList> Relationships => throw new NotImplementedException();
-
-    public Sentence[] DefaultAnswers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
     public float FadeDuration = 1f;
 
     private Transform _newSpawnTransform;
@@ -77,34 +57,9 @@ public class SirBonkelBehaviour : MonoBehaviour, IEntity
             m.color = newColor;
         }
     }
-
-    public IEnumerator CalmDown()
+    
+    public override void UseFirstAbility()
     {
-        yield return null;
-    }
-
-    public void CheckSurroundings()
-    {
-    }
-
-    public void DealFearDamage(float amount)
-    {
-    }
-
-    public void Faint()
-    {
-    }
-
-    public void Move(Vector3 direction)
-    {
-    }
-
-    public void UseFirstAbility()
-    {
-    }
-
-    public void EntityJump()
-    {
-        throw new NotImplementedException();
+        //TODO sir Bonkel ability? WHEEZE
     }
 }

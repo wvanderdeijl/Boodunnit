@@ -2,7 +2,6 @@
 using DefaultNamespace.Enums;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class LevitateableObject : MonoBehaviour, ILevitateable
 {
     [SerializeField] private bool _canRespawnWhenOutOfRange;
@@ -84,7 +83,6 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     
     public void Despawn()
     {
-        print("yeet");
         transform.position = _spawnLocation;
         transform.rotation = _spawnRotation;
         _rigidbody.velocity = Vector3.zero;

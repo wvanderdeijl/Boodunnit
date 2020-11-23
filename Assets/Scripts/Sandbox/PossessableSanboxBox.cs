@@ -3,7 +3,7 @@
 public class PossessableSanboxBox : BaseEntity
 {
     private CameraController _cameraController;
-
+    
     private void Awake()
     {
         _cameraController = UnityEngine.Camera.main.GetComponent<CameraController>();

@@ -14,26 +14,20 @@ namespace Entities
         
         //Properties & Fields regarding Dialogue mechanic.
         [Header("Conversation")]
-        public CharacterList Name;
-        public Dialogue dialogue;
-        public Question question;
-        public List<CharacterList> relationships;
-        
-        [Header("Default Answers")]
-        public Sentence[] DefaultAnswersList;
-        public Dialogue Dialogue { get => dialogue; }
-        public Question Question { get => question; }
-        public List<CharacterList> Relationships { get => relationships; }
-        public Sentence[] DefaultAnswers { get => DefaultAnswersList; set => DefaultAnswersList = value; }
-        public CharacterList CharacterName { get => Name; set => Name = value; }
-        
+        public Dialogue Dialogue;
+        public Question Question;
+        public List<CharacterList> Relationships;
+        public Sentence[] DefaultAnswers;
+        public CharacterList CharacterName;
+        public bool CanTalkToBoolia;
+
         //Properties & Fields regarding Terrify mechanic.
-        public float FearThreshold { get; set; }
-        public float FearDamage { get; set; }
-        public float FaintDuration { get; set; }
-        public EmotionalState EmotionalState { get; set; }
-        public Dictionary<Type, float> ScaredOfGameObjects { get; set; } 
-        public bool HasFearCooldown { get; set; }
+        public float FearThreshold;
+        public float FearDamage;
+        public float FaintDuration;
+        public EmotionalState EmotionalState;
+        public Dictionary<Type, float> ScaredOfGameObjects;
+        public bool HasFearCooldown;
         
         [SerializeField] private float _radius;
         [SerializeField] private float _angle;

@@ -10,14 +10,14 @@ public class ConversationManager : MonoBehaviour
 {
     public static bool hasConversationStarted;
 
-    private Animator Animator;
-    private Text EntityNameTextbox;
-    private Text DialogueTextbox;
-    private Button ContinueButton;
-    private GameObject QuestionPool;
-    public Button ButtonPrefab;
-
     private BaseEntity _currentPossedEntity;
+    private Animator _animator;
+    private Text _entityNameTextbox;
+    private Text _dialogueTextbox;
+    private Button _buttonPrefab;
+    private Button _continueButton;
+    private GameObject _questionPool;
+    
     private Queue<string> _sentences = new Queue<string>();
     private Queue<Button> _choiceButtons = new Queue<Button>();
     private Question _dialogueContainedQuestion;
@@ -25,23 +25,24 @@ public class ConversationManager : MonoBehaviour
     private bool _isSentenceFinished = true;
     private bool _hasNoRelation;
     private float _typeSpeed;
-    private int _keepCount = 0;
+    private int _maxDefaultSencteces = 0;
 
     private void Awake()
     {
-        //To NOT change the gameobject names of the Dialog[Canvas] gameobject, that will break the below code
-        GameObject conversationCanvasGO = GameObject.Find("Dialogue[Canvas]");
-        Animator = conversationCanvasGO.GetComponentInChildren<Animator>();
-        EntityNameTextbox = conversationCanvasGO.transform.Find("DialogBox").Find("NameBK").Find("Name").GetComponent<Text>();
-        DialogueTextbox = conversationCanvasGO.transform.Find("DialogBox").Find("Dialog").GetComponent<Text>();
-        ContinueButton = conversationCanvasGO.transform.Find("DialogBox").Find("Continue").GetComponent<Button>();
-        QuestionPool = conversationCanvasGO.transform.Find("QuestionPool").gameObject;
+        //Assign all variables in Dialogue Canvas
+        _animator = GameObject.Find("DialogBox").GetComponent<Animator>();
+        _entityNameTextbox = GameObject.Find("Name").GetComponent<Text>();
+        _dialogueTextbox = GameObject.Find("Dialog").GetComponent<Text>();
+        _buttonPrefab = Resources.Load<Button>("ScriptableObjects/Dialogue/Button");
+        _continueButton = GameObject.Find("Continue").GetComponent<Button>();
+        _questionPool = GameObject.Find("QuestionPool");
     }
 
+    #region Conversation Trigger 
     public void TriggerConversation(bool isPossesing)
     {
         _hasNoRelation = false;
-        _keepCount = 0;
+        _maxDefaultSencteces = 0;
 
         //Get textspeed from the playersettings
         PlayerSettings playerSettings = SaveHandler.Instance.LoadDataContainer<PlayerSettings>();
@@ -54,7 +55,7 @@ public class ConversationManager : MonoBehaviour
         Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, 5);
         foreach (Collider entityCollider in hitColliderArray)
         {
-            //Get the entity boolia is currently possesing
+            //Check which entity boolia is possesing
             if (isPossesing)
             {
                 _currentPossedEntity = PossessionBehaviour.PossessionTarget.GetComponent<BaseEntity>();
@@ -62,18 +63,22 @@ public class ConversationManager : MonoBehaviour
 
             if (entityCollider.TryGetComponent(out BaseEntity entityToTalkTo))
             {
+                //When possesing check if the 2 interacting NPC have a relationship
+                //If realtionship count is 0 they have a realtionship with everyone
                 if (isPossesing && entityToTalkTo != _currentPossedEntity && !entityToTalkTo.Relationships.Contains(_currentPossedEntity.CharacterName) && entityToTalkTo.Relationships.Count != 0)
                 {
                     _hasNoRelation = true;
                     _defaultAnswers = entityToTalkTo.DefaultAnswers;
                 }
 
-                //Start conversation when boolia is taling to emmie || ispossing and has relationship with NPC
-                if ((!isPossesing && entityToTalkTo.CharacterName == CharacterList.EmmieLawson) || (isPossesing && entityToTalkTo != _currentPossedEntity))
+                //start conversation if boolia is possesing another npc
+                //or if she is not possesing anyone check if she can talk to the NPC
+                if ((!isPossesing && entityToTalkTo.CanTalkToBoolia) ||
+                    (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     hasConversationStarted = true;
-                    EntityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
-                    Animator.SetBool("IsOpen", true);
+                    _entityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
+                    _animator.SetBool("IsOpen", true);
                     GameManager.CursorIsLocked = false;
 
                     ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
@@ -82,7 +87,9 @@ public class ConversationManager : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Manange conversation 
     public void ManageConversation(Dialogue dialogue, Question question)
     {
         ResetQuestions();
@@ -102,7 +109,7 @@ public class ConversationManager : MonoBehaviour
             StartDefaultDialogue(_defaultAnswers);
         }
 
-        if (!question && !dialogue || _keepCount == 1)
+        if (!question && !dialogue)
         {
             CloseConversation();
         }
@@ -110,16 +117,17 @@ public class ConversationManager : MonoBehaviour
 
     public void CloseConversation()
     {
-        Animator.SetBool("IsOpen", false);
         hasConversationStarted = false;
+        _animator.SetBool("IsOpen", false);
         GameManager.CursorIsLocked = true;
     }
+    #endregion
 
-    /* Conversation */
+    #region Dialogue
     private void StartDialogue(Dialogue dialogue)
     {
         _dialogueContainedQuestion = dialogue.question;
-        ContinueButton.gameObject.SetActive(true);
+        _continueButton.gameObject.SetActive(true);
         _sentences.Clear();
         
         foreach (Sentence sentence in dialogue.sentences)
@@ -132,7 +140,7 @@ public class ConversationManager : MonoBehaviour
 
     private void StartDefaultDialogue(Sentence[] dialogue)
     {
-        ContinueButton.gameObject.SetActive(true);
+        _continueButton.gameObject.SetActive(true);
 
         string sentence;
 
@@ -147,6 +155,7 @@ public class ConversationManager : MonoBehaviour
         }
 
         StopAllCoroutines();
+        _maxDefaultSencteces = 1;
         StartCoroutine(TypeSentence(sentence, _typeSpeed));
     }
 
@@ -157,7 +166,7 @@ public class ConversationManager : MonoBehaviour
             return;
         }
 
-        if (_sentences.Count == 0)
+        if (_sentences.Count == 0 || _maxDefaultSencteces == 1)
         {
             if (_dialogueContainedQuestion)
             {
@@ -175,31 +184,34 @@ public class ConversationManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence, float typespeed)
     {
-        DialogueTextbox.text = "";
+        _dialogueTextbox.text = "";
         _isSentenceFinished = false;
 
         foreach (char letter in sentence.ToCharArray())
         {
-            DialogueTextbox.text += letter;
+            _dialogueTextbox.text += letter;
             yield return new WaitForSeconds(typespeed);
         }
 
         _isSentenceFinished = true;
     }
+    #endregion
 
-    /* Question */
+    #region Question
     private void AskQuestion(Question question)
     {
         StartCoroutine(TypeSentence(question.Text.ToString(), _typeSpeed));
-        ContinueButton.gameObject.SetActive(false);
+        _continueButton.gameObject.SetActive(false);
 
         foreach (Choice choice in question.Choices)
         {
-            Button choiceButton = Instantiate(ButtonPrefab, Vector3.zero, Quaternion.identity);
-            choiceButton.transform.SetParent(QuestionPool.transform, false);
+            Button choiceButton = Instantiate(_buttonPrefab, Vector3.zero, Quaternion.identity);
+            choiceButton.transform.SetParent(_questionPool.transform, false);
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();
             choiceButton.onClick.AddListener(delegate () { ManageConversation(choice.Dialogue, choice.Question); });
 
+            //If boolia is possesing the wrong NPC disable certain choiceButtons
+            //If CharacterUnlocksChoice is 0 enable all choiceButtons
             if (_currentPossedEntity != null && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
             {
                 choiceButton.interactable = false;
@@ -220,6 +232,7 @@ public class ConversationManager : MonoBehaviour
             }
         }
     }
+    #endregion
     private string EnumValueToString(CharacterList character)
     {
         string newValue = Regex.Replace(character.ToString(), "([a-z])([A-Z])", "$1 $2");

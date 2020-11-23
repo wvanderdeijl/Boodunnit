@@ -19,10 +19,8 @@ public class PoliceManBehaviour : BaseEntity
         {
             [typeof(ILevitateable)] = 3f
         };
-        
-        CharacterName = Name;
     }
-
+    
     private void Update()
     {
         if (!IsPossessed && !ConversationManager.hasConversationStarted) MoveWithPathFinding();

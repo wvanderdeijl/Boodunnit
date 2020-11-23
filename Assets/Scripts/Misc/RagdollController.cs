@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RagdollControler : MonoBehaviour
+public class RagdollController : MonoBehaviour
 {
 
     [Header("References")]

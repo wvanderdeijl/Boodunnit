@@ -1,8 +1,8 @@
 ﻿using Enums;
-using Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +10,14 @@ public class ConversationManager : MonoBehaviour
 {
     public static bool hasConversationStarted;
 
-    private IEntity _currentPossedEntity;
+    private BaseEntity _currentPossedEntity;
     private Animator _animator;
     private Text _entityNameTextbox;
     private Text _dialogueTextbox;
     private Button _buttonPrefab;
     private Button _continueButton;
     private GameObject _questionPool;
+    
     private Queue<string> _sentences = new Queue<string>();
     private Queue<Button> _choiceButtons = new Queue<Button>();
     private Question _dialogueContainedQuestion;
@@ -57,10 +58,10 @@ public class ConversationManager : MonoBehaviour
             //Check which entity boolia is possesing
             if (isPossesing)
             {
-                _currentPossedEntity = PossessionBehaviour.PossessionTarget.GetComponent<IEntity>();
+                _currentPossedEntity = PossessionBehaviour.PossessionTarget.GetComponent<BaseEntity>();
             }
 
-            if (entityCollider.TryGetComponent(out IEntity entityToTalkTo))
+            if (entityCollider.TryGetComponent(out BaseEntity entityToTalkTo))
             {
                 //When possesing check if the 2 interacting NPC have a relationship
                 //If realtionship count is 0 they have a realtionship with everyone

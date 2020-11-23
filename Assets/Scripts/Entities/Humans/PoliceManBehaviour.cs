@@ -1,64 +1,29 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using Enums;
-using Interfaces;
 using UnityEngine;
 
-public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
+public class PoliceManBehaviour : BaseEntity
 {
-    [Header("Conversation Settings")]
-    public bool PolicemanCanTalkToBoolia;
-    public CharacterList PolicemanName;
-    public Dialogue PolicemanDialogue;
-    public Question PolicemanQuestion;
-    public List<CharacterList> PolicemanRelationships;
-
-    [Header("Default Dialogue Answers")]
-    public Sentence[] DefaultAnswersList;
-
-    public bool CanTalkToBoolia
-    {
-        get { return PolicemanCanTalkToBoolia; }
-        set => PolicemanCanTalkToBoolia = value;
-    }
-    public CharacterList CharacterName
-    {
-        get { return PolicemanName; }
-        set => PolicemanName = value;
-    }
-    public Dialogue Dialogue
-    {
-        get { return PolicemanDialogue; }
-        set => PolicemanDialogue = value;
-    }
-    public Question Question
-    {
-        get { return PolicemanQuestion; }
-        set => PolicemanQuestion = value;
-    }
-    public List<CharacterList> Relationships
-    {
-        get { return PolicemanRelationships; }
-        set => PolicemanRelationships = value;
-    }
-    public Sentence[] DefaultAnswers
-    {
-        get { return DefaultAnswersList; }
-        set => DefaultAnswersList = value;
-    }
-    public bool IsPossessed { get; set; }
-    public float FearThreshold { get; set; }
-    public float FearDamage { get; set; }
-    public float FaintDuration { get; set; }
-    public EmotionalState EmotionalState { get; set; }
-    public Dictionary<Type, float> ScaredOfGameObjects { get; set; }
-
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
 
+    private void Awake()
+    {
+        FearThreshold = 20;
+        FearDamage = 0;
+        FaintDuration = 10;
+        EmotionalState = EmotionalState.Calm;
+        ScaredOfGameObjects = new Dictionary<Type, float>()
+        {
+            [typeof(ILevitateable)] = 3f
+        };
+    }
+    
     private void Update()
     {
+        if (!IsPossessed && !ConversationManager.hasConversationStarted) MoveWithPathFinding();
         CheckDonutsInSurrounding();
     }
 
@@ -91,39 +56,13 @@ public class PoliceManBehaviour : MonoBehaviour, IHuman, IPossessable
         }
     }
 
-
-    public void DealFearDamage(float amount)
+    public override void MoveEntityInDirection(Vector3 direction)
     {
-        
+        if (!ConversationManager.hasConversationStarted) base.MoveEntityInDirection(direction);
     }
 
-    public IEnumerator CalmDown()
+    public override void UseFirstAbility()
     {
-        yield return null;
-    }
-
-    public void Faint()
-    {
-        
-    }
-
-    public void Move(Vector3 direction)
-    {
-        
-    }
-
-    public void EntityJump()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void CheckSurroundings()
-    {
-        
-    }
-
-    public void UseFirstAbility()
-    {
-        
+        //TODO implement PoliceManBehaviour.
     }
 }

@@ -17,6 +17,7 @@ public class Popup : MonoBehaviour
     {
         if (!isPopUpOpen)
         {
+            GameManager.CursorIsLocked = false;
             DisableOrEnableOtherCanvasses(false);
             PopupMenuUI.SetActive(true);
             isPopUpOpen = true;
@@ -26,6 +27,7 @@ public class Popup : MonoBehaviour
 
     public void ClosePopup()
     {
+        GameManager.CursorIsLocked = true;
         DisableOrEnableOtherCanvasses(true);
         PopupMenuUI.SetActive(false);
         isPopUpOpen = false;

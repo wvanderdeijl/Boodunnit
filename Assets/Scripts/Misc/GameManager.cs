@@ -9,6 +9,8 @@ public class GameManager
     /// </summary>
     public static bool IsPaused { get; set; }
 
+    public static bool IsCutscenePlaying { get; set; }
+
     private static bool _cursorIsLocked = true;
 
     /// <summary>

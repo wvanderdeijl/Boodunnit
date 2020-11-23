@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &53867265 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
-  m_PrefabInstance: {fileID: 57738052}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154470a9805e1604786df94f782ebe40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &57738052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -614,6 +603,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &332936431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332936433}
+  - component: {fileID: 332936432}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &332936432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332936431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa05839434632342ba8c2a55539fdfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &332936433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332936431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.7582755, y: 2.4864235, z: -5.8303185}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &493666541
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493666541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 4.78, z: -21.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -870,51 +902,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionsInCutscene:
-  - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: -6.61, y: 1.96, z: 9.93}
+  - ActionType: 2
+    ObjectForCutscene: {fileID: 1865034209}
+    EndPosition: {x: 0, y: 1.96, z: -9}
     EndRotation: {x: 0, y: 0, z: 0}
+    NewScaleForObject: {x: 3, y: 3, z: 3}
+    TransitionSpeed: 5
+    IsInstant: 0
+    IsExecuting: 0
+    TimeBeforeNextAction: 0
     Popup: {fileID: 0}
-    ActionType: 0
-    TransitionSpeed: 3
+    MethodToCallFromScript:
+      m_PersistentCalls:
+        m_Calls: []
+  - ActionType: 5
+    ObjectForCutscene: {fileID: 1865034209}
+    EndPosition: {x: 0, y: 1, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
+    NewScaleForObject: {x: 3, y: 3, z: 3}
+    TransitionSpeed: 5
     IsInstant: 0
     IsExecuting: 0
     TimeBeforeNextAction: 0
-  - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: -6.61, y: 1.96, z: 9.93}
-    EndRotation: {x: 0, y: 180, z: 0}
     Popup: {fileID: 0}
-    ActionType: 1
-    TransitionSpeed: 10
-    IsInstant: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
-  - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: -6.61, y: 1.96, z: 9.93}
-    EndRotation: {x: 0, y: 180, z: 0}
-    Popup: {fileID: 0}
-    ActionType: 3
-    TransitionSpeed: 10
-    IsInstant: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
-  - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: -6.61, y: 1.96, z: -12.82}
-    EndRotation: {x: 0, y: 180, z: 0}
-    Popup: {fileID: 0}
-    ActionType: 0
-    TransitionSpeed: 3
-    IsInstant: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
-  - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: -6.61, y: 1.96, z: -12.82}
-    EndRotation: {x: 0, y: 180, z: 0}
-    Popup: {fileID: 53867265}
-    ActionType: 2
-    TransitionSpeed: 10
-    IsInstant: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
+    MethodToCallFromScript:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 332936432}
+          m_TargetAssemblyTypeName: test, Assembly-CSharp
+          m_MethodName: printHello
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1865034209
 GameObject:
   m_ObjectHideFlags: 0

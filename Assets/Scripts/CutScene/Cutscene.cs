@@ -9,6 +9,7 @@ public class Cutscene : MonoBehaviour
 
     private void Awake()
     {
+        StartCutscene();
     }
 
     public void StartCutscene()
@@ -41,11 +42,17 @@ public class Cutscene : MonoBehaviour
                 case ActionType.Rotation:
                     yield return StartCoroutine(ChangeRotationOfGameObject(action));
                     break;
+                case ActionType.Scaling:
+                    yield return StartCoroutine(ChangeScalingOfGameObject(action));
+                    break;
                 case ActionType.Popup:
                     yield return StartCoroutine(OpenPopUp(action));
                     break;
                 case ActionType.Dialogue:
                     yield return StartCoroutine(StartDialogue(action));
+                    break;
+                case ActionType.Method:
+                    CallMethodFromMonoBehaviour(action);
                     break;
             }
            
@@ -110,9 +117,32 @@ public class Cutscene : MonoBehaviour
             gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, rotateToEndRotation, (currentAction.TransitionSpeed * _transitionSpeedMultiplier) * Time.deltaTime);
 
             if (gameObject.transform.rotation == rotateToEndRotation)
-            {
                 currentAction.IsExecuting = false;
-            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator ChangeScalingOfGameObject(Action currentAction)
+    {
+        if (!currentAction.ObjectForCutscene)
+            yield break;
+
+        GameObject gameObject = currentAction.ObjectForCutscene;
+        if (currentAction.IsInstant)
+        {
+            gameObject.transform.localScale = currentAction.NewScaleForObject;
+            currentAction.IsExecuting = false;
+        }
+
+        float timeLerping = 0.0f;
+        while (currentAction.IsExecuting)
+        {
+            timeLerping += Time.deltaTime;
+            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, currentAction.NewScaleForObject, timeLerping / (currentAction.TransitionSpeed * _transitionSpeedMultiplier));
+
+            if (gameObject.transform.localScale == currentAction.NewScaleForObject)
+                currentAction.IsExecuting = false;
 
             yield return null;
         }
@@ -152,6 +182,15 @@ public class Cutscene : MonoBehaviour
         }
     }
 
+    private void CallMethodFromMonoBehaviour(Action currentAction)
+    {
+        if (currentAction.MethodToCallFromScript == null)
+            return;
+
+        currentAction.MethodToCallFromScript.Invoke();
+        currentAction.IsExecuting = false;
+    }
+
     
     /// <summary>
     /// Enable or disable everything bound the player movement and ability.
@@ -159,8 +198,9 @@ public class Cutscene : MonoBehaviour
     /// <param name="shouldPlayerBeEnabled">Should player be enabled or disabled.</param>
     private void DisableOrEnablePlayer(bool shouldPlayerBeEnabled)
     {
-        GameObject player = FindObjectInScene("Player");
-        player.GetComponent<PlayerBehaviour>().enabled = shouldPlayerBeEnabled;
+        GameObject player = GameObject.Find("Player");
+        if(player)
+            player.GetComponent<PlayerBehaviour>().enabled = shouldPlayerBeEnabled;
     }
 
     /// <summary>
@@ -171,20 +211,5 @@ public class Cutscene : MonoBehaviour
     {
         GameObject camera = Camera.main.gameObject;
         camera.GetComponent<CameraController>().enabled = shouldCamereaBeEnabled;
-    }
-
-    /// <summary>
-    /// Find Gameobject by name.
-    /// </summary>
-    /// <param name="nameOfObject">Name of object you want to find.</param>
-    /// <returns></returns>
-    private GameObject FindObjectInScene(string nameOfObject)
-    {
-        GameObject objectToFind = GameObject.Find(nameOfObject);
-        if (objectToFind)
-        {
-            return objectToFind;
-        }
-        return null;
     }
 }

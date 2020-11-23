@@ -23,7 +23,7 @@ public class Settings : MonoBehaviour
     private int _textSpeedValue;
     private bool _isFullscreen;
 
-    private PlayerSettings _playerSettings;
+    private PlayerSettings _playerSettings = new PlayerSettings();
 
     private ScreenResolution _currentScreenResolution;
 
@@ -31,7 +31,6 @@ public class Settings : MonoBehaviour
     {
         SetDefaultValues();
 
-        _playerSettings = new PlayerSettings();
         CheckIfPlayerSettingsExist();
 
         UpdateCanvasValues();

@@ -4,17 +4,20 @@ using UnityEngine;
 public abstract class BaseMovement : MonoBehaviour
 {
     [HideInInspector] public Rigidbody Rigidbody;
-    public float Speed;
-    public bool IsGrounded = true;
+
+    [Header("Movement")]
     public float JumpForce = 10.0f;
+    public float Speed;
     public Collider Collider;
 
+    [HideInInspector]
+    public bool IsGrounded;
+
     private float _rotationSpeed = 10f;
-    private float _gravity = 9.81f;
     private bool _hasCollidedWithWall;
     private ContactPoint[] _contacts;
 
-    protected void Initialize()
+    protected void InitBaseMovement()
     {
         Rigidbody = GetComponent<Rigidbody>();
     }
@@ -81,6 +84,7 @@ public abstract class BaseMovement : MonoBehaviour
 
     public void Jump()
     {
+        //ToDo: Only animals can jump
         IsGrounded = false;
         Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
     }

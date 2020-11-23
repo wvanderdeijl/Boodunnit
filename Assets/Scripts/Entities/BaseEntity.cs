@@ -21,7 +21,7 @@ namespace Entities
         public CharacterList CharacterName;
         public bool CanTalkToBoolia;
 
-        //Properties & Fields regarding Terrify mechanic.
+        [Header("Fear")]
         public float FearThreshold;
         public float FearDamage;
         public float FaintDuration;
@@ -29,15 +29,19 @@ namespace Entities
         public Dictionary<Type, float> ScaredOfGameObjects;
         public bool HasFearCooldown;
         
-        [SerializeField] private float _radius;
-        [SerializeField] private float _angle;
-        [SerializeField] private Image _fearMeter;
+        [SerializeField] private float FearRadius;
+        [SerializeField] private float FearAngle;
+
+        private Image _fearMeter;
+
         [SerializeField] private RagdollController _ragdollController;
 
-        private void Start()
+        protected void InitBaseEntity()
         {
-            Initialize();
             _fearMeter = GetComponentInChildren<Image>();
+
+            InitEntityMovement();
+            InitBaseMovement();
         }
 
         public abstract void UseFirstAbility();
@@ -47,14 +51,14 @@ namespace Entities
             if (HasFearCooldown) return;
             StartCoroutine(ActivateCooldown());
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _radius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, FearRadius);
 
             foreach (Collider collider in colliders)
             {
                 Vector3 offset = (collider.transform.position - transform.position).normalized;
                 float dot = Vector3.Dot(offset, transform.forward);
 
-                if (dot * 100f >= (90 - (_angle / 2f)))
+                if (dot * 100f >= (90 - (FearAngle / 2f)))
                 {
                     BaseEntity scaryEntity = collider.gameObject.GetComponent<BaseEntity>();
                     if (scaryEntity != null && ScaredOfGameObjects.ContainsKey(scaryEntity.GetType()))

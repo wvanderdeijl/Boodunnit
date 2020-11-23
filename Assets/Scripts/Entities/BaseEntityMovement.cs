@@ -6,9 +6,14 @@ using UnityEngine.AI;
 public abstract class BaseEntityMovement : BaseMovement
 {
     public GameObject TargetToFollow;
+
+    [HideInInspector]
     public NavMeshAgent NavMeshAgent;
+
+    [HideInInspector]
     public bool IsOnCountdown;
-    
+
+    [Header("Pathfinding")]
     [SerializeField] private PathFindingState _pathFindingState;
     public float MinimumFollowRange, MaximumFollowRange;
     private bool _isPathFinding;
@@ -18,12 +23,10 @@ public abstract class BaseEntityMovement : BaseMovement
     private Vector3 _patrolDestination;
     private EntityArea _currentArea;
     
-    protected void Initialize()
+    protected void InitEntityMovement()
     {
-        Initialize();
-        
         NavMeshAgent = GetComponent<NavMeshAgent>();
-        
+
         if (NavMeshAgent)
         {
             NavMeshAgent.autoBraking = true;

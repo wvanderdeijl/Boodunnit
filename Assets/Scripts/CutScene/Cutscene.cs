@@ -5,37 +5,25 @@ using UnityEngine;
 public class Cutscene : MonoBehaviour
 {
     public List<Action> ActionsInCutscene;
-    public static bool IsCutSceneFinished;
-
-    /**
-        * 1. Check if a gameobject is set.
-        *      1.1 Set begin position and rotation.
-        *      1.2 Set end position and rotation.
-        *      1.3 Keep in mind the time to transition.
-        * 2. Check if action contains a Popup.
-        *      2.1 Trigger Popup.
-        * 3. Check if action contains a dialogue.
-        *      3.1 Trigger Dialogue.
-        * 4. Check if action is a blocking action. ???
-    **/
+    private int _transitionSpeedMultiplier = 10;
 
     private void Awake()
+    {
+    }
+
+    public void StartCutscene()
     {
         GameManager.IsCutscenePlaying = true;
         DisableOrEnablePlayer(false);
         DisableOrEnablePlayerCamera(false);
-        StartCoroutine(StartCutscene());
 
+        StartCoroutine(ExecuteActions());
     }
 
-    private void Update()
-    {
-    }
-
-    public IEnumerator StartCutscene()
+    private IEnumerator ExecuteActions()
     {
         int actionCounter = 0;
-        if (ActionsInCutscene == null && ActionsInCutscene.Count == 0)
+        if (ActionsInCutscene == null || ActionsInCutscene.Count == 0)
         {
             yield break;
         }
@@ -76,22 +64,24 @@ public class Cutscene : MonoBehaviour
                     yield break;
                 }
             }
-
             yield return null;
         }
     }
 
     private IEnumerator ChangePositionOfGameObject(Action currentAction)
     {
+        if (!currentAction.ObjectForCutscene)
+            yield break;
+
+        GameObject gameObject = currentAction.ObjectForCutscene;
+        if (currentAction.IsInstant)
+        {
+            gameObject.transform.position = currentAction.EndPosition;
+            currentAction.IsExecuting = false;
+        }
+
         while (currentAction.IsExecuting)
         {
-            GameObject gameObject = currentAction.ObjectForCutscene;
-            if (currentAction.IsInstant)
-            {
-                gameObject.transform.position = currentAction.EndPosition;
-                currentAction.IsExecuting = false;
-            }
-
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, currentAction.EndPosition, currentAction.TransitionSpeed * Time.deltaTime);
 
             if (gameObject.transform.position == currentAction.EndPosition)
@@ -103,18 +93,23 @@ public class Cutscene : MonoBehaviour
 
     private IEnumerator ChangeRotationOfGameObject(Action currentAction)
     {
+        if (!currentAction.ObjectForCutscene)
+            yield break;
+
+        GameObject gameObject = currentAction.ObjectForCutscene;
+        if (currentAction.IsInstant)
+        {
+            Quaternion rotateToEndRotation = Quaternion.Euler(currentAction.EndRotation.x, currentAction.EndRotation.y, currentAction.EndRotation.z);
+            gameObject.transform.rotation = rotateToEndRotation;
+            currentAction.IsExecuting = false;
+        }
+
         while (currentAction.IsExecuting)
         {
-            GameObject gameObject = currentAction.ObjectForCutscene;
-            if (currentAction.IsInstant)
-            {
-                gameObject.transform.rotation = currentAction.EndRotation;
-                currentAction.IsExecuting = false;
-            }
+            Quaternion rotateToEndRotation = Quaternion.Euler(currentAction.EndRotation.x, currentAction.EndRotation.y, currentAction.EndRotation.z);
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, rotateToEndRotation, (currentAction.TransitionSpeed * _transitionSpeedMultiplier) * Time.deltaTime);
 
-            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, currentAction.EndRotation, currentAction.TransitionSpeed * Time.deltaTime);
-
-            if (Quaternion.Angle(gameObject.transform.rotation, currentAction.EndRotation) <= 0.01f)
+            if (gameObject.transform.rotation == rotateToEndRotation)
             {
                 currentAction.IsExecuting = false;
             }
@@ -132,10 +127,7 @@ public class Cutscene : MonoBehaviour
         
         while (currentAction.IsExecuting)
         {
-            if (!Popup.isPopUpOpen)
-            {
-                currentAction.IsExecuting = false;
-            }
+            currentAction.IsExecuting = Popup.isPopUpOpen;
             yield return null;
         }
     }
@@ -145,16 +137,17 @@ public class Cutscene : MonoBehaviour
         if (!currentAction.ObjectForCutscene)
             yield break;
 
-        ConversationManager conversationManager = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>().ConversationManager;
-        bool isPossessing = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>().PossessionBehaviour.IsPossessing;
-        conversationManager.TriggerConversation(isPossessing);
+        PlayerBehaviour playerBehaviour = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>();
+        if (playerBehaviour.GetComponent<ConversationManager>() && playerBehaviour.GetComponent<PossessionBehaviour>())
+        {
+            ConversationManager conversationManager = playerBehaviour.GetComponent<ConversationManager>();
+            bool isPossessing = playerBehaviour.GetComponent<PossessionBehaviour>().IsPossessing;
+            conversationManager.TriggerConversation(isPossessing);
+        }
 
         while (currentAction.IsExecuting)
         {
-            if (!ConversationManager.hasConversationStarted)
-            {
-                currentAction.IsExecuting = false;
-            }
+            currentAction.IsExecuting = ConversationManager.hasConversationStarted;
             yield return null;
         }
     }

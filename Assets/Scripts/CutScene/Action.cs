@@ -5,7 +5,7 @@ public class Action
 {
     public GameObject ObjectForCutscene;
     public Vector3 EndPosition;
-    public Quaternion EndRotation;
+    public Vector3 EndRotation;
     public Popup Popup;
 
     public ActionType ActionType;

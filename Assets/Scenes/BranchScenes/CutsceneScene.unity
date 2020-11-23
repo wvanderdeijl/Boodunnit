@@ -325,7 +325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &145717688
 GameObject:
@@ -421,7 +421,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &197930957
 GameObject:
@@ -696,7 +696,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &493666545
 MonoBehaviour:
@@ -855,7 +855,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1382637936
 MonoBehaviour:
@@ -872,29 +872,47 @@ MonoBehaviour:
   ActionsInCutscene:
   - ObjectForCutscene: {fileID: 1865034209}
     EndPosition: {x: -6.61, y: 1.96, z: 9.93}
-    EndRotation: {x: 0, y: 0, z: 0, w: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
     Popup: {fileID: 0}
     ActionType: 0
     TransitionSpeed: 3
     IsInstant: 0
     IsExecuting: 0
-    TimeBeforeNextAction: 2
+    TimeBeforeNextAction: 0
   - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 180, z: 0, w: 0}
+    EndPosition: {x: -6.61, y: 1.96, z: 9.93}
+    EndRotation: {x: 0, y: 180, z: 0}
     Popup: {fileID: 0}
     ActionType: 1
+    TransitionSpeed: 10
+    IsInstant: 0
+    IsExecuting: 0
+    TimeBeforeNextAction: 0
+  - ObjectForCutscene: {fileID: 1865034209}
+    EndPosition: {x: -6.61, y: 1.96, z: 9.93}
+    EndRotation: {x: 0, y: 180, z: 0}
+    Popup: {fileID: 0}
+    ActionType: 3
+    TransitionSpeed: 10
+    IsInstant: 0
+    IsExecuting: 0
+    TimeBeforeNextAction: 0
+  - ObjectForCutscene: {fileID: 1865034209}
+    EndPosition: {x: -6.61, y: 1.96, z: -12.82}
+    EndRotation: {x: 0, y: 180, z: 0}
+    Popup: {fileID: 0}
+    ActionType: 0
     TransitionSpeed: 3
     IsInstant: 0
     IsExecuting: 0
-    TimeBeforeNextAction: 2
+    TimeBeforeNextAction: 0
   - ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 0, y: 90, z: 0, w: 0}
+    EndPosition: {x: -6.61, y: 1.96, z: -12.82}
+    EndRotation: {x: 0, y: 180, z: 0}
     Popup: {fileID: 53867265}
-    ActionType: 3
-    TransitionSpeed: 0
-    IsInstant: 1
+    ActionType: 2
+    TransitionSpeed: 10
+    IsInstant: 0
     IsExecuting: 0
     TimeBeforeNextAction: 0
 --- !u!1 &1865034209
@@ -1123,9 +1141,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865034209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.61, y: 1.96, z: -13.64}
+  m_LocalPosition: {x: -6.61, y: 1.96, z: -12.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

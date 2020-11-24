@@ -44,6 +44,12 @@ namespace Entities
             InitBaseMovement();
         }
 
+        private void Update()
+        {
+            Rigidbody.isKinematic = !IsPossessed;
+            if (!IsPossessed && !ConversationManager.hasConversationStarted) MoveWithPathFinding();
+        }
+
         public abstract void UseFirstAbility();
         
         protected virtual void CheckSurroundings()

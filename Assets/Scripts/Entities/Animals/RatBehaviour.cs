@@ -32,8 +32,6 @@ public class RatBehaviour : BaseEntity
 
     private void Update()
     {
-        Rigidbody.isKinematic = !IsPossessed;
-        if (!IsPossessed) MoveWithPathFinding();
         if (_climbBehaviour.StaminaBarCanvas) _climbBehaviour.StaminaBarCanvas.enabled = IsPossessed;
     }
     

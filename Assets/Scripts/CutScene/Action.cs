@@ -7,7 +7,7 @@ public class Action
     public GameObject ObjectForCutscene;
     public Vector3 EndPosition;
     public Vector3 EndRotation;
-    public Vector3 NewScaleForObject;
+    public Vector3 EndScale;
     public int TransitionSpeed;
  
     public bool IsInstant;

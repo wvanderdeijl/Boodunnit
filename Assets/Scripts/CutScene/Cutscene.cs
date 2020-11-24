@@ -131,7 +131,7 @@ public class Cutscene : MonoBehaviour
         GameObject gameObject = currentAction.ObjectForCutscene;
         if (currentAction.IsInstant)
         {
-            gameObject.transform.localScale = currentAction.NewScaleForObject;
+            gameObject.transform.localScale = currentAction.EndScale;
             currentAction.IsExecuting = false;
         }
 
@@ -139,9 +139,9 @@ public class Cutscene : MonoBehaviour
         while (currentAction.IsExecuting)
         {
             timeLerping += Time.deltaTime;
-            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, currentAction.NewScaleForObject, timeLerping / (currentAction.TransitionSpeed * _transitionSpeedMultiplier));
+            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, currentAction.EndScale, timeLerping / (currentAction.TransitionSpeed * _transitionSpeedMultiplier));
 
-            if (gameObject.transform.localScale == currentAction.NewScaleForObject)
+            if (gameObject.transform.localScale == currentAction.EndScale)
                 currentAction.IsExecuting = false;
 
             yield return null;

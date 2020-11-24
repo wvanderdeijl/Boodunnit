@@ -41,9 +41,11 @@ public class ConversationCamera : MonoBehaviour
         transform.position = Vector3.Slerp(transform.position, cameraPoint, Time.deltaTime);
         
         //This makes both the conversation target and the player look at one another
-        _cameraController.CameraRotationTarget.transform.LookAt(conversationTarget);
+        RotateWithIgnoreXZRotations(_cameraController.CameraRotationTarget, conversationTarget);
+        RotateWithIgnoreXZRotations(ConversationManager.ConversationTarget, _cameraController.CameraRotationTarget.position);
+        // _cameraController.CameraRotationTarget.transform.LookAt(conversationTarget);
+        // ConversationManager.ConversationTarget.LookAt(_cameraController.CameraRotationTarget);
         transform.LookAt(conversationTarget);
-        ConversationManager.ConversationTarget.LookAt(_cameraController.CameraRotationTarget);
         yield return null;
         if (Vector3.Distance(transform.position, cameraPoint) > 1f && ConversationManager.HasConversationStarted) 
             StartCoroutine(CameraMover(cameraPoint, conversationTarget));
@@ -119,5 +121,14 @@ public class ConversationCamera : MonoBehaviour
         if (angle < 0) angle += 360;
         if (angle > 360) angle -= 360;
         return angle;
+    }
+
+    private void RotateWithIgnoreXZRotations(Transform targetTransform, Vector3 toLookAt)
+    {
+        Vector3 rotationEulers = targetTransform.rotation.eulerAngles;
+        targetTransform.LookAt(toLookAt);
+        targetTransform.rotation = Quaternion.Euler(
+            new Vector3(rotationEulers.x, targetTransform.rotation.eulerAngles.y, rotationEulers.z)
+            );
     }
 }

@@ -2,6 +2,8 @@
 {
     Position,
     Rotation,
+    Scaling,
     Popup,
-    Dialogue
+    Dialogue,
+    Method
 }

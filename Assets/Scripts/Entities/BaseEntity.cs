@@ -47,7 +47,7 @@ namespace Entities
         private void Update()
         {
             Rigidbody.isKinematic = !IsPossessed;
-            if (!IsPossessed && !ConversationManager.hasConversationStarted) MoveWithPathFinding();
+            if (!IsPossessed) MoveWithPathFinding();
         }
 
         public abstract void UseFirstAbility();

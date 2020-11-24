@@ -1480,6 +1480,7 @@ MonoBehaviour:
   Speed: 10
   Collider: {fileID: 71585660}
   IsGrounded: 1
+  CanJump: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 71585664}
   IsOnCountdown: 0
@@ -1497,8 +1498,8 @@ MonoBehaviour:
   FaintDuration: 0
   EmotionalState: 0
   HasFearCooldown: 0
-  FearRadius: 0
-  FearAngle: 0
+  _fearRadius: 0
+  _fearAngle: 0
   _ragdollController: {fileID: 0}
   NotGlidingMesh: {fileID: 4158664722518695437, guid: f7e3617cb1a69fc4a8c4bd6b4d95b98c, type: 3}
   GlidingMesh: {fileID: 5029941002934114284, guid: bb49278a6f8c8524bbe5eac8806ce19c, type: 3}
@@ -2303,6 +2304,7 @@ MonoBehaviour:
   Speed: 6
   Collider: {fileID: 132955850}
   IsGrounded: 1
+  CanJump: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
@@ -2320,8 +2322,8 @@ MonoBehaviour:
   FaintDuration: 0
   EmotionalState: 0
   HasFearCooldown: 0
-  FearRadius: 0
-  FearAngle: 0
+  _fearRadius: 0
+  _fearAngle: 0
   _ragdollController: {fileID: 0}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90
@@ -7614,6 +7616,10 @@ PrefabInstance:
     - target: {fileID: 2832741858228525860, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: UnpossessRadius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: CanJump
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: JumpForce
@@ -17099,6 +17105,7 @@ MonoBehaviour:
   Speed: 6
   Collider: {fileID: 132955850}
   IsGrounded: 1
+  CanJump: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
@@ -17116,8 +17123,8 @@ MonoBehaviour:
   FaintDuration: 0
   EmotionalState: 0
   HasFearCooldown: 0
-  FearRadius: 0
-  FearAngle: 0
+  _fearRadius: 0
+  _fearAngle: 0
   _ragdollController: {fileID: 0}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90
@@ -18586,6 +18593,7 @@ MonoBehaviour:
   Speed: 6
   Collider: {fileID: 132955850}
   IsGrounded: 1
+  CanJump: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
@@ -18603,8 +18611,8 @@ MonoBehaviour:
   FaintDuration: 0
   EmotionalState: 0
   HasFearCooldown: 0
-  FearRadius: 0
-  FearAngle: 0
+  _fearRadius: 0
+  _fearAngle: 0
   _ragdollController: {fileID: 0}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90

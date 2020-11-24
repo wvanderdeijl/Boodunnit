@@ -48,8 +48,7 @@ public class PossessionBehaviour : MonoBehaviour
             TargetBehaviour.IsPossessed = false;
             PossessionTarget.GetComponent<NavMeshAgent>().enabled = true;
             PossessionTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
-            PossessionTarget.GetComponent<Rigidbody>().isKinematic = true;
+            TargetBehaviour.ResetDestination();
 
             TargetBehaviour = null;
             PossessionTarget = null;

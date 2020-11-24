@@ -26,7 +26,6 @@ public class BirdBehaviour : BaseEntity
 
     private void Update()
     {
-        Rigidbody.isKinematic = !IsPossessed;
         if (!IsPossessed)  MoveWithPathFinding();
     }
 

@@ -25,7 +25,11 @@ public class PoliceManBehaviour : BaseEntity
     
     private void Update()
     {
-        if (!IsPossessed && !ConversationManager.hasConversationStarted) CheckDonutsInSurrounding();
+        if (!IsPossessed && !ConversationManager.hasConversationStarted)
+        {
+            MoveWithPathFinding();
+            CheckDonutsInSurrounding();
+        }
     }
 
     private void CheckDonutsInSurrounding()

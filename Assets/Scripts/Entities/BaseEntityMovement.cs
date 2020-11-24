@@ -122,4 +122,9 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         _pathFindingState = pathFindingState;
     }
+
+    public void ResetDestination()
+    {
+        NavMeshAgent.destination = _patrolDestination;
+    }
 }

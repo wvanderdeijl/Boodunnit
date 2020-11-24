@@ -9,7 +9,8 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         // Todo start a new game
-        SceneTransitionHandler.Instance.GoToScene("DevSandbox");
+        //SceneTransitionHandler.Instance.GoToScene("DevSandbox");
+        SceneManager.LoadScene("DevSandbox");
     }
 
     public void ContinueGame()

@@ -2,7 +2,6 @@
 using DefaultNamespace.Enums;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class LevitateableObject : MonoBehaviour, ILevitateable
 {
     [SerializeField] private bool _canRespawnWhenOutOfRange;
@@ -74,12 +73,11 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private IEnumerator CheckForDistance()
     {
         yield return new WaitForSeconds(3f);
-        if (CanRespawnWhenOutOfRange && 
-            Vector3.Distance(transform.position, CameraController.RotationTarget.position) > DespawnDistance &&
-            Vector3.Distance(_spawnLocation, CameraController.RotationTarget.position) > DespawnDistance)
+        if (CanRespawnWhenOutOfRange && Mathf.Abs(Vector3.Distance(transform.position, _spawnLocation)) >= DespawnDistance && Mathf.Abs(Vector3.Distance(transform.position, CameraController.RotationTarget.position)) >= DespawnDistance && Mathf.Abs(Vector3.Distance(_spawnLocation, CameraController.RotationTarget.position)) >= DespawnDistance)
         {
             Despawn();
         }
+
         StartCoroutine(CheckForDistance());
     }
     

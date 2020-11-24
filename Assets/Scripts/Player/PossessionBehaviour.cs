@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Interfaces;
+using Entities;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PossessionBehaviour : MonoBehaviour
 {
     public bool IsPossessing;
-    public IEntity TargetBehaviour;
+    public BaseEntity TargetBehaviour;
 
     public Image CooldownImage;
 
@@ -114,7 +114,7 @@ public class PossessionBehaviour : MonoBehaviour
             IPossessable possessableInterface = gameObjectInRangeCollider.GetComponent<IPossessable>();
             if (possessableInterface != null && !PossessionTarget)
             {
-                TargetBehaviour = gameObjectInRangeCollider.GetComponent<IEntity>();
+                TargetBehaviour = gameObjectInRangeCollider.GetComponent<BaseEntity>();
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
                 PossessionTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;

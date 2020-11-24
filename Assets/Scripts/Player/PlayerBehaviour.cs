@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-﻿using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -87,7 +84,7 @@ public class PlayerBehaviour : BaseMovement
         } 
         else if (PossessionBehaviour.IsPossessing)
         {
-            PossessionBehaviour.TargetBehaviour.Move(moveDirection);
+            PossessionBehaviour.TargetBehaviour.MoveEntityInDirection(moveDirection);
         }
 
         //Use first ability.
@@ -101,7 +98,7 @@ public class PlayerBehaviour : BaseMovement
         {
             if (PossessionBehaviour.IsPossessing)
             {
-                PossessionBehaviour.TargetBehaviour.EntityJump();
+                PossessionBehaviour.TargetBehaviour.Jump();
                 return;
             }
 

@@ -7,62 +7,128 @@ using System;
 
 public class Settings : MonoBehaviour
 {
-    public Text SoundEffectValueText;
-    public Slider SoundEffectSlider;
-    public Text MusicValueText;
-    public Slider MusicSlider;
-    public Text SensivityValueText;
-    public Slider SensitivitySlider;
+    public Text AudioText;
+    public Text MusicText;
+    public Text CameraSensivityText;
+    public Text ScreenResolutionText;
+    public Text FullscreenText;
+    public Text TextSpeedText;
 
-    public Dropdown TextSpeedDropdown;
+    public List<ScreenResolution> ScreenResolutions;
 
-    private PlayerSettings _playerSettings;
-    private float _sensivityPercentage;
+    private int _audioValue;
+    private int _musicValue;
+    private int _cameraSensivityValue;
+    private int _screenResolutionValue;
+    private int _textSpeedValue;
+    private bool _isFullscreen;
 
-    private void Awake()
+    private PlayerSettings _playerSettings = new PlayerSettings();
+
+    private ScreenResolution _currentScreenResolution;
+
+    public void Awake()
     {
-        _playerSettings = new PlayerSettings();
-        AddOptionsToDropdown();
+        SetDefaultValues();
+
         CheckIfPlayerSettingsExist();
-        _sensivityPercentage = 12.5f;
-    }
 
-    public void OnValueChangedSoundEffectSlider(float volumeValue)
+        UpdateCanvasValues();
+    }
+    private void SetDefaultValues()
     {
-        SoundEffectValueText.text = volumeValue.ToString();
+        _audioValue = 100;
+        _musicValue = 100;
+        _cameraSensivityValue = 1;
+        _screenResolutionValue = 0;
+        _currentScreenResolution = ScreenResolutions[0];
+        _isFullscreen = true;
+        _textSpeedValue = 0;
     }
 
-    public void OnValueChangedMusicSlider(float volumeValue)
+    private void UpdateCanvasValues()
     {
-        MusicValueText.text = volumeValue.ToString();
+        AudioText.text = _audioValue + "%";
+        MusicText.text = _musicValue + "%";
+        CameraSensivityText.text = _cameraSensivityValue.ToString();
+        ScreenResolutionText.text = _currentScreenResolution.ScreenWidth + " x " + _currentScreenResolution.ScreenHeight;
+
+        ChangeFullscreenText();
+
+        TextSpeedText.text = ((string)Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
     }
 
-    public void OnValueChangedSensitivitySlider(float volumeValue)
+    public void OnChangeAudio(int increment)
     {
-        SensivityValueText.text = ((int) (volumeValue / _sensivityPercentage)).ToString();
+        _audioValue = IncrementValues(increment, 100, 0, _audioValue);
+        AudioText.text = _audioValue + "%";
+    }
+    public void OnChangeMusic(int increment)
+    {
+        _musicValue = IncrementValues(increment, 100, 0, _musicValue);
+        MusicText.text = _musicValue + "%";
+    }
+    public void OnChangeCameraSensitivity(int increment)
+    {
+        _cameraSensivityValue = IncrementValues(increment, 8, 1, _cameraSensivityValue);
+        CameraSensivityText.text = _cameraSensivityValue.ToString();
+    }
+    public void OnChangeScreenResolution(int increment)
+    {
+        _screenResolutionValue = IncrementValues(increment, ScreenResolutions.Count - 1, 0, _screenResolutionValue);
+        _currentScreenResolution = ScreenResolutions[_screenResolutionValue];
+        ScreenResolutionText.text = _currentScreenResolution.ScreenWidth + " x " + _currentScreenResolution.ScreenHeight;
     }
 
+    public void OnChangeFullscreen()
+    {
+        _isFullscreen = !_isFullscreen;
+        ChangeFullscreenText();
+    }
+
+    public void OnChangeTextSpeed(int increment)
+    {
+        _textSpeedValue = IncrementValues(increment, 2, 0, _textSpeedValue);
+        TextSpeedText.text = ((string)Enum.GetNames(typeof(TextSpeed)).GetValue(_textSpeedValue)).ToLower();
+    }
+
+    private int IncrementValues(int increment, int maxValue, int minValue, int changedValue)
+    {
+        if (changedValue + increment > maxValue)
+        {
+            changedValue = minValue;
+        }
+        else if (changedValue + increment < minValue)
+        {
+            changedValue = maxValue;
+        }
+        else
+        {
+            changedValue += increment;
+        }
+        return changedValue;
+    }
+
+    private void ChangeFullscreenText()
+    {
+        FullscreenText.text = _isFullscreen ? "yes" : "no";
+    }
+
+    // Daryl's save system
     public void OnClickSaveChanges()
     {
-        _playerSettings.MusicVolume = (int) MusicSlider.value;
-        _playerSettings.SoundEffectVolume = (int) SoundEffectSlider.value;
-        _playerSettings.CameraSensitivity = (int) (SensitivitySlider.value / _sensivityPercentage);
-        _playerSettings.TextSpeed = TextSpeedDropdown.value;
+        Screen.SetResolution(_currentScreenResolution.ScreenWidth, _currentScreenResolution.ScreenHeight, _isFullscreen);
+
+        _playerSettings.AudioVolume = _audioValue;
+        _playerSettings.MusicVolume = _musicValue;
+        _playerSettings.CameraSensitivity = _cameraSensivityValue;
+        _playerSettings.ScreenResolution = _screenResolutionValue;
+        _playerSettings.IsFullscreen = _isFullscreen;
+        _playerSettings.TextSpeed = _textSpeedValue;
 
         _playerSettings.ValidateData();
 
         SaveHandler.Instance.SaveDataContainer(_playerSettings);
-    }
-
-    private void AddOptionsToDropdown()
-    {
-        List<string> textSpeedOptions = new List<string>();
-        foreach(TextSpeed textSpeed in Enum.GetValues(typeof(TextSpeed)))
-        {
-            textSpeedOptions.Add(textSpeed.ToString());
-        }
-
-        TextSpeedDropdown.AddOptions(textSpeedOptions);
     }
 
     private void CheckIfPlayerSettingsExist()
@@ -71,31 +137,19 @@ public class Settings : MonoBehaviour
         if (settings != null)
         {
             OnLoadPlayerSettings(settings);
-        } else
-        {
-            ChangeSlidersToDefaultValues();
         }
-    }
-
-    private void ChangeSlidersToDefaultValues()
-    {
-        SoundEffectValueText.text = "100";
-        MusicValueText.text = "100";
-        SensivityValueText.text = "1";
-        SoundEffectSlider.value = 100;
-        MusicSlider.value = 100;
-        SensitivitySlider.value = 1;
-        TextSpeedDropdown.value = 0;
     }
 
     private void OnLoadPlayerSettings(PlayerSettings settings)
     {
-        SoundEffectValueText.text = settings.SoundEffectVolume.ToString();
-        MusicValueText.text = settings.MusicVolume.ToString();
-        SensivityValueText.text = (settings.CameraSensitivity * _sensivityPercentage).ToString();
-        SoundEffectSlider.value = settings.SoundEffectVolume;
-        MusicSlider.value = settings.MusicVolume;
-        SensitivitySlider.value = settings.CameraSensitivity * _sensivityPercentage;
-        TextSpeedDropdown.value = settings.TextSpeed;
+        _audioValue = settings.AudioVolume;
+        _musicValue = settings.MusicVolume;
+        _cameraSensivityValue = settings.CameraSensitivity;
+        _screenResolutionValue = settings.ScreenResolution;
+        _textSpeedValue = settings.TextSpeed;
+        _isFullscreen = settings.IsFullscreen;
+
+        _currentScreenResolution = ScreenResolutions[_screenResolutionValue];
+        Screen.SetResolution(_currentScreenResolution.ScreenWidth, _currentScreenResolution.ScreenHeight, _isFullscreen);
     }
 }

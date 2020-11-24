@@ -6,13 +6,18 @@ using UnityEngine;
 public class ConversationCamera : MonoBehaviour
 {
     public bool IsConversing;
-    public CameraController CameraController;
-    [SerializeField] private float _angle;
+    private CameraController _cameraController;
+    private float _angle;
     private float _upperAngle;
     private float _lowerAngle;
     public float ConversationRadius = 7f;
 
     private Vector3 _conversationCenterPoint;
+
+    private void Awake()
+    {
+        _cameraController = GetComponent<CameraController>();
+    }
 
     private void Update()
     {
@@ -20,8 +25,6 @@ public class ConversationCamera : MonoBehaviour
             StartConversation(ConversationManager.ConversationTarget.position);
         else if (IsConversing && !ConversationManager.hasConversationStarted) 
             EndConversation();
-        
-        Debug.DrawRay(transform.position, _conversationCenterPoint - transform.position, Color.cyan);
     }
 
     public void StartConversation( Vector3 conversationTarget)
@@ -29,33 +32,38 @@ public class ConversationCamera : MonoBehaviour
         IsConversing = true;
         DeterminePointInformation(conversationTarget);
         Vector3 cameraPoint = Attempt(0);
+
         StartCoroutine(CameraMover(cameraPoint, conversationTarget));
     }
 
     IEnumerator CameraMover(Vector3 cameraPoint, Vector3 conversationTarget)
     {
         transform.position = Vector3.Slerp(transform.position, cameraPoint, Time.deltaTime);
-        CameraController.CameraRotationTarget.transform.LookAt(conversationTarget);
+        _cameraController.CameraRotationTarget.transform.LookAt(conversationTarget);
         transform.LookAt(conversationTarget);
+        ConversationManager.ConversationTarget.LookAt(_cameraController.CameraRotationTarget);
         yield return null;
-        if (Vector3.Distance(transform.position, cameraPoint) > 1f) 
+        if (Vector3.Distance(transform.position, cameraPoint) > 1f && ConversationManager.hasConversationStarted) 
             StartCoroutine(CameraMover(cameraPoint, conversationTarget));
     }
 
     bool CheckCameraObstruction(Vector3 cameraPoint, Vector3 conversationTargetPosition)
     {
-        Vector3 targetDirection =transform.position - _conversationCenterPoint;
-        return Physics.Raycast(cameraPoint, targetDirection, out RaycastHit hit,
+        Vector3 targetDirection = cameraPoint - _conversationCenterPoint;
+        return Physics.Raycast(_conversationCenterPoint, targetDirection, out RaycastHit hit,
             Vector3.Distance(cameraPoint, conversationTargetPosition) + 0.2f, 
             LayerMask.GetMask("Default"));
     }
 
     private void DeterminePointInformation(Vector3 conversationTarget)
     {
-        Vector3 playerPos = CameraController.CameraRotationTarget.position;
+        Vector3 playerPos = _cameraController.CameraRotationTarget.position;
         _conversationCenterPoint = 
             Vector3.Lerp(conversationTarget, playerPos, 0.5f);
-        _angle = Vector3.Angle(Vector3.forward, _conversationCenterPoint - playerPos); //this will be behind the player
+        
+        Vector3 delta = _conversationCenterPoint - playerPos;
+        _angle = (Mathf.Atan2(delta.x, delta.z) * 180 / Mathf.PI);
+        
         _lowerAngle = _angle - 90;
         _upperAngle = _angle + 90;
         if (_lowerAngle < 0) _lowerAngle += 360;
@@ -75,7 +83,7 @@ public class ConversationCamera : MonoBehaviour
         if (offset > 90)
         {
             print("obstructed");
-            return CameraController.CameraRotationTarget.position;
+            return _cameraController.CameraRotationTarget.position;
         }
         if (leftAttempt != Vector3.zero)
         {

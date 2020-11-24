@@ -45,7 +45,6 @@ public class CameraController : MonoBehaviour
     /// To reassign use non static public Transform CameraRotationTarget
     /// </summary>
     public static Transform RotationTarget;
-    public ConversationCamera ConversationCamera;
 
     private Vector3 _pointToSlerpTo;
     private float _angle;
@@ -74,7 +73,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (ConversationCamera.IsConversing) return;
+        if (ConversationManager.hasConversationStarted) return;
         RotationTarget = CameraRotationTarget;
         
         if (Input.GetKeyDown(KeyCode.LeftAlt))

@@ -29,8 +29,8 @@ namespace Entities
         public Dictionary<Type, float> ScaredOfGameObjects;
         public bool HasFearCooldown;
         
-        [SerializeField] private float FearRadius;
-        [SerializeField] private float FearAngle;
+        [SerializeField] private float _fearRadius;
+        [SerializeField] private float _fearAngle;
 
         private Image _fearMeter;
 
@@ -51,14 +51,14 @@ namespace Entities
             if (HasFearCooldown) return;
             StartCoroutine(ActivateCooldown());
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, FearRadius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _fearRadius);
 
             foreach (Collider collider in colliders)
             {
                 Vector3 offset = (collider.transform.position - transform.position).normalized;
                 float dot = Vector3.Dot(offset, transform.forward);
 
-                if (dot * 100f >= (90 - (FearAngle / 2f)))
+                if (dot * 100f >= (90 - (_fearAngle / 2f)))
                 {
                     BaseEntity scaryEntity = collider.gameObject.GetComponent<BaseEntity>();
                     if (scaryEntity != null && ScaredOfGameObjects.ContainsKey(scaryEntity.GetType()))

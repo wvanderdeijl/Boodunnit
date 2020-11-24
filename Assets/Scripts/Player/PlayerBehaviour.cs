@@ -94,7 +94,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (PossessionBehaviour.IsPossessing)
             {

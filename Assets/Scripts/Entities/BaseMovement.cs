@@ -84,9 +84,11 @@ public abstract class BaseMovement : MonoBehaviour
 
     public void Jump()
     {
-        //ToDo: Only animals can jump
-        IsGrounded = false;
-        Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+        if (IsGrounded)
+        {
+            IsGrounded = false;
+            Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);   
+        }
     }
 
     private void OnCollisionStay(Collision other)

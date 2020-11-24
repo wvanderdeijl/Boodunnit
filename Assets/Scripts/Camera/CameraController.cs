@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
     public float MinDistance = 1.255763f;
 
     private float _distance;
-
+ 
     public float RotationSpeed = 1f;
 
     public Transform CameraRotationTarget;
@@ -45,21 +45,17 @@ public class CameraController : MonoBehaviour
     /// To reassign use non static public Transform CameraRotationTarget
     /// </summary>
     public static Transform RotationTarget;
-    
-    public Vector3 LookAtTargetPosition;
 
     private Vector3 _pointToSlerpTo;
     private float _angle;
     private Vector2 _rotationInput;
     private float _scrollingInput;
-
     private bool _scrollZoomActivation;
 
     private float _minElevationOrigin;
     private float _maxElevationOrigin;
     public float MaxElevation = 8f;
     public float MinElevation = -0.5f;
-
     private float _elevationRange = 2f;
 
     private void Awake()
@@ -72,11 +68,12 @@ public class CameraController : MonoBehaviour
         Distance = MaxDistance;
         _minElevationOrigin = MinElevation;
         _maxElevationOrigin = MaxElevation;  
-        LookAtTargetPosition = CameraRotationTarget.position;
+
     }
 
     private void Update()
     {
+        if (ConversationManager.hasConversationStarted) return;
         RotationTarget = CameraRotationTarget;
         
         if (Input.GetKeyDown(KeyCode.LeftAlt))
@@ -178,7 +175,7 @@ public class CameraController : MonoBehaviour
         _pointToSlerpTo = GetCirclePosition( _angle, Distance);
     }
 
-    private Vector3 GetCirclePosition(float angle, float radius)
+    public static Vector3 GetCirclePosition(float angle, float radius)
     {
         Vector3 circlePosition = Vector3.zero;
         angle *= Mathf.PI / 180f;

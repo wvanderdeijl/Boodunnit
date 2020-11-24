@@ -25,7 +25,7 @@ public class PoliceManBehaviour : BaseEntity
     
     private void Update()
     {
-        if (!IsPossessed && !ConversationManager.hasConversationStarted) MoveWithPathFinding();
+        if (!IsPossessed && !ConversationManager.HasConversationStarted) MoveWithPathFinding();
         CheckDonutsInSurrounding();
     }
 
@@ -60,7 +60,7 @@ public class PoliceManBehaviour : BaseEntity
 
     public override void MoveEntityInDirection(Vector3 direction)
     {
-        if (!ConversationManager.hasConversationStarted) base.MoveEntityInDirection(direction);
+        if (!ConversationManager.HasConversationStarted) base.MoveEntityInDirection(direction);
     }
 
     public override void UseFirstAbility()

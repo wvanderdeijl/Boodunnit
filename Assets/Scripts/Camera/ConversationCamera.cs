@@ -21,9 +21,9 @@ public class ConversationCamera : MonoBehaviour
 
     private void Update()
     {
-        if (ConversationManager.hasConversationStarted && !_isConversing) 
+        if (ConversationManager.HasConversationStarted && !_isConversing) 
             StartConversing(ConversationManager.ConversationTarget.position);
-        else if (_isConversing && !ConversationManager.hasConversationStarted) 
+        else if (_isConversing && !ConversationManager.HasConversationStarted) 
             EndConversing();
     }
 
@@ -45,7 +45,7 @@ public class ConversationCamera : MonoBehaviour
         transform.LookAt(conversationTarget);
         ConversationManager.ConversationTarget.LookAt(_cameraController.CameraRotationTarget);
         yield return null;
-        if (Vector3.Distance(transform.position, cameraPoint) > 1f && ConversationManager.hasConversationStarted) 
+        if (Vector3.Distance(transform.position, cameraPoint) > 1f && ConversationManager.HasConversationStarted) 
             StartCoroutine(CameraMover(cameraPoint, conversationTarget));
     }
 

@@ -55,7 +55,7 @@ public class PlayerBehaviour : BaseMovement
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.hasConversationStarted)
+            if (!ConversationManager.HasConversationStarted)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
@@ -78,7 +78,7 @@ public class PlayerBehaviour : BaseMovement
                                 Input.GetAxisRaw("Horizontal") * _cameraTransform.right;
         moveDirection.y = 0;
 
-        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.hasConversationStarted)
+        if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {
             MoveEntityInDirection(moveDirection);   
         } 

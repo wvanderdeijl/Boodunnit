@@ -73,7 +73,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (ConversationManager.hasConversationStarted) return;
+        if (ConversationManager.HasConversationStarted) return;
         RotationTarget = CameraRotationTarget;
         
         if (Input.GetKeyDown(KeyCode.LeftAlt))

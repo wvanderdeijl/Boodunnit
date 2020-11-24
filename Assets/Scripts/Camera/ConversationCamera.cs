@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ConversationCamera : MonoBehaviour
 {
-    public bool IsConversing;
+    public float ConversationRadius = 7f;
+    private bool _isConversing;
     private CameraController _cameraController;
     private float _angle;
     private float _upperAngle;
     private float _lowerAngle;
-    public float ConversationRadius = 7f;
 
     private Vector3 _conversationCenterPoint;
 
@@ -21,17 +21,17 @@ public class ConversationCamera : MonoBehaviour
 
     private void Update()
     {
-        if (ConversationManager.hasConversationStarted && !IsConversing) 
-            StartConversation(ConversationManager.ConversationTarget.position);
-        else if (IsConversing && !ConversationManager.hasConversationStarted) 
-            EndConversation();
+        if (ConversationManager.hasConversationStarted && !_isConversing) 
+            StartConversing(ConversationManager.ConversationTarget.position);
+        else if (_isConversing && !ConversationManager.hasConversationStarted) 
+            EndConversing();
     }
 
-    public void StartConversation( Vector3 conversationTarget)
+    public void StartConversing( Vector3 conversationTarget)
     {
-        IsConversing = true;
+        _isConversing = true;
         DeterminePointInformation(conversationTarget);
-        Vector3 cameraPoint = Attempt(0);
+        Vector3 cameraPoint = AttemptPerpendicularPoints(0);
 
         StartCoroutine(CameraMover(cameraPoint, conversationTarget));
     }
@@ -39,6 +39,8 @@ public class ConversationCamera : MonoBehaviour
     IEnumerator CameraMover(Vector3 cameraPoint, Vector3 conversationTarget)
     {
         transform.position = Vector3.Slerp(transform.position, cameraPoint, Time.deltaTime);
+        
+        //This makes both the conversation target and the player look at one another
         _cameraController.CameraRotationTarget.transform.LookAt(conversationTarget);
         transform.LookAt(conversationTarget);
         ConversationManager.ConversationTarget.LookAt(_cameraController.CameraRotationTarget);
@@ -62,7 +64,7 @@ public class ConversationCamera : MonoBehaviour
             Vector3.Lerp(conversationTarget, playerPos, 0.5f);
         
         Vector3 delta = _conversationCenterPoint - playerPos;
-        _angle = (Mathf.Atan2(delta.x, delta.z) * 180 / Mathf.PI);
+        _angle = Mathf.Atan2(delta.x, delta.z) * 180f / Mathf.PI;
         
         _lowerAngle = _angle - 90;
         _upperAngle = _angle + 90;
@@ -70,42 +72,41 @@ public class ConversationCamera : MonoBehaviour
         if (_upperAngle > 360) _upperAngle -= 360;
     }
     
-    public void EndConversation()
+    public void EndConversing()
     {
-        IsConversing = false;
+        _isConversing = false;
     }
 
-    private Vector3 Attempt(float offset)
+    private Vector3 AttemptPerpendicularPoints(float angleOffset)
     {
-        Vector3 leftAttempt = TryPoint(offset, _lowerAngle);
-        Vector3 rightattempt = TryPoint(offset, _upperAngle);
+        Vector3 leftAttempt = TryPoint(angleOffset, _lowerAngle);
+        Vector3 rightattempt = TryPoint(angleOffset, _upperAngle);
 
-        if (offset > 90)
+        if (angleOffset > 90)
         {
-            print("obstructed");
             return _cameraController.CameraRotationTarget.position;
         }
         if (leftAttempt != Vector3.zero)
         {
-            print("left, offset: " + offset);
             return  leftAttempt;
         }
         if (rightattempt != Vector3.zero)
         {
-            print("right, offset: " +offset);
             return rightattempt;
         }
-        return Attempt(offset + 1);
+        return AttemptPerpendicularPoints(angleOffset + 1);
     }
 
     private Vector3 TryPoint(float offset, float originalAngle)
     {
         float currentUpperAngle = CheckAngleOverflow(originalAngle + offset);
         float currentLowerAngle = CheckAngleOverflow(originalAngle - offset);
-
+        
+        //Check Left
         Vector3 CameraPoint = CameraController.GetCirclePosition(currentUpperAngle, ConversationRadius);
         if (CheckCameraObstruction(_conversationCenterPoint + CameraPoint, _conversationCenterPoint))
         {
+            //Check Right
             CameraPoint = CameraController.GetCirclePosition(currentLowerAngle, ConversationRadius);
             if (CheckCameraObstruction(_conversationCenterPoint + CameraPoint, _conversationCenterPoint)) 
                 return Vector3.zero;  

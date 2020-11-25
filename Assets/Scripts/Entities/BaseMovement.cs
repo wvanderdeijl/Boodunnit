@@ -13,6 +13,8 @@ public abstract class BaseMovement : MonoBehaviour
     [HideInInspector]
     public bool IsGrounded;
 
+    public bool CanJump;
+
     private float _rotationSpeed = 10f;
     private bool _hasCollidedWithWall;
     private ContactPoint[] _contacts;
@@ -84,9 +86,11 @@ public abstract class BaseMovement : MonoBehaviour
 
     public void Jump()
     {
-        //ToDo: Only animals can jump
-        IsGrounded = false;
-        Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+        if (CanJump && IsGrounded)
+        {
+            IsGrounded = false;
+            Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);   
+        }
     }
 
     private void OnCollisionStay(Collision other)

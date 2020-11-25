@@ -23,10 +23,9 @@ public class PoliceManBehaviour : BaseEntity
         };
     }
     
-    private void Update()
+    private void LateUpdate()
     {
-        if (!IsPossessed && !ConversationManager.HasConversationStarted) MoveWithPathFinding();
-        CheckDonutsInSurrounding();
+        if (!IsPossessed && !ConversationManager.HasConversationStarted) CheckDonutsInSurrounding();
     }
 
     private void CheckDonutsInSurrounding()

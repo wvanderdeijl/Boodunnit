@@ -21,11 +21,6 @@ public class CatBehaviour : BaseEntity
             [typeof(ILevitateable)] = 5f
         };
     }
-
-    private void Update()
-    {
-        CheckSurroundings();
-    }
     
     public override void UseFirstAbility()
     {

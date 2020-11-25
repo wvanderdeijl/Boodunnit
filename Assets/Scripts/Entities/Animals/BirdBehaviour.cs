@@ -12,6 +12,9 @@ public class BirdBehaviour : BaseEntity
     
     private void Awake()
     {
+        InitBaseEntity();
+        _glideBehaviour = GetComponent<GlideBehaviour>();
+        
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;
@@ -22,11 +25,6 @@ public class BirdBehaviour : BaseEntity
             [typeof(VillagerBehaviour)] = 3f,
             [typeof(ILevitateable)] = 3f
         };
-    }
-
-    private void Update()
-    {
-        if (!IsPossessed)  MoveWithPathFinding();
     }
 
     public override void MoveEntityInDirection(Vector3 direction)

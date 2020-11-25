@@ -39,15 +39,20 @@ namespace Entities
         protected void InitBaseEntity()
         {
             _fearMeter = GetComponentInChildren<Image>();
-
+            
             InitEntityMovement();
-            InitBaseMovement();
+
+            Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         private void Update()
         {
             Rigidbody.isKinematic = !IsPossessed;
-            if (!IsPossessed) MoveWithPathFinding();
+            if (!IsPossessed)
+            {
+                MoveWithPathFinding();
+                CheckSurroundings();
+            }
         }
 
         public abstract void UseFirstAbility();

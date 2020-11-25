@@ -22,11 +22,6 @@ public class VillagerBehaviour : BaseEntity
         };
     }
 
-    void Update()
-    {
-        CheckSurroundings();
-    }
-
     public override void UseFirstAbility()
     {
         //TODO Villager first ability.

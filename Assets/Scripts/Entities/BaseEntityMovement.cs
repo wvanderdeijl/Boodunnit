@@ -25,6 +25,7 @@ public abstract class BaseEntityMovement : BaseMovement
     
     protected void InitEntityMovement()
     {
+        InitBaseMovement();
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
         if (NavMeshAgent)
@@ -125,6 +126,6 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void ResetDestination()
     {
-        NavMeshAgent.destination = _patrolDestination;
+        _hasPositionInArea = false;
     }
 }

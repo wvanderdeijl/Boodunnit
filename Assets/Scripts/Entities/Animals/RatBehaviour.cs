@@ -10,6 +10,7 @@ public class RatBehaviour : BaseEntity
 
     private void Awake()
     {
+        InitBaseEntity();
         _climbBehaviour = GetComponent<ClimbBehaviour>();
 
         FearThreshold = 20;
@@ -30,7 +31,7 @@ public class RatBehaviour : BaseEntity
         _climbBehaviour.Speed = 5f;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (_climbBehaviour.StaminaBarCanvas) _climbBehaviour.StaminaBarCanvas.enabled = IsPossessed;
     }

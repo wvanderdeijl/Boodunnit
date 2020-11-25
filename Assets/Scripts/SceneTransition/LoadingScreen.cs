@@ -15,7 +15,7 @@ public class LoadingScreen : MonoBehaviour
     private Sprite _loadingBackgroundSprite;
     private string _sceneName;
 
-    [SerializeField] private Sprite _backgroundSpriteMockup; //Mockup
+    [SerializeField] private Sprite _backgroundSpriteMockup;
 
     private void Awake()
     {
@@ -29,25 +29,21 @@ public class LoadingScreen : MonoBehaviour
 
     private void InitializeLoadingScene()
     {
-        // todo: Get background sprite from list of sprites for chosen scene
         _sceneName = SaveHandler.Instance.LoadCurrentScene();
-        SetSceneToLoadAsynchronously(_sceneName); // mockup
-        SetLoadingBackgroundSprite(_backgroundSpriteMockup); // mockup
-        
-        ShowRandomHintInLoadScreen();
-        ShowBackgroundImage();
+        _loadingBackgroundSprite = _backgroundSpriteMockup;
+        HintText.text = GetRandomHintFromArray();
+        LoadingBackground.sprite = _loadingBackgroundSprite;
     }
 
     private IEnumerator LoadLevelAsynchronously(string sceneName)
     {
         AsyncOperation asyncLevelLoad = SceneManager.LoadSceneAsync(sceneName);
-
         asyncLevelLoad.allowSceneActivation = false;
 
         while (!asyncLevelLoad.isDone)
         {
             float progress = Mathf.Clamp01(asyncLevelLoad.progress / 0.9f);
-            UpdateLoadingBarValue(progress);
+            LoadingBar.value = progress;
             
             if (asyncLevelLoad.progress >= 0.9f)
             {
@@ -57,31 +53,6 @@ public class LoadingScreen : MonoBehaviour
 
             yield return null;
         }
-    }
-
-    private void UpdateLoadingBarValue(float progress)
-    {
-        LoadingBar.value = progress;
-    }
-
-    private void ShowRandomHintInLoadScreen()
-    {
-        HintText.text = GetRandomHintFromArray();
-    }
-
-    private void ShowBackgroundImage()
-    {
-        LoadingBackground.sprite = _loadingBackgroundSprite;
-    }
-    
-    public void SetSceneToLoadAsynchronously(string sceneName)
-    {
-        _sceneName = sceneName;
-    }
-
-    public void SetLoadingBackgroundSprite(Sprite backgroundSprite)
-    {
-        _loadingBackgroundSprite = backgroundSprite;
     }
     
     private string GetRandomHintFromArray()

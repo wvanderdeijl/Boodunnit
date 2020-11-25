@@ -19,7 +19,10 @@ public class SceneTransitionHandler
 
     public void GoToScene(string sceneNameToLoad)
     {
-        SaveHandler.Instance.SaveCurrentScene(sceneNameToLoad);
-        SceneManager.LoadScene("LoadingScene");
+        if (!sceneNameToLoad.Trim().Equals(""))
+        {
+            SaveHandler.Instance.SaveCurrentScene(sceneNameToLoad);
+            SceneManager.LoadScene("LoadingScene"); 
+        }
     }
 }

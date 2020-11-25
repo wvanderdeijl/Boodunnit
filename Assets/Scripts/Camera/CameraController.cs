@@ -60,9 +60,6 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        //ToDo: This is hacky, this should be done by the GameManager
-        Cursor.lockState = CursorLockMode.Locked;
-
         _pointToSlerpTo = transform.position;
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
         Distance = MaxDistance;

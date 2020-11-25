@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class PossessionBehaviour : MonoBehaviour
 {
     public bool IsPossessing;
-    public BaseEntity TargetBehaviour;
 
-    public Image CooldownImage;
+    [HideInInspector]
+    public BaseEntity TargetBehaviour;
 
     public static GameObject PossessionTarget;
     private CameraController _cameraController;
@@ -208,7 +208,6 @@ public class PossessionBehaviour : MonoBehaviour
         {
             yield return null;
             currentTime += Time.deltaTime;
-            CooldownImage.fillAmount = currentTime / Cooldown;
         }
 
         IsOnCooldown = false;

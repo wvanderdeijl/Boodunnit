@@ -10,8 +10,6 @@ public class DashBehaviour : MonoBehaviour
     public bool IsDashing = false;
     public bool DashOnCooldown = false;
 
-    public Image DashCooldownImage;
-
     public float _dashCooldown = 2f;
     public float _dashDuration = 0.4f;
     public float _dashDistance = 4f;
@@ -101,7 +99,6 @@ public class DashBehaviour : MonoBehaviour
         {
             yield return null;
             currentTime += Time.deltaTime;
-            DashCooldownImage.fillAmount = currentTime / interval;
         }
         DashOnCooldown = false;
     }

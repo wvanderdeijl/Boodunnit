@@ -11931,6 +11931,7 @@ GameObject:
   - component: {fileID: 1158294917}
   - component: {fileID: 1158294916}
   - component: {fileID: 1158294919}
+  - component: {fileID: 1158294920}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12019,9 +12020,21 @@ MonoBehaviour:
   MinDistance: 1.255763
   RotationSpeed: 2
   CameraRotationTarget: {fileID: 700081655}
-  LookAtTargetPosition: {x: 0, y: 0, z: 0}
   MaxElevation: 8
   MinElevation: 0
+--- !u!114 &1158294920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158294915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dd2a2b9e7582543830edcb985ebf75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConversationRadius: 7
 --- !u!1001 &1170851583
 PrefabInstance:
   m_ObjectHideFlags: 0

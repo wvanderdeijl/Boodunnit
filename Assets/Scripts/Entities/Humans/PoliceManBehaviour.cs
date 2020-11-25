@@ -63,7 +63,7 @@ public class PoliceManBehaviour : BaseEntity
 
     public override void MoveEntityInDirection(Vector3 direction)
     {
-        if (!ConversationManager.hasConversationStarted) base.MoveEntityInDirection(direction);
+        if (!ConversationManager.HasConversationStarted) base.MoveEntityInDirection(direction);
     }
 
     public override void UseFirstAbility()

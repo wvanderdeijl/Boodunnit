@@ -177,7 +177,7 @@ public class Cutscene : MonoBehaviour
 
         while (currentAction.IsExecuting)
         {
-            currentAction.IsExecuting = ConversationManager.hasConversationStarted;
+            currentAction.IsExecuting = ConversationManager.HasConversationStarted;
             yield return null;
         }
     }

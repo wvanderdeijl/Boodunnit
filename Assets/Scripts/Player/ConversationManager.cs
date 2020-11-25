@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class ConversationManager : MonoBehaviour
 {
-    public static bool hasConversationStarted;
+    public static bool HasConversationStarted;
+    public static Transform ConversationTarget;
 
     private BaseEntity _currentPossedEntity;
     private Animator _animator;
@@ -76,9 +77,12 @@ public class ConversationManager : MonoBehaviour
                 if ((!isPossesing && entityToTalkTo.CanTalkToBoolia) ||
                     (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
-                    hasConversationStarted = true;
+                    HasConversationStarted = true;
+                    
+                    ConversationTarget = entityCollider.gameObject.transform;
                     _entityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
                     _animator.SetBool("IsOpen", true);
+                    
                     GameManager.CursorIsLocked = false;
 
                     ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
@@ -117,7 +121,8 @@ public class ConversationManager : MonoBehaviour
 
     public void CloseConversation()
     {
-        hasConversationStarted = false;
+        HasConversationStarted = false;
+        ConversationTarget = null;
         _animator.SetBool("IsOpen", false);
         GameManager.CursorIsLocked = true;
     }

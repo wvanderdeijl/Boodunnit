@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b60abfbbe2cd8d48a94075b6b7e6b5a, type: 2}
+  - {fileID: 8655272418810597354, guid: bf47d9769add51a408aba70f4dafe337, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   StaminaConsumptionPerSecond: 5
   StaminaReplenishRatePerSecond: 20
   IsClimbing: 0
-  _rigidbody: {fileID: 1097548279662457384}
+  StaminaBarCanvas: {fileID: 0}
   _rotationSpeed: 100
   _staminaRadialCircle: {fileID: 0}
 --- !u!114 &1097548279662457385
@@ -133,24 +133,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed47abad56540ed4bb3b57611391ed9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 1371556504}
   Rigidbody: {fileID: 1097548279662457384}
-  MinimumFollowRange: 1
-  MaximumFollowRange: 20
+  JumpForce: 5
   Speed: 10
+  Collider: {fileID: 6267253183563679202}
   IsGrounded: 1
+  TargetToFollow: {fileID: 0}
+  NavMeshAgent: {fileID: 1371556504}
   IsOnCountdown: 0
   _pathFindingState: 1
-  JumpForce: 5
-  Collider: {fileID: 6267253183563679202}
-  RatCanTalkToBoolia: 0
-  RatName: 0
-  RatDialogue: {fileID: 0}
-  RatQuestion: {fileID: 0}
-  RatRelationships: 
-  DefaultAnswersList: []
-  _climbBehaviour: {fileID: 1097548279662457390}
+  MinimumFollowRange: 1
+  MaximumFollowRange: 20
+  Dialogue: {fileID: 0}
+  Question: {fileID: 0}
+  Relationships: 
+  DefaultAnswers: []
+  CharacterName: 0
+  CanTalkToBoolia: 0
+  FearThreshold: 0
+  FearDamage: 0
+  FaintDuration: 0
+  EmotionalState: 0
+  HasFearCooldown: 0
+  FearRadius: 0
+  FearAngle: 0
+  _ragdollController: {fileID: 0}
 --- !u!136 &6267253183563679202
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -8,7 +8,9 @@ public class PoliceManBehaviour : BaseEntity
 {
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
-
+    
+    private Donut _targetDonut;
+    
     private void Awake()
     {
         InitBaseEntity();
@@ -26,6 +28,7 @@ public class PoliceManBehaviour : BaseEntity
     private void LateUpdate()
     {
         if (!IsPossessed && !ConversationManager.HasConversationStarted) CheckDonutsInSurrounding();
+        if(TargetToFollow) CheckDistanceToDonut();
     }
 
     private void CheckDonutsInSurrounding()
@@ -46,11 +49,12 @@ public class PoliceManBehaviour : BaseEntity
             {
                 Donut isDonut = hit.collider.gameObject.GetComponent<Donut>();
                 
-                if (isDonut)
+                if (isDonut && !isDonut.IsTargeted)
                 {
                     if (donutAngle > -(_donutDetectionAngle / 2) && donutAngle < _donutDetectionAngle / 2)
                     {
-                        Debug.Log("I SEE: " + hit.transform.gameObject.name);
+                        FollowDonut(isDonut);
+                        return;
                     }
                 }
             }
@@ -65,5 +69,22 @@ public class PoliceManBehaviour : BaseEntity
     public override void UseFirstAbility()
     {
         //TODO implement PoliceManBehaviour.
+    }
+
+    private void FollowDonut(Donut donut)
+    {
+        _targetDonut = donut;
+        TargetToFollow = donut.gameObject;
+        ChangePathFindingState(PathFindingState.Following);
+    }
+
+    public void CheckDistanceToDonut()
+    {
+        float distance = Vector3.Distance(transform.position, TargetToFollow.transform.position);
+        if (distance <= 1f)
+        {
+            Vector3 mouthPosition = transform.position + transform.forward + transform.up;
+            _targetDonut.MoveToPosition(gameObject, mouthPosition);
+        }
     }
 }

@@ -510,23 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00129e178a23e7e45b40dd46b7a3f668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 0}
-  Rigidbody: {fileID: 0}
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  Speed: 0
-  IsGrounded: 1
-  IsOnCountdown: 0
-  _pathFindingState: 0
-  JumpForce: 10
-  Collider: {fileID: 0}
-  PoliceCanTalkToBoolia: 1
-  PoliceName: 7
-  PoliceDialogue: {fileID: 11400000, guid: 40b07697c6a9ddb47a94df3870ac8906, type: 2}
-  PoliceQuestion: {fileID: 0}
-  PoliceRelationships: 
-  DefaultAnswersList: []
 --- !u!65 &276196953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -902,12 +885,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionsInCutscene:
-  - ActionType: 2
-    ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: 0, y: 1.96, z: -9}
+  - ActionType: 0
+    ObjectForCutscene: {fileID: 0}
+    EndPosition: {x: 0, y: 0, z: 0}
     EndRotation: {x: 0, y: 0, z: 0}
-    NewScaleForObject: {x: 3, y: 3, z: 3}
-    TransitionSpeed: 5
+    EndScale: {x: 0, y: 0, z: 0}
+    TransitionSpeed: 0
     IsInstant: 0
     IsExecuting: 0
     TimeBeforeNextAction: 0
@@ -915,31 +898,6 @@ MonoBehaviour:
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
-  - ActionType: 5
-    ObjectForCutscene: {fileID: 1865034209}
-    EndPosition: {x: 0, y: 1, z: 0}
-    EndRotation: {x: 0, y: 0, z: 0}
-    NewScaleForObject: {x: 3, y: 3, z: 3}
-    TransitionSpeed: 5
-    IsInstant: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
-    Popup: {fileID: 0}
-    MethodToCallFromScript:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 332936432}
-          m_TargetAssemblyTypeName: test, Assembly-CSharp
-          m_MethodName: printHello
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1865034209
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1865034209}
+  _mainCamera: {fileID: 0}
   _overlapSphereRadiusInUnits: 5
   _overlapSphereAngleInDegrees: 360
   _velocitySpeedPercentage: 25
@@ -1042,6 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPossessing: 0
+  TargetBehaviour: {fileID: 0}
   CooldownImage: {fileID: 0}
   UnpossessRadius: 3
   UnPossessRetriesOnYAxis: 15
@@ -1059,17 +1019,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61aa2981fb2c0ce43872593267e80272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  NavMeshAgent: {fileID: 0}
   Rigidbody: {fileID: 1865034216}
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  Speed: 12
-  IsGrounded: 1
-  IsOnCountdown: 0
-  _pathFindingState: 0
   JumpForce: 10
+  Speed: 12
   Collider: {fileID: 0}
+  IsGrounded: 1
   PossessionBehaviour: {fileID: 1865034214}
   DashBehaviour: {fileID: 1865034212}
   HighlightBehaviour: {fileID: 1865034213}

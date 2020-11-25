@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -30,10 +27,11 @@ public class PauseMenu : MonoBehaviour
             CameraController.RotationSpeed = playerSettings.CameraSensitivity;
         }
     }
-
+    
     public void OnQuitToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        TogglePauseGame();
+        SceneTransitionHandler.Instance.GoToScene("MainMenu");
     }
 
     private void ResetPanels()

@@ -20,11 +20,6 @@ public class PlayerBehaviour : BaseMovement
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SaveHandler.Instance.DeleteSaveGame();
-        }
-
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour

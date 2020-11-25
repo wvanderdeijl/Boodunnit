@@ -50,7 +50,6 @@ public class LevitateBehaviour : MonoBehaviour
     public void MoveLevitateableObject()
     {
         if (!_selectedRigidbody) return;
-
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
 
         if (!levitateable.IsInsideSphere ||

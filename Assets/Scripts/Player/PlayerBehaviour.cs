@@ -42,20 +42,21 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                PossessionBehaviour.PossessTarget();
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted)
+                    PossessionBehaviour.PossessTarget();
             }
         }
 
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted)
+            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
@@ -70,7 +71,10 @@ public class PlayerBehaviour : BaseMovement
             }
         }
 
-        HandleLevitationInput();
+        if(!PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+        {
+            HandleLevitationInput();
+        }
         
         //Move player with BaseMovement.
         Vector2 movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -133,8 +137,9 @@ public class PlayerBehaviour : BaseMovement
     }
     private void HandleLevitationInput()
     {
+
         LevitateBehaviour.FindObjectInFrontOfPLayer();//ToDo: This throws errors when a gameobject is destroy while in range
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             LevitateBehaviour.LevitationStateHandler();

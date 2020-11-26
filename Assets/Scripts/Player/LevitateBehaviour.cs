@@ -9,13 +9,13 @@ public class LevitateBehaviour : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
 
     [Header("OverlapSphere")]
-    [SerializeField][Range(0, 30)] private float _overlapSphereRadiusInUnits = 5f;
+    [SerializeField] private float _overlapSphereRadiusInUnits = 5f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
     
     [Header("Speeds")]
-    [SerializeField][Range(0, 100)] private float _velocitySpeedPercentage = 25f;
-    [SerializeField][Range(0, 500)] private float _pushPullSpeed = 300f;
-    [SerializeField][Range(0, 50)] private float _rotationSpeed = 5f;
+    [SerializeField]private float _velocitySpeedPercentage = 25f;
+    [SerializeField] private float _pushPullSpeed = 300f;
+    [SerializeField] private float _rotationSpeed = 5f;
     
     [Header("Durations")]
     [SerializeField] private float _frozenDurationInSeconds = 5f;
@@ -46,7 +46,6 @@ public class LevitateBehaviour : MonoBehaviour
         }
     }
     
-
     public void MoveLevitateableObject()
     {
         if (!_selectedRigidbody) return;

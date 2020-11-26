@@ -9,8 +9,9 @@ public abstract class BaseMovement : MonoBehaviour
     public float JumpForce = 10.0f;
     public float Speed;
     public Collider Collider;
-    
-    public bool IsGrounded;
+
+    [HideInInspector]
+    public bool IsGrounded = false;
 
     public bool CanJump;
 

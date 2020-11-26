@@ -3211,6 +3211,10 @@ MonoBehaviour:
     ScreenWidth: 1600
   - ScreenHeight: 1080
     ScreenWidth: 1920
+  - ScreenHeight: 1440
+    ScreenWidth: 2560
+  - ScreenHeight: 2160
+    ScreenWidth: 3840
 --- !u!1 &6899861822557173541
 GameObject:
   m_ObjectHideFlags: 0

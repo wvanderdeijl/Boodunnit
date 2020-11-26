@@ -40,24 +40,25 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void FreezeOrReleaseLevitateableObject(LevitationState levitationState)
     {
-        //TODO: fix duplicate code
-        
         switch (levitationState)
         {
             case LevitationState.NotLevitating:
-                _rigidbody.useGravity = false;
-                _rigidbody.isKinematic = true;
-                CanBeLevitated = false;
+                SetRigidbodyAndLevitationBooleans(false, true, false);
                 break;
             
             case LevitationState.Frozen:
-                _rigidbody.useGravity = true;
-                _rigidbody.isKinematic = false;
-                CanBeLevitated = true;
+                SetRigidbodyAndLevitationBooleans(true, false, true);
                 break;
         }
         
         State = levitationState;
+    }
+
+    private void SetRigidbodyAndLevitationBooleans(bool useGravity, bool isKinematic, bool canBeLevited)
+    {
+        _rigidbody.useGravity = useGravity;
+        _rigidbody.isKinematic = isKinematic;
+        CanBeLevitated = canBeLevited;
     }
 
     public IEnumerator LevitateForSeconds(float seconds)

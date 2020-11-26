@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Enums;
+﻿using System;
+using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
 
@@ -25,7 +26,7 @@ public class LevitateBehaviour : MonoBehaviour
     
     public static bool IsRotating { get; set; }
     public bool IsLevitating { get; set; }
-    public Collider[] levitateables { get; set; }
+    public Collider[] CurrentLevitateableObjects { get; set; }
 
     private Rigidbody _selectedRigidbody;
     private float _selectionDistance;
@@ -45,7 +46,7 @@ public class LevitateBehaviour : MonoBehaviour
             RemoveRigidbodyAndStartFreeze();
         }
     }
-    
+
     public void MoveLevitateableObject()
     {
         if (!_selectedRigidbody) return;
@@ -192,10 +193,10 @@ public class LevitateBehaviour : MonoBehaviour
             StartCoroutine(levitateable.LevitateForSeconds(_frozenDurationInSeconds));
         }
     }
-    
+
     public void FindLevitateableObjectsInFrontOfPlayer()
     {
-        levitateables = Physics
+        CurrentLevitateableObjects = Physics
             .OverlapSphere(transform.position, _overlapSphereRadiusInUnits)
             .Where(c => { return IsObjectInRange(c) && IsObjectLevitateble(c) && IsObjectInAngle(c); })
             .ToArray();
@@ -221,9 +222,9 @@ public class LevitateBehaviour : MonoBehaviour
 
     private bool IsObjectInLevitateablesArray(Collider collider)
     {
-        if (levitateables.Length > 0)
+        if (CurrentLevitateableObjects.Length > 0)
         {
-            return levitateables.Contains(collider);
+            return CurrentLevitateableObjects.Contains(collider);
         }
 
         return false;

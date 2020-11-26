@@ -128,7 +128,7 @@ public class PlayerBehaviour : BaseMovement
     }
     private void HandleLevitationInput()
     {
-        LevitateBehaviour.FindObjectInFrontOfPLayer();//ToDo: This throws errors when a gameobject is destroy while in range
+        LevitateBehaviour.FindObjectInFrontOfPLayer();
         
         if (Input.GetMouseButtonDown(0))
         {

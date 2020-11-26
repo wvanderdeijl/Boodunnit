@@ -1,5 +1,6 @@
 ﻿using DefaultNamespace.Enums;
 using UnityEngine;
+using System.Linq;
 
 public class LevitateBehaviour : MonoBehaviour
 {
@@ -139,21 +140,17 @@ public class LevitateBehaviour : MonoBehaviour
     {
         ILevitateable levitateable =
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
-
-        SnapLocation validSnapLocation = 
-            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>()
-                .FindClosestValidSnaplocation() : null;
-        
-        SnappableLevitationObject snappableLevitationObject = 
-            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>() : null;
         
         if (levitateable != null)
         {
+            SnappableLevitationObject snappableLevitationObject = 
+                _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<SnappableLevitationObject>() : null;
 
-            if (validSnapLocation != null)
+            if (snappableLevitationObject)
             {
+                SnapLocation validSnapLocation = snappableLevitationObject.FindClosestValidSnaplocation();
 
-                if (snappableLevitationObject)
+                if (validSnapLocation)
                 {
                     snappableLevitationObject.SnapThisObject();
                     _selectedRigidbody = null;
@@ -226,7 +223,7 @@ public class LevitateBehaviour : MonoBehaviour
                 }
             }
         }
-
+    
         foreach (var hitCollider in _hitColliders)
         {
             ILevitateable levitateable = hitCollider.gameObject.GetComponent<ILevitateable>();        
@@ -235,11 +232,11 @@ public class LevitateBehaviour : MonoBehaviour
                 ToggleIsInsideSphereBool(hitCollider, true);
             }
         }
-
+    
         _cachedHitColliders = _hitColliders;
         _colliderCount++;
     }
-
+    
     private void ToggleIsInsideSphereBool(Collider hitCollider, bool isInsideSphere)
     {
         Vector3 targetDirection = hitCollider.transform.position - transform.position;
@@ -263,4 +260,41 @@ public class LevitateBehaviour : MonoBehaviour
             StartCoroutine(levitateable.LevitateForSeconds(_frozenDurationInSeconds));
         }
     }
+    
+    
+    
+    
+    
+    // // GETTING ALL LEVITATEABLE OBJECTS IN ARRAY
+    // public void FindLevitateableObjectsInFrontOfPlayer()
+    // {
+    //     Collider[] colliders = Physics
+    //         .OverlapSphere(transform.position, _overlapSphereRadiusInUnits)
+    //         .Where(c => { return IsObjectInRange(c) && IsObjectLevitateble(c) && IsObjectInAngle(c); })
+    //         .ToArray();
+    //
+    //     foreach (Collider collider in colliders)
+    //     {
+    //         ILevitateable levitateable = collider.gameObject.GetComponent<ILevitateable>();
+    //         levitateable
+    //     }
+    // }
+    //
+    // private bool IsObjectInRange(Collider collider)
+    // {
+    //     return Vector3.Distance(transform.position, collider.transform.position) <= _overlapSphereRadiusInUnits;
+    // }
+    //
+    // private bool IsObjectLevitateble(Collider collider)
+    // {
+    //     ILevitateable levitateableObject = collider.GetComponent<ILevitateable>();
+    //     return levitateableObject != null;
+    // }
+    //
+    // private bool IsObjectInAngle(Collider collider)
+    // {
+    //     Vector3 colliderDirection = collider.transform.position - transform.position;
+    //     float angle = Vector3.Angle(colliderDirection, _player.transform.forward);
+    //     return angle > -(_overlapSphereAngleInDegrees / 2) && angle < _overlapSphereAngleInDegrees / 2;
+    // }
 }

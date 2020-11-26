@@ -1528,6 +1528,7 @@ MonoBehaviour:
   Collider: {fileID: 71585660}
   IsGrounded: 1
   CanJump: 1
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 71585664}
   IsOnCountdown: 0
@@ -2352,6 +2353,7 @@ MonoBehaviour:
   Collider: {fileID: 132955850}
   IsGrounded: 1
   CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
@@ -9482,6 +9484,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1278859775}
     m_Modifications:
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: NextBtn
+      value: 
+      objectReference: {fileID: 901794484}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: CloseButton
+      value: 
+      objectReference: {fileID: 901794485}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: PreviousBtn
+      value: 
+      objectReference: {fileID: 901794483}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: Sprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: Sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: ace5ebfa21eeaad41a061fa9f19cc1d9, type: 3}
     - target: {fileID: 6005114893056738119, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -9596,6 +9618,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154470a9805e1604786df94f782ebe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &901794483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 511372862, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+  m_PrefabInstance: {fileID: 901794480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &901794484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 344828990, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+  m_PrefabInstance: {fileID: 901794480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &901794485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6005114892799945958, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+  m_PrefabInstance: {fileID: 901794480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &906427392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13666,6 +13703,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1278859775}
     m_Modifications:
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: NextBtn
+      value: 
+      objectReference: {fileID: 1323824403}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: CloseButton
+      value: 
+      objectReference: {fileID: 1323824404}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: PreviousBtn
+      value: 
+      objectReference: {fileID: 1323824402}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: Sprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005114893056738116, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+      propertyPath: Sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 52440d72b20d9044bb78d5b3d540d754, type: 3}
     - target: {fileID: 6005114893056738119, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -13764,6 +13821,21 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 52440d72b20d9044bb78d5b3d540d754, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+--- !u!1 &1323824402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 511372862, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+  m_PrefabInstance: {fileID: 1323824401}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1323824403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 344828990, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+  m_PrefabInstance: {fileID: 1323824401}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1323824404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6005114892799945958, guid: 08ce3e1a4e470df4cb80fa05d82a2d89, type: 3}
+  m_PrefabInstance: {fileID: 1323824401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1334640744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17346,6 +17418,7 @@ MonoBehaviour:
   Collider: {fileID: 132955850}
   IsGrounded: 1
   CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0
@@ -18864,6 +18937,7 @@ MonoBehaviour:
   Collider: {fileID: 132955850}
   IsGrounded: 1
   CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   IsOnCountdown: 0

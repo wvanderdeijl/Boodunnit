@@ -13,6 +13,15 @@ public class Popup : MonoBehaviour
 
     private int imageIndex = 0;
 
+    private void Awake()
+    {
+        if (Sprites != null && Sprites.Length == 1)
+        {
+            NextBtn.SetActive(false);
+            PreviousBtn.SetActive(false);
+        }
+    }
+
     public void OpenPopup()
     {
         if (!isPopUpOpen)

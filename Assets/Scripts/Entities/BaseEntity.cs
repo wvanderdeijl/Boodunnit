@@ -43,6 +43,15 @@ namespace Entities
             InitEntityMovement();
 
             Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
+            Outline outline = gameObject.AddComponent<Outline>();
+            if (outline)
+            {
+                outline.OutlineColor = Color.magenta;
+                outline.OutlineMode = Outline.Mode.OutlineVisible;
+                outline.OutlineWidth = 5.0f;
+                outline.enabled = false;
+            }
         }
 
         private void Update()

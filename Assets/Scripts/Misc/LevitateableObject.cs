@@ -20,6 +20,15 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         _spawnLocation = transform.position;
         _spawnRotation = transform.rotation;
         StartCoroutine(CheckForDistance());
+
+        Outline outline = gameObject.AddComponent<Outline>();
+        if (outline)
+        {
+            outline.OutlineColor = Color.white;
+            outline.OutlineMode = Outline.Mode.OutlineVisible;
+            outline.OutlineWidth = 5.0f;
+            outline.enabled = false;
+        }
     }
 
     public bool CanBeLevitated { get; set; }

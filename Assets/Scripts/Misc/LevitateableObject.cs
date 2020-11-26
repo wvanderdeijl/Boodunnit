@@ -14,7 +14,6 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private void Awake()
     {
         CanBeLevitated = true;
-        IsInsideSphere = false;
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
         
@@ -36,8 +35,6 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
             _canRespawnWhenOutOfRange = value;
         }
     }
-
-    public bool IsInsideSphere { get; set; }
 
     public LevitationState State { get; set; }
 

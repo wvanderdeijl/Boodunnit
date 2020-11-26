@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__M_Red
-    second: {fileID: 2100000, guid: 481f41d2a46c6794e880ee8968cbb2e3, type: 2}
+    second: {fileID: 2100000, guid: 86283012f03e3b246be1cac1e9bf19b3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

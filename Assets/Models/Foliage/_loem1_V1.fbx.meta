@@ -3,7 +3,22 @@ guid: 35d1e616ae7fa2e48b6df86667c98b93
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bloem_bloem
+    second: {fileID: 2100000, guid: ba2e6e10895ede149ba541a529c28c50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vines
+    second: {fileID: 2100000, guid: 3683a8076af5ea140888002f0be8ed25, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Vines
+    second: {fileID: 2800000, guid: 31c823f52e9a5f345a4b26dbd290901a, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

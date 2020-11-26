@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Beuk_Stam
-    second: {fileID: 2100000, guid: b4ad0e8440d56914291782cf42693d2e, type: 2}
+    second: {fileID: 2100000, guid: 8d127c50bcad9b94da14877090b00d40, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Struik_Blad
-    second: {fileID: 2100000, guid: 1ea1b7bd8870dae4e9ab53d296005948, type: 2}
+    second: {fileID: 2100000, guid: 059475d227a75d942b79f92a1f5f5147, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

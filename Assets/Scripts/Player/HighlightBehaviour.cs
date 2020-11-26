@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,15 +7,8 @@ public class HighlightBehaviour : MonoBehaviour
 {
     public float Radius;
 
-    private Shader _outlineShader, _standardShader;
     private List<Collider> _previousColliders = new List<Collider>();
     private IEnumerable<Collider> _removeShaderFromColliders;
-
-    private void Awake()
-    {
-        _outlineShader = Shader.Find("Outlined/Highlight");
-        _standardShader = Shader.Find("Standard");
-    }
 
     public void HighlightGameobjectsInRadius()
     {
@@ -25,11 +19,12 @@ public class HighlightBehaviour : MonoBehaviour
         {
             if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable) || hitCollider.TryGetComponent(out WorldSpaceClue worldSpaceClue))
             {
-                Renderer renderer = hitCollider.GetComponent<Renderer>();
 
-                if (renderer)
+                Outline outline = hitCollider.gameObject.GetComponent<Outline>();
+
+                if (outline)
                 {
-                    ChangeShader(renderer, _outlineShader);
+                    ToggleOutlineScriptOnGameobject(outline, true);
                 }
 
                 //Add colliders tot the previous list
@@ -50,23 +45,17 @@ public class HighlightBehaviour : MonoBehaviour
 
         foreach (Collider collider in _removeShaderFromColliders)
         {
-            Renderer renderer = collider.gameObject.GetComponent<Renderer>();
+            Outline outline = collider.gameObject.GetComponent<Outline>();
 
-            if (renderer)
+            if (outline)
             {
-                ChangeShader(renderer, _standardShader);
+                ToggleOutlineScriptOnGameobject(outline, false);
             }
         }
     }
 
-    private void ChangeShader(Renderer renderer, Shader shader)
+    private void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
     {
-        //If the player is possessing
-        if (PossessionBehaviour.PossessionTarget != null && shader == _outlineShader)
-        {
-            return;
-        }
-
-        renderer.material.shader = shader;
+        outline.enabled = active;
     }
 }

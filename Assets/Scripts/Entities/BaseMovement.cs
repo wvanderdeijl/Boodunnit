@@ -68,8 +68,8 @@ public abstract class BaseMovement : MonoBehaviour
             }
         }
         float yVelocity = 0;
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit castHit, 3.1f) && 
-            castHit.normal.y > 0.5 && IsGrounded && Rigidbody.velocity.y < 5)
+        if (IsGrounded && Physics.Raycast(transform.position, -transform.up, out RaycastHit castHit, 3.1f) && 
+            castHit.normal.y > 0.5  && Rigidbody.velocity.y < JumpForce - 0.3f)
         {
             bottomHitPoint = castHit.normal;
             yVelocity = (castHit.normal.y -1) * -1;

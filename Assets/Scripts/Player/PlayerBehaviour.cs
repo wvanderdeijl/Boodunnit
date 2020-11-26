@@ -16,15 +16,10 @@ public class PlayerBehaviour : BaseMovement
     private void Awake()
     {
         _cameraTransform = UnityEngine.Camera.main.transform;
-    }
+    } 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SaveHandler.Instance.DeleteSaveGame();
-        }
-
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
@@ -48,7 +43,7 @@ public class PlayerBehaviour : BaseMovement
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted)
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
                     PossessionBehaviour.PossessTarget();
             }
         }
@@ -56,7 +51,7 @@ public class PlayerBehaviour : BaseMovement
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing)
+            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
@@ -104,7 +99,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (PossessionBehaviour.IsPossessing)
             {
@@ -137,9 +132,8 @@ public class PlayerBehaviour : BaseMovement
     }
     private void HandleLevitationInput()
     {
-
-        LevitateBehaviour.FindObjectInFrontOfPLayer();//ToDo: This throws errors when a gameobject is destroy while in range
-
+        LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
+        
         if (Input.GetMouseButtonDown(0))
         {
             LevitateBehaviour.LevitationStateHandler();
@@ -156,7 +150,7 @@ public class PlayerBehaviour : BaseMovement
 
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            LevitateBehaviour.RemoveRigidbodyAndChangeState();
+            LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
         }
 
         LevitateBehaviour.PushOrPullLevitateableObject();

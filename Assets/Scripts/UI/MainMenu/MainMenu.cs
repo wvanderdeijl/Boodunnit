@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,8 +6,7 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         // Todo start a new game
-        //SceneTransitionHandler.Instance.GoToScene("DevSandbox");
-        SceneManager.LoadScene("DevSandbox");
+        SceneTransitionHandler.Instance.GoToScene("DevSandbox");
     }
 
     public void ContinueGame()

@@ -5,7 +5,6 @@ public interface ILevitateable
 {
     bool CanBeLevitated { get; set; }
     bool CanRespawnWhenOutOfRange { get; set; }
-    bool IsInsideSphere { get; set; }
     LevitationState State { get; set; }
     IEnumerator LevitateForSeconds(float seconds);
 }

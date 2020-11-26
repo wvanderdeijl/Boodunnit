@@ -9,7 +9,6 @@ public class GlideBehaviour : MonoBehaviour
 
     private void Update()
     {
-        _rigidbody.angularVelocity = Vector3.zero;
         if(IsGliding) ApplyLoweredGravity();
     }
 

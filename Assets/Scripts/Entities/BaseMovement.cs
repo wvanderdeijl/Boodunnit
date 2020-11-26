@@ -55,7 +55,6 @@ public abstract class BaseMovement : MonoBehaviour
                         float angle = contactAngle > 0 ? 90 : contactAngle < 0 ? -90 : 0;
                         direction = Quaternion.Euler(0, angle, 0) * hit.normal * (Math.Abs(contactAngle)/90);
                         direction.y = 0;
-                        print("apply new movement");
                     }    
                     else if (Math.Abs(contactAngle) > 90)
                     {

@@ -9,8 +9,7 @@ public abstract class BaseMovement : MonoBehaviour
     public float JumpForce = 10.0f;
     public float Speed;
     public Collider Collider;
-
-    [HideInInspector]
+    
     public bool IsGrounded;
 
     public bool CanJump;
@@ -18,6 +17,7 @@ public abstract class BaseMovement : MonoBehaviour
     private float _rotationSpeed = 10f;
     private bool _hasCollidedWithWall;
     private ContactPoint[] _contacts;
+    [SerializeField] private Vector3 bottomHitPoint = Vector3.zero; 
 
     protected void InitBaseMovement()
     {
@@ -37,12 +37,12 @@ public abstract class BaseMovement : MonoBehaviour
                     ~LayerMask.GetMask("Player", "PlayerDash", "Possessable"));
                   if (raycast)
                   {
-                    if (
-                        (hit.normal.y > 0.75 || hit.normal.y < 0) && 
-                        (contact.point.y < transform.position.y - Collider.bounds.size.y/2 
-                         || contact.point.y > transform.position.y + Collider.bounds.size.y/2)
-                        ) continue;
-                    
+                      if (
+                          (hit.normal.y > 0.75f || hit.normal.y < 0) &&
+                          (contact.point.y < transform.position.y - Collider.bounds.size.y / 2
+                           || contact.point.y > transform.position.y + Collider.bounds.size.y / 2)
+                      ) continue;
+                      
                     float contactAngle = Vector3.Angle(IgnoreY(direction), IgnoreY(contactDirection));
                     Vector3 contactCross = Vector3.Cross(IgnoreY(direction), IgnoreY(contactDirection));
 
@@ -54,7 +54,7 @@ public abstract class BaseMovement : MonoBehaviour
                         float angle = contactAngle > 0 ? 90 : contactAngle < 0 ? -90 : 0;
                         direction = Quaternion.Euler(0, angle, 0) * hit.normal * (Math.Abs(contactAngle)/90);
                         direction.y = 0;
-
+                        print("apply new movement");
                     }    
                     else if (Math.Abs(contactAngle) > 90)
                     {
@@ -67,11 +67,18 @@ public abstract class BaseMovement : MonoBehaviour
                 }
             }
         }
-        
-        float yVelocity = Rigidbody.velocity.y;
+        float yVelocity = 0;
+        if (IsGrounded && Physics.Raycast(transform.position, -transform.up, out RaycastHit castHit, 3.1f) && 
+            castHit.normal.y > 0.5  && Rigidbody.velocity.y < JumpForce - 0.3f)
+        {
+            bottomHitPoint = castHit.normal;
+            yVelocity = (castHit.normal.y -1) * -1;
+            if (yVelocity < 0) yVelocity = 0;
+            Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, yVelocity, Rigidbody.velocity.z);
+        } 
+        yVelocity = Rigidbody.velocity.y;
         Rigidbody.velocity = direction * speed;
         Rigidbody.velocity += new Vector3(0f, yVelocity, 0f);
-
         if (direction != Vector3.zero)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, 

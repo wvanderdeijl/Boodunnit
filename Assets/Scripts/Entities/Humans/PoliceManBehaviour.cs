@@ -53,6 +53,7 @@ public class PoliceManBehaviour : BaseEntity
                 {
                     if (donutAngle > -(_donutDetectionAngle / 2) && donutAngle < _donutDetectionAngle / 2)
                     {
+                        Debug.Log("IK ZIE DONUT!");
                         FollowDonut(isDonut);
                         return;
                     }
@@ -75,16 +76,21 @@ public class PoliceManBehaviour : BaseEntity
     {
         _targetDonut = donut;
         TargetToFollow = donut.gameObject;
+        _targetDonut.PoliceMan = gameObject;
         ChangePathFindingState(PathFindingState.Following);
     }
 
     public void CheckDistanceToDonut()
     {
         float distance = Vector3.Distance(transform.position, TargetToFollow.transform.position);
-        if (distance <= 1f)
+        if (distance <= 2.1f)
         {
-            Vector3 mouthPosition = transform.position + transform.forward + transform.up;
-            _targetDonut.MoveToPosition(gameObject, mouthPosition);
+            if (_targetDonut.GetPoliceMan().Equals(gameObject))
+            {
+                Vector3 mouthPosition = transform.position + transform.forward + transform.up;
+                StartCoroutine(_targetDonut.MoveToPosition(mouthPosition));   
+            }
+            else ResetDestination();
         }
     }
 }

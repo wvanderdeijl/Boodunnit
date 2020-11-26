@@ -126,6 +126,7 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void ResetDestination()
     {
+        ChangePathFindingState(PathFindingState.Patrolling);
         _hasPositionInArea = false;
     }
 }

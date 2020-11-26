@@ -428,7 +428,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1281627034421034005}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5767731
+  m_Size: 0.5402044
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1054,7 +1054,7 @@ RectTransform:
   m_Father: {fileID: 3739221103572214863}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.4232269}
+  m_AnchorMin: {x: 0, y: 0.4597956}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -3181,38 +3181,40 @@ MonoBehaviour:
   FullscreenText: {fileID: 2101510300451005913}
   TextSpeedText: {fileID: 5540845948877985788}
   ScreenResolutions:
-  - ScreenHeight: 1080
-    ScreenWidth: 1920
-  - ScreenHeight: 1050
-    ScreenWidth: 1600
-  - ScreenHeight: 900
-    ScreenWidth: 1680
-  - ScreenHeight: 900
-    ScreenWidth: 1440
-  - ScreenHeight: 1050
-    ScreenWidth: 1400
+  - ScreenHeight: 600
+    ScreenWidth: 800
   - ScreenHeight: 768
-    ScreenWidth: 1366
-  - ScreenHeight: 768
-    ScreenWidth: 1360
-  - ScreenHeight: 1024
-    ScreenWidth: 1280
-  - ScreenHeight: 960
-    ScreenWidth: 1280
-  - ScreenHeight: 800
-    ScreenWidth: 1280
-  - ScreenHeight: 768
+    ScreenWidth: 1024
+  - ScreenHeight: 864
+    ScreenWidth: 1152
+  - ScreenHeight: 600
     ScreenWidth: 1280
   - ScreenHeight: 720
     ScreenWidth: 1280
-  - ScreenHeight: 600
+  - ScreenHeight: 800
     ScreenWidth: 1280
-  - ScreenHeight: 864
-    ScreenWidth: 1152
+  - ScreenHeight: 960
+    ScreenWidth: 1280
+  - ScreenHeight: 1024
+    ScreenWidth: 1280
   - ScreenHeight: 768
-    ScreenWidth: 1024
-  - ScreenHeight: 600
-    ScreenWidth: 800
+    ScreenWidth: 1360
+  - ScreenHeight: 1050
+    ScreenWidth: 1400
+  - ScreenHeight: 1050
+    ScreenWidth: 1440
+  - ScreenHeight: 900
+    ScreenWidth: 1440
+  - ScreenHeight: 900
+    ScreenWidth: 1600
+  - ScreenHeight: 1050
+    ScreenWidth: 1600
+  - ScreenHeight: 1080
+    ScreenWidth: 1920
+  - ScreenHeight: 1440
+    ScreenWidth: 2560
+  - ScreenHeight: 2160
+    ScreenWidth: 3840
 --- !u!1 &6899861822557173541
 GameObject:
   m_ObjectHideFlags: 0

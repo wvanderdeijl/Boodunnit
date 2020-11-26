@@ -33,7 +33,7 @@ public class HoldDownButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             {
                 clickSpeed -= 0.05f;
             }
-            yield return new WaitForSeconds(clickSpeed);
+            yield return new WaitForSecondsRealtime(clickSpeed);
         }
     }
 

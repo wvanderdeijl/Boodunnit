@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class SirBonkelBehaviour : BaseEntity
 {
+    [Header("SirBoonkle")]
     public float FadeDuration = 1f;
+    public Dialogue[] Dialogues;
 
     private Transform _newSpawnTransform;
 
-    public void SpawnToNewLocation(Transform newTransform)
+    public void Awake()
     {
-        _newSpawnTransform = newTransform;
+        InitBaseEntity();
+        CanPossess = false;
+    }
 
-        if (transform.position != _newSpawnTransform.position)
+    public void SpawnToNewLocation(Transform newTransform, int index)
+    {
+        if (transform.position != newTransform.position)
         {
+            _newSpawnTransform = newTransform;
+            Dialogue = Dialogues[index];
             StartCoroutine("FadeInAndOut");
         }
     }

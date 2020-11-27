@@ -50,6 +50,8 @@ public abstract class BaseEntityMovement : BaseMovement
             case PathFindingState.Following:
                 FollowTarget();
                 break;
+            case PathFindingState.None:
+                break;
         }
     }
     private void FollowTarget()

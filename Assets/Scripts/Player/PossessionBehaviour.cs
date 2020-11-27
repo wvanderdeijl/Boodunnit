@@ -115,6 +115,12 @@ public class PossessionBehaviour : MonoBehaviour
             if (possessableInterface != null && !PossessionTarget)
             {
                 TargetBehaviour = gameObjectInRangeCollider.GetComponent<BaseEntity>();
+
+                if (!TargetBehaviour.CanPossess)
+                {
+                    break;
+                }
+
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
                 TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;

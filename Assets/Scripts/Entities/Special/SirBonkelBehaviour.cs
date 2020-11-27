@@ -6,7 +6,7 @@ public class SirBonkelBehaviour : BaseEntity
 {
     [Header("SirBoonkle")]
     public float FadeDuration = 1f;
-    public Dialogue[] Dialogues;
+    private Dialogue[] _dialogues;
 
     private Transform _newSpawnTransform;
 
@@ -14,7 +14,7 @@ public class SirBonkelBehaviour : BaseEntity
     {
         InitBaseEntity();
         CanPossess = false;
-        Dialogues = Resources.LoadAll<Dialogue>($"ScriptableObjects/Conversations/Sir Boonkle/BoonkleBaseDialogue");
+        _dialogues = Resources.LoadAll<Dialogue>($"ScriptableObjects/Conversations/Sir Boonkle/BoonkleBaseDialogue");
     }
 
     public void SpawnToNewLocation(Transform newTransform, int index)
@@ -22,7 +22,7 @@ public class SirBonkelBehaviour : BaseEntity
         if (transform.position != newTransform.position)
         {
             _newSpawnTransform = newTransform;
-            Dialogue = Dialogues[index];
+            Dialogue = _dialogues[index];
             StartCoroutine("FadeInAndOut");
         }
     }

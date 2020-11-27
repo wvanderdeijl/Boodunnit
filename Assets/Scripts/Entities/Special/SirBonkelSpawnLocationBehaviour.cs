@@ -5,6 +5,7 @@ using UnityEngine;
 public class SirBonkelSpawnLocationBehaviour : MonoBehaviour
 {
     public Transform Spawnpoint;
+    public int Index;
 
     private SirBonkelBehaviour _sirBonkelBehaviour;
 
@@ -17,7 +18,7 @@ public class SirBonkelSpawnLocationBehaviour : MonoBehaviour
     {
         if (other.GetComponent<PlayerBehaviour>() && _sirBonkelBehaviour)
         {
-            _sirBonkelBehaviour.SpawnToNewLocation(Spawnpoint);
+            _sirBonkelBehaviour.SpawnToNewLocation(Spawnpoint, Index);
         }
     }
 }

@@ -22,7 +22,7 @@ public class HighlightBehaviour : MonoBehaviour
 
                 Outline outline = hitCollider.gameObject.GetComponent<Outline>();
 
-                if (outline)
+                if (outline && !hitCollider.gameObject.GetComponent<SirBonkelBehaviour>())
                 {
                     ToggleOutlineScriptOnGameobject(outline, true);
                 }

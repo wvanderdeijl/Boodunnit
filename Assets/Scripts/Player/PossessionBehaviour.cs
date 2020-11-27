@@ -42,6 +42,7 @@ public class PossessionBehaviour : MonoBehaviour
             TargetBehaviour.IsPossessed = false;
             transform.position = PossessionTarget.transform.position + (Vector3.up * 2);
             _cameraController.CameraRotationTarget = transform;
+            gameObject.GetComponent<PlayerBehaviour>().IsGrounded = false;
 
             TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             TargetBehaviour.NavMeshAgent.enabled = true;

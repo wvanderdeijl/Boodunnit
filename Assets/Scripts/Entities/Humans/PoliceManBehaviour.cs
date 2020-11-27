@@ -85,7 +85,7 @@ public class PoliceManBehaviour : BaseEntity
         float distance = Vector3.Distance(transform.position, TargetToFollow.transform.position);
         if (distance <= 2.1f)
         {
-            if (_targetDonut.GetPoliceMan().Equals(gameObject))
+            if (_targetDonut.PoliceMan.Equals(gameObject))
             {
                 Vector3 mouthPosition = transform.position + transform.forward + transform.up;
                 StartCoroutine(_targetDonut.MoveToPosition(mouthPosition));   

@@ -14,6 +14,7 @@ public class SirBonkelBehaviour : BaseEntity
     {
         InitBaseEntity();
         CanPossess = false;
+        Dialogues = Resources.LoadAll<Dialogue>($"ScriptableObjects/Conversations/Sir Boonkle/BoonkleBaseDialogue");
     }
 
     public void SpawnToNewLocation(Transform newTransform, int index)

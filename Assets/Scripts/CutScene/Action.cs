@@ -24,13 +24,20 @@ public class Action
     [Header("Check this if you want the position, rotation or scaling to be changed instantly.")]
     public bool IsInstant;
 
-    [HideInInspector] public bool IsExecuting;
+    [Header("Use this if you want to manipulate the Y cordinate")]
+    public bool ShouldBeKinematic;
+
+    public bool IsExecuting;
 
     [Header("Time to wait before the next action is executed.")]
     public float TimeBeforeNextAction;
     
     [Header("Pass a reference to a popup if the action is 'PopUp'")]
     public Popup Popup;
+
+    [Header("Pass the dialogue / question you want to use for the cutscene")]
+    public Dialogue Dialogue;
+    public Question Question;
 
     [Header("Click the '+' button and pass a reference to a scrip if the action is 'Method'")]
     public MethodToCallEvent MethodToCallFromScript;

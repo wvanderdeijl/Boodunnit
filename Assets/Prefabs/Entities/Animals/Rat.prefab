@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8655272418810597354, guid: bf47d9769add51a408aba70f4dafe337, type: 3}
+  - {fileID: 2100000, guid: 3e52dd58053ae394c989af063558a382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,12 +138,15 @@ MonoBehaviour:
   Speed: 10
   Collider: {fileID: 6267253183563679202}
   IsGrounded: 1
+  CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 1371556504}
   IsOnCountdown: 0
   _pathFindingState: 1
   MinimumFollowRange: 1
   MaximumFollowRange: 20
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
   Relationships: 
@@ -155,8 +158,8 @@ MonoBehaviour:
   FaintDuration: 0
   EmotionalState: 0
   HasFearCooldown: 0
-  FearRadius: 0
-  FearAngle: 0
+  _fearRadius: 0
+  _fearAngle: 0
   _ragdollController: {fileID: 0}
 --- !u!136 &6267253183563679202
 CapsuleCollider:

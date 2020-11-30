@@ -14,6 +14,7 @@ public abstract class BaseMovement : MonoBehaviour
     [HideInInspector]
     public bool IsGrounded = false;
 
+    [HideInInspector]
     public bool CanJump;
 
     private float _rotationSpeed = 10f;

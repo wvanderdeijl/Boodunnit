@@ -14,6 +14,7 @@ public class BirdBehaviour : BaseEntity
     {
         InitBaseEntity();
         _glideBehaviour = GetComponent<GlideBehaviour>();
+        CanJump = true;
         
         FearThreshold = 20;
         FearDamage = 0;

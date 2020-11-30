@@ -26,7 +26,8 @@ public class PoliceManBehaviour : BaseEntity
         EmotionalState = EmotionalState.Calm;
         ScaredOfGameObjects = new Dictionary<Type, float>()
         {
-            [typeof(ILevitateable)] = 3f
+            [typeof(ILevitateable)] = 3f,
+            [typeof(RatBehaviour)] = 3f
         };
     }
     

@@ -4,9 +4,12 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     public GameObject PopupMenuUI;
+
+    [HideInInspector]
     public GameObject CloseButton;
-    public GameObject NextBtn;
-    public GameObject PreviousBtn;
+
+    [HideInInspector]
+    public GameObject PreviousBtn, NextBtn;
     public Sprite[] Sprites;
     public Image DisplayImage;
     public static bool isPopUpOpen;
@@ -15,6 +18,10 @@ public class Popup : MonoBehaviour
 
     private void Awake()
     {
+        CloseButton = transform.Find("CloseButton").gameObject;
+        NextBtn = transform.Find("NextButton").gameObject;
+        PreviousBtn = transform.Find("PreviousButton").gameObject;
+
         if (Sprites != null && Sprites.Length == 1)
         {
             NextBtn.SetActive(false);

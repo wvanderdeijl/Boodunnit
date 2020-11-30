@@ -60,7 +60,7 @@ public class PlayerBehaviour : BaseMovement
         //Dash behaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown)
+            if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown && !ConversationManager.HasConversationStarted)
             {
                 DashBehaviour.Dash();
             }
@@ -99,7 +99,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !ConversationManager.HasConversationStarted)
         {
             if (PossessionBehaviour.IsPossessing)
             {

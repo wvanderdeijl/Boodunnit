@@ -128,6 +128,8 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void ResetDestination()
     {
+        NavMeshAgent.isStopped = false;
+        ChangePathFindingState(PathFindingState.Patrolling);
         _hasPositionInArea = false;
     }
 }

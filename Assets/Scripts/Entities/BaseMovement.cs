@@ -10,6 +10,7 @@ public abstract class BaseMovement : MonoBehaviour
     public float Speed;
     public Collider Collider;
 
+
     [HideInInspector]
     public bool IsGrounded = false;
 
@@ -116,7 +117,7 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 0)
+        if (!other.isTrigger)
         {
             if (other.name == "GameObject Air flow")
             {
@@ -129,7 +130,7 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 0)
+        if (!other.isTrigger)
         {
             if (other.name == "GameObject Air flow")
             {
@@ -142,7 +143,7 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 0)
+        if (!other.isTrigger)
         {
             if (other.name == "GameObject Air flow")
             {
@@ -152,4 +153,7 @@ public abstract class BaseMovement : MonoBehaviour
             IsGrounded = false;
         }
     }
+
+    
 }
+

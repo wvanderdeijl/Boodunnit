@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PoliceManBehaviour : BaseEntity
 {
+    public Transform ConsumableEndPosition;
+    
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
     
@@ -15,6 +17,8 @@ public class PoliceManBehaviour : BaseEntity
     {
         InitBaseEntity();
 
+        ConsumableEndPosition = transform.Find("ConsumableEndPosition");
+        
         FearThreshold = 20;
         FearDamage = 0;
         FaintDuration = 10;
@@ -85,10 +89,11 @@ public class PoliceManBehaviour : BaseEntity
         float distance = Vector3.Distance(transform.position, TargetToFollow.transform.position);
         if (distance <= 2.1f)
         {
-            if (_targetDonut.PoliceMan.Equals(gameObject))
+            if (_targetDonut.PoliceMan.Equals(gameObject) && !_targetDonut.IsTargeted)
             {
-                Vector3 mouthPosition = transform.position + transform.forward + transform.up;
-                StartCoroutine(_targetDonut.MoveToPosition(mouthPosition));   
+                NavMeshAgent.isStopped = true;
+                NavMeshAgent.velocity = Vector3.zero;
+                StartCoroutine(_targetDonut.MoveToPosition());   
             }
             else ResetDestination();
         }

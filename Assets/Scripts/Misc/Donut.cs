@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Numerics;
 using DefaultNamespace.Enums;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class Donut : MonoBehaviour
 {
@@ -11,35 +13,36 @@ public class Donut : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private LevitateableObject _levitateableObject;
+    private PoliceManBehaviour _policeManBehaviour;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _levitateableObject = GetComponent<LevitateableObject>();
     }
-
-    public IEnumerator MoveToPosition(Vector3 position)
+    
+    public IEnumerator MoveToPosition()
     {
-        _rigidbody.isKinematic = true;
         IsTargeted = true;
-        _levitateableObject.CanBeLevitated = false;
+        _policeManBehaviour = PoliceMan.GetComponent<PoliceManBehaviour>();
+        Destroy(_levitateableObject);
         
-        Vector3 moveToPos = Vector3.MoveTowards(transform.position, position, 
-            0.5f * Time.deltaTime);
-        _rigidbody.position = moveToPos;
-        
-        yield return new WaitForSeconds(5f);
-        Vector3 moveToMouth = Vector3.MoveTowards(transform.position, PoliceMan.transform.position + Vector3.up, 
-            0.25f * Time.deltaTime);
-        _rigidbody.position = moveToMouth;
-        
-        yield return new WaitForSeconds(5f);
+        transform.position = PoliceMan.transform.position + (PoliceMan.transform.forward * 0.25f) + 
+                                          new Vector3(0, 
+                                              _policeManBehaviour.ConsumableEndPosition.transform.localPosition.y, 0);
+        yield return new WaitForSeconds(1.5f);
+        while (Vector3.Distance(transform.position, _policeManBehaviour.ConsumableEndPosition.position) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, 
+                _policeManBehaviour.ConsumableEndPosition.position, 0.02f * Time.deltaTime);
+            yield return null;
+        }
         GetConsumed();
     }
 
     public void GetConsumed()
     {
-        PoliceMan.GetComponent<PoliceManBehaviour>().ResetDestination();
+        _policeManBehaviour.ResetDestination();
         
         //TODO deze boi moet gedestroyed worden na de refactor van de Highlight- en LevitateBehaviour.
         gameObject.SetActive(false);

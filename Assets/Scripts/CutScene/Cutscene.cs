@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Cutscene : MonoBehaviour
 {
+    public bool StartCutsceneOnAwake;
     public List<Action> ActionsInCutscene;
     private int _transitionSpeedMultiplier = 10;
 
     private void Awake()
     {
-        StartCutscene();
+        if(StartCutsceneOnAwake)
+            StartCutscene();
     }
 
     public void StartCutscene()
@@ -55,6 +57,8 @@ public class Cutscene : MonoBehaviour
                     CallMethodFromMonoBehaviour(action);
                     break;
             }
+
+            print(actionCounter);
            
             if (!action.IsExecuting)
             {
@@ -75,12 +79,17 @@ public class Cutscene : MonoBehaviour
         }
     }
 
+    #region Cutscene actions
     private IEnumerator ChangePositionOfGameObject(Action currentAction)
     {
         if (!currentAction.ObjectForCutscene)
             yield break;
 
         GameObject gameObject = currentAction.ObjectForCutscene;
+
+        if (currentAction.ShouldBeKinematic)
+            SetRigidBodyKinematic(gameObject, true);
+
         if (currentAction.IsInstant)
         {
             gameObject.transform.position = currentAction.EndPosition;
@@ -96,6 +105,8 @@ public class Cutscene : MonoBehaviour
 
             yield return null;
         }
+
+        SetRigidBodyKinematic(gameObject, false);
     }
 
     private IEnumerator ChangeRotationOfGameObject(Action currentAction)
@@ -168,11 +179,16 @@ public class Cutscene : MonoBehaviour
             yield break;
 
         PlayerBehaviour playerBehaviour = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>();
-        if (playerBehaviour.GetComponent<ConversationManager>() && playerBehaviour.GetComponent<PossessionBehaviour>())
+        if (playerBehaviour)
         {
             ConversationManager conversationManager = playerBehaviour.GetComponent<ConversationManager>();
-            bool isPossessing = playerBehaviour.GetComponent<PossessionBehaviour>().IsPossessing;
-            conversationManager.TriggerConversation(isPossessing);
+            PossessionBehaviour possessionBehaviour = playerBehaviour.GetComponent<PossessionBehaviour>();
+
+            if (conversationManager && possessionBehaviour)
+            {
+                bool isPossessing = possessionBehaviour.IsPossessing;
+                conversationManager.TriggerConversation(isPossessing, currentAction.Dialogue, currentAction.Question);
+            }
         }
 
         while (currentAction.IsExecuting)
@@ -190,7 +206,18 @@ public class Cutscene : MonoBehaviour
         currentAction.MethodToCallFromScript.Invoke();
         currentAction.IsExecuting = false;
     }
+    #endregion
 
+    #region Cutscene utility
+    private void SetRigidBodyKinematic(GameObject gameObject, bool enableOrDisable)
+    {
+        Rigidbody objectRigidBody = gameObject.GetComponent<Rigidbody>();
+        if (objectRigidBody)
+        {
+            objectRigidBody.isKinematic = enableOrDisable;
+            objectRigidBody.useGravity = !enableOrDisable;
+        }
+    }
     
     /// <summary>
     /// Enable or disable everything bound the player movement and ability.
@@ -212,4 +239,5 @@ public class Cutscene : MonoBehaviour
         GameObject camera = Camera.main.gameObject;
         camera.GetComponent<CameraController>().enabled = shouldCamereaBeEnabled;
     }
+    #endregion
 }

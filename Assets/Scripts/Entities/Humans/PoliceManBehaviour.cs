@@ -93,11 +93,13 @@ public class PoliceManBehaviour : BaseEntity
         {
             if (_targetDonut.PoliceMan.Equals(gameObject) && !_targetDonut.IsTargeted)
             {
+                _targetDonut.IsTargeted = true;
                 NavMeshAgent.isStopped = true;
                 NavMeshAgent.velocity = Vector3.zero;
-                StartCoroutine(_targetDonut.MoveToPosition());   
+                StartCoroutine(_targetDonut.MoveToPosition());
+                return;
             }
-            else ResetDestination();
+            if(!_targetDonut.PoliceMan.Equals(gameObject)) ResetDestination();
         }
     }
 }

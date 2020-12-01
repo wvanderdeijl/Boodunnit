@@ -26,6 +26,7 @@ public class Donut : MonoBehaviour
         IsTargeted = true;
         _policeManBehaviour = PoliceMan.GetComponent<PoliceManBehaviour>();
         Destroy(_levitateableObject);
+        Destroy(_rigidbody);
         
         transform.position = PoliceMan.transform.position + (PoliceMan.transform.forward * 0.25f) + 
                              new Vector3(0, 
@@ -37,6 +38,7 @@ public class Donut : MonoBehaviour
                 _policeManBehaviour.ConsumableEndPosition.position, 0.02f * Time.deltaTime);
             yield return null;
         }
+        yield return new WaitForSeconds(5f);
         GetConsumed();
     }
 
@@ -45,6 +47,6 @@ public class Donut : MonoBehaviour
         _policeManBehaviour.ResetDestination();
         
         //TODO deze boi moet gedestroyed worden na de refactor van de Highlight- en LevitateBehaviour.
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

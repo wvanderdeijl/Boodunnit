@@ -164,12 +164,12 @@ public class PossessionBehaviour : MonoBehaviour
         bool isPositionValid = false;
         int newPositionTries = 0;
 
-        while (!isPositionValid || newPositionTries == UnPossessRetriesOnYAxis)
+        while (!isPositionValid || newPositionTries < UnPossessRetriesOnYAxis)
         {
             Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y,
                 minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
 
-            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius);
+            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius, default, QueryTriggerInteraction.Ignore);
             if (newPositionCollision != null)
             {
                 if (newPositionCollision.Length == 0)

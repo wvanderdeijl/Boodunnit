@@ -3246,6 +3246,7 @@ MonoBehaviour:
   _pathFindingState: 1
   MinimumFollowRange: 0
   MaximumFollowRange: 0
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
   Relationships: 0a000000
@@ -3260,6 +3261,7 @@ MonoBehaviour:
   _fearRadius: 0
   _fearAngle: 0
   _ragdollController: {fileID: 0}
+  ConsumableEndPosition: {fileID: 0}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90
 --- !u!136 &132955850
@@ -15406,8 +15408,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 89ed6681cdce68b42bb4544d7cd4ad89, type: 3}
   m_PrefabInstance: {fileID: 1388354968}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &862459790
-MeshCollider:
+--- !u!65 &862459788
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15416,10 +15418,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7035690196794747791, guid: 89ed6681cdce68b42bb4544d7cd4ad89, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.032740828, y: 0.046697993, z: 0.0015276469}
+  m_Center: {x: -0.00045382133, y: 0.000000027928799, z: -0.00017969766}
 --- !u!1001 &877622185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31113,6 +31114,7 @@ MonoBehaviour:
   _pathFindingState: 1
   MinimumFollowRange: 0
   MaximumFollowRange: 0
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
   Relationships: 0a000000
@@ -31127,6 +31129,7 @@ MonoBehaviour:
   _fearRadius: 0
   _fearAngle: 0
   _ragdollController: {fileID: 0}
+  ConsumableEndPosition: {fileID: 0}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90
 --- !u!54 &1686607867
@@ -33747,6 +33750,7 @@ MonoBehaviour:
   _pathFindingState: 1
   MinimumFollowRange: 0
   MaximumFollowRange: 0
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
   Relationships: 0a000000
@@ -33761,6 +33765,7 @@ MonoBehaviour:
   _fearRadius: 0
   _fearAngle: 0
   _ragdollController: {fileID: 0}
+  ConsumableEndPosition: {fileID: 0}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90
 --- !u!195 &1835016666
@@ -39568,9 +39573,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609491, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609491, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Center.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6263936470470609495, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
       propertyPath: m_Name
       value: Duif_Default_V1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609582, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.4821022
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609582, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609582, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Center.x
+      value: -0.058134332
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609582, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Center.y
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263936470470609582, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.09969443
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7447090a1ac1c784bbb1e4e40cff120c, type: 3}

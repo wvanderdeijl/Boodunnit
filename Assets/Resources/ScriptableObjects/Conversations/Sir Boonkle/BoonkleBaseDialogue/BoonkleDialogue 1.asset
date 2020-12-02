@@ -10,10 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
-  m_Name: BoonkleDialogue7
+  m_Name: BoonkleDialogue 1
   m_EditorClassIdentifier: 
-  sentences:
-  - Text: This is as far as I can take you. The rest is up to you, Julia.
-  - Text: Go and talk to your sister now. Solve this mystery together and you will
-      find your peace.
-  question: {fileID: 11400000, guid: d330b736eb71cd0478d587bc0883c94b, type: 2}
+  sentences: []
+  question: {fileID: 0}

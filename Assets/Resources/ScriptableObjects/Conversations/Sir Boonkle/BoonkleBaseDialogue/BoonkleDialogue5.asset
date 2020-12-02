@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: BoonkleDialogue5
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: "Good job! You\u2019re almost at the entrance!"
+  - Text: Yes, almost, since there are still people blocking the gate over there.
+  - Text: You can possess people too, but I think the best thing to do is scare them
+      away.
+  - Text: You can use the same rat you just possessed.
+  - Text: Keep in mind that some people are easier to scare than others.
   question: {fileID: 0}

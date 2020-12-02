@@ -127,7 +127,7 @@ public class PossessionBehaviour : MonoBehaviour
                 Vector3 playerToPossessable = (TargetBehaviour.transform.position - transform.position).normalized;
                 Physics.Raycast(transform.position, playerToPossessable, out RaycastHit hit,
                     Vector3.Distance(transform.position, TargetBehaviour.transform.position));
-                if (!hit.collider.gameObject.Equals(TargetBehaviour.gameObject)) continue;
+                if (!hit.collider.transform.root.gameObject.Equals(TargetBehaviour.gameObject)) continue;
 
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;

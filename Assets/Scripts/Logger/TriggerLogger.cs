@@ -16,6 +16,7 @@ public class TriggerLogger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger) return;
         //TODO do something with layers here LayerMask does not seem to work for this
         if (other.gameObject.name != "Player")
             if (!(PossessionBehaviour.PossessionTarget &&

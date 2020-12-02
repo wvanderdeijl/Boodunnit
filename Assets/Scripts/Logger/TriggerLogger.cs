@@ -18,12 +18,18 @@ public class TriggerLogger : MonoBehaviour
     {
         //TODO do something with layers here LayerMask does not seem to work for this
         if (other.gameObject.name != "Player")
-            return;
+            if (!(PossessionBehaviour.PossessionTarget &&
+                  PossessionBehaviour.PossessionTarget.name == other.gameObject.name))
+                return;
+        
         Log log = new Log();
         log.LogTime = (float) (DateTime.UtcNow - _scenelogger.SceneLog.StartingTime).TotalSeconds;
-        log.LogInformation.Add(new CustomLogProperty(gameObject.name + " Passed", true));
         log.Name = gameObject.name;
         
-        _scenelogger.SceneLog.Logs.Add(log);
+        if (PossessionBehaviour.PossessionTarget)
+            log.LogDetails.Add("Possessing: " + PossessionBehaviour.PossessionTarget.name);
+        else log.LogDetails.Add("Possessing: None");
+        if (log.LogDetails.Count > 0)
+            _scenelogger.SceneLog.Logs.Add(log);
     }
 }

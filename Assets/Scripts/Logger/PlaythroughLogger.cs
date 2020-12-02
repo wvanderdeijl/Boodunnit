@@ -16,7 +16,7 @@ public class PlaythroughLogger
     static PlaythroughLogger() => _instance = new PlaythroughLogger();
 
     private PlaythroughLogger() {
-        PlaythroughLog.scenes = new List<SceneLog>();
+        PlaythroughLog.Scenes = new List<SceneLog>();
         PlaythroughLog.GameStartTime = DateTime.UtcNow;
         PlaythroughLog.GUID = GUID.Generate().ToString();
     }

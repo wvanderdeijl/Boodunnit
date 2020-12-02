@@ -8,5 +8,5 @@ public class Playthrough
 {
     public string GUID;
     public DateTime GameStartTime = DateTime.UtcNow;
-    public List<SceneLog> scenes;
+    public List<SceneLog> Scenes;
 }

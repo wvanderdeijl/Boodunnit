@@ -12,17 +12,7 @@ public class Log
     /// 1st is the actual information
     /// 2nd Describes time in seconds after starting
     /// </summary>
-    public List<CustomLogProperty> LogInformation = new List<CustomLogProperty>();
+    public List<object> LogDetails = new List<object>();
     public float LogTime;
 }
-public class CustomLogProperty
-{
-    public string Name;
-    public object Value;
 
-    public CustomLogProperty(string name, object value)
-    {
-        Name = name;
-        Value = value;
-    }
-}

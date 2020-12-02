@@ -15,7 +15,7 @@ public class SceneLogger : MonoBehaviour
     
     private void OnDestroy()
     {
-        PlaythroughLogger.Instance.PlaythroughLog.scenes.Add(SceneLog);
+        PlaythroughLogger.Instance.PlaythroughLog.Scenes.Add(SceneLog);
         PlaythroughLogger.Instance.WriteLog();
     }
 }

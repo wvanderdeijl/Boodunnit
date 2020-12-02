@@ -10,11 +10,10 @@ public class DashBehaviour : MonoBehaviour
     public bool IsDashing = false;
     public bool DashOnCooldown = false;
 
-    public float _dashCooldown = 2f;
-    public float _dashDuration = 0.4f;
-    public float _dashDistance = 4f;
+    public float DashCooldown = 2f;
+    public float DashDuration = 0.2f;
+    public float DashDistance = 7f;
     private float _dashSpeed;
-    private float _endPositionRadius;
 
     private Rigidbody _rigidbodyPlayer;
 
@@ -27,8 +26,7 @@ public class DashBehaviour : MonoBehaviour
     private void Awake()
     {
         _rigidbodyPlayer = GetComponent<Rigidbody>();
-        _dashSpeed = _dashDistance / _dashDuration;
-        _endPositionRadius = GetComponent<Collider>().bounds.extents.z * 0.9f;
+        _dashSpeed = DashDistance / DashDuration;
     }
 
     public void Dash()
@@ -60,14 +58,14 @@ public class DashBehaviour : MonoBehaviour
         Vector3 newVelocity = transform.forward * _dashSpeed;
 
         InitializeDashDistances();
-        if (_distanceDashableEndPosition > 1 && CheckDashEndPosition())
+        if (CheckDashEndPosition())
         {
             gameObject.layer = 9;
         }
 
         _rigidbodyPlayer.velocity = newVelocity;
 
-        yield return new WaitForSeconds(_dashDuration);
+        yield return new WaitForSeconds(DashDuration);
 
         oldVelocity.y = 0;
         _rigidbodyPlayer.velocity = oldVelocity;
@@ -84,32 +82,35 @@ public class DashBehaviour : MonoBehaviour
 
     private bool CheckDashEndPosition()
     {
-        Vector3 endPosition = transform.position + (transform.forward * _dashDistance);
+        Vector3 endPosition = transform.position + (transform.forward * DashDistance);
 
         Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _distanceDashableEndPosition);
 
+        bool canDash = true;
+
         if (endPositionColliderArray != null)
         {
-            bool canDash = true;
             foreach (Collider collider in endPositionColliderArray)
             {
-                Vector3 endOFDashablePosition = transform.position + (transform.forward * (_dashableThickness + _distanceBooliaDashable));
-                float distanceColliderDashable = Vector3.Distance(collider.transform.position, endOFDashablePosition);
-                Debug.Log(distanceColliderDashable);
-                canDash = distanceColliderDashable > 1.5;
-                if (!canDash)
+                if (collider.gameObject.layer != 10)
                 {
-                    break;
+                    Vector3 endOFDashablePosition = transform.position + (transform.forward * (_dashableThickness + _distanceBooliaDashable));
+                    float distanceColliderDashable = Vector3.Distance(collider.transform.position, endOFDashablePosition);
+
+                    if (distanceColliderDashable < 2)
+                    {
+                        canDash = false;
+                        break;
+                    }
                 }
             }
-            return canDash;
         }
-        return true;
+        return canDash;
     }
 
     private void InitializeDashDistances()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 10))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, DashDistance))
         {
             float angle = Vector3.Angle(hitInfo.normal, -transform.forward);
             float cosAngle = Math.Abs(Mathf.Cos(angle));
@@ -118,14 +119,14 @@ public class DashBehaviour : MonoBehaviour
 
             _distanceBooliaDashable = hitInfo.distance;
 
-            _distanceDashableEndPosition = _dashDistance - _dashableThickness - _distanceBooliaDashable;
+            _distanceDashableEndPosition = DashDistance - _dashableThickness - _distanceBooliaDashable;
         }
     }
 
     private IEnumerator DashTimer()
     {
         float currentTime = 0;
-        float interval = _dashCooldown + _dashDuration;
+        float interval = DashCooldown + DashDuration;
 
         while (currentTime < interval)
         {

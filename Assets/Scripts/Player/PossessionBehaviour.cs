@@ -42,6 +42,7 @@ public class PossessionBehaviour : MonoBehaviour
             TargetBehaviour.IsPossessed = false;
             transform.position = PossessionTarget.transform.position + (Vector3.up * 2);
             _cameraController.CameraRotationTarget = transform;
+            gameObject.GetComponent<PlayerBehaviour>().IsGrounded = false;
 
             TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             TargetBehaviour.NavMeshAgent.enabled = true;
@@ -115,6 +116,12 @@ public class PossessionBehaviour : MonoBehaviour
             if (possessableInterface != null && !PossessionTarget)
             {
                 TargetBehaviour = gameObjectInRangeCollider.GetComponent<BaseEntity>();
+
+                if (!TargetBehaviour.CanPossess)
+                {
+                    break;
+                }
+
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
                 TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -157,12 +164,12 @@ public class PossessionBehaviour : MonoBehaviour
         bool isPositionValid = false;
         int newPositionTries = 0;
 
-        while (!isPositionValid || newPositionTries == UnPossessRetriesOnYAxis)
+        while (!isPositionValid || newPositionTries < UnPossessRetriesOnYAxis)
         {
             Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y,
                 minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
 
-            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius);
+            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius, default, QueryTriggerInteraction.Ignore);
             if (newPositionCollision != null)
             {
                 if (newPositionCollision.Length == 0)

@@ -146,6 +146,7 @@ MonoBehaviour:
   _pathFindingState: 1
   MinimumFollowRange: 1
   MaximumFollowRange: 20
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
   Relationships: 

@@ -4,6 +4,7 @@ namespace Enums
     {
         Stationary,
         Patrolling,
-        Following
+        Following,
+        None
     }
 }

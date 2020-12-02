@@ -19,10 +19,9 @@ public class HighlightBehaviour : MonoBehaviour
         {
             if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable) || hitCollider.TryGetComponent(out WorldSpaceClue worldSpaceClue))
             {
-
                 Outline outline = hitCollider.gameObject.GetComponent<Outline>();
 
-                if (outline)
+                if (outline && !hitCollider.gameObject.GetComponent<SirBonkelBehaviour>())
                 {
                     ToggleOutlineScriptOnGameobject(outline, true);
                 }

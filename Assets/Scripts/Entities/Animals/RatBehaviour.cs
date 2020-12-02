@@ -12,6 +12,7 @@ public class RatBehaviour : BaseEntity
     {
         InitBaseEntity();
         _climbBehaviour = GetComponent<ClimbBehaviour>();
+        CanJump = true;
 
         FearThreshold = 20;
         FearDamage = 0;

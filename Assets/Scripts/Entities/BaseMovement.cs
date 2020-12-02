@@ -10,9 +10,11 @@ public abstract class BaseMovement : MonoBehaviour
     public float Speed;
     public Collider Collider;
 
+
     [HideInInspector]
     public bool IsGrounded = false;
 
+    [HideInInspector]
     public bool CanJump;
 
     private float _rotationSpeed = 10f;
@@ -68,7 +70,9 @@ public abstract class BaseMovement : MonoBehaviour
             }
         }
         float yVelocity = 0;
-        if (IsGrounded && Physics.Raycast(transform.position, -transform.up, out RaycastHit castHit, 3.1f) && 
+        if (IsGrounded && 
+            Physics.Raycast(transform.position, -transform.up, out RaycastHit castHit, Collider.bounds.size.y/2 + Mathf.Abs(Collider.bounds.center.y) + 0.1f, 
+                LayerMask.GetMask("Default")) && 
             castHit.normal.y > 0.5  && Rigidbody.velocity.y < JumpForce - 0.3f)
         {
             bottomHitPoint = castHit.normal;
@@ -114,31 +118,43 @@ public abstract class BaseMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "GameObject Air flow")
+        if (!other.isTrigger)
         {
-            return;
-        }
+            if (other.name == "GameObject Air flow")
+            {
+                return;
+            }
 
-        IsGrounded = true;
+            IsGrounded = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "GameObject Air flow")
+        if (!other.isTrigger)
         {
-            return;
-        }
+            if (other.name == "GameObject Air flow")
+            {
+                return;
+            }
 
-        IsGrounded = true;
+            IsGrounded = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "GameObject Air flow")
+        if (!other.isTrigger)
         {
-            return;
-        }
+            if (other.name == "GameObject Air flow")
+            {
+                return;
+            }
 
-        IsGrounded = false;
+            IsGrounded = false;
+        }
     }
+
+    
 }
+

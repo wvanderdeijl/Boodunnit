@@ -81,24 +81,25 @@ public class Outline : MonoBehaviour {
   private bool needsUpdate;
 
   void Awake() {
-    foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
-    {
-        if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)
-        {
-            skinnedMeshRenderer.sharedMesh.subMeshCount = skinnedMeshRenderer.sharedMesh.subMeshCount + 1;
-            skinnedMeshRenderer.sharedMesh.SetTriangles(skinnedMeshRenderer.sharedMesh.triangles, skinnedMeshRenderer.sharedMesh.subMeshCount - 1);
-        }
+    //foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
+    //{
+    //    if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)
+    //    {
+    //        skinnedMeshRenderer.sharedMesh.subMeshCount = skinnedMeshRenderer.sharedMesh.subMeshCount + 1;
+    //        skinnedMeshRenderer.sharedMesh.SetTriangles(skinnedMeshRenderer.sharedMesh.triangles, skinnedMeshRenderer.sharedMesh.subMeshCount - 1);
+    //    }
 
-    }
+    //}
 
     foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
     {
-        if (meshFilter.sharedMesh.subMeshCount > 1)
+        if (meshFilter.mesh.subMeshCount > 1)
         {
-            meshFilter.sharedMesh.subMeshCount = meshFilter.sharedMesh.subMeshCount + 1;
-            meshFilter.sharedMesh.SetTriangles(meshFilter.sharedMesh.triangles, meshFilter.sharedMesh.subMeshCount - 1);
+            meshFilter.mesh.subMeshCount = meshFilter.mesh.subMeshCount + 1;
+            meshFilter.mesh.SetTriangles(meshFilter.mesh.triangles, meshFilter.mesh.subMeshCount - 1);
         }
     }
+
     // Cache renderers
      renderers = GetComponentsInChildren<Renderer>();
 

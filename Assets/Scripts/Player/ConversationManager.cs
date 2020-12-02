@@ -40,7 +40,7 @@ public class ConversationManager : MonoBehaviour
     }
 
     #region Conversation Trigger 
-    public void TriggerConversation(bool isPossesing)
+    public void TriggerConversation(bool isPossesing, Dialogue dialogue = null, Question question = null)
     {
         _hasNoRelation = false;
         _maxDefaultSencteces = 0;
@@ -85,8 +85,23 @@ public class ConversationManager : MonoBehaviour
                     
                     GameManager.CursorIsLocked = false;
 
-                    ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
-                    return;
+                    if(dialogue != null)
+                    {
+                        ManageConversation(dialogue, null);
+                        return;
+                    }
+
+                    if(question != null)
+                    {
+                        ManageConversation(null, question);
+                        return;
+                    }
+                    
+                    if(dialogue == null && question == null)
+                    {
+                        ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
+                        return;
+                    }
                 }
             }
         }

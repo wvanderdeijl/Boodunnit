@@ -580,7 +580,6 @@ MonoBehaviour:
   MinDistance: 1.255763
   RotationSpeed: 1
   CameraRotationTarget: {fileID: 710235793}
-  LookAtTargetPosition: {x: 0, y: 0, z: 0}
   MaxElevation: 8
   MinElevation: -0.5
 --- !u!1 &424920140
@@ -865,11 +864,11 @@ GameObject:
   - component: {fileID: 710235790}
   - component: {fileID: 710235789}
   - component: {fileID: 710235788}
+  - component: {fileID: 710235794}
   - component: {fileID: 710235787}
   - component: {fileID: 710235786}
   - component: {fileID: 710235785}
   - component: {fileID: 710235784}
-  - component: {fileID: 710235783}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -877,22 +876,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &710235783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710235782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6b269b9af6e84d4e901cee89cd3bccc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasDialogueStarted: 0
-  EntityNameUIText: {fileID: 0}
-  DialogueUIText: {fileID: 0}
-  Animator: {fileID: 0}
 --- !u!114 &710235784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,7 +911,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDashing: 0
   DashOnCooldown: 0
-  DashCooldownImage: {fileID: 905703045}
   _dashCooldown: 1
   _dashDuration: 0.3
   _dashDistance: 10
@@ -958,8 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPossessing: 0
-  CooldownImage: {fileID: 554746775}
-  CameraController: {fileID: 374799659}
+  TargetBehaviour: {fileID: 0}
   UnpossessRadius: 2
   UnPossessRetriesOnYAxis: 10
   Cooldown: 1
@@ -977,13 +958,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 710235789}
+  JumpForce: 10
   Speed: 12
+  Collider: {fileID: 710235790}
   IsGrounded: 1
+  CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   PossessionBehaviour: {fileID: 710235787}
   DashBehaviour: {fileID: 710235785}
   HighlightBehaviour: {fileID: 710235786}
   LevitateBehaviour: {fileID: 710235784}
-  DialogueManager: {fileID: 710235783}
+  ConversationManager: {fileID: 710235794}
   PauseMenu: {fileID: 0}
 --- !u!54 &710235789
 Rigidbody:
@@ -1081,6 +1066,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710235794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710235782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f297e70c516d38e4884946def3587320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &800264003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,6 +1423,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905703043}
   m_CullTransparentMesh: 0
+--- !u!1 &1039575671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039575673}
+  - component: {fileID: 1039575672}
+  m_Layer: 13
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1039575672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039575671}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1039575673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039575671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.21, y: 5.12, z: 18.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1042904378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1959,7 @@ GameObject:
   - component: {fileID: 1529070342}
   - component: {fileID: 1529070341}
   - component: {fileID: 1529070340}
+  - component: {fileID: 1529070347}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1956,7 +1998,7 @@ MonoBehaviour:
   StaminaConsumptionPerSecond: 0
   StaminaReplenishRatePerSecond: 0
   IsClimbing: 0
-  _rigidbody: {fileID: 1529070340}
+  StaminaBarCanvas: {fileID: 0}
   _rotationSpeed: 100
   _staminaRadialCircle: {fileID: 0}
 --- !u!114 &1529070342
@@ -1972,9 +2014,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 1529070340}
+  JumpForce: 10
   Speed: 10
+  Collider: {fileID: 1529070343}
   IsGrounded: 1
-  _climbBehaviour: {fileID: 1529070341}
+  CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
+  TargetToFollow: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
+  IsOnCountdown: 0
+  _pathFindingState: 0
+  MinimumFollowRange: 0
+  MaximumFollowRange: 0
+  CanPossess: 1
+  Dialogue: {fileID: 0}
+  Question: {fileID: 0}
+  Relationships: 
+  DefaultAnswers: []
+  CharacterName: 0
+  CanTalkToBoolia: 0
+  FearThreshold: 0
+  FearDamage: 0
+  FaintDuration: 0
+  EmotionalState: 0
+  HasFearCooldown: 0
+  _fearRadius: 0
+  _fearAngle: 0
+  _ragdollController: {fileID: 0}
 --- !u!65 &1529070343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2051,6 +2117,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &1529070347
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529070339}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1718774895
 GameObject:
   m_ObjectHideFlags: 0

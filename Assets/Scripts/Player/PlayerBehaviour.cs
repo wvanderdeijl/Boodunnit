@@ -16,6 +16,7 @@ public class PlayerBehaviour : BaseMovement
     private void Awake()
     {
         _cameraTransform = UnityEngine.Camera.main.transform;
+        CanJump = true;
     } 
 
     void Update()
@@ -37,20 +38,21 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                PossessionBehaviour.PossessTarget();
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
+                    PossessionBehaviour.PossessTarget();
             }
         }
 
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted)
+            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
@@ -59,13 +61,16 @@ public class PlayerBehaviour : BaseMovement
         //Dash behaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown)
+            if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown && !ConversationManager.HasConversationStarted)
             {
                 DashBehaviour.Dash();
             }
         }
 
-        HandleLevitationInput();
+        if(!PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+        {
+            HandleLevitationInput();
+        }
         
         //Move player with BaseMovement.
         Vector2 movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -95,7 +100,7 @@ public class PlayerBehaviour : BaseMovement
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !ConversationManager.HasConversationStarted)
         {
             if (PossessionBehaviour.IsPossessing)
             {

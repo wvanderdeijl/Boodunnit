@@ -109,18 +109,25 @@ public class PossessionBehaviour : MonoBehaviour
 
         //It was really frustrating for everyone to possess something, so i the lead dev created this, this is code that will be used for now, later on interaction with the world will change (for example by hovering your mouse on an object and pressing E to possess). Dont worry about this new kind of input yet.
         float overlapSphereRadius = 3;
-        List<Collider> listGameObjectsInRangeOrderedByRange = Physics.OverlapSphere(transform.position, overlapSphereRadius).OrderBy(c => Vector3.Distance(transform.position, c.transform.position)).ToList();//ToDo: there is a possessable collision layer, should we use this layer or not? If we are using the layer use: LayerMask.GetMask() in the OverlapSphere method
+        List<Collider> listGameObjectsInRangeOrderedByRange = Physics
+            .OverlapSphere(transform.position, overlapSphereRadius)
+            .OrderBy(c => Vector3.Distance(transform.position, c.transform.position))
+            .ToList();
+        
         foreach (Collider gameObjectInRangeCollider in listGameObjectsInRangeOrderedByRange)
         {
             IPossessable possessableInterface = gameObjectInRangeCollider.GetComponent<IPossessable>();
             if (possessableInterface != null && !PossessionTarget)
             {
+                //Check if the targetBehaviour is possessable.
                 TargetBehaviour = gameObjectInRangeCollider.GetComponent<BaseEntity>();
-
-                if (!TargetBehaviour.CanPossess)
-                {
-                    break;
-                }
+                if (!TargetBehaviour.CanPossess) break;
+                
+                //Check if there is a collider in between the player and the possessable.
+                Vector3 playerToPossessable = (TargetBehaviour.transform.position - transform.position).normalized;
+                Physics.Raycast(transform.position, playerToPossessable, out RaycastHit hit,
+                    Vector3.Distance(transform.position, TargetBehaviour.transform.position));
+                if (!hit.collider.gameObject.Equals(TargetBehaviour.gameObject)) continue;
 
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
                 _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;

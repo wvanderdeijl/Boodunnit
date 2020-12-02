@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 03f3df1a639ea424790f932a179232c3
+guid: 66701b4f35e70614ab5499a3097d3a9e
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bird
+    second: {fileID: 2100000, guid: 56d731a2fc6306542b1084a2025b0298, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bird.001
+    second: {fileID: 2100000, guid: 56d731a2fc6306542b1084a2025b0298, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 56d731a2fc6306542b1084a2025b0298, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -85,7 +100,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.001
+    globalScale: 0.1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

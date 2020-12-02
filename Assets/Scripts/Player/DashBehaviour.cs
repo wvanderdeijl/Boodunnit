@@ -20,6 +20,10 @@ public class DashBehaviour : MonoBehaviour
 
     private IEnumerator _dashCoroutine;
 
+    private float _distanceBooliaDashable;
+    private float _dashableThickness;
+    private float _distanceDashableEndPosition;
+
     private void Awake()
     {
         _rigidbodyPlayer = GetComponent<Rigidbody>();
@@ -55,7 +59,8 @@ public class DashBehaviour : MonoBehaviour
         Vector3 oldVelocity = _rigidbodyPlayer.velocity;
         Vector3 newVelocity = transform.forward * _dashSpeed;
 
-        if (CheckDashEndPosition())
+        InitializeDashDistances();
+        if (_distanceDashableEndPosition > 1 && CheckDashEndPosition())
         {
             gameObject.layer = 9;
         }
@@ -81,13 +86,40 @@ public class DashBehaviour : MonoBehaviour
     {
         Vector3 endPosition = transform.position + (transform.forward * _dashDistance);
 
-        Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _endPositionRadius);
+        Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _distanceDashableEndPosition);
 
         if (endPositionColliderArray != null)
         {
-            return endPositionColliderArray.Length == 0;
+            bool canDash = true;
+            foreach (Collider collider in endPositionColliderArray)
+            {
+                Vector3 endOFDashablePosition = transform.position + (transform.forward * (_dashableThickness + _distanceBooliaDashable));
+                float distanceColliderDashable = Vector3.Distance(collider.transform.position, endOFDashablePosition);
+                Debug.Log(distanceColliderDashable);
+                canDash = distanceColliderDashable > 1.5;
+                if (!canDash)
+                {
+                    break;
+                }
+            }
+            return canDash;
         }
         return true;
+    }
+
+    private void InitializeDashDistances()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 10))
+        {
+            float angle = Vector3.Angle(hitInfo.normal, -transform.forward);
+            float cosAngle = Math.Abs(Mathf.Cos(angle));
+            float size = hitInfo.transform.localScale.z;
+            _dashableThickness = size / cosAngle;
+
+            _distanceBooliaDashable = hitInfo.distance;
+
+            _distanceDashableEndPosition = _dashDistance - _dashableThickness - _distanceBooliaDashable;
+        }
     }
 
     private IEnumerator DashTimer()

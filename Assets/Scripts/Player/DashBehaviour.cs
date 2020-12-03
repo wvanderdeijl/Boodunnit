@@ -19,14 +19,28 @@ public class DashBehaviour : MonoBehaviour
 
     private IEnumerator _dashCoroutine;
 
-    private float _distanceBooliaDashable;
-    private float _dashableThickness;
-    private float _distanceDashableEndPosition;
+    private float _playerSize;
+    private float _defaultDashDuration;
+
+    private RaycastHit[] _raycastHits;
+    private RaycastHit _furthestHit;
+    private Collider[] _collidesAtEndOFRaycast;
+
+    private bool _canDash;
 
     private void Awake()
     {
         _rigidbodyPlayer = GetComponent<Rigidbody>();
         _dashSpeed = DashDistance / DashDuration;
+        _defaultDashDuration = DashDuration;
+
+        foreach (Collider collider in GetComponents<CapsuleCollider>())
+        {
+            if (!collider.isTrigger)
+            {
+                _playerSize = collider.bounds.size.z;
+            }
+        }
     }
 
     public void Dash()
@@ -57,7 +71,6 @@ public class DashBehaviour : MonoBehaviour
         Vector3 oldVelocity = _rigidbodyPlayer.velocity;
         Vector3 newVelocity = transform.forward * _dashSpeed;
 
-        InitializeDashDistances();
         if (CheckDashEndPosition())
         {
             gameObject.layer = 9;
@@ -78,49 +91,84 @@ public class DashBehaviour : MonoBehaviour
         DashOnCooldown = true;
         IsDashing = false;
         _rigidbodyPlayer.useGravity = true;
+        DashDuration = _defaultDashDuration;
     }
 
     private bool CheckDashEndPosition()
     {
-        Vector3 endPosition = transform.position + (transform.forward * DashDistance);
+        _raycastHits = Physics.RaycastAll(transform.position, transform.forward, DashDistance);
 
-        Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _distanceDashableEndPosition);
-
-        bool canDash = true;
-
-        if (endPositionColliderArray != null)
+        if(_raycastHits.Length == 0)
         {
-            foreach (Collider collider in endPositionColliderArray)
-            {
-                if (collider.gameObject.layer != 10)
-                {
-                    Vector3 endOFDashablePosition = transform.position + (transform.forward * (_dashableThickness + _distanceBooliaDashable));
-                    float distanceColliderDashable = Vector3.Distance(collider.transform.position, endOFDashablePosition);
-
-                    if (distanceColliderDashable < 2)
-                    {
-                        canDash = false;
-                        break;
-                    }
-                }
-            }
+            return true;
         }
-        return canDash;
+
+        if (_raycastHits.Length == 1)
+        {
+            return RayCastLengthIsOne();
+        }
+        
+        CheckFurthestRaycastHit();
+
+        _collidesAtEndOFRaycast = Physics.OverlapSphere(_furthestHit.point, _playerSize);
+        _canDash = _collidesAtEndOFRaycast.Length < 2;
+
+        CheckRoomBetweenTwoDashables();
+
+        return _canDash;
     }
 
-    private void InitializeDashDistances()
+    private bool RayCastLengthIsOne()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, DashDistance))
+        Vector3 endPosition = transform.position + (transform.forward * DashDistance);
+        Collider[] collidesAtEndPosition = Physics.OverlapSphere(endPosition, _playerSize);
+
+        foreach (Collider collide in collidesAtEndPosition)
         {
-            float angle = Vector3.Angle(hitInfo.normal, -transform.forward);
-            float cosAngle = Math.Abs(Mathf.Cos(angle));
-            float size = hitInfo.transform.localScale.z;
-            _dashableThickness = size / cosAngle;
-
-            _distanceBooliaDashable = hitInfo.distance;
-
-            _distanceDashableEndPosition = DashDistance - _dashableThickness - _distanceBooliaDashable;
+            if (collide == _raycastHits[0].collider)
+            {
+                return false;
+            }
         }
+        return true;
+    }
+
+    private void CheckFurthestRaycastHit()
+    {
+        _furthestHit = _raycastHits[0];
+
+        foreach (RaycastHit hit in _raycastHits)
+        {
+            if (Vector3.Distance(transform.position, _furthestHit.point) < Vector3.Distance(transform.position, hit.point))
+            {
+                _furthestHit = hit;
+            }
+        }
+    }
+
+    private void CheckRoomBetweenTwoDashables()
+    {
+        if (_furthestHit.transform.gameObject.layer == 10)
+        {
+            if (_collidesAtEndOFRaycast.Length < 2)
+            {
+                float dashDistance = Vector3.Distance(transform.position, _furthestHit.point) - _playerSize;
+
+                DashDuration = dashDistance / _dashSpeed;
+            } 
+            
+            else
+            {
+                Vector3 endPosition = transform.position + (transform.forward * DashDistance);
+
+                Collider[] endPositionColliderArray = Physics.OverlapSphere(endPosition, _playerSize);
+
+                if (endPositionColliderArray != null)
+                {
+                    _canDash = endPositionColliderArray.Length == 0;
+                }
+            }
+        } 
     }
 
     private IEnumerator DashTimer()

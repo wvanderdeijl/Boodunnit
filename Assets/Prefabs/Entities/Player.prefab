@@ -128,6 +128,8 @@ MonoBehaviour:
   Speed: 12
   Collider: {fileID: 2832741858228525863}
   IsGrounded: 1
+  CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   PossessionBehaviour: {fileID: 2832741858228525860}
   DashBehaviour: {fileID: 2832741858228525858}
   HighlightBehaviour: {fileID: 2832741858228525859}
@@ -148,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPossessing: 0
   TargetBehaviour: {fileID: 0}
-  CooldownImage: {fileID: 0}
   UnpossessRadius: 2
   UnPossessRetriesOnYAxis: 15
   Cooldown: 1
@@ -180,7 +181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDashing: 0
   DashOnCooldown: 0
-  DashCooldownImage: {fileID: 0}
   _dashCooldown: 1
   _dashDuration: 0.4
   _dashDistance: 7

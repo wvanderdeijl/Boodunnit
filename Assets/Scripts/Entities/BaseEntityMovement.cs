@@ -11,6 +11,9 @@ public abstract class BaseEntityMovement : BaseMovement
     public NavMeshAgent NavMeshAgent;
 
     [HideInInspector]
+    public Animator Animator;
+
+    [HideInInspector]
     public bool IsOnCountdown;
 
     [Header("Pathfinding")]
@@ -27,6 +30,7 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         InitBaseMovement();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
 
         if (NavMeshAgent)
         {
@@ -62,10 +66,12 @@ public abstract class BaseEntityMovement : BaseMovement
             if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
             {
                 NavMeshAgent.isStopped = false;
+                Animator.SetBool("IsWalking", true);
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
 
+            Animator.SetBool("IsWalking", false);
             NavMeshAgent.isStopped = true;
         }
     }
@@ -92,11 +98,13 @@ public abstract class BaseEntityMovement : BaseMovement
         {
             _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
             NavMeshAgent.destination = _patrolDestination;
+            Animator.SetBool("IsWalking", true);
             _hasPositionInArea = true;
         }
 
         if (HasReachedDestination(_patrolDestination))
         {
+            Animator.SetBool("IsWalking", false);
             _hasPositionInArea = false;
         }
     }

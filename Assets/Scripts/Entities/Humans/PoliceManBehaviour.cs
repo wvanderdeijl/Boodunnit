@@ -27,7 +27,7 @@ public class PoliceManBehaviour : BaseEntity
         ScaredOfGameObjects = new Dictionary<Type, float>()
         {
             [typeof(ILevitateable)] = 3f,
-            [typeof(RatBehaviour)] = 3f
+            [typeof(RatBehaviour)] = 3f,
         };
     }
     

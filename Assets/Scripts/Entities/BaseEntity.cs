@@ -106,7 +106,6 @@ namespace Entities
         protected virtual void DealFearDamage(float amount)
         {
             if (EmotionalState == EmotionalState.Fainted) return;
-
             FearDamage += amount;
             UpdateFearMeter();
             if (FearDamage >= FearThreshold) Faint();
@@ -117,6 +116,7 @@ namespace Entities
             yield return new WaitForSeconds(FaintDuration);
             EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
+            Animator.SetBool("IsScared", false);
             _ragdollController.ToggleRagdoll(false);
         }
 

@@ -26,6 +26,7 @@ public class PlayerBehaviour : BaseMovement
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            GameManager.ToggleCursor();
             PauseMenu.TogglePauseGame();
         }
         

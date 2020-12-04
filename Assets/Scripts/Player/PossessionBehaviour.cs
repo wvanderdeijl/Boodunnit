@@ -154,13 +154,6 @@ public class PossessionBehaviour : MonoBehaviour
 
     private void TeleportPlayerToRandomPosition()
     {
-        /**
-            * 1. Create a random point for the player to teleport to.
-            * 2. Check if this point is valid, does the player collide with any object?
-            * 3. If point found is invalid, retry.
-            * 4. Update player position to random position in radius.
-        **/
-
         float minNewPlayerPositionInRadiusX = transform.position.x - UnpossessRadius;
         float minNewPlayerPositionInRadiusZ = transform.position.z - UnpossessRadius;
 
@@ -168,21 +161,24 @@ public class PossessionBehaviour : MonoBehaviour
         float maxNewPlayerPositionInRadiusY = transform.position.y + UnpossessRadius;
         float maxNewPlayerPositionInRadiusZ = transform.position.z + UnpossessRadius;
 
-        bool isPositionValid = false;
         int newPositionTries = 0;
-
-        while (!isPositionValid || newPositionTries < UnPossessRetriesOnYAxis)
+        while (newPositionTries < UnPossessRetriesOnYAxis)
         {
-            Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y,
+            Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX,
                 minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
 
-            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius, default, QueryTriggerInteraction.Ignore);
+            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius);
             if (newPositionCollision != null)
             {
-                if (newPositionCollision.Length == 0)
+                Collider[] collisionsWithoutTrigger = newPositionCollision.Where(collider => collider.isTrigger == false).ToArray();
+                if (collisionsWithoutTrigger.Length == 0)
                 {
+                    Vector3 playerToNewPosition = (transform.position - playerNewPositionAfterUnpossessing).normalized;
+                    if (!Physics.Raycast(transform.position, playerToNewPosition,
+                        Vector3.Distance(transform.position, playerToNewPosition))) continue;
+
                     transform.position = playerNewPositionAfterUnpossessing;
-                    isPositionValid = true;
+                    return;
                 }
             }
 
@@ -206,11 +202,11 @@ public class PossessionBehaviour : MonoBehaviour
         );
     }
 
-    private Vector3 GetNewPlayerVector3Position(float minPositionX, float maxPositionX, float positionY, float minPositionZ, float maxPositionZ)
+    private Vector3 GetNewPlayerVector3Position(float minPositionX, float maxPositionX, float minPositionZ, float maxPositionZ)
     {
         return new Vector3(
             Random.Range(minPositionX, maxPositionX),
-            positionY,
+            transform.position.y,
             Random.Range(minPositionZ, maxPositionZ)
         );
     }

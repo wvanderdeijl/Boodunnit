@@ -53,7 +53,7 @@ public class Shop : MonoBehaviour
 
         _dicCurrentItemsForSale.Remove(itemSlot);
 
-        Destroy(itemToBuy);
+        //Destroy(itemToBuy);
 
         StartCoroutine(RestockEmptyShopSlot(itemSlot));
         return itemToBuy;

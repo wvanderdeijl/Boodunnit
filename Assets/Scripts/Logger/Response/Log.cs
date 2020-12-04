@@ -8,11 +8,16 @@ using UnityEngine;
 public class Log
 {
     public string Name;
+    public List<Entry> LogDetails = new List<Entry>();
     /// <summary>
-    /// 1st is the actual information
-    /// 2nd Describes time in seconds after starting
+    /// Describes time in seconds after starting
     /// </summary>
-    public List<object> LogDetails = new List<object>();
-    public float LogTime;
+
+    public class Entry
+    {
+        public object info;
+        public float LogTime;
+    }
+
 }
 

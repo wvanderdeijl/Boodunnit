@@ -18,4 +18,10 @@ public class SceneLogger : MonoBehaviour
         PlaythroughLogger.Instance.PlaythroughLog.Scenes.Add(SceneLog);
         PlaythroughLogger.Instance.WriteLog();
     }
+
+    private void OnApplicationQuit()
+    {
+        PlaythroughLogger.Instance.PlaythroughLog.GameEndTime = DateTime.UtcNow;
+        PlaythroughLogger.Instance.PlaythroughLog.Platform = Application.platform.ToString();
+    }
 }

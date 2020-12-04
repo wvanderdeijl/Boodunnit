@@ -14,6 +14,8 @@ public class ClimbBehaviour : MonoBehaviour
 
     public float Speed { get; set; }
     public bool IsClimbing;
+    
+    [HideInInspector]
     public Canvas StaminaBarCanvas;
     
     [SerializeField] private float _rotationSpeed = 100f;

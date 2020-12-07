@@ -598,6 +598,7 @@ MonoBehaviour:
   _fearAngle: 90
   _ragdollController: {fileID: 3261587041592194182}
   ConsumableEndPosition: {fileID: 2548035854093646812}
+  PoliceHead: {fileID: 1543573615025307774}
   _donutDetectionRadius: 10
   _donutDetectionAngle: 90
 --- !u!114 &3261587041592194182
@@ -1683,5 +1684,10 @@ PrefabInstance:
 --- !u!4 &2170788530493561540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1753fb12197b97f4893e49cb96cba81c, type: 3}
+  m_PrefabInstance: {fileID: 1849442156523224367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1543573615025307774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1753fb12197b97f4893e49cb96cba81c, type: 3}
   m_PrefabInstance: {fileID: 1849442156523224367}
   m_PrefabAsset: {fileID: 0}

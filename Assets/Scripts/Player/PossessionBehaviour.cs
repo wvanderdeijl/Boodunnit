@@ -166,8 +166,6 @@ public class PossessionBehaviour : MonoBehaviour
         {
             Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX,
                 minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
-
-<<<<<<< HEAD
             Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius).Where(collider => collider.isTrigger == false).ToArray();
 
             if (newPositionCollision != null)
@@ -193,34 +191,7 @@ public class PossessionBehaviour : MonoBehaviour
         Vector3 playerNewPositionAfterUnpossessingOnY = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y, maxNewPlayerPositionInRadiusY,
             minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
         transform.position = playerNewPositionAfterUnpossessingOnY;
-=======
-            Collider[] newPositionCollision = Physics.OverlapSphere(playerNewPositionAfterUnpossessing, _playerEndPositionRadius);
-            if (newPositionCollision != null)
-            {
-                Collider[] collisionsWithoutTrigger = newPositionCollision.Where(collider => collider.isTrigger == false).ToArray();
-                if (collisionsWithoutTrigger.Length == 0)
-                {
-                    Vector3 playerToNewPosition = (transform.position - playerNewPositionAfterUnpossessing).normalized;
-                    if (!Physics.Raycast(transform.position, playerToNewPosition,
-                        Vector3.Distance(transform.position, playerToNewPosition))) continue;
-
-                    transform.position = playerNewPositionAfterUnpossessing;
-                    return;
-                }
-            }
-
-            newPositionTries++;
-        }
-
-        if(newPositionTries >= UnPossessRetriesOnYAxis)
-        {
-            Vector3 playerNewPositionAfterUnpossessing = GetNewPlayerVector3Position(minNewPlayerPositionInRadiusX, maxNewPlayerPositionInRadiusX, transform.position.y, maxNewPlayerPositionInRadiusY,
-                minNewPlayerPositionInRadiusZ, maxNewPlayerPositionInRadiusZ);
-            transform.position = playerNewPositionAfterUnpossessing;
-        }
->>>>>>> 5c06355584b45158f0f1718ad8c29dadf911afb3
     }
-
     private Vector3 GetNewPlayerVector3Position(float minPositionX, float maxPositionX, float minPositionY, float maxPositionY, float minPositionZ, float maxPositionZ)
     {
         return new Vector3(

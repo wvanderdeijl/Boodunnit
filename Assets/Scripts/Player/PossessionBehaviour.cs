@@ -174,10 +174,10 @@ public class PossessionBehaviour : MonoBehaviour
                 {
                     Vector3 playerToNewPosition = (transform.position - playerNewPositionAfterUnpossessing).normalized;
                     RaycastHit[] hits = Physics.RaycastAll(transform.position, playerToNewPosition,
-                        Vector3.Distance(transform.position, playerToNewPosition));
+                       Vector3.Distance(transform.position, playerToNewPosition));
                     foreach(RaycastHit hit in hits)
                     {
-                        if(hit.collider != null && hit.collider.isTrigger == false || hit.collider.isTrigger)
+                        if(hit.collider != null && !hit.collider.isTrigger || hit.collider != null && hit.collider.isTrigger)
                         {
                             transform.position = playerNewPositionAfterUnpossessing;
                             return;

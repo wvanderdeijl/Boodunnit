@@ -66,12 +66,21 @@ public abstract class BaseEntityMovement : BaseMovement
             if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
             {
                 NavMeshAgent.isStopped = false;
-                Animator.SetBool("IsWalking", true);
+
+                if (Animator)
+                {
+                    Animator.SetBool("IsWalking", true);
+                }
+
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
 
-            Animator.SetBool("IsWalking", false);
+            if (Animator)
+            {
+                Animator.SetBool("IsWalking", false);
+            }
+
             NavMeshAgent.isStopped = true;
         }
     }
@@ -98,13 +107,22 @@ public abstract class BaseEntityMovement : BaseMovement
         {
             _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
             NavMeshAgent.destination = _patrolDestination;
-            Animator.SetBool("IsWalking", true);
+
+            if (Animator)
+            {
+                Animator.SetBool("IsWalking", true);
+            }
+
             _hasPositionInArea = true;
         }
 
         if (HasReachedDestination(_patrolDestination))
         {
-            Animator.SetBool("IsWalking", false);
+            if (Animator)
+            {
+                Animator.SetBool("IsWalking", false);
+            }
+
             _hasPositionInArea = false;
         }
     }

@@ -39,7 +39,8 @@ public class PoliceManBehaviour : BaseEntity
 
     private void CheckDonutsInSurrounding()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _donutDetectionRadius);
+        Vector3 headLocation = transform.position + new Vector3(0, 5f, 0);
+        Collider[] hitColliders = Physics.OverlapSphere(headLocation, _donutDetectionRadius);
         
         foreach (Collider hitCollider in hitColliders)
         {
@@ -59,7 +60,6 @@ public class PoliceManBehaviour : BaseEntity
                 {
                     if (donutAngle > -(_donutDetectionAngle / 2) && donutAngle < _donutDetectionAngle / 2)
                     {
-                        Debug.Log("IK ZIE DONUT!");
                         FollowDonut(isDonut);
                         return;
                     }

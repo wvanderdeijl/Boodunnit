@@ -21,12 +21,14 @@ public class PlayerBehaviour : BaseMovement
 
     void Update()
     {
+        Debug.DrawRay( _cameraTransform.position, _cameraTransform.transform.forward * 100f, Color.yellow );
+        
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseMenu.TogglePauseGame();
+            //PauseMenu.TogglePauseGame();
         }
         
         //Return when the game is paused, so there can be no input buffer
@@ -83,7 +85,7 @@ public class PlayerBehaviour : BaseMovement
         Vector3 moveDirection = movementInput.y * _cameraTransform.forward +
                                 movementInput.x * _cameraTransform.right;
         moveDirection.y = 0;
-
+        
         if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {
             MoveEntityInDirection(moveDirection);   
@@ -160,8 +162,6 @@ public class PlayerBehaviour : BaseMovement
     private void RotationHandler(bool isRotating)
     {
         LevitateBehaviour.IsRotating = isRotating;
-        GameManager.CursorIsLocked = isRotating;
-
         LevitateBehaviour.RotateLevitateableObject();
     }
 }

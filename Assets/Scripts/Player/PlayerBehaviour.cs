@@ -133,11 +133,28 @@ public class PlayerBehaviour : BaseMovement
 
         SaveHandler.Instance.SaveDataContainer(playerDataContainer);
     }
+    
     private void HandleLevitationInput()
     {
         LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
-        LevitateBehaviour.PushOrPullLevitateableObject();
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            LevitateBehaviour.ToggleMiddleMouseButton();
+        }
+
+        if (LevitateBehaviour.IsPushing)
+        {
+            Debug.Log("PUSH AND PULL");
+            LevitateBehaviour.PushOrPullLevitateableObject();
+        }
+        else
+        {
+            Debug.Log("CHANGE HEIGHT");
+            LevitateBehaviour.ChangeHeightOfLevitateableObject();
+        }
         
+
         if (Input.GetMouseButtonDown(0))
         {
             LevitateBehaviour.LevitationStateHandler();

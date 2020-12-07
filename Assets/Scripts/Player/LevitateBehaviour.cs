@@ -1,7 +1,7 @@
 ﻿using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 
 public class LevitateBehaviour : MonoBehaviour
 {
@@ -26,28 +26,40 @@ public class LevitateBehaviour : MonoBehaviour
     public static bool IsRotating { get; set; }
     public bool IsLevitating { get; set; }
     public Collider[] CurrentLevitateableObjects { get; set; }
+    public bool IsPushing { get; set; }
 
     private Rigidbody _selectedRigidbody;
-    private float _selectionDistance;
     
+    private float _heightOfLevitateableObject;
+    private float _distanceOfLevitateableObject;
+
     private Vector3 _originalScreenTargetPosition;
     private Vector3 _originalRigidbodyPosition;
-    
+
     public void LevitationStateHandler()
     {
         if (!_selectedRigidbody)
         {
+            FindObjectOfType<CameraController>().CanScrollZoom = false;
+            FindObjectOfType<CameraController>().CanAutoZoom = false;
             GetRigidbodyAndStartLevitation();
             DisableRotation(true);
         }
 
         else
         {
+            FindObjectOfType<CameraController>().CanScrollZoom = true;
+            FindObjectOfType<CameraController>().CanAutoZoom = true;
             ToggleGravity(true);
             DisableRotation(false);
-            _selectionDistance = 0;
+            _heightOfLevitateableObject = 0;
             RemoveRigidbodyAndStartFreeze();
         }
+    }
+
+    public void ToggleMiddleMouseButton()
+    {
+        IsPushing = !IsPushing;
     }
 
     public void MoveLevitateableObject()
@@ -65,7 +77,10 @@ public class LevitateBehaviour : MonoBehaviour
         ToggleGravity(false);
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 endOfRayCast = (ray.origin + (ray.direction * 10f)) + new Vector3(0, _selectionDistance, 0);
+        Vector3 endOfRayCast = ray.origin + ray.direction * (_distanceOfLevitateableObject + 10f);
+        endOfRayCast += new Vector3(0, _heightOfLevitateableObject + 1f, 0);
+        
+        Debug.Log(_distanceOfLevitateableObject);
 
         _selectedRigidbody.position = endOfRayCast;
 
@@ -83,22 +98,31 @@ public class LevitateBehaviour : MonoBehaviour
         _selectedRigidbody.useGravity = useGravity;
     }
 
-    public void PushOrPullLevitateableObject()
+    public void ChangeHeightOfLevitateableObject()
     {
         if (!_selectedRigidbody) return;
-        
+
         float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
-        
         
         if (scrollWheelInput > 0 || scrollWheelInput < 0)
         {
             Vector3 position = _selectedRigidbody.transform.position;
-            _selectionDistance += scrollWheelInput * _pushPullSpeed;
-            
-            Debug.Log(_selectionDistance);
-            
-            _selectedRigidbody.transform.position = new Vector3(position.x, _selectionDistance, position.z);
+            _heightOfLevitateableObject += (scrollWheelInput * _pushPullSpeed);
+            _selectedRigidbody.transform.position = new Vector3(position.x, _heightOfLevitateableObject, position.z);
         }
+    }
+    
+    public void PushOrPullLevitateableObject()
+    {
+        if (!_selectedRigidbody) return;
+        
+        if (_distanceOfLevitateableObject < 0f)
+        {
+            _distanceOfLevitateableObject = 0f + 0.1f;
+            return;
+        }
+        
+        _distanceOfLevitateableObject += (Input.GetAxis("Mouse ScrollWheel") * _pushPullSpeed * Time.deltaTime);
     }
     
     public void RotateLevitateableObject()
@@ -272,6 +296,6 @@ public class LevitateBehaviour : MonoBehaviour
     {
         IsLevitating = false;
         _selectedRigidbody = null;
-        _selectionDistance = 0;
+        _heightOfLevitateableObject = 0;
     }
 }

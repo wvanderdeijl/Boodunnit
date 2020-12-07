@@ -31,12 +31,11 @@ public class CameraController : MonoBehaviour
             _elevationRange = value;
         }
     }
-
+    [Header("Target & Distance")]
     public float MaxDistance = 7;
     public float MinDistance = 1.255763f;
 
     private float _distance;
- 
     public float RotationSpeed = 1f;
 
     public Transform CameraRotationTarget;
@@ -51,12 +50,17 @@ public class CameraController : MonoBehaviour
     private Vector2 _rotationInput;
     private float _scrollingInput;
     private bool _scrollZoomActivation;
-
+    
     private float _minElevationOrigin;
     private float _maxElevationOrigin;
+    [Header("Elevation")]
     public float MaxElevation = 8f;
     public float MinElevation = -0.5f;
     private float _elevationRange = 2f;
+
+    [Header("Disable-ables")] 
+    public bool CanScrollZoom;
+    public bool CanAutoZoom;
 
     private void Awake()
     {
@@ -126,18 +130,20 @@ public class CameraController : MonoBehaviour
     {
         Vector3 direction = (transform.position - CameraRotationTarget.position).normalized;
         float zoomValue = 0;
-        if (Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit raycastHit,
-            Distance, LayerMask.GetMask("Default")))
-        {
-            raycastHit.point -= direction.normalized / 2f;
-            zoomValue = (-Vector3.Distance(transform.position, raycastHit.point) - 0.1f);
-            _scrollZoomActivation = false;
+        if (CanAutoZoom)
+        {if (Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit raycastHit,
+                Distance, LayerMask.GetMask("Default")))
+            {
+                raycastHit.point -= direction.normalized / 2f;
+                zoomValue = (-Vector3.Distance(transform.position, raycastHit.point) - 0.1f);
+                _scrollZoomActivation = false;
+            }
+            else if (!Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit hit, MaxDistance, 
+                LayerMask.GetMask("Default")) && !_scrollZoomActivation)
+                zoomValue = 1f;
         }
-        else if (!Physics.Raycast(CameraRotationTarget.position, direction, out RaycastHit hit, MaxDistance, 
-                 LayerMask.GetMask("Default")) && !_scrollZoomActivation)
-            zoomValue = 1f;
         
-        if (_scrollingInput != 0)
+        if (CanScrollZoom && _scrollingInput != 0)
         {
             _scrollZoomActivation = true;
             zoomValue = _scrollingInput * 3;

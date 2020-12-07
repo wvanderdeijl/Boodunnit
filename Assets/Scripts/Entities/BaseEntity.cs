@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace.Enums;
 using Enums;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,14 +35,10 @@ namespace Entities
         [SerializeField] private float _fearRadius;
         [SerializeField] private float _fearAngle;
 
-        private Image _fearMeter;
-
         [SerializeField] private RagdollController _ragdollController;
 
         protected void InitBaseEntity()
         {
-            _fearMeter = GetComponentInChildren<Image>();
-            
             InitEntityMovement();
 
             Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -60,8 +58,8 @@ namespace Entities
             Rigidbody.isKinematic = !IsPossessed;
             if (!IsPossessed)
             {
-                MoveWithPathFinding();
                 CheckSurroundings();
+                MoveWithPathFinding();
             }
         }
 
@@ -69,26 +67,31 @@ namespace Entities
         
         protected virtual void CheckSurroundings()
         {
+            Debug.Log("Checking surroundings...");
             if (HasFearCooldown) return;
+            Debug.Log("No fear cooldown.");
             StartCoroutine(ActivateCooldown());
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, _fearRadius);
 
             foreach (Collider collider in colliders)
             {
-                Vector3 offset = (collider.transform.position - transform.position).normalized;
+                Vector3 offset = (collider.transform.root.position - transform.position).normalized;
                 float dot = Vector3.Dot(offset, transform.forward);
 
                 if (dot * 100f >= (90 - (_fearAngle / 2f)))
                 {
+                    Debug.Log("Collider in area:");
                     BaseEntity scaryEntity = collider.gameObject.GetComponent<BaseEntity>();
                     if (scaryEntity != null && ScaredOfGameObjects.ContainsKey(scaryEntity.GetType()))
                     {
+                        Debug.Log("Dealing fear damage.");
                         DealFearDamage(ScaredOfGameObjects[scaryEntity.GetType()]);
                     }
 
-                    ILevitateable levitateableObject = collider.gameObject.GetComponent<ILevitateable>();
-                    if (levitateableObject != null) //TODO check levitateable state
+                    ILevitateable levitateableObject = collider.gameObject.GetComponent<LevitateableObject>();
+                    if (levitateableObject != null && (levitateableObject.State == LevitationState.Frozen 
+                                                       || levitateableObject.State == LevitationState.Levitating))
                     {
                         DealFearDamage(ScaredOfGameObjects[levitateableObject.GetType()]);
                     }
@@ -107,10 +110,17 @@ namespace Entities
         {
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
-            UpdateFearMeter();
             if (FearDamage >= FearThreshold) Faint();
         }
 
+        protected virtual void Faint()
+        {
+            Debug.Log("Fainted.");
+            EmotionalState = EmotionalState.Fainted;
+            if (_ragdollController) _ragdollController.ToggleRagdoll(true);
+            StartCoroutine(CalmDown());
+        }
+        
         protected virtual IEnumerator CalmDown()
         {
             yield return new WaitForSeconds(FaintDuration);
@@ -118,18 +128,6 @@ namespace Entities
             FearDamage = 0;
             Animator.SetBool("IsScared", false);
             _ragdollController.ToggleRagdoll(false);
-        }
-
-        protected virtual void Faint()
-        {
-            EmotionalState = EmotionalState.Fainted;
-            if (_ragdollController) _ragdollController.ToggleRagdoll(true);
-            StartCoroutine(CalmDown());
-        }
-        
-        protected virtual void UpdateFearMeter()
-        {
-            _fearMeter.fillAmount = FearDamage / FearThreshold;
         }
     }
 }

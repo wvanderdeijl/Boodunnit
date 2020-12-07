@@ -26,7 +26,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0.34728202, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8878074394517601490}
   m_Father: {fileID: 6349564243796587345}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -260,9 +261,11 @@ GameObject:
   - component: {fileID: 4699617755995634118}
   - component: {fileID: 3181425577721348680}
   - component: {fileID: 1338320295521059910}
-  - component: {fileID: 327703962357968386}
+  - component: {fileID: -5596406916413632425}
+  - component: {fileID: 5308071399483030495}
+  - component: {fileID: 5006808132192281613}
   m_Layer: 0
-  m_Name: NPC_Policeman1
+  m_Name: WhitePoliceMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,9 +335,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &327703962357968386
+--- !u!114 &-5596406916413632425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,36 +346,77 @@ MonoBehaviour:
   m_GameObject: {fileID: 2059157727463176454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dedd8a6ba0b4db4e856619ca3ce6672, type: 3}
+  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   JumpForce: 10
   Speed: 5
-  Collider: {fileID: 0}
+  Collider: {fileID: 3181425577721348680}
   IsGrounded: 0
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  Animator: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 0
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
+  MinimumFollowRange: 2
+  MaximumFollowRange: 10
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
-  Relationships: 
+  Relationships: 0a000000
   DefaultAnswers: []
   CharacterName: 10
   CanTalkToBoolia: 0
-  FearThreshold: 0
+  FearThreshold: 30
   FearDamage: 0
-  FaintDuration: 0
+  FaintDuration: 10
   EmotionalState: 0
   HasFearCooldown: 0
-  _fearRadius: 0
-  _fearAngle: 0
-  _ragdollController: {fileID: 0}
+  _fearRadius: 5
+  _fearAngle: 90
+  _ragdollController: {fileID: 5308071399483030495}
+  ConsumableEndPosition: {fileID: 8878074394517601490}
+  PoliceHead: {fileID: 2059157727533346083}
+  _donutDetectionRadius: 10
+  _donutDetectionAngle: 90
+--- !u!114 &5308071399483030495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059157727463176454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a370603715da9442b5b569700ac28f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAnimator: {fileID: 0}
+--- !u!195 &5006808132192281613
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059157727463176454}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2139687536168054809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1255,36 @@ Transform:
   m_Father: {fileID: 4103491541914020515}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7047724782163556454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8878074394517601490}
+  m_Layer: 0
+  m_Name: ConsumableEndPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8878074394517601490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047724782163556454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6119126402961702779}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7463126231357775757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,5 +1684,10 @@ PrefabInstance:
 --- !u!4 &1718204241808488345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7b60393bd1d7b56458a121b03c213e44, type: 3}
+  m_PrefabInstance: {fileID: 1176267275853697138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2059157727533346083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7b60393bd1d7b56458a121b03c213e44, type: 3}
   m_PrefabInstance: {fileID: 1176267275853697138}
   m_PrefabAsset: {fileID: 0}

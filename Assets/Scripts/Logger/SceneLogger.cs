@@ -15,6 +15,11 @@ public class SceneLogger : MonoBehaviour
     
     private void OnDestroy()
     {
+        TriggerLogger[] logs = gameObject.GetComponentsInChildren<TriggerLogger>();
+        foreach (TriggerLogger logger in logs)
+        {
+            if (!logger.hasLogged) SceneLog.UnusedLogs.Add(new Log(logger.name));
+        }
         PlaythroughLogger.Instance.PlaythroughLog.Scenes.Add(SceneLog);
         PlaythroughLogger.Instance.WriteLog();
     }

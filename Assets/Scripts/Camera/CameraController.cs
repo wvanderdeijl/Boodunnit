@@ -73,7 +73,7 @@ public class CameraController : MonoBehaviour
         if (ConversationManager.HasConversationStarted) return;
         RotationTarget = CameraRotationTarget;
         
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !GameManager.IsPaused)
         {
             GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
         }

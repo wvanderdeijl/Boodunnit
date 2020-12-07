@@ -136,6 +136,7 @@ public class PlayerBehaviour : BaseMovement
     private void HandleLevitationInput()
     {
         LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
+        LevitateBehaviour.PushOrPullLevitateableObject();
         
         if (Input.GetMouseButtonDown(0))
         {
@@ -155,8 +156,6 @@ public class PlayerBehaviour : BaseMovement
         {
             LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
         }
-
-        LevitateBehaviour.PushOrPullLevitateableObject();
     }
 
     private void RotationHandler(bool isRotating)

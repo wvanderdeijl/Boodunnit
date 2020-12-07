@@ -45,6 +45,7 @@ public class LevitateBehaviour : MonoBehaviour
         {
             ToggleGravity(true);
             DisableRotation(false);
+            _selectionDistance = 0;
             RemoveRigidbodyAndStartFreeze();
         }
     }
@@ -64,7 +65,7 @@ public class LevitateBehaviour : MonoBehaviour
         ToggleGravity(false);
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 endOfRayCast = ray.origin + (ray.direction * 10f);
+        Vector3 endOfRayCast = (ray.origin + (ray.direction * 10f)) + new Vector3(0, _selectionDistance, 0);
 
         _selectedRigidbody.position = endOfRayCast;
 
@@ -92,9 +93,11 @@ public class LevitateBehaviour : MonoBehaviour
         if (scrollWheelInput > 0 || scrollWheelInput < 0)
         {
             Vector3 position = _selectedRigidbody.transform.position;
-            _selectedRigidbody.transform.position = new Vector3(position.x, position.y + scrollWheelInput * _pushPullSpeed, position.z);
+            _selectionDistance += scrollWheelInput * _pushPullSpeed;
             
-            //todo: object still moves towards mouse
+            Debug.Log(_selectionDistance);
+            
+            _selectedRigidbody.transform.position = new Vector3(position.x, _selectionDistance, position.z);
         }
     }
     
@@ -269,5 +272,6 @@ public class LevitateBehaviour : MonoBehaviour
     {
         IsLevitating = false;
         _selectedRigidbody = null;
+        _selectionDistance = 0;
     }
 }

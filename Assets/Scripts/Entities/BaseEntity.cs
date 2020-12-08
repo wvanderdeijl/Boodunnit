@@ -5,6 +5,7 @@ using System.Linq;
 using DefaultNamespace.Enums;
 using Enums;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 namespace Entities
@@ -14,7 +15,7 @@ namespace Entities
         //Property regarding Possession mechanic.
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
-        
+
         //Properties & Fields regarding Dialogue mechanic.
         [Header("Conversation")]
         public Dialogue Dialogue;
@@ -31,7 +32,7 @@ namespace Entities
         public EmotionalState EmotionalState;
         public Dictionary<Type, float> ScaredOfGameObjects;
         public bool HasFearCooldown;
-        
+
         [SerializeField] private float _fearRadius;
         [SerializeField] private float _fearAngle;
 
@@ -59,21 +60,23 @@ namespace Entities
             if (!IsPossessed)
             {
                 CheckSurroundings();
-                MoveWithPathFinding();
+
+                if(EmotionalState != EmotionalState.Fainted)
+                    MoveWithPathFinding();
             }
         }
 
         public abstract void UseFirstAbility();
-        
+
         protected virtual void CheckSurroundings(Vector3 raycastStartPosition)
         {
             if (HasFearCooldown || EmotionalState == EmotionalState.Fainted) return;
             StartCoroutine(ActivateCooldown());
-            
+
             Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
 
             List<BaseEntity> baseEntities = colliders
-                .Where(c => 
+                .Where(c =>
                     Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
                     c.GetComponent<BaseEntity>() != null &&
                     ScaredOfGameObjects.ContainsKey(c.GetComponent<BaseEntity>().GetType()))
@@ -81,7 +84,7 @@ namespace Entities
                 .ToList();
 
             List<LevitateableObject> levitateables = colliders
-                .Where(c => 
+                .Where(c =>
                     Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
                     c.GetComponent<LevitateableObject>() != null &&
                     ScaredOfGameObjects.ContainsKey(c.GetComponent<LevitateableObject>().GetType()))
@@ -91,15 +94,15 @@ namespace Entities
             if (baseEntities.Count == 0 && levitateables.Count == 0) CalmDown();
             else
             {
-                foreach (BaseEntity entity in baseEntities) DealFearDamage(ScaredOfGameObjects[entity.GetType()]);
-                foreach (LevitateableObject levitateable in levitateables) DealFearDamage(ScaredOfGameObjects[levitateable.GetType()]);
+                foreach (BaseEntity entity in baseEntities) if(!IsPossessed) DealFearDamage(ScaredOfGameObjects[entity.GetType()]);
+                foreach (LevitateableObject levitateable in levitateables) if(!IsPossessed) DealFearDamage(ScaredOfGameObjects[levitateable.GetType()]);
             }
         }
-        
+
         protected virtual void CheckSurroundings() { CheckSurroundings(transform.position); }
-        
+
         protected virtual IEnumerator ActivateCooldown()
-        { 
+        {
             HasFearCooldown = true;
             yield return new WaitForSeconds(0.5f);
             HasFearCooldown = false;
@@ -109,33 +112,43 @@ namespace Entities
         {
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
-            if (FearDamage >= FearThreshold) Faint();
-            Debug.Log(FearDamage);
+            NavMeshAgent.isStopped = true;
+
+            Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
+
+            if (FearDamage >= FearThreshold && EmotionalState != EmotionalState.Fainted) Faint();
         }
 
         protected virtual void Faint()
         {
-            Debug.Log("Fainted.");
             EmotionalState = EmotionalState.Fainted;
             if (_ragdollController) _ragdollController.ToggleRagdoll(true);
             StartCoroutine(WakeUp());
         }
-        
+
         protected virtual void CalmDown()
         {
-            Debug.Log(FearDamage);
             if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
-            if (FearDamage < 0) FearDamage = 0;
+            if (FearDamage <= 0)
+            {
+                if(Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
+                {
+                    Animator.SetInteger("ScaredStage", 0);
+                    ResetDestination();
+                }
+                FearDamage = 0;
+            }
         }
 
         protected virtual IEnumerator WakeUp()
         {
             yield return new WaitForSeconds(FaintDuration);
             Debug.Log("Awake");
-            EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
-            Animator.SetBool("IsScared", false);
+            EmotionalState = EmotionalState.Calm;
             _ragdollController.ToggleRagdoll(false);
+            Animator.SetInteger("ScaredStage", 0);
+            ResetDestination();
         }
     }
 }

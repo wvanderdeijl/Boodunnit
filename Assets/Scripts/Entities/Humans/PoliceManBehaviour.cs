@@ -8,10 +8,11 @@ using UnityEngine;
 public class PoliceManBehaviour : BaseEntity
 {
     public Transform ConsumableEndPosition;
+    public GameObject PoliceHead;
     
     [SerializeField][Range(0, 10)] private float _donutDetectionRadius = 10f;
     [SerializeField][Range(0, 360)] private float _donutDetectionAngle = 90f;
-    
+
     private Donut _targetDonut;
     
     private void Awake()
@@ -39,7 +40,7 @@ public class PoliceManBehaviour : BaseEntity
 
     private void CheckDonutsInSurrounding()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _donutDetectionRadius);
+        Collider[] hitColliders = Physics.OverlapSphere(PoliceHead.transform.forward, _donutDetectionRadius);
         
         foreach (Collider hitCollider in hitColliders)
         {
@@ -49,7 +50,7 @@ public class PoliceManBehaviour : BaseEntity
             Vector3 toPosition = hitCollider.transform.position;
             Vector3 direction = toPosition - fromPosition;
             
-            float donutAngle = Vector3.Angle(direction, transform.forward);
+            float donutAngle = Vector3.Angle(direction, PoliceHead.transform.forward);
 
             if (Physics.Raycast(fromPosition, direction, out hit, _donutDetectionRadius))
             {
@@ -59,7 +60,6 @@ public class PoliceManBehaviour : BaseEntity
                 {
                     if (donutAngle > -(_donutDetectionAngle / 2) && donutAngle < _donutDetectionAngle / 2)
                     {
-                        Debug.Log("IK ZIE DONUT!");
                         FollowDonut(isDonut);
                         return;
                     }

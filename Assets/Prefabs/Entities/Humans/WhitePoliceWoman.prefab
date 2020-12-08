@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 6864950967645693321}
   - component: {fileID: 3628740556893347335}
   - component: {fileID: 1634591127054458353}
-  - component: {fileID: -3126115740197313829}
+  - component: {fileID: 1727358535519778681}
+  - component: {fileID: 3465630835520830596}
+  - component: {fileID: 6785665802871704304}
   m_Layer: 0
-  m_Name: NPC_Policeman2
+  m_Name: WhitePoliceWoman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,9 +86,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &-3126115740197313829
+--- !u!114 &1727358535519778681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,36 +97,77 @@ MonoBehaviour:
   m_GameObject: {fileID: 211327167482783049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dedd8a6ba0b4db4e856619ca3ce6672, type: 3}
+  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   JumpForce: 10
   Speed: 5
-  Collider: {fileID: 0}
+  Collider: {fileID: 3628740556893347335}
   IsGrounded: 0
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  Animator: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 0
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
+  MinimumFollowRange: 2
+  MaximumFollowRange: 10
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
-  Relationships: 
+  Relationships: 0a000000
   DefaultAnswers: []
   CharacterName: 10
   CanTalkToBoolia: 0
-  FearThreshold: 0
+  FearThreshold: 30
   FearDamage: 0
-  FaintDuration: 0
+  FaintDuration: 10
   EmotionalState: 0
   HasFearCooldown: 0
-  _fearRadius: 0
-  _fearAngle: 0
-  _ragdollController: {fileID: 0}
+  _fearRadius: 5
+  _fearAngle: 90
+  _ragdollController: {fileID: 3465630835520830596}
+  ConsumableEndPosition: {fileID: 7608479514112368769}
+  PoliceHead: {fileID: 6440014344126333749}
+  _donutDetectionRadius: 10
+  _donutDetectionAngle: 90
+--- !u!114 &3465630835520830596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211327167482783049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a370603715da9442b5b569700ac28f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAnimator: {fileID: 0}
+--- !u!195 &6785665802871704304
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211327167482783049}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &273843821616475222
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,8 +443,39 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0.34728202, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7608479514112368769}
   m_Father: {fileID: 5072037186195844894}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2199395164296171254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7608479514112368769}
+  m_Layer: 0
+  m_Name: ConsumableEndPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7608479514112368769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199395164296171254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5374712936620942132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2402177004216603398
@@ -1618,5 +1692,10 @@ PrefabInstance:
 --- !u!4 &5914447045546105231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5be6c1f693cbaa04d851f795a716d997, type: 3}
+  m_PrefabInstance: {fileID: 6169631584918912612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6440014344126333749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5be6c1f693cbaa04d851f795a716d997, type: 3}
   m_PrefabInstance: {fileID: 6169631584918912612}
   m_PrefabAsset: {fileID: 0}

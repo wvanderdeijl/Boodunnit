@@ -20,6 +20,7 @@ public class PreTutorialPopup : MonoBehaviour
         {
             PopupText.text = PopupTexts[0];
         }
+
         if (PopupTexts.Length > 1)
         {
             NextButton.SetActive(true);
@@ -35,7 +36,9 @@ public class PreTutorialPopup : MonoBehaviour
             PopupText.text = PopupTexts[_textCounter];
             NextButton.SetActive(false);
             CloseButton.SetActive(true);
-        } else
+        } 
+        
+        else
         {
             PopupText.text = PopupTexts[_textCounter];
         }

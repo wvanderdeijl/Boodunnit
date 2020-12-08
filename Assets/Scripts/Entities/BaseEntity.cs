@@ -67,35 +67,32 @@ namespace Entities
         
         protected virtual void CheckSurroundings()
         {
-            Debug.Log("Checking surroundings...");
             if (HasFearCooldown) return;
-            Debug.Log("No fear cooldown.");
             StartCoroutine(ActivateCooldown());
-
+            
             Collider[] colliders = Physics.OverlapSphere(transform.position, _fearRadius);
 
-            foreach (Collider collider in colliders)
+            List<BaseEntity> baseEntities = colliders
+                .Where(c => 
+                    Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
+                    c.GetComponent<BaseEntity>() != null &&
+                    ScaredOfGameObjects.ContainsKey(c.GetComponent<BaseEntity>().GetType()))
+                .Select(e => e.GetComponent<BaseEntity>())
+                .ToList();
+
+            List<LevitateableObject> levitateables = colliders
+                .Where(c => 
+                    Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
+                    c.GetComponent<LevitateableObject>() != null &&
+                    ScaredOfGameObjects.ContainsKey(c.GetComponent<LevitateableObject>().GetType()))
+                .Select(l => l.GetComponent<LevitateableObject>())
+                .ToList();
+
+            if (baseEntities.Count == 0 && levitateables.Count == 0) CalmDown();
+            else
             {
-                Vector3 offset = (collider.transform.root.position - transform.position).normalized;
-                float dot = Vector3.Dot(offset, transform.forward);
-
-                if (dot * 100f >= (90 - (_fearAngle / 2f)))
-                {
-                    Debug.Log("Collider in area:");
-                    BaseEntity scaryEntity = collider.gameObject.GetComponent<BaseEntity>();
-                    if (scaryEntity != null && ScaredOfGameObjects.ContainsKey(scaryEntity.GetType()))
-                    {
-                        Debug.Log("Dealing fear damage.");
-                        DealFearDamage(ScaredOfGameObjects[scaryEntity.GetType()]);
-                    }
-
-                    ILevitateable levitateableObject = collider.gameObject.GetComponent<LevitateableObject>();
-                    if (levitateableObject != null && (levitateableObject.State == LevitationState.Frozen 
-                                                       || levitateableObject.State == LevitationState.Levitating))
-                    {
-                        DealFearDamage(ScaredOfGameObjects[levitateableObject.GetType()]);
-                    }
-                }
+                foreach (BaseEntity entity in baseEntities) DealFearDamage(ScaredOfGameObjects[entity.GetType()]);
+                foreach (LevitateableObject levitateable in levitateables) DealFearDamage(ScaredOfGameObjects[levitateable.GetType()]);
             }
         }
         
@@ -118,10 +115,15 @@ namespace Entities
             Debug.Log("Fainted.");
             EmotionalState = EmotionalState.Fainted;
             if (_ragdollController) _ragdollController.ToggleRagdoll(true);
-            StartCoroutine(CalmDown());
+            StartCoroutine(WakeUp());
         }
         
-        protected virtual IEnumerator CalmDown()
+        protected virtual void CalmDown()
+        {
+            FearDamage -= FearThreshold / 20f;
+        }
+
+        protected virtual IEnumerator WakeUp()
         {
             yield return new WaitForSeconds(FaintDuration);
             EmotionalState = EmotionalState.Calm;

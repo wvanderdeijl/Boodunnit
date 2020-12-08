@@ -1,8 +1,6 @@
 ﻿using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
-using System.Net;
-using UnityEditor;
 
 public class LevitateBehaviour : MonoBehaviour
 {
@@ -52,6 +50,7 @@ public class LevitateBehaviour : MonoBehaviour
             FindObjectOfType<CameraController>().CanScrollZoom = true;
             FindObjectOfType<CameraController>().CanAutoZoom = true;
             ToggleGravity(true);
+            IsPushing = false;
             DisableRotation(false);
             _heightOfLevitateableObject = 0f;
             _distanceOfLevitateableObject = 10f;
@@ -81,12 +80,12 @@ public class LevitateBehaviour : MonoBehaviour
         Transform cameraTransform = Camera.main.transform;
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
         Vector3 endOfRayCast = ray.GetPoint(_distanceOfLevitateableObject);
-        Vector3 heightOffset = new Vector3(0, _heightOfLevitateableObject, 0);
+        Vector3 heightOffset = new Vector3(0, _heightOfLevitateableObject * Time.deltaTime * 10f, 0);
         Vector3 targetPosition = endOfRayCast + heightOffset;
 
-        _selectedRigidbody.velocity =
-            (_originalRigidbodyPosition + targetPosition - _selectedRigidbody.transform.position)
-            * (500 * Time.deltaTime * (_velocitySpeedPercentage / 100));
+        // _selectedRigidbody.transform.forward = ray.direction;
+
+        _selectedRigidbody.MovePosition(targetPosition);
     }
 
     private void ToggleGravity(bool useGravity)
@@ -112,9 +111,9 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (!_selectedRigidbody) return;
         
-        if (_distanceOfLevitateableObject < 0f)
+        if (_distanceOfLevitateableObject < 10f)
         {
-            _distanceOfLevitateableObject = 0f + 0.1f;
+            _distanceOfLevitateableObject = 10.1f;
             return;
         }
 

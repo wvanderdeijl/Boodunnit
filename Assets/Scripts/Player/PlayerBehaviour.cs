@@ -145,15 +145,12 @@ public class PlayerBehaviour : BaseMovement
 
         if (LevitateBehaviour.IsPushing)
         {
-            Debug.Log("PUSH AND PULL");
             LevitateBehaviour.PushOrPullLevitateableObject();
         }
         else
         {
-            Debug.Log("CHANGE HEIGHT");
             LevitateBehaviour.ChangeHeightOfLevitateableObject();
         }
-        
 
         if (Input.GetMouseButtonDown(0))
         {

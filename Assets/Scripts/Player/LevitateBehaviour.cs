@@ -1,7 +1,6 @@
 ﻿using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 public class LevitateBehaviour : MonoBehaviour
 {
@@ -52,7 +51,8 @@ public class LevitateBehaviour : MonoBehaviour
             FindObjectOfType<CameraController>().CanAutoZoom = true;
             ToggleGravity(true);
             DisableRotation(false);
-            _heightOfLevitateableObject = 0;
+            _heightOfLevitateableObject = 0f;
+            _distanceOfLevitateableObject = 0.1f;
             RemoveRigidbodyAndStartFreeze();
         }
     }
@@ -79,16 +79,20 @@ public class LevitateBehaviour : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 endOfRayCast = ray.origin + ray.direction * (_distanceOfLevitateableObject + 10f);
         endOfRayCast += new Vector3(0, _heightOfLevitateableObject + 1f, 0);
-        
-        Debug.Log(_distanceOfLevitateableObject);
-
-        _selectedRigidbody.position = endOfRayCast;
 
         // Vector3 screenPositionOffset = _mainCamera.ScreenToWorldPoint(endOfRayCast) - _originalScreenTargetPosition;
-
+        //
         // _selectedRigidbody.velocity =
         //     (_originalRigidbodyPosition + screenPositionOffset - _selectedRigidbody.transform.position)
-        //     * (500 * Time.deltaTime * (_velocitySpeedPercentage / 100));
+        //     * (5 * Time.deltaTime * (_velocitySpeedPercentage / 100));
+
+
+        float step = 10f * Time.deltaTime;
+        _selectedRigidbody.transform.position = Vector3.Lerp(
+            _selectedRigidbody.transform.position,
+            endOfRayCast,
+            step
+        );
     }
 
     private void ToggleGravity(bool useGravity)
@@ -106,9 +110,7 @@ public class LevitateBehaviour : MonoBehaviour
         
         if (scrollWheelInput > 0 || scrollWheelInput < 0)
         {
-            Vector3 position = _selectedRigidbody.transform.position;
-            _heightOfLevitateableObject += (scrollWheelInput * _pushPullSpeed);
-            _selectedRigidbody.transform.position = new Vector3(position.x, _heightOfLevitateableObject, position.z);
+            _heightOfLevitateableObject += (scrollWheelInput * _pushPullSpeed); 
         }
     }
     
@@ -121,6 +123,8 @@ public class LevitateBehaviour : MonoBehaviour
             _distanceOfLevitateableObject = 0f + 0.1f;
             return;
         }
+        
+        //todo: reset distance
         
         _distanceOfLevitateableObject += (Input.GetAxis("Mouse ScrollWheel") * _pushPullSpeed * Time.deltaTime);
     }

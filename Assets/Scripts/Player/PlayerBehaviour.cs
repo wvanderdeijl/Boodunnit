@@ -12,6 +12,8 @@ public class PlayerBehaviour : BaseMovement
     public PauseMenu PauseMenu;
 
     private Transform _cameraTransform;
+    private int _dashCounter;
+
 
     private void Awake()
     {
@@ -64,7 +66,16 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown && !ConversationManager.HasConversationStarted)
             {
-                DashBehaviour.Dash();
+                // If player is grounded he can always dash.
+                if (IsGrounded)
+                    DashBehaviour.Dash();
+
+                // If player is not grounded, we check _dashCounter.
+                if (!IsGrounded && _dashCounter <= 0)
+                {
+                    DashBehaviour.Dash();
+                    _dashCounter++;
+                }
             }
         }
 
@@ -110,6 +121,12 @@ public class PlayerBehaviour : BaseMovement
             }
 
             Jump();
+        }
+
+        if (IsGrounded)
+        {
+            // Reset dash counter for single in air dash.
+            _dashCounter = 0;
         }
     }
     private void FixedUpdate()

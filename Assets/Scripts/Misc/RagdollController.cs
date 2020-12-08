@@ -40,9 +40,12 @@ public class RagdollController : MonoBehaviour
             ragdollRigidbody.isKinematic = !isRagdoll;
         }
 
+        //TODO: Jesse doe iets aan dit, ik kan sommige shit niet possessen.
+        /**
         foreach (Collider ragdollCollider in _ragdollColliders)
         {
             ragdollCollider.enabled = isRagdoll;
         }
+        **/
     }
 }

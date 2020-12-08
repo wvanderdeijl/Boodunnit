@@ -43,6 +43,16 @@ public abstract class BaseEntityMovement : BaseMovement
     
     public void MoveWithPathFinding()
     {
+        if (NavMeshAgent.velocity != Vector3.zero)
+        {
+            if (Animator)
+                Animator.SetBool("IsWalking", true);
+        } else
+        {
+            if (Animator)
+                Animator.SetBool("IsWalking", false);
+        }
+
         switch (_pathFindingState)
         {
             case PathFindingState.Stationary:
@@ -67,18 +77,8 @@ public abstract class BaseEntityMovement : BaseMovement
             {
                 NavMeshAgent.isStopped = false;
 
-                if (Animator)
-                {
-                    Animator.SetBool("IsWalking", true);
-                }
-
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
-            }
-
-            if (Animator)
-            {
-                Animator.SetBool("IsWalking", false);
             }
 
             NavMeshAgent.isStopped = true;
@@ -108,21 +108,11 @@ public abstract class BaseEntityMovement : BaseMovement
             _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
             NavMeshAgent.destination = _patrolDestination;
 
-            if (Animator)
-            {
-                Animator.SetBool("IsWalking", true);
-            }
-
             _hasPositionInArea = true;
         }
 
         if (HasReachedDestination(_patrolDestination))
         {
-            if (Animator)
-            {
-                Animator.SetBool("IsWalking", false);
-            }
-
             _hasPositionInArea = false;
         }
     }

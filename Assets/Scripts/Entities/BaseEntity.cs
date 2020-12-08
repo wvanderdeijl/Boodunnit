@@ -110,6 +110,9 @@ namespace Entities
         {
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
+
+            Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
+
             if (FearDamage >= FearThreshold) Faint();
         }
 
@@ -126,7 +129,7 @@ namespace Entities
             yield return new WaitForSeconds(FaintDuration);
             EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
-            Animator.SetBool("IsScared", false);
+            Animator.SetInteger("ScaredStage", 0);
             _ragdollController.ToggleRagdoll(false);
         }
     }

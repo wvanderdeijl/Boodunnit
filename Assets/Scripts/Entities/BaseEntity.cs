@@ -67,7 +67,7 @@ namespace Entities
         
         protected virtual void CheckSurroundings(Vector3 raycastStartPosition)
         {
-            if (HasFearCooldown) return;
+            if (HasFearCooldown || EmotionalState == EmotionalState.Fainted) return;
             StartCoroutine(ActivateCooldown());
             
             Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
@@ -110,6 +110,7 @@ namespace Entities
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
             if (FearDamage >= FearThreshold) Faint();
+            Debug.Log(FearDamage);
         }
 
         protected virtual void Faint()
@@ -122,12 +123,15 @@ namespace Entities
         
         protected virtual void CalmDown()
         {
-            FearDamage -= FearThreshold / 20f;
+            Debug.Log(FearDamage);
+            if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
+            if (FearDamage < 0) FearDamage = 0;
         }
 
         protected virtual IEnumerator WakeUp()
         {
             yield return new WaitForSeconds(FaintDuration);
+            Debug.Log("Awake");
             EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
             Animator.SetBool("IsScared", false);

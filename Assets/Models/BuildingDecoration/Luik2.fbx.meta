@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2636d7e582dea7644af14350f8caf8c2
+guid: f7e876e0c5aa9df4282e6ef10feedcaa
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: ff41decf8af588b4689359a360b29f67, type: 2}
+      name: B8E7DE.001
+    second: {fileID: 2100000, guid: 5d89dec148898504689fb06d93d703ee, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -36,10 +36,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 20
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 20
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

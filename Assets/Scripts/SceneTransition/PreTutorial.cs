@@ -8,7 +8,7 @@ public class PreTutorial : MonoBehaviour
     {
         if (FindObjectOfType<PlayerBehaviour>() == other.GetComponent<PlayerBehaviour>())
         {
-            SceneTransitionHandler.Instance.GoToScene("CemetaryScene");
+            SceneTransitionHandler.Instance.GoToScene("CemeteryScene");
         }
     }
 }

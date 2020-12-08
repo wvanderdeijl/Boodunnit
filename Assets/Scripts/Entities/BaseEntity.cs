@@ -65,39 +65,38 @@ namespace Entities
 
         public abstract void UseFirstAbility();
         
-        protected virtual void CheckSurroundings()
+        protected virtual void CheckSurroundings(Vector3 raycastStartPosition)
         {
-            Debug.Log("Checking surroundings...");
-            if (HasFearCooldown) return;
-            Debug.Log("No fear cooldown.");
+            if (HasFearCooldown || EmotionalState == EmotionalState.Fainted) return;
             StartCoroutine(ActivateCooldown());
+            
+            Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _fearRadius);
+            List<BaseEntity> baseEntities = colliders
+                .Where(c => 
+                    Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
+                    c.GetComponent<BaseEntity>() != null &&
+                    ScaredOfGameObjects.ContainsKey(c.GetComponent<BaseEntity>().GetType()))
+                .Select(e => e.GetComponent<BaseEntity>())
+                .ToList();
 
-            foreach (Collider collider in colliders)
+            List<LevitateableObject> levitateables = colliders
+                .Where(c => 
+                    Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
+                    c.GetComponent<LevitateableObject>() != null &&
+                    ScaredOfGameObjects.ContainsKey(c.GetComponent<LevitateableObject>().GetType()))
+                .Select(l => l.GetComponent<LevitateableObject>())
+                .ToList();
+
+            if (baseEntities.Count == 0 && levitateables.Count == 0) CalmDown();
+            else
             {
-                Vector3 offset = (collider.transform.root.position - transform.position).normalized;
-                float dot = Vector3.Dot(offset, transform.forward);
-
-                if (dot * 100f >= (90 - (_fearAngle / 2f)))
-                {
-                    Debug.Log("Collider in area:");
-                    BaseEntity scaryEntity = collider.gameObject.GetComponent<BaseEntity>();
-                    if (scaryEntity != null && ScaredOfGameObjects.ContainsKey(scaryEntity.GetType()))
-                    {
-                        Debug.Log("Dealing fear damage.");
-                        DealFearDamage(ScaredOfGameObjects[scaryEntity.GetType()]);
-                    }
-
-                    ILevitateable levitateableObject = collider.gameObject.GetComponent<LevitateableObject>();
-                    if (levitateableObject != null && (levitateableObject.State == LevitationState.Frozen 
-                                                       || levitateableObject.State == LevitationState.Levitating))
-                    {
-                        DealFearDamage(ScaredOfGameObjects[levitateableObject.GetType()]);
-                    }
-                }
+                foreach (BaseEntity entity in baseEntities) DealFearDamage(ScaredOfGameObjects[entity.GetType()]);
+                foreach (LevitateableObject levitateable in levitateables) DealFearDamage(ScaredOfGameObjects[levitateable.GetType()]);
             }
         }
+        
+        protected virtual void CheckSurroundings() { CheckSurroundings(transform.position); }
         
         protected virtual IEnumerator ActivateCooldown()
         { 
@@ -114,6 +113,7 @@ namespace Entities
             Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
 
             if (FearDamage >= FearThreshold) Faint();
+            Debug.Log(FearDamage);
         }
 
         protected virtual void Faint()
@@ -121,12 +121,20 @@ namespace Entities
             Debug.Log("Fainted.");
             EmotionalState = EmotionalState.Fainted;
             if (_ragdollController) _ragdollController.ToggleRagdoll(true);
-            StartCoroutine(CalmDown());
+            StartCoroutine(WakeUp());
         }
         
-        protected virtual IEnumerator CalmDown()
+        protected virtual void CalmDown()
+        {
+            Debug.Log(FearDamage);
+            if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
+            if (FearDamage < 0) FearDamage = 0;
+        }
+
+        protected virtual IEnumerator WakeUp()
         {
             yield return new WaitForSeconds(FaintDuration);
+            Debug.Log("Awake");
             EmotionalState = EmotionalState.Calm;
             FearDamage = 0;
             Animator.SetInteger("ScaredStage", 0);

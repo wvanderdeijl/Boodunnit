@@ -65,12 +65,12 @@ namespace Entities
 
         public abstract void UseFirstAbility();
         
-        protected virtual void CheckSurroundings()
+        protected virtual void CheckSurroundings(Vector3 raycastStartPosition)
         {
             if (HasFearCooldown) return;
             StartCoroutine(ActivateCooldown());
             
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _fearRadius);
+            Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
 
             List<BaseEntity> baseEntities = colliders
                 .Where(c => 
@@ -95,6 +95,8 @@ namespace Entities
                 foreach (LevitateableObject levitateable in levitateables) DealFearDamage(ScaredOfGameObjects[levitateable.GetType()]);
             }
         }
+        
+        protected virtual void CheckSurroundings() { CheckSurroundings(transform.position); }
         
         protected virtual IEnumerator ActivateCooldown()
         { 

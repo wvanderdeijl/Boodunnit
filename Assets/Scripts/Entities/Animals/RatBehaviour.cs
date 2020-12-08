@@ -14,7 +14,7 @@ public class RatBehaviour : BaseEntity
         _climbBehaviour = GetComponent<ClimbBehaviour>();
         CanJump = true;
 
-        FearThreshold = 20;
+        FearThreshold = 50;
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;

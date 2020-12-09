@@ -8,6 +8,8 @@ public class GameManager
     /// If the game paused?
     /// </summary>
     public static bool IsPaused { get; set; }
+    
+    public static bool UseWonkyLevitation { get; set; }
 
     public static bool IsCutscenePlaying { get; set; }
 

@@ -301,6 +301,8 @@ MonoBehaviour:
   CameraRotationTarget: {fileID: 443138623}
   MaxElevation: 8
   MinElevation: -0.5
+  CanScrollZoom: 0
+  CanAutoZoom: 0
 --- !u!81 &39362224
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1601,6 +1603,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &124574547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+  m_PrefabInstance: {fileID: 443138622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &124574548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124574547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5434a22cf0523e6418cdac728bdff103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 124574547}
+  _mainCamera: {fileID: 39362225}
+  _overlapSphereRadiusInUnits: 12
+  _overlapSphereAngleInDegrees: 360
+  _pushPullSpeed: 300
+  _rotationSpeed: 5
+  _frozenDurationInSeconds: 5
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &125145704
 GameObject:
   m_ObjectHideFlags: 0
@@ -5168,9 +5197,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1520719935}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossessionSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: HighlightBehaviour
       value: 
       objectReference: {fileID: 443138624}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: UseWonkyLevitation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LevitateBehaviourCamera
+      value: 
+      objectReference: {fileID: 124574548}
     - target: {fileID: 2832741858228525862, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -5255,7 +5296,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2832741858228525859, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
   m_PrefabInstance: {fileID: 443138622}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 124574547}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bda64b232a8ed564b8fd5097cf3494e6, type: 3}

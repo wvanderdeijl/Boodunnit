@@ -6,10 +6,13 @@ public class PlayerBehaviour : BaseMovement
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
+    public LevitateBehaviourCamera LevitateBehaviourCamera;
 
     public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
+
+    public bool UseWonkyLevitation;
 
     private Transform _cameraTransform;
     private int _dashCounter;
@@ -17,12 +20,15 @@ public class PlayerBehaviour : BaseMovement
 
     private void Awake()
     {
+        GameManager.UseWonkyLevitation = UseWonkyLevitation;
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
     } 
 
     void Update()
     {
+        Debug.DrawRay( _cameraTransform.position, _cameraTransform.transform.forward * 100f, Color.yellow );
+        
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
@@ -131,7 +137,15 @@ public class PlayerBehaviour : BaseMovement
     }
     private void FixedUpdate()
     {
-        LevitateBehaviour.MoveLevitateableObject();
+        if (!GameManager.UseWonkyLevitation)
+        {
+            LevitateBehaviour.MoveLevitateableObject();
+        }
+        else
+        {
+            Debug.Log("FIXED UDPATE");
+            LevitateBehaviourCamera.MoveLevitateableObject();
+        }
     }
 
     private void OnApplicationQuit()
@@ -149,7 +163,21 @@ public class PlayerBehaviour : BaseMovement
 
         SaveHandler.Instance.SaveDataContainer(playerDataContainer);
     }
+    
     private void HandleLevitationInput()
+    {
+        if (!GameManager.UseWonkyLevitation)
+        {
+            HandleRegularLevitation();
+        }
+        else
+        {
+            Debug.Log("INPUT UPDATE");
+            HandleWonkyLevitation();
+        }
+    }
+
+    private void HandleRegularLevitation()
     {
         LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
         
@@ -175,11 +203,56 @@ public class PlayerBehaviour : BaseMovement
         LevitateBehaviour.PushOrPullLevitateableObject();
     }
 
+    private void HandleWonkyLevitation()
+    {
+        LevitateBehaviourCamera.FindLevitateableObjectsInFrontOfPlayer();
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            LevitateBehaviourCamera.ToggleMiddleMouseButton();
+        }
+
+        if (LevitateBehaviourCamera.PushingObjectIsToggled)
+        {
+            LevitateBehaviourCamera.ChangeDistanceOfLevitateableObject();
+        }
+        else
+        {
+            LevitateBehaviourCamera.ChangeHeightOfLevitateableObject();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            LevitateBehaviourCamera.LevitationStateHandler();
+        }
+        
+        if (Input.GetMouseButton(1))
+        {
+            RotationHandler(true);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            RotationHandler(false);
+        }
+
+        LevitateBehaviourCamera.ChangeDistanceOfLevitateableObject();
+    }
+    
+
     private void RotationHandler(bool isRotating)
     {
-        LevitateBehaviour.IsRotating = isRotating;
+        if (!GameManager.UseWonkyLevitation)
+        {
+            LevitateBehaviour.IsRotating = isRotating;
+            LevitateBehaviour.RotateLevitateableObject();
+        }
+        else
+        {
+            Debug.Log("ROTATING TEST");
+            LevitateBehaviourCamera.IsRotating = isRotating;
+            LevitateBehaviourCamera.RotateLevitateableObject();
+        }
+        
         GameManager.CursorIsLocked = isRotating;
-
-        LevitateBehaviour.RotateLevitateableObject();
     }
 }

@@ -84,6 +84,8 @@ public class DashBehaviour : MonoBehaviour
         _rigidbodyPlayer.velocity = oldVelocity;
         gameObject.layer = 8;
 
+        DashDuration = _defaultDashDuration;
+
         StopDash();
     }
     private void StopDash()
@@ -91,7 +93,6 @@ public class DashBehaviour : MonoBehaviour
         DashOnCooldown = true;
         IsDashing = false;
         _rigidbodyPlayer.useGravity = true;
-        DashDuration = _defaultDashDuration;
     }
 
     private bool CheckDashEndPosition()

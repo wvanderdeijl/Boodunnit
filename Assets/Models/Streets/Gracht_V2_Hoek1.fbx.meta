@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2636d7e582dea7644af14350f8caf8c2
+guid: 972f304f43bbf384a9f9a8ffeb06843e
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: ff41decf8af588b4689359a360b29f67, type: 2}
+      name: Gracht.001
+    second: {fileID: 2100000, guid: 725f89b49b3e09d4fa5df6f52a71dac5, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -36,10 +36,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 20
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 20
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

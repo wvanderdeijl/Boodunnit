@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6263936470470609491}
   - component: {fileID: 6263936470470609583}
   - component: {fileID: 6263936470470609582}
+  - component: {fileID: 1180966745}
   m_Layer: 11
   m_Name: Duif_Default_V1
   m_TagString: Untagged
@@ -118,18 +119,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 6263936470470609493}
-  JumpForce: 4
-  Speed: 10
+  JumpForce: 4.5
+  Speed: 3
   Collider: {fileID: 6263936470470609491}
   IsGrounded: 1
   CanJump: 1
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 6263936470470609583}
+  Animator: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
   MinimumFollowRange: 0
   MaximumFollowRange: 0
+  CanPossess: 1
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
   Relationships: 
@@ -172,8 +175,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.530168, y: 1.6, z: 0.84199864}
-  m_Center: {x: -0.01708341, y: 0.8, z: -0.09969444}
+  m_Size: {x: 0.530168, y: 1.4, z: 0.84199864}
+  m_Center: {x: -0.01708341, y: 0.7, z: -0.09969444}
 --- !u!195 &6263936470470609583
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -187,7 +190,7 @@ NavMeshAgent:
   m_Speed: 4
   m_Acceleration: 12
   avoidancePriority: 50
-  m_AngularSpeed: 1000
+  m_AngularSpeed: 100000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -207,5 +210,24 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.3406949, z: 0.7}
-  m_Center: {x: -0.0170834, y: 0.5, z: -0.09969442}
+  m_Size: {x: 0.4821022, y: 0.05, z: 0.7}
+  m_Center: {x: -0.058134332, y: -0.01, z: -0.09969443}
+--- !u!95 &1180966745
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263936470470609495}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

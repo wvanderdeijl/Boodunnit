@@ -56,11 +56,11 @@ namespace Entities
 
         private void Update()
         {
+            EntityWalkAnimation();
             Rigidbody.isKinematic = !IsPossessed;
             if (!IsPossessed)
             {
                 CheckSurroundings();
-
                 if(EmotionalState != EmotionalState.Fainted)
                     MoveWithPathFinding();
             }
@@ -114,7 +114,8 @@ namespace Entities
             FearDamage += amount;
             NavMeshAgent.isStopped = true;
 
-            Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
+            if(Animator)
+                Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
 
             if (FearDamage >= FearThreshold && EmotionalState != EmotionalState.Fainted) Faint();
         }
@@ -123,6 +124,7 @@ namespace Entities
         {
             EmotionalState = EmotionalState.Fainted;
             if (_ragdollController) _ragdollController.ToggleRagdoll(true);
+            CanPossess = false;
             StartCoroutine(WakeUp());
         }
 
@@ -131,23 +133,61 @@ namespace Entities
             if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
             if (FearDamage <= 0)
             {
-                if(Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
+                if (Animator)
                 {
-                    Animator.SetInteger("ScaredStage", 0);
-                    ResetDestination();
+                    if (Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
+                    {
+                        Animator.SetInteger("ScaredStage", 0);
+                        ResetDestination();
+                    }
                 }
                 FearDamage = 0;
+            }
+        }
+
+        private void EntityWalkAnimation()
+        {
+            if (IsPossessed)
+            {
+                if (Rigidbody.velocity.magnitude > 0.01)
+                {
+                    if (Animator)
+                        Animator.SetBool("IsWalking", true);
+                }
+                else
+                {
+                    if (Animator)
+                        Animator.SetBool("IsWalking", false);
+                }
+            } else
+            {
+                if (NavMeshAgent)
+                {
+                    if (NavMeshAgent.velocity.magnitude > 0.01)
+                    {
+                        if (Animator)
+                            Animator.SetBool("IsWalking", true);
+                    }
+                    else
+                    {
+                        if (Animator)
+                            Animator.SetBool("IsWalking", false);
+                    }
+                }
             }
         }
 
         protected virtual IEnumerator WakeUp()
         {
             yield return new WaitForSeconds(FaintDuration);
-            Debug.Log("Awake");
             FearDamage = 0;
             EmotionalState = EmotionalState.Calm;
-            _ragdollController.ToggleRagdoll(false);
-            Animator.SetInteger("ScaredStage", 0);
+
+            if(_ragdollController)  _ragdollController.ToggleRagdoll(false);
+
+            if(Animator) Animator.SetInteger("ScaredStage", 0);
+
+            CanPossess = true;
             ResetDestination();
         }
     }

@@ -35,7 +35,7 @@ public abstract class BaseEntityMovement : BaseMovement
         if (NavMeshAgent)
         {
             NavMeshAgent.autoBraking = true;
-            NavMeshAgent.speed = Speed;
+            NavMeshAgent.speed = PathfindingSpeed;
             _spawnRotation = transform.rotation;
             _spawnLocation = transform.position;
         }
@@ -65,13 +65,13 @@ public abstract class BaseEntityMovement : BaseMovement
             float distanceToTarget = Vector3.Distance(transform.position, TargetToFollow.transform.position);
             if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
             {
-                NavMeshAgent.isStopped = false;
+                PauseEntityNavAgent(false);
 
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
 
-            NavMeshAgent.isStopped = true;
+            PauseEntityNavAgent(true);
         }
     }
 
@@ -79,7 +79,7 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         if (HasReachedDestination(_spawnLocation))
         {
-            NavMeshAgent.isStopped = false;
+            PauseEntityNavAgent(false);
             NavMeshAgent.destination = _spawnLocation;
             return;
         }
@@ -135,8 +135,17 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void ResetDestination()
     {
-        NavMeshAgent.isStopped = false;
+        PauseEntityNavAgent(false);
         ChangePathFindingState(PathFindingState.Patrolling);
         _hasPositionInArea = false;
+    }
+
+    public void PauseEntityNavAgent(bool shouldPause)
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent)
+        {
+            agent.isStopped = shouldPause;
+        }
     }
 }

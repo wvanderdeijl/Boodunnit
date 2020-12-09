@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Entities;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -92,11 +93,10 @@ public class ConversationManager : MonoBehaviour
                     (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     HasConversationStarted = true;
-                    
                     ConversationTarget = entityCollider.gameObject.transform;
                     _entityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
                     _animator.SetBool("IsOpen", true);
-                    
+
                     GameManager.CursorIsLocked = false;
 
                     if(dialogue != null)
@@ -127,6 +127,11 @@ public class ConversationManager : MonoBehaviour
     {
         ResetQuestions();
 
+        BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
+        if (entity)
+        {
+            entity.PauseEntityNavAgent(true);
+        }
         //Check to ask question, start dialogue or end conversation
         if (dialogue && !_hasNoRelation)
         {
@@ -151,6 +156,11 @@ public class ConversationManager : MonoBehaviour
 
     public void CloseConversation()
     {
+        BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
+        if (entity)
+        {
+            entity.PauseEntityNavAgent(false);
+        }
         HasConversationStarted = false;
         ConversationTarget = null;
         _animator.SetBool("IsOpen", false);

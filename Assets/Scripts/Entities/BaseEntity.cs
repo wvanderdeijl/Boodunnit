@@ -58,7 +58,7 @@ namespace Entities
         {
             EntityWalkAnimation();
             Rigidbody.isKinematic = !IsPossessed;
-            if (!IsPossessed)
+            if (!IsPossessed && !NavMeshAgent.isStopped)
             {
                 CheckSurroundings();
                 if(EmotionalState != EmotionalState.Fainted)

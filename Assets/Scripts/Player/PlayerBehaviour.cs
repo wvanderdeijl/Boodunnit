@@ -143,9 +143,9 @@ public class PlayerBehaviour : BaseMovement
             LevitateBehaviour.ToggleMiddleMouseButton();
         }
 
-        if (LevitateBehaviour.IsPushing)
+        if (LevitateBehaviour.PushingObjectIsToggled)
         {
-            LevitateBehaviour.PushOrPullLevitateableObject();
+            LevitateBehaviour.ChangeDistanceOfLevitateableObject();
         }
         else
         {

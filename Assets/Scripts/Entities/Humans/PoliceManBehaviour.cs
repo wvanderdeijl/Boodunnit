@@ -35,7 +35,7 @@ public class PoliceManBehaviour : BaseEntity
     private void LateUpdate()
     {
         if (!IsPossessed && !ConversationManager.HasConversationStarted) CheckDonutsInSurrounding();
-        if(TargetToFollow) CheckDistanceToDonut();
+        if(TargetToFollow && !IsPossessed) CheckDistanceToDonut();
     }
 
     private void CheckDonutsInSurrounding()

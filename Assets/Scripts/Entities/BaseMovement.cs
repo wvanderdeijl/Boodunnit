@@ -83,6 +83,7 @@ public abstract class BaseMovement : MonoBehaviour
         yVelocity = Rigidbody.velocity.y;
         Rigidbody.velocity = direction * speed;
         Rigidbody.velocity += new Vector3(0f, yVelocity, 0f);
+      
         if (direction != Vector3.zero)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, 

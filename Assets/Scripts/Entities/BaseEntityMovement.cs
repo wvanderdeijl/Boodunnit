@@ -35,24 +35,14 @@ public abstract class BaseEntityMovement : BaseMovement
         if (NavMeshAgent)
         {
             NavMeshAgent.autoBraking = true;
-
+            NavMeshAgent.speed = Speed;
             _spawnRotation = transform.rotation;
             _spawnLocation = transform.position;
         }
     }
     
     public void MoveWithPathFinding()
-    {
-        if (NavMeshAgent.velocity != Vector3.zero)
-        {
-            if (Animator)
-                Animator.SetBool("IsWalking", true);
-        } else
-        {
-            if (Animator)
-                Animator.SetBool("IsWalking", false);
-        }
-
+    { 
         switch (_pathFindingState)
         {
             case PathFindingState.Stationary:
@@ -98,6 +88,7 @@ public abstract class BaseEntityMovement : BaseMovement
             Time.deltaTime * 5f);
         transform.rotation = lerpToRotation;
     }
+
 
     private void PatrolArea()
     {

@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PreTutorial : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public string SceneName;
+
+    public void LeavePretutorial()
     {
-        if (FindObjectOfType<PlayerBehaviour>() == other.GetComponent<PlayerBehaviour>())
+        if (SceneName != null)
         {
-            SceneTransitionHandler.Instance.GoToScene("CemeteryScene");
+            SceneTransitionHandler.Instance.GoToScene(SceneName);
+        } 
+
+        else
+        {
+            SceneTransitionHandler.Instance.GoToScene("MainMenu");
         }
     }
 }

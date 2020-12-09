@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BranchScenes/LoadingScene.unity
     guid: 080349b04d7ac7b49bdedeab11e69fb4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BranchScenes/QuestScenes/CemeteryScene.unity
     guid: a747e6d88e664ca4e9b1230929bfd9b7
+  - enabled: 1
+    path: Assets/Scenes/BranchScenes/LevitateScene.unity
+    guid: 0d29621e6978a4148a46a500ba5b6a18
   m_configObjects: {}

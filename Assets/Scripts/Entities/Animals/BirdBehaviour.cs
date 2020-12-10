@@ -20,11 +20,11 @@ public class BirdBehaviour : BaseEntity
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        IsScaredOfLevitatableObject = true;
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(PoliceManBehaviour)] = 3f,
-            [typeof(VillagerBehaviour)] = 3f,
-            [typeof(ILevitateable)] = 3f
+            [CharacterType.PoliceMan] = 3f,
+            [CharacterType.Villager] = 3f
         };
     }
 

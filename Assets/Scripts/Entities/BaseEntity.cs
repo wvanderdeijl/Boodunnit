@@ -20,9 +20,9 @@ namespace Entities
         [Header("Conversation")]
         public Dialogue Dialogue;
         public Question Question;
-        public List<CharacterList> Relationships;
+        public List<CharacterType> Relationships;
         public Sentence[] DefaultAnswers;
-        public CharacterList CharacterName;
+        public CharacterType CharacterName;
         public bool CanTalkToBoolia;
 
         [Header("Fear")]
@@ -30,7 +30,9 @@ namespace Entities
         public float FearDamage;
         public float FaintDuration;
         public EmotionalState EmotionalState;
-        public Dictionary<Type, float> ScaredOfGameObjects;
+        public Dictionary<CharacterType, float> ScaredOfEntities;
+        public bool IsScaredOfLevitatableObject;
+        public float LevitatableObjectFearDamage = 10;
         public bool HasFearCooldown;
 
         [SerializeField] private float _fearRadius;
@@ -58,7 +60,7 @@ namespace Entities
         {
             EntityWalkAnimation();
             Rigidbody.isKinematic = !IsPossessed;
-            if (!IsPossessed && !NavMeshAgent.isStopped)
+            if (!IsPossessed)
             {
                 CheckSurroundings();
                 if(EmotionalState != EmotionalState.Fainted)
@@ -70,32 +72,35 @@ namespace Entities
 
         protected virtual void CheckSurroundings(Vector3 raycastStartPosition)
         {
-            if (HasFearCooldown || EmotionalState == EmotionalState.Fainted) return;
+            if (HasFearCooldown || EmotionalState == EmotionalState.Fainted || IsPossessed) return;
             StartCoroutine(ActivateCooldown());
-
+            print(raycastStartPosition);
+            Debug.DrawRay(raycastStartPosition, Vector3.forward * _fearRadius, Color.cyan, 10f);
             Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
 
             List<BaseEntity> baseEntities = colliders
                 .Where(c =>
+                    !c.isTrigger &&
                     Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
-                    c.GetComponent<BaseEntity>() != null &&
-                    ScaredOfGameObjects.ContainsKey(c.GetComponent<BaseEntity>().GetType()))
+                    c.GetComponent<BaseEntity>() &&
+                    ScaredOfEntities.ContainsKey(c.GetComponent<BaseEntity>().CharacterName))
                 .Select(e => e.GetComponent<BaseEntity>())
                 .ToList();
 
             List<LevitateableObject> levitateables = colliders
                 .Where(c =>
                     Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
-                    c.GetComponent<LevitateableObject>() != null &&
-                    ScaredOfGameObjects.ContainsKey(c.GetComponent<LevitateableObject>().GetType()))
+                    c.GetComponent<LevitateableObject>()
+                    && c.GetComponent<LevitateableObject>().State != LevitationState.NotLevitating &&
+                    IsScaredOfLevitatableObject)
                 .Select(l => l.GetComponent<LevitateableObject>())
                 .ToList();
 
             if (baseEntities.Count == 0 && levitateables.Count == 0) CalmDown();
             else
             {
-                foreach (BaseEntity entity in baseEntities) if(!IsPossessed) DealFearDamage(ScaredOfGameObjects[entity.GetType()]);
-                foreach (LevitateableObject levitateable in levitateables) if(!IsPossessed) DealFearDamage(ScaredOfGameObjects[levitateable.GetType()]);
+                foreach (BaseEntity entity in baseEntities) if(!IsPossessed) DealFearDamage(ScaredOfEntities[entity.CharacterName]);
+                foreach (LevitateableObject levitateable in levitateables) if(!IsPossessed) DealFearDamage(LevitatableObjectFearDamage);
             }
         }
 

@@ -285,7 +285,7 @@ public class ConversationManager : MonoBehaviour
         }
     }
     #endregion
-    private string EnumValueToString(CharacterList character)
+    private string EnumValueToString(CharacterType character)
     {
         string newValue = Regex.Replace(character.ToString(), "([a-z])([A-Z])", "$1 $2");
 

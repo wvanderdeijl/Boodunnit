@@ -74,8 +74,7 @@ namespace Entities
         {
             if (HasFearCooldown || EmotionalState == EmotionalState.Fainted || IsPossessed) return;
             StartCoroutine(ActivateCooldown());
-            print(raycastStartPosition);
-            Debug.DrawRay(raycastStartPosition, Vector3.forward * _fearRadius, Color.cyan, 10f);
+            
             Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
 
             List<BaseEntity> baseEntities = colliders

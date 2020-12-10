@@ -13,7 +13,7 @@ public abstract class BaseEntityMovement : BaseMovement
     [HideInInspector]
     public Animator Animator;
 
-    [HideInInspector]
+    
     public bool IsOnCountdown;
 
     [Header("Pathfinding")]
@@ -89,29 +89,25 @@ public abstract class BaseEntityMovement : BaseMovement
         transform.rotation = lerpToRotation;
     }
 
-
     private void PatrolArea()
     {
         if (!_currentArea) MoveToNextArea();
-
         if (!_hasPositionInArea)
         {
-            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
-            NavMeshAgent.destination = _patrolDestination;
-
+            MoveToNextPosition();
             _hasPositionInArea = true;
         }
-
-        if (HasReachedDestination(_patrolDestination))
+        if (HasReachedDestination(_patrolDestination) && !IsOnCountdown)
         {
-            _hasPositionInArea = false;
+            IsOnCountdown = true;
+            StartCoroutine(StartCountdownInArea(_currentArea.GetEntityTimeInArea(gameObject)));
         }
     }
 
     private bool HasReachedDestination(Vector3 destination)
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
-        return distanceToDestination < 0.5f;
+        return distanceToDestination < 1f;
     }
 
     public IEnumerator StartCountdownInArea(float amountOfTime)
@@ -119,6 +115,7 @@ public abstract class BaseEntityMovement : BaseMovement
         yield return new WaitForSeconds(amountOfTime);
         _currentArea = null;
         IsOnCountdown = false;
+        _hasPositionInArea = false;
     }
 
     private void MoveToNextArea()
@@ -126,6 +123,28 @@ public abstract class BaseEntityMovement : BaseMovement
         _currentArea = EntityAreaHandler.Instance.GetRandomAreaForEntity(gameObject);
         _hasPositionInArea = false;
         NavMeshAgent.ResetPath();
+    }
+
+    private void MoveToNextPosition()
+    {
+        bool positionIsFound = false;
+        if (_patrolDestination == null)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            NavMeshAgent.destination = _patrolDestination;
+            return;
+        }
+
+        Vector3 previousDestionation = _patrolDestination;
+        while (!positionIsFound)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            if(Vector3.Distance(previousDestionation, _patrolDestination) > 1f)
+            {
+                positionIsFound = true;
+                NavMeshAgent.destination = _patrolDestination;
+            }
+        }
     }
     
     public void ChangePathFindingState(PathFindingState pathFindingState)

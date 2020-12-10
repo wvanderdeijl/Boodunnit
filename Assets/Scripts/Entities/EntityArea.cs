@@ -70,8 +70,8 @@ public class EntityArea : MonoBehaviour
             BaseEntity entity = collidedObject.GetComponent<BaseEntity>();
             if (!entity.IsOnCountdown)
             {
-                entity.IsOnCountdown = true;
-                StartCoroutine(entity.StartCountdownInArea(GetEntityTimeInArea(collidedObject)));
+                //entity.IsOnCountdown = true;
+                //StartCoroutine(entity.StartCountdownInArea(GetEntityTimeInArea(collidedObject)));
             }
         }
     }

@@ -1,8 +1,9 @@
 ﻿namespace Enums
 {
-    public enum CharacterList
+    public enum CharacterType
     {
         Boolia,
+        Cat,
         EmmieLawson,
         RichardCash,
         SirBartholomeusBoonkle,
@@ -12,11 +13,12 @@
         Bronald,
         BusinessTycoon,
         Bodyguard,
-        PoliceOfficer,
+        PoliceMan,
         Bird,
         LighthouseKeeper,
         Rat,
         QueenBee,
-        Beekeeper
+        Beekeeper,
+        Villager
     }
 }

@@ -13,12 +13,11 @@ public class CatBehaviour : BaseEntity
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        IsScaredOfLevitatableObject = true;
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(RatBehaviour)] = 3f,
-            [typeof(PoliceManBehaviour)] = 2f,
-            [typeof(VillagerBehaviour)] = 2f,
-            [typeof(ILevitateable)] = 5f
+            [CharacterType.PoliceMan] = 2f,
+            [CharacterType.Villager] = 2f,
         };
     }
     

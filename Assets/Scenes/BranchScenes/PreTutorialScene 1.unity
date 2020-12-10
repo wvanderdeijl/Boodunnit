@@ -22152,7 +22152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
-  JumpForce: 10
+  JumpForce: 7.1
   PossessionSpeed: 10
   PathfindingSpeed: 0
   Collider: {fileID: 2832741858403064069}

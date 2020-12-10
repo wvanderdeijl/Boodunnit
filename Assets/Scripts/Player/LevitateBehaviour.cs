@@ -235,6 +235,7 @@ public class LevitateBehaviour : MonoBehaviour
     private void RemoveGameObjectFromCursor()
     {
         IsLevitating = false;
+        IsRotating = false;
         
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
 

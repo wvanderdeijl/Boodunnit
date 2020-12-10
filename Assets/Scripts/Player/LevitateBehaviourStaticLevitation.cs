@@ -1,52 +1,73 @@
-﻿using System;
-using DefaultNamespace.Enums;
+﻿using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
 
-public class LevitateBehaviour : MonoBehaviour
+public class LevitateBehaviourStaticLevitation : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject _player;
     [SerializeField] private Camera _mainCamera;
 
     [Header("OverlapSphere")]
-    [SerializeField] private float _overlapSphereRadiusInUnits = 5f;
+    [SerializeField] private float _overlapSphereRadiusInUnits = 12f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
     
     [Header("Speeds")]
-    [SerializeField]private float _velocitySpeedPercentage = 25f;
     [SerializeField] private float _pushPullSpeed = 300f;
     [SerializeField] private float _rotationSpeed = 5f;
     
     [Header("Durations")]
     [SerializeField] private float _frozenDurationInSeconds = 5f;
-    
-    [Header("Distances")]
-    [SerializeField] private float _minimumSelectionDistanceInUnits = 2f;
-    
+
+    [Header("Layermasks")]
+    [SerializeField] private LayerMask _layerMask;
+
     public static bool IsRotating { get; set; }
     public static bool IsLevitating { get; set; }
     public Collider[] CurrentLevitateableObjects { get; set; }
+    public bool PushingObjectIsToggled { get; set; }
 
     private Rigidbody _selectedRigidbody;
-    private float _selectionDistance;
-    
+    private float _heightOfLevitateableObject = 4f;
+    private float _distanceOfLevitateableObject = 10f;
     private Vector3 _originalScreenTargetPosition;
-    private Vector3 _originalRigidbodyPosition;
-
+    
+    #region Levitation handler
     public void LevitationStateHandler()
     {
         if (!_selectedRigidbody)
         {
-            GetRigidbodyAndStartLevitation();
+            Levitate();
         }
 
         else
         {
-            RemoveRigidbodyAndStartFreeze();
+            StopLevitation();
         }
     }
 
+    private void Levitate()
+    {
+        FindObjectOfType<CameraController>().CanScrollZoom = false;
+        FindObjectOfType<CameraController>().CanAutoZoom = false;
+        GetRigidbodyAndStartLevitation();
+        DisableRotation(true);
+    }
+
+    private void StopLevitation()
+    {
+        FindObjectOfType<CameraController>().CanScrollZoom = true;
+        FindObjectOfType<CameraController>().CanAutoZoom = true;
+        ToggleGravity(true);
+        PushingObjectIsToggled = false;
+        DisableRotation(false);
+        _heightOfLevitateableObject = 4f;
+        _distanceOfLevitateableObject = 10f;
+        RemoveRigidbodyAndStartFreeze();
+    }
+    #endregion
+    
+    #region Handle Movement
     public void MoveLevitateableObject()
     {
         if (!_selectedRigidbody) return;
@@ -58,28 +79,40 @@ public class LevitateBehaviour : MonoBehaviour
             RemoveGameObjectFromCursor();
             return;
         }
-
-        Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _selectionDistance);
-        Vector3 mousePositionOffset = _mainCamera.ScreenToWorldPoint(mousePosition) - _originalScreenTargetPosition;
-            
-        _selectedRigidbody.velocity = 
-            (_originalRigidbodyPosition + mousePositionOffset - _selectedRigidbody.transform.position) 
-            * (500 * Time.deltaTime * (_velocitySpeedPercentage / 100));
+        
+        ToggleGravity(false);
+        Transform cameraTransform = Camera.main.transform;
+        Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        Vector3 endOfRayCast = ray.GetPoint(_distanceOfLevitateableObject);
+        Vector3 heightOffset = new Vector3(0, _heightOfLevitateableObject * Time.deltaTime * 10f, 0);
+        Vector3 targetPosition = endOfRayCast + heightOffset;
+        _selectedRigidbody.MovePosition(targetPosition);
     }
+    #endregion
 
-    public void PushOrPullLevitateableObject()
+    #region Handle push/pull and height
+    public void ChangeHeightOfLevitateableObject()
     {
         if (!_selectedRigidbody) return;
-        
-        if (_selectionDistance < _minimumSelectionDistanceInUnits)
-        {
-            _selectionDistance = _minimumSelectionDistanceInUnits + 0.1f;
-            return;
-        }
-            
-        _selectionDistance += (Input.GetAxis("Mouse ScrollWheel") * _pushPullSpeed * Time.deltaTime);
-    }
 
+        float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
+        
+        if (scrollWheelInput > 0 || scrollWheelInput < 0)
+        {
+            _heightOfLevitateableObject += (scrollWheelInput * _pushPullSpeed);
+            _heightOfLevitateableObject = Mathf.Clamp(_heightOfLevitateableObject, 4f, _overlapSphereRadiusInUnits);
+        }
+    }
+    
+    public void ChangeDistanceOfLevitateableObject()
+    {
+        if (!_selectedRigidbody) return;
+        _distanceOfLevitateableObject += (Input.GetAxis("Mouse ScrollWheel") * _pushPullSpeed * Time.deltaTime);
+        _distanceOfLevitateableObject = Mathf.Clamp(_distanceOfLevitateableObject, 10, _overlapSphereRadiusInUnits);
+    }
+    #endregion
+    
+    #region Handle rotation
     public void RotateLevitateableObject()
     {
         if (!_selectedRigidbody) return;
@@ -102,6 +135,23 @@ public class LevitateBehaviour : MonoBehaviour
         _selectedRigidbody.transform.RotateAround (_mainCamera.transform.rotation * Vector3.right, yaxisRotation);
     }
 
+    public void DisableRotation(bool disable)
+    {
+        if (!_selectedRigidbody) return;
+
+        switch (disable)
+        {
+            case true:
+                _selectedRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+                break;
+            case false:
+                _selectedRigidbody.constraints = RigidbodyConstraints.None;
+                break;
+        }
+    }
+    #endregion
+
+    #region Handle rigidbody
     private void GetRigidbodyAndStartLevitation()
     {
         _selectedRigidbody = GetRigidbodyFromMouseClick();
@@ -113,8 +163,6 @@ public class LevitateBehaviour : MonoBehaviour
 
     public void RemoveRigidbodyAndStartFreeze()
     {
-        GameManager.CursorIsLocked = true;
-        
         ILevitateable levitateable =
             _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
         
@@ -158,33 +206,22 @@ public class LevitateBehaviour : MonoBehaviour
                 return null;
             }
         }
-        
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out RaycastHit hitInfo, 100f, ~_layerMask))
         {
             Rigidbody rigidbody = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
-            
+
             if (!rigidbody) return null;
-
             if (!hitInfo.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
-
-            _selectionDistance = Vector3.Distance(ray.origin, hitInfo.point);
-            _originalScreenTargetPosition = _mainCamera.ScreenToWorldPoint(
-                new Vector3(
-                    Input.mousePosition.x,
-                    Input.mousePosition.y,
-                    _selectionDistance
-                )
-            );
-
-            _originalRigidbodyPosition = hitInfo.collider.transform.position;
+            
             return rigidbody;
         }
 
         return null;
     }
+    #endregion
 
+    #region Handle object freeze
     private void ActivateLevitateCoRoutine()
     {
         ILevitateable levitateable =
@@ -195,7 +232,9 @@ public class LevitateBehaviour : MonoBehaviour
             StartCoroutine(levitateable.LevitateForSeconds(_frozenDurationInSeconds));
         }
     }
+    #endregion
 
+    #region Handle levitateable objectes seeker
     public void FindLevitateableObjectsInFrontOfPlayer()
     {
         CurrentLevitateableObjects = Physics
@@ -231,7 +270,9 @@ public class LevitateBehaviour : MonoBehaviour
 
         return false;
     }
-    
+    #endregion
+
+    #region Misc
     private void RemoveGameObjectFromCursor()
     {
         IsLevitating = false;
@@ -250,5 +291,19 @@ public class LevitateBehaviour : MonoBehaviour
     {
         IsLevitating = false;
         _selectedRigidbody = null;
+        _heightOfLevitateableObject = 4f;
     }
+    
+    public void ToggleMiddleMouseButton()
+    {
+        PushingObjectIsToggled = !PushingObjectIsToggled;
+    }
+    
+    private void ToggleGravity(bool useGravity)
+    {
+        if (!_selectedRigidbody) return;
+
+        _selectedRigidbody.useGravity = useGravity;
+    }
+    #endregion
 }

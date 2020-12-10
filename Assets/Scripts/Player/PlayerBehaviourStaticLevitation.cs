@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class PlayerBehaviour : BaseMovement
+public class PlayerBehaviourStaticLevitation : BaseMovement
 {
     public PossessionBehaviour PossessionBehaviour;
     public DashBehaviour DashBehaviour;
     public HighlightBehaviour HighlightBehaviour;
-    public LevitateBehaviour LevitateBehaviour;
+    public LevitateBehaviourStaticLevitation LevitateBehaviour;
 
     public ConversationManager ConversationManager;
 
@@ -17,6 +17,7 @@ public class PlayerBehaviour : BaseMovement
 
     private void Awake()
     {
+        InitBaseMovement();
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
     } 
@@ -47,7 +48,7 @@ public class PlayerBehaviour : BaseMovement
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviourStaticLevitation.IsLevitating)
                     PossessionBehaviour.PossessTarget();
             }
         }
@@ -55,7 +56,7 @@ public class PlayerBehaviour : BaseMovement
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviour.IsLevitating)
+            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviourStaticLevitation.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
@@ -149,36 +150,43 @@ public class PlayerBehaviour : BaseMovement
 
         SaveHandler.Instance.SaveDataContainer(playerDataContainer);
     }
-    private void HandleLevitationInput()
-    {
-        LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            LevitateBehaviour.LevitationStateHandler();
-        }
-        
-        if (Input.GetMouseButton(1) && LevitateBehaviour.IsLevitating)
-        {
-            RotationHandler(true);
-        }
-        else if (Input.GetMouseButtonUp(1) && LevitateBehaviour.IsLevitating)
-        {
-            RotationHandler(false);
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
-        }
-
-        LevitateBehaviour.PushOrPullLevitateableObject();
-    }
+    
+      private void HandleLevitationInput()
+      {
+          LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
+          
+          if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Z))
+          {
+              LevitateBehaviour.ToggleMiddleMouseButton();
+          }
+          
+          if (LevitateBehaviour.PushingObjectIsToggled)
+          {
+              LevitateBehaviour.ChangeDistanceOfLevitateableObject();
+          }
+          else
+          {
+              LevitateBehaviour.ChangeHeightOfLevitateableObject();
+          }
+          
+          if (Input.GetMouseButtonDown(0))
+          {
+              LevitateBehaviour.LevitationStateHandler();
+          }
+                  
+          if (Input.GetMouseButton(1))
+          {
+              RotationHandler(true);
+          }
+          else if (Input.GetMouseButtonUp(1))
+          {
+              RotationHandler(false);
+          }
+      }
 
     private void RotationHandler(bool isRotating)
     {
-        LevitateBehaviour.IsRotating = isRotating;
-        GameManager.CursorIsLocked = isRotating;
+        LevitateBehaviourStaticLevitation.IsRotating = isRotating;
 
         LevitateBehaviour.RotateLevitateableObject();
     }

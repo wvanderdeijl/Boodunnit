@@ -7,7 +7,7 @@ public struct Choice
 {
     [TextArea(2, 5)]
     public string Text;
-    public List<CharacterList> CharacterUnlocksChoice;
+    public List<CharacterType> CharacterUnlocksChoice;
     public Dialogue Dialogue;
     public Question Question;
 }

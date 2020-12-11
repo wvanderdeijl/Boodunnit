@@ -13,7 +13,7 @@ public abstract class BaseEntityMovement : BaseMovement
     [HideInInspector]
     public Animator Animator;
 
-    [HideInInspector]
+    
     public bool IsOnCountdown;
 
     [Header("Pathfinding")]
@@ -35,24 +35,14 @@ public abstract class BaseEntityMovement : BaseMovement
         if (NavMeshAgent)
         {
             NavMeshAgent.autoBraking = true;
-
+            NavMeshAgent.speed = PathfindingSpeed;
             _spawnRotation = transform.rotation;
             _spawnLocation = transform.position;
         }
     }
     
     public void MoveWithPathFinding()
-    {
-        if (NavMeshAgent.velocity != Vector3.zero)
-        {
-            if (Animator)
-                Animator.SetBool("IsWalking", true);
-        } else
-        {
-            if (Animator)
-                Animator.SetBool("IsWalking", false);
-        }
-
+    { 
         switch (_pathFindingState)
         {
             case PathFindingState.Stationary:
@@ -75,13 +65,13 @@ public abstract class BaseEntityMovement : BaseMovement
             float distanceToTarget = Vector3.Distance(transform.position, TargetToFollow.transform.position);
             if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
             {
-                NavMeshAgent.isStopped = false;
+                PauseEntityNavAgent(false);
 
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
 
-            NavMeshAgent.isStopped = true;
+            PauseEntityNavAgent(true);
         }
     }
 
@@ -89,7 +79,7 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         if (HasReachedDestination(_spawnLocation))
         {
-            NavMeshAgent.isStopped = false;
+            PauseEntityNavAgent(false);
             NavMeshAgent.destination = _spawnLocation;
             return;
         }
@@ -102,25 +92,22 @@ public abstract class BaseEntityMovement : BaseMovement
     private void PatrolArea()
     {
         if (!_currentArea) MoveToNextArea();
-
         if (!_hasPositionInArea)
         {
-            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
-            NavMeshAgent.destination = _patrolDestination;
-
+            MoveToNextPosition();
             _hasPositionInArea = true;
         }
-
-        if (HasReachedDestination(_patrolDestination))
+        if (HasReachedDestination(_patrolDestination) && !IsOnCountdown)
         {
-            _hasPositionInArea = false;
+            IsOnCountdown = true;
+            StartCoroutine(StartCountdownInArea(_currentArea.GetEntityTimeInArea(gameObject)));
         }
     }
 
     private bool HasReachedDestination(Vector3 destination)
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
-        return distanceToDestination < 0.5f;
+        return distanceToDestination < 1f;
     }
 
     public IEnumerator StartCountdownInArea(float amountOfTime)
@@ -128,6 +115,7 @@ public abstract class BaseEntityMovement : BaseMovement
         yield return new WaitForSeconds(amountOfTime);
         _currentArea = null;
         IsOnCountdown = false;
+        _hasPositionInArea = false;
     }
 
     private void MoveToNextArea()
@@ -135,6 +123,28 @@ public abstract class BaseEntityMovement : BaseMovement
         _currentArea = EntityAreaHandler.Instance.GetRandomAreaForEntity(gameObject);
         _hasPositionInArea = false;
         NavMeshAgent.ResetPath();
+    }
+
+    private void MoveToNextPosition()
+    {
+        bool positionIsFound = false;
+        if (_patrolDestination == null)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            NavMeshAgent.destination = _patrolDestination;
+            return;
+        }
+
+        Vector3 previousDestionation = _patrolDestination;
+        while (!positionIsFound)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            if(Vector3.Distance(previousDestionation, _patrolDestination) > 1f)
+            {
+                positionIsFound = true;
+                NavMeshAgent.destination = _patrolDestination;
+            }
+        }
     }
     
     public void ChangePathFindingState(PathFindingState pathFindingState)
@@ -144,8 +154,17 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void ResetDestination()
     {
-        NavMeshAgent.isStopped = false;
+        PauseEntityNavAgent(false);
         ChangePathFindingState(PathFindingState.Patrolling);
         _hasPositionInArea = false;
+    }
+
+    public void PauseEntityNavAgent(bool shouldPause)
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent)
+        {
+            agent.isStopped = shouldPause;
+        }
     }
 }

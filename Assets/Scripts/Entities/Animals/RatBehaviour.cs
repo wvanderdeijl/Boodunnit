@@ -18,12 +18,11 @@ public class RatBehaviour : BaseEntity
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        IsScaredOfLevitatableObject = true;
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(BirdBehaviour)] = 5f,
-            [typeof(VillagerBehaviour)] = 4f,
-            [typeof(PoliceManBehaviour)] = 4f,
-            [typeof(ILevitateable)] = 3f
+            [CharacterType.Cat] = 5f,
+            [CharacterType.Bird] = 5f,
         };
         
         _climbBehaviour.MinimumStamina = 0f;

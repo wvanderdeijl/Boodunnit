@@ -51,6 +51,8 @@ public class PossessionBehaviour : MonoBehaviour
             
             EnableOrDisablePlayerMeshRenderers(true);
             EnableOrDisablePlayerColliders(true);
+            EnableOrDisableObjectChildColliders(true);
+            EnableOrDisableObjectRigidBody(true);
 
             TargetBehaviour = null;
             PossessionTarget = null;
@@ -125,6 +127,7 @@ public class PossessionBehaviour : MonoBehaviour
                 
                 //Check if there is a collider in between the player and the possessable.
                 Vector3 playerToPossessable = (TargetBehaviour.transform.position - transform.position).normalized;
+
                 Physics.Raycast(transform.position, playerToPossessable, out RaycastHit hit,
                     Vector3.Distance(transform.position, TargetBehaviour.transform.position));
                 if (!hit.collider.transform.root.gameObject.Equals(TargetBehaviour.gameObject) && !hit.collider.isTrigger) continue;
@@ -137,6 +140,8 @@ public class PossessionBehaviour : MonoBehaviour
                 IsPossessing = true;
                 transform.position = gameObjectInRangeCollider.gameObject.transform.position;
 
+                EnableOrDisableObjectChildColliders(false);
+                EnableOrDisableObjectRigidBody(false);
                 EnableOrDisablePlayerMeshRenderers(false);
                 EnableOrDisablePlayerColliders(false);
 
@@ -208,6 +213,24 @@ public class PossessionBehaviour : MonoBehaviour
             transform.position.y,
             Random.Range(minPositionZ, maxPositionZ)
         );
+    }
+
+    private void EnableOrDisableObjectRigidBody(bool shouldBeEnabled)
+    {
+        foreach (Rigidbody rigidBodyOfChild in TargetBehaviour.GetComponentsInChildren<Rigidbody>())
+        {
+            if (rigidBodyOfChild.gameObject != TargetBehaviour.gameObject)
+                rigidBodyOfChild.isKinematic = shouldBeEnabled;
+        }
+    }
+
+    private void EnableOrDisableObjectChildColliders(bool shouldBeEnabled)
+    {
+        foreach (Collider colliderOfChild in TargetBehaviour.GetComponentsInChildren<Collider>())
+        {
+            if (colliderOfChild.gameObject != TargetBehaviour.gameObject)
+                colliderOfChild.enabled = shouldBeEnabled;
+        }
     }
 
     private IEnumerator PossessionTimer()

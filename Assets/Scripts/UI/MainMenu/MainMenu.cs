@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     {
         // Todo start a new game
         SaveHandler.Instance.StartNewGame();
-        SceneTransitionHandler.Instance.GoToScene("PreTutorialScene");
+        SceneTransitionHandler.Instance.GoToScene("PreTutorialScene 1");
         GameManager.CursorIsLocked = true;
     }
 

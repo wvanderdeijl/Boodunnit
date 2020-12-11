@@ -15,7 +15,7 @@ public class PreTutorial : MonoBehaviour
 
         else
         {
-            SceneTransitionHandler.Instance.GoToScene("MainMenu");
+            SceneTransitionHandler.Instance.GoToMainMenu();
         }
     }
 }

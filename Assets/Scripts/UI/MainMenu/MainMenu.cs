@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
         // Todo start a new game
         SaveHandler.Instance.StartNewGame();
         SceneTransitionHandler.Instance.GoToScene("PreTutorialScene");
-        GameManager.CursorIsLocked = true;
+        Debug.Log(SaveHandler.Instance.LoadCurrentScene());
     }
 
     public void ContinueGame()
@@ -26,6 +26,8 @@ public class MainMenu : MonoBehaviour
         if (!SaveHandler.Instance.DoesSaveGameExist())
             return;
         // Todo load the game from the last save point
+
+        SceneTransitionHandler.Instance.GoToScene(SaveHandler.Instance.LoadCurrentScene());
     }
 
     public void QuitGame()

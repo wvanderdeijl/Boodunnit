@@ -1,7 +1,14 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SceneTransitionHandler
 {
+    private List<string> _excludedScenesFromSavedScenes = new List<string>()
+        {
+            "MainMenu",
+            "LoadingScene"
+        };
+
     public static SceneTransitionHandler Instance
     {
         get
@@ -19,10 +26,20 @@ public class SceneTransitionHandler
 
     public void GoToScene(string sceneNameToLoad)
     {
+        LoadingScreen.GoToMainMenu = false;
         if (!sceneNameToLoad.Trim().Equals(""))
         {
-            SaveHandler.Instance.SaveCurrentScene(sceneNameToLoad);
+            if (!_excludedScenesFromSavedScenes.Contains(sceneNameToLoad))
+            {
+                SaveHandler.Instance.SaveCurrentScene(sceneNameToLoad);
+            }
             SceneManager.LoadScene("LoadingScene"); 
         }
+    }
+
+    public void GoToMainMenu()
+    {
+        LoadingScreen.GoToMainMenu = true;
+        SceneManager.LoadScene("LoadingScene");
     }
 }

@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class LoadingScreen : MonoBehaviour
 {
+    public static bool GoToMainMenu;
+
     public Slider LoadingBar;
     public Text HintText;
     public Image LoadingBackground;
@@ -29,7 +31,16 @@ public class LoadingScreen : MonoBehaviour
 
     private void InitializeLoadingScene()
     {
-        _sceneName = SaveHandler.Instance.LoadCurrentScene();
+        if (GoToMainMenu)
+        {
+            _sceneName = "MainMenu";
+        }
+        else
+        {
+            _sceneName = SaveHandler.Instance.LoadCurrentScene();
+        }
+        GameManager.CursorIsLocked = true;
+
         _loadingBackgroundSprite = _backgroundSpriteMockup;
         HintText.text = GetRandomHintFromArray();
         LoadingBackground.sprite = _loadingBackgroundSprite;

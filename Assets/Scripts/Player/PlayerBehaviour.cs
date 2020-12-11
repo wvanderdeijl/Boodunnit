@@ -15,14 +15,20 @@ public class PlayerBehaviour : BaseMovement
     private int _dashCounter;
 
 
+    [HideInInspector]
+    public Animator Animator;
+
     private void Awake()
     {
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
-    } 
+
+        Animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
+
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
@@ -31,7 +37,7 @@ public class PlayerBehaviour : BaseMovement
             GameManager.ToggleCursor();
             PauseMenu.TogglePauseGame();
         }
-        
+
         //Return when the game is paused, so there can be no input buffer
         if (GameManager.IsPaused)
         {
@@ -44,10 +50,10 @@ public class PlayerBehaviour : BaseMovement
             if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
             {
                 PossessionBehaviour.LeavePossessedTarget();
-            } 
+            }
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
+                if (!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
                     PossessionBehaviour.PossessTarget();
             }
         }
@@ -79,27 +85,27 @@ public class PlayerBehaviour : BaseMovement
             }
         }
 
-        if(!PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+        if (!PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {
             HandleLevitationInput();
         }
-        
+
         //Move player with BaseMovement.
         Vector2 movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (movementInput.x != 0 && movementInput.y != 0)
         {
-            movementInput.x *= Mathf.Sqrt(2)/2;
-            movementInput.y *= Mathf.Sqrt(2)/2;
+            movementInput.x *= Mathf.Sqrt(2) / 2;
+            movementInput.y *= Mathf.Sqrt(2) / 2;
         }
-        
+
         Vector3 moveDirection = movementInput.y * _cameraTransform.forward +
                                 movementInput.x * _cameraTransform.right;
         moveDirection.y = 0;
 
         if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {
-            MoveEntityInDirection(moveDirection);   
-        } 
+            MoveEntityInDirection(moveDirection);
+        }
         else if (PossessionBehaviour.IsPossessing)
         {
             PossessionBehaviour.TargetBehaviour.MoveEntityInDirection(moveDirection);
@@ -152,12 +158,12 @@ public class PlayerBehaviour : BaseMovement
     private void HandleLevitationInput()
     {
         LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             LevitateBehaviour.LevitationStateHandler();
         }
-        
+
         if (Input.GetMouseButton(1))
         {
             RotationHandler(true);
@@ -181,5 +187,58 @@ public class PlayerBehaviour : BaseMovement
         GameManager.CursorIsLocked = isRotating;
 
         LevitateBehaviour.RotateLevitateableObject();
+    }
+
+    private void PlayerMoveAnimation()
+    {
+        if (Rigidbody.velocity.magnitude > 0.01)
+        {
+            if (Animator)
+                Animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            if (Animator)
+                Animator.SetBool("IsMoving", false);
+        }
+    }
+    private void PlayerDashAnimation()
+    {
+        if (DashBehaviour.IsDashing)
+        {
+            if (Animator)
+                Animator.SetBool("IsDashing", true);
+        }
+        else
+        {
+            if (Animator)
+                Animator.SetBool("IsDashing", false);
+        }
+    }
+    private void PlayerJumpAnimation()
+    {
+        if (IsGrounded)
+        {
+            if (Animator)
+                Animator.SetBool("IsGrounded", true);
+        }
+        else
+        {
+            if (Animator)
+                Animator.SetBool("IsGrounded", false);
+        }
+    }
+    private void PlayerLevitateAnimation()
+    {
+        if (LevitateBehaviour.IsLevitating)
+        {
+            if (Animator)
+                Animator.SetBool("IsLevitating", true);
+        }
+        else
+        {
+            if (Animator)
+                Animator.SetBool("IsLevitating", false);
+        }
     }
 }

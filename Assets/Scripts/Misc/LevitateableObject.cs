@@ -10,12 +10,14 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private Quaternion _spawnRotation;
 
     private Rigidbody _rigidbody;
+    public LayerMask DefaultLayerMask;
 
     private void Awake()
     {
         CanBeLevitated = true;
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
+        DefaultLayerMask = gameObject.layer;
         
         _spawnLocation = transform.position;
         _spawnRotation = transform.rotation;
@@ -72,6 +74,12 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     public IEnumerator LevitateForSeconds(float seconds)
     {
+        gameObject.layer = DefaultLayerMask;
+        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
+        {
+            transform.gameObject.layer = DefaultLayerMask;
+        }     
+        
         FreezeOrReleaseLevitateableObject(LevitationState.NotLevitating);
         yield return new WaitForSeconds(seconds);
         FreezeOrReleaseLevitateableObject(LevitationState.Frozen);

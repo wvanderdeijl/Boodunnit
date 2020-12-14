@@ -9,7 +9,7 @@ public class LevitateBehaviourStaticLevitation : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
 
     [Header("OverlapSphere")]
-    [SerializeField] private float _overlapSphereRadiusInUnits = 12f;
+    [SerializeField] private float _overlapSphereRadiusInUnits = 20f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
     
     [Header("Speeds")]
@@ -158,6 +158,7 @@ public class LevitateBehaviourStaticLevitation : MonoBehaviour
         if (!_selectedRigidbody) return;
         IsLevitating = true;
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+
         if (levitateable != null) levitateable.State = LevitationState.Levitating;
     }
 
@@ -213,6 +214,13 @@ public class LevitateBehaviourStaticLevitation : MonoBehaviour
 
             if (!rigidbody) return null;
             if (!hitInfo.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
+            
+            // changing layers (default layer changes back within the levitateable object script.
+            int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
+            foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
+            {
+                transform.gameObject.layer = levitatingObjectLayerMask;
+            }     
             
             return rigidbody;
         }

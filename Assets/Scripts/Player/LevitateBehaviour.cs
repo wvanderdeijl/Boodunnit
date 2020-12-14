@@ -1,5 +1,4 @@
-﻿using System;
-using DefaultNamespace.Enums;
+﻿using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
 
@@ -10,7 +9,7 @@ public class LevitateBehaviour : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
 
     [Header("OverlapSphere")]
-    [SerializeField] private float _overlapSphereRadiusInUnits = 5f;
+    [SerializeField] private float _overlapSphereRadiusInUnits = 20f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
     
     [Header("Speeds")]
@@ -108,6 +107,7 @@ public class LevitateBehaviour : MonoBehaviour
         if (!_selectedRigidbody) return;
         IsLevitating = true;
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+
         if (levitateable != null) levitateable.State = LevitationState.Levitating;
     }
 
@@ -179,6 +179,14 @@ public class LevitateBehaviour : MonoBehaviour
             );
 
             _originalRigidbodyPosition = hitInfo.collider.transform.position;
+            
+            // changing layers (default layer changes back within the levitateable object script.
+            int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
+            foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
+            {
+                transform.gameObject.layer = levitatingObjectLayerMask;
+            }     
+
             return rigidbody;
         }
 

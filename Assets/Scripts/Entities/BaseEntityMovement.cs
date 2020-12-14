@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Enums;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,8 @@ public abstract class BaseEntityMovement : BaseMovement
     [Header("Pathfinding")]
     [SerializeField] private PathFindingState _pathFindingState;
     public float MinimumFollowRange, MaximumFollowRange;
+    public List<EntityArea> SequencePatrolAreas;
+    private int _sequencePatrolAreaCounter = 0;
     private bool _isPathFinding;
     private bool _hasPositionInArea;
     private Quaternion _spawnRotation;
@@ -50,6 +53,9 @@ public abstract class BaseEntityMovement : BaseMovement
                 break;
             case PathFindingState.Patrolling:
                 PatrolArea();
+                break;
+            case PathFindingState.PatrolAreas:
+                PatrolSequence();
                 break;
             case PathFindingState.Following:
                 FollowTarget();
@@ -104,6 +110,29 @@ public abstract class BaseEntityMovement : BaseMovement
         }
     }
 
+    private void PatrolSequence()
+    {
+        if (SequencePatrolAreas.Count <= 0)
+            return;
+
+        if (!_hasPositionInArea)
+        {
+            _currentArea = SequencePatrolAreas[_sequencePatrolAreaCounter];
+            MoveToNextPosition();
+            _hasPositionInArea = true;
+        }
+
+        if(HasReachedDestination(_patrolDestination) && !IsOnCountdown)
+        {
+            IsOnCountdown = true;
+            _sequencePatrolAreaCounter++;
+            StartCoroutine(StartCountdownInArea(0f));
+        }
+
+        if(_sequencePatrolAreaCounter == SequencePatrolAreas.Count)
+            _sequencePatrolAreaCounter = 0;
+    }
+
     private bool HasReachedDestination(Vector3 destination)
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
@@ -155,7 +184,7 @@ public abstract class BaseEntityMovement : BaseMovement
     public void ResetDestination()
     {
         PauseEntityNavAgent(false);
-        ChangePathFindingState(PathFindingState.Patrolling);
+        ChangePathFindingState(_pathFindingState);
         _hasPositionInArea = false;
     }
 

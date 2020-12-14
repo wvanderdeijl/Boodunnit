@@ -181,6 +181,15 @@ namespace Entities
             }
         }
 
+        public void ResetFearDamage()
+        {
+            if (Animator && Animator.runtimeAnimatorController != null)
+            {
+                Animator.SetInteger("ScaredStage", 0);
+                FearDamage = 0;
+            }
+        }
+
         protected virtual IEnumerator WakeUp()
         {
             yield return new WaitForSeconds(FaintDuration);

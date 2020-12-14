@@ -10,19 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
-  m_Name: OpeningQuestion
+  m_Name: DefaultOpeningQuestion
   m_EditorClassIdentifier: 
-  Text: Do you know what it feels like to fight in war, mr Krabs?
+  Text: Can you feel it now, mr Krabs?
   Choices:
-  - Text: Amfibie
-    CharacterUnlocksChoice: 
-    Dialogue: {fileID: 0}
-    Question: {fileID: 0}
-  - Text: Waterbeest
-    CharacterUnlocksChoice: 01000000
-    Dialogue: {fileID: 0}
-    Question: {fileID: 0}
-  - Text: Alien
+  - Text: Yes
     CharacterUnlocksChoice: 
     Dialogue: {fileID: 0}
     Question: {fileID: 0}

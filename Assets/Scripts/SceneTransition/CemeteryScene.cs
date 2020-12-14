@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace SceneTransition
@@ -9,6 +10,11 @@ namespace SceneTransition
         public void LeaveCemeteryScene()
         {
             SceneTransitionHandler.Instance.GoToScene(SceneName ?? "MainMenu");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject == GameObject.Find("Player")) LeaveCemeteryScene();
         }
     }
 }

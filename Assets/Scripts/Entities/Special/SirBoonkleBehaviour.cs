@@ -2,7 +2,7 @@
 using Entities;
 using UnityEngine;
 
-public class SirBonkelBehaviour : BaseEntity
+public class SirBoonkleBehaviour : BaseEntity
 {
     [Header("SirBoonkle")]
     public float FadeDuration = 1f;
@@ -29,7 +29,7 @@ public class SirBonkelBehaviour : BaseEntity
 
     private IEnumerator FadeInAndOut()
     {
-        MeshRenderer meshRend = GetComponent<MeshRenderer>();
+        SkinnedMeshRenderer meshRend = GetComponent<SkinnedMeshRenderer>();
         Material[] materials = meshRend.materials;
 
         // Fade out
@@ -40,11 +40,11 @@ public class SirBonkelBehaviour : BaseEntity
             currentTime += Time.deltaTime;
             ChangeColorOpacity(materials, 1 - currentTime / FadeDuration);
         }
-
+        
         if (_newSpawnTransform)
         {
-            transform.position = _newSpawnTransform.position;
-            transform.rotation = _newSpawnTransform.rotation;
+            transform.root.position = _newSpawnTransform.position;
+            transform.root.rotation = _newSpawnTransform.rotation;
         }
 
         // Fade in

@@ -10,10 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
-  m_Name: OpeningDialogue
+  m_Name: DefaultDialogue
   m_EditorClassIdentifier: 
-  sentences:
-  - Text: 'Hello my name is Sir Boonkle
-
-'
-  question: {fileID: 11400000, guid: 9487f6c324378644bb7c3fb7238aac13, type: 2}
+  sentences: []
+  question: {fileID: 11400000, guid: 114b4e1a91621f84b96e211ad4412fd0, type: 2}

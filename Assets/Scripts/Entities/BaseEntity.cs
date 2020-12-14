@@ -118,7 +118,7 @@ namespace Entities
             FearDamage += amount;
             NavMeshAgent.isStopped = true;
 
-            if(Animator)
+            if(Animator && Animator.runtimeAnimatorController != null)
                 Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
 
             if (FearDamage >= FearThreshold && EmotionalState != EmotionalState.Fainted) Faint();
@@ -137,7 +137,7 @@ namespace Entities
             if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
             if (FearDamage <= 0)
             {
-                if (Animator)
+                if (Animator && Animator.runtimeAnimatorController != null)
                 {
                     if (Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
                     {
@@ -155,12 +155,12 @@ namespace Entities
             {
                 if (Rigidbody.velocity.magnitude > 0.01)
                 {
-                    if (Animator)
+                    if (Animator && Animator.runtimeAnimatorController != null)
                         Animator.SetBool("IsWalking", true);
                 }
                 else
                 {
-                    if (Animator)
+                    if (Animator && Animator.runtimeAnimatorController != null)
                         Animator.SetBool("IsWalking", false);
                 }
             } else
@@ -169,12 +169,12 @@ namespace Entities
                 {
                     if (NavMeshAgent.velocity.magnitude > 0.01)
                     {
-                        if (Animator)
+                        if (Animator && Animator.runtimeAnimatorController != null)
                             Animator.SetBool("IsWalking", true);
                     }
                     else
                     {
-                        if (Animator)
+                        if (Animator && Animator.runtimeAnimatorController != null)
                             Animator.SetBool("IsWalking", false);
                     }
                 }
@@ -189,7 +189,7 @@ namespace Entities
 
             if(_ragdollController)  _ragdollController.ToggleRagdoll(false);
 
-            if(Animator) Animator.SetInteger("ScaredStage", 0);
+            if(Animator && Animator.runtimeAnimatorController != null) Animator.SetInteger("ScaredStage", 0);
 
             CanPossess = true;
             ResetDestination();

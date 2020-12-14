@@ -6,7 +6,7 @@
         Cat,
         EmmieLawson,
         RichardCash,
-        SirBartholomeusBoonkle,
+        SirBoonkle,
         StabbinSally,
         Gertrude,
         CaptainJenkins,

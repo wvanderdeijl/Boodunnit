@@ -25,10 +25,11 @@ public class PoliceManBehaviour : BaseEntity
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        IsScaredOfLevitatableObject = true;
+        LevitatableObjectFearDamage = 5f;
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(ILevitateable)] = 3f,
-            [typeof(RatBehaviour)] = 3f,
+            [CharacterType.Rat] = 3f,
         };
     }
     

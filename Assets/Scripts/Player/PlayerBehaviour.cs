@@ -21,7 +21,12 @@ public class PlayerBehaviour : BaseMovement
 
     private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
     private Transform _cameraTransform;
+<<<<<<< HEAD
     private Collider _highlightedCollider;
+=======
+    private int _dashCounter;
+
+>>>>>>> development
 
     private void Awake()
     {
@@ -42,6 +47,7 @@ public class PlayerBehaviour : BaseMovement
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            GameManager.ToggleCursor();
             PauseMenu.TogglePauseGame();
         }
         
@@ -82,7 +88,16 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown && !ConversationManager.HasConversationStarted)
             {
-                DashBehaviour.Dash();
+                // If player is grounded he can always dash.
+                if (IsGrounded)
+                    DashBehaviour.Dash();
+
+                // If player is not grounded, we check _dashCounter.
+                if (!IsGrounded && _dashCounter <= 0)
+                {
+                    DashBehaviour.Dash();
+                    _dashCounter++;
+                }
             }
         }
 
@@ -128,6 +143,12 @@ public class PlayerBehaviour : BaseMovement
             }
 
             Jump();
+        }
+
+        if (IsGrounded)
+        {
+            // Reset dash counter for single in air dash.
+            _dashCounter = 0;
         }
     }
     private void FixedUpdate()

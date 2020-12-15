@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class BaseMovement : MonoBehaviour
 {
@@ -7,13 +8,14 @@ public abstract class BaseMovement : MonoBehaviour
 
     [Header("Movement")]
     public float JumpForce = 10.0f;
-    public float Speed;
+    public float PossessionSpeed;
+    public float PathfindingSpeed;
     public Collider Collider;
 
 
     [HideInInspector]
     public bool IsGrounded = false;
-
+    
     [HideInInspector]
     public bool CanJump;
 
@@ -83,6 +85,7 @@ public abstract class BaseMovement : MonoBehaviour
         yVelocity = Rigidbody.velocity.y;
         Rigidbody.velocity = direction * speed;
         Rigidbody.velocity += new Vector3(0f, yVelocity, 0f);
+      
         if (direction != Vector3.zero)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, 
@@ -92,7 +95,20 @@ public abstract class BaseMovement : MonoBehaviour
 
     public virtual void MoveEntityInDirection(Vector3 direction)
     {
-        MoveEntityInDirection(direction, Speed);
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent)
+        {
+            if (agent.enabled && agent.isStopped == false)
+            {
+                MoveEntityInDirection(direction, PathfindingSpeed);
+            }
+            else
+            {
+                MoveEntityInDirection(direction, PossessionSpeed);
+            }
+            return;
+        }
+        MoveEntityInDirection(direction, PossessionSpeed);
     }
 
     public void Jump()

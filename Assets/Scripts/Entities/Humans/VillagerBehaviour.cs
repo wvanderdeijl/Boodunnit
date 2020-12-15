@@ -15,10 +15,10 @@ public class VillagerBehaviour : BaseEntity
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        IsScaredOfLevitatableObject = true;
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(RatBehaviour)] = 3f,
-            [typeof(ILevitateable)] = 3f
+            [CharacterType.Rat] = 3f,
         };
     }
 

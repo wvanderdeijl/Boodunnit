@@ -63,7 +63,7 @@ namespace Entities
             if (!IsPossessed)
             {
                 CheckSurroundings();
-                if(EmotionalState != EmotionalState.Fainted)
+                if(EmotionalState != EmotionalState.Fainted && FearDamage <= 0)
                     MoveWithPathFinding();
             }
         }
@@ -116,10 +116,9 @@ namespace Entities
         {
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
-            NavMeshAgent.isStopped = true;
 
-            if(Animator && Animator.runtimeAnimatorController != null)
-                Animator.SetInteger("ScaredStage", (FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted) ? 2 : 1);
+            SetScaredStage(FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted ? 2 : 1);
+            PauseEntityNavAgent(true);
 
             if (FearDamage >= FearThreshold && EmotionalState != EmotionalState.Fainted) Faint();
         }
@@ -141,8 +140,12 @@ namespace Entities
                 {
                     if (Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
                     {
-                        Animator.SetInteger("ScaredStage", 0);
-                        ResetDestination();
+                        if(Animator.GetCurrentAnimatorStateInfo(0).IsTag("Terrified") || Animator.GetCurrentAnimatorStateInfo(0).IsTag("Scared"))
+                        {
+                            SetScaredStage(0);
+                            Animator.Rebind();
+                            ResetDestination();
+                        }
                     }
                 }
                 FearDamage = 0;
@@ -155,13 +158,11 @@ namespace Entities
             {
                 if (Rigidbody.velocity.magnitude > 0.01)
                 {
-                    if (Animator && Animator.runtimeAnimatorController != null)
-                        Animator.SetBool("IsWalking", true);
+                    SetWalkingAnimation(true);
                 }
                 else
                 {
-                    if (Animator && Animator.runtimeAnimatorController != null)
-                        Animator.SetBool("IsWalking", false);
+                    SetWalkingAnimation(false);
                 }
             } else
             {
@@ -169,13 +170,12 @@ namespace Entities
                 {
                     if (NavMeshAgent.velocity.magnitude > 0.01)
                     {
-                        if (Animator && Animator.runtimeAnimatorController != null)
-                            Animator.SetBool("IsWalking", true);
+                        SetWalkingAnimation(true);
                     }
                     else
                     {
-                        if (Animator && Animator.runtimeAnimatorController != null)
-                            Animator.SetBool("IsWalking", false);
+
+                        SetWalkingAnimation(false);
                     }
                 }
             }
@@ -183,11 +183,25 @@ namespace Entities
 
         public void ResetFearDamage()
         {
+            SetScaredStage(0);
+            SetWalkingAnimation(false);
+
+            if(Animator != null && Animator.runtimeAnimatorController != null)
+                Animator.Rebind();
+
+            FearDamage = 0;
+        }
+
+        private void SetWalkingAnimation(bool shouldWalk)
+        {
             if (Animator && Animator.runtimeAnimatorController != null)
-            {
-                Animator.SetInteger("ScaredStage", 0);
-                FearDamage = 0;
-            }
+                Animator.SetBool("IsWalking", shouldWalk);
+        }
+
+        private void SetScaredStage(int scaredStage)
+        {
+            if (Animator && Animator.runtimeAnimatorController != null)
+                Animator.SetInteger("ScaredStage", scaredStage);
         }
 
         protected virtual IEnumerator WakeUp()
@@ -198,10 +212,14 @@ namespace Entities
 
             if(_ragdollController)  _ragdollController.ToggleRagdoll(false);
 
-            if(Animator && Animator.runtimeAnimatorController != null) Animator.SetInteger("ScaredStage", 0);
+            if (Animator && Animator.runtimeAnimatorController != null)
+            {
+                Animator.SetInteger("ScaredStage", 0);
+                Animator.Rebind();
+            }
 
-            CanPossess = true;
             ResetDestination();
+            CanPossess = true;
         }
     }
 }

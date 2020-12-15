@@ -15,6 +15,8 @@ public abstract class BaseMovement : MonoBehaviour
 
     //[HideInInspector]
     public bool IsGrounded = false;
+
+    public bool IsJumping = false;
     
     [HideInInspector]
     public bool CanJump;
@@ -115,6 +117,7 @@ public abstract class BaseMovement : MonoBehaviour
     {
         if (CanJump && IsGrounded)
         {
+            IsJumping = true;
             IsGrounded = false;
             Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);   
         }
@@ -142,6 +145,7 @@ public abstract class BaseMovement : MonoBehaviour
             }
 
             IsGrounded = true;
+            IsJumping = false;
         }
     }
 
@@ -155,6 +159,7 @@ public abstract class BaseMovement : MonoBehaviour
             }
 
             IsGrounded = true;
+            IsJumping = false;
         }
     }
 

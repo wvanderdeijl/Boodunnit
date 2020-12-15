@@ -192,15 +192,15 @@ public class PlayerBehaviour : BaseMovement
     {
         if (Animator)
         {
-            //// Jump animation
-            //if (IsGrounded)
-            //{
-            //    Animator.SetBool("IsGrounded", true);
-            //}
-            //else if (!IsGrounded)
-            //{
-            //    Animator.SetBool("IsGrounded", false);
-            //}
+            // Jump animation
+            if (IsJumping)
+            {
+                Animator.SetBool("IsJumping", true);
+            }
+            else if (!IsJumping)
+            {
+                Animator.SetBool("IsJumping", false);
+            }
 
             // Levitate animation
             if (LevitateBehaviour.IsLevitating)
@@ -223,7 +223,7 @@ public class PlayerBehaviour : BaseMovement
             }
 
             // Move animation
-            if (Rigidbody.velocity.magnitude > 0.01 && !DashBehaviour.IsDashing)
+            if (Rigidbody.velocity.magnitude > 0.01 && !DashBehaviour.IsDashing && !IsJumping)
             {
                 Animator.SetBool("IsMoving", true);
             }

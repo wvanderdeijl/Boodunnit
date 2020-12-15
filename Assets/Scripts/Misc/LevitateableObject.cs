@@ -24,7 +24,10 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         Outline outline = gameObject.AddComponent<Outline>();
         if (outline)
         {
-            outline.OutlineColor = Color.white;
+            Color purple;
+            ColorUtility.TryParseHtmlString("#d2b8db", out purple);
+
+            outline.OutlineColor = purple;
             outline.OutlineMode = Outline.Mode.OutlineVisible;
             outline.OutlineWidth = 5.0f;
             outline.enabled = false;

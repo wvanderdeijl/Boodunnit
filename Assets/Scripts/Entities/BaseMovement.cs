@@ -100,7 +100,7 @@ public abstract class BaseMovement : MonoBehaviour
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         if (agent)
         {
-            if (agent.enabled)
+            if (agent.enabled && agent.isStopped == false)
             {
                 MoveEntityInDirection(direction, PathfindingSpeed);
             }

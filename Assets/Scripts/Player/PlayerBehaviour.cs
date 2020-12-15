@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -7,28 +8,41 @@ public class PlayerBehaviour : BaseMovement
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
 
+    [Header("Highlight Radius")]
+    public float ConversationRadius;
+    public float LeviatateRadius;
+    public float PossesionRadius;
+    public float ClueRadius;
+
     public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
 
     public Animator Animator;
 
+    private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
+
     private Transform _cameraTransform;
     private int _dashCounter;
-
 
     private void Awake()
     {
         InitBaseMovement();
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
+
+        //Add radiuses to dictionary
+        _highlightRadiuses.Add("ConversationRadius", ConversationRadius);
+        _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
+        _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
+        _highlightRadiuses.Add("ClueRadius", ClueRadius);
     } 
 
     void Update()
     {
         PlayerAnimation();
 
-        HighlightBehaviour.HighlightGameobjectsInRadius();
+        HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -60,7 +74,10 @@ public class PlayerBehaviour : BaseMovement
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviour.IsLevitating)
+            if (!ConversationManager.HasConversationStarted && 
+                !DashBehaviour.IsDashing && 
+                !LevitateBehaviour.IsLevitating &&
+                GameManager.CurrentHighlightedCollider != null)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }

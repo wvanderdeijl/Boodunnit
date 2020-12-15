@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
@@ -15,9 +17,11 @@ public class Popup : MonoBehaviour
     public static bool isPopUpOpen;
 
     private int imageIndex = 0;
+    private SceneTransitionHandler _sceneTransitionHandler;
 
     private void Awake()
     {
+        _sceneTransitionHandler = new SceneTransitionHandler();
         CloseButton = transform.Find("CloseButton").gameObject;
         NextBtn = transform.Find("NextButton").gameObject;
         PreviousBtn = transform.Find("PreviousButton").gameObject;
@@ -50,6 +54,19 @@ public class Popup : MonoBehaviour
         PopupMenuUI.SetActive(false);
         isPopUpOpen = false;
         Time.timeScale = 1f;
+    }
+
+    public void NavigateToMainMenu()
+    {
+        if (!isPopUpOpen)
+        {
+            GameManager.CursorIsLocked = false;
+            DisableOrEnableOtherCanvasses(true);
+            PopupMenuUI.SetActive(false);
+            isPopUpOpen = false;
+            Time.timeScale = 1f;
+            _sceneTransitionHandler.GoToScene("MainMenu");
+        }
     }
 
     public void ShowNextImage()

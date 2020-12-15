@@ -1,12 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class WorldSpaceClue : MonoBehaviour
 {
     public Clue ClueScriptableObject;
     public Popup Popup;
+    public Popup ToBeContinuedPopup;
+
+    private List<Clue> _listOfClues;
 
     private void Awake()
     {
+        _listOfClues = Resources.LoadAll<Clue>("ScriptableObjects/Clues").ToList();
+        
         if (SaveHandler.Instance.DoesPlayerHaveClue(ClueScriptableObject.Name))
         {
             gameObject.SetActive(false);
@@ -36,8 +43,23 @@ public class WorldSpaceClue : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private bool DoIHaveAllClues()
+    {
+        return _listOfClues.All(clue => SaveHandler.Instance.DoesPlayerHaveClue(clue.name));
+    }
+
+    private void StartToBeContinuedPopup()
+    {
+        ToBeContinuedPopup.OpenPopup();
+    }
+
     void OnMouseDown()
     {
         AddToInventory();
+
+        if (DoIHaveAllClues())
+        {
+            StartToBeContinuedPopup();
+        }
     }
 }

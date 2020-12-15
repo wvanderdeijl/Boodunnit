@@ -192,7 +192,7 @@ public class PlayerBehaviour : BaseMovement
     {
         if (Animator)
         {
-            // Jump animation
+            //// Jump animation
             //if (IsGrounded)
             //{
             //    Animator.SetBool("IsGrounded", true);
@@ -227,7 +227,7 @@ public class PlayerBehaviour : BaseMovement
             {
                 Animator.SetBool("IsMoving", true);
             }
-            else
+            else if (Rigidbody.velocity.magnitude < 0.01)
             {
                 Animator.SetBool("IsMoving", false);
             }

@@ -66,6 +66,11 @@ public class DashBehaviour : MonoBehaviour
     {
         IsDashing = true;
 
+        for (int i = 0; i < 1000000; i++)
+        {
+            print("test");
+        }
+
         _rigidbodyPlayer.useGravity = false;
 
         Vector3 oldVelocity = _rigidbodyPlayer.velocity;

@@ -13,7 +13,7 @@ public abstract class BaseMovement : MonoBehaviour
     public Collider Collider;
 
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool IsGrounded = false;
     
     [HideInInspector]

@@ -11,6 +11,8 @@ public class PlayerBehaviour : BaseMovement
 
     public PauseMenu PauseMenu;
 
+    public Animator Animator;
+
     private Transform _cameraTransform;
     private int _dashCounter;
 
@@ -24,6 +26,8 @@ public class PlayerBehaviour : BaseMovement
 
     void Update()
     {
+        PlayerAnimation();
+
         HighlightBehaviour.HighlightGameobjectsInRadius();
 
         //Pause game behaviour
@@ -182,5 +186,51 @@ public class PlayerBehaviour : BaseMovement
         GameManager.CursorIsLocked = isRotating;
 
         LevitateBehaviour.RotateLevitateableObject();
+    }
+
+    private void PlayerAnimation()
+    {
+        if (Animator)
+        {
+            // Jump animation
+            //if (IsGrounded)
+            //{
+            //    Animator.SetBool("IsGrounded", true);
+            //}
+            //else if (!IsGrounded)
+            //{
+            //    Animator.SetBool("IsGrounded", false);
+            //}
+
+            // Levitate animation
+            if (LevitateBehaviour.IsLevitating)
+            {
+                Animator.SetBool("IsLevitating", true);
+            }
+            else
+            {
+                Animator.SetBool("IsLevitating", false);
+            }
+
+            // Dash animation
+            if (DashBehaviour.IsDashing)
+            {
+                Animator.SetBool("IsDashing", true);
+            }
+            else
+            {
+                Animator.SetBool("IsDashing", false);
+            }
+
+            // Move animation
+            if (Rigidbody.velocity.magnitude > 0.01 && !DashBehaviour.IsDashing)
+            {
+                Animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                Animator.SetBool("IsMoving", false);
+            }
+        }
     }
 }

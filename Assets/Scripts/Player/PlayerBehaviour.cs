@@ -18,12 +18,16 @@ public class PlayerBehaviour : BaseMovement
 
     public PauseMenu PauseMenu;
 
+    public Animator Animator;
+
     private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
+
     private Transform _cameraTransform;
     private int _dashCounter;
 
     private void Awake()
     {
+        InitBaseMovement();
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
 
@@ -36,6 +40,8 @@ public class PlayerBehaviour : BaseMovement
 
     void Update()
     {
+        PlayerAnimation();
+
         HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
 
         //Pause game behaviour
@@ -135,7 +141,6 @@ public class PlayerBehaviour : BaseMovement
                 PossessionBehaviour.TargetBehaviour.Jump();
                 return;
             }
-
             Jump();
         }
 
@@ -197,5 +202,51 @@ public class PlayerBehaviour : BaseMovement
         GameManager.CursorIsLocked = isRotating;
 
         LevitateBehaviour.RotateLevitateableObject();
+    }
+
+    private void PlayerAnimation()
+    {
+        if (Animator)
+        {
+            //// Jump animation
+            //if (IsJumping && IsGrounded)
+            //{
+            //    Animator.SetBool("IsJumping", true);
+            //}
+            //else if (!IsJumping)
+            //{
+            //    Animator.SetBool("IsJumping", false);
+            //}
+
+            // Levitate animation
+            if (LevitateBehaviour.IsLevitating)
+            {
+                Animator.SetBool("IsLevitating", true);
+            }
+            else
+            {
+                Animator.SetBool("IsLevitating", false);
+            }
+
+            // Dash animation
+            if (DashBehaviour.IsDashing)
+            {
+                Animator.SetBool("IsDashing", true);
+            }
+            else
+            {
+                Animator.SetBool("IsDashing", false);
+            }
+
+            // Move animation
+            if (Rigidbody.velocity.magnitude > 0.01 && !DashBehaviour.IsDashing && !IsJumping)
+            {
+                Animator.SetBool("IsMoving", true);
+            }
+            else if (Rigidbody.velocity.magnitude < 0.01)
+            {
+                Animator.SetBool("IsMoving", false);
+            }
+        }
     }
 }

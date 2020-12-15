@@ -3165,8 +3165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPossessing: 0
-  CooldownImage: {fileID: 56388837}
-  CameraController: {fileID: 0}
+  TargetBehaviour: {fileID: 0}
+  UnpossessRadius: 0
+  UnPossessRetriesOnYAxis: 0
   Cooldown: 1
   IsOnCooldown: 0
 --- !u!114 &1500548292
@@ -3183,7 +3184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDashing: 0
   DashOnCooldown: 0
-  DashCooldownImage: {fileID: 364445167}
   _dashCooldown: 2
   _dashDuration: 0.4
   _dashDistance: 4
@@ -3200,12 +3200,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 1500548289}
+  JumpForce: 10
   Speed: 0
+  Collider: {fileID: 0}
+  IsGrounded: 0
+  CanJump: 0
+  bottomHitPoint: {x: 0, y: 0, z: 0}
   PossessionBehaviour: {fileID: 1500548291}
   DashBehaviour: {fileID: 1500548292}
   HighlightBehaviour: {fileID: 1500548290}
   LevitateBehaviour: {fileID: 0}
-  DialogueManager: {fileID: 0}
+  ConversationManager: {fileID: 0}
   PauseMenu: {fileID: 1882569956}
 --- !u!65 &1500548294
 BoxCollider:
@@ -4484,6 +4489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 1620477966}
   SettingsCanvas: {fileID: 702185115}
+  CameraController: {fileID: 0}
   CanvasPanels:
   - {fileID: 1306271493}
   - {fileID: 1796717943}

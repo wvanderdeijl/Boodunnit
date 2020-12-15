@@ -92,26 +92,26 @@ public class ConversationManager : MonoBehaviour
                     (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     HasConversationStarted = true;
-                    
+
                     ConversationTarget = entityCollider.gameObject.transform;
                     _entityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
                     _animator.SetBool("IsOpen", true);
-                    
+
                     GameManager.CursorIsLocked = false;
 
-                    if(dialogue != null)
+                    if (dialogue != null)
                     {
                         ManageConversation(dialogue, null);
                         return;
                     }
 
-                    if(question != null)
+                    if (question != null)
                     {
                         ManageConversation(null, question);
                         return;
                     }
-                    
-                    if(dialogue == null && question == null)
+
+                    if (dialogue == null && question == null)
                     {
                         ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
                         return;
@@ -122,7 +122,7 @@ public class ConversationManager : MonoBehaviour
     }
     #endregion
 
-    #region Manange conversation 
+    #region Manage conversation 
     public void ManageConversation(Dialogue dialogue, Question question)
     {
         ResetQuestions();

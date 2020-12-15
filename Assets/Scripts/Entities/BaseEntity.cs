@@ -48,7 +48,9 @@ namespace Entities
             Outline outline = gameObject.AddComponent<Outline>();
             if (outline)
             {
-                outline.OutlineColor = Color.magenta;
+                Color possesionColor;
+                ColorUtility.TryParseHtmlString("#ffed85", out possesionColor);
+                outline.OutlineColor = possesionColor;
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 outline.OutlineWidth = 5.0f;
                 outline.enabled = false;

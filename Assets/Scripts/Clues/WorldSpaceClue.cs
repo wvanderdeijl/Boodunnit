@@ -13,6 +13,17 @@ public class WorldSpaceClue : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
+        Outline outline = gameObject.AddComponent<Outline>();
+        if (outline)
+        {
+            Color clueColor;
+            ColorUtility.TryParseHtmlString("#fabd61", out clueColor);
+            outline.OutlineColor = clueColor;
+            outline.OutlineMode = Outline.Mode.OutlineVisible;
+            outline.OutlineWidth = 5.0f;
+            outline.enabled = false;
+        }
     }
 
     public void AddToInventory()

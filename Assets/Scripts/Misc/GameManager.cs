@@ -8,8 +8,8 @@ public class GameManager
     /// If the game paused?
     /// </summary>
     public static bool IsPaused { get; set; }
-
     public static bool IsCutscenePlaying { get; set; }
+    public static Collider CurrentHighlightedCollider { get; set; }
 
     private static bool _cursorIsLocked = true;
 

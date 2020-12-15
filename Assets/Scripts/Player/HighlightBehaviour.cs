@@ -1,58 +1,143 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 public class HighlightBehaviour : MonoBehaviour
 {
-    public float Radius;
+    private Dictionary<string, float> _highlighRadius;
+    private float _maxRadius;
+    private Vector3 _position;
+    private Collider _currentCollider;
+    private Collider _previousCollider;
 
-    private List<Collider> _previousColliders = new List<Collider>();
-    private IEnumerable<Collider> _removeShaderFromColliders;
-
-    public void HighlightGameobjectsInRadius()
+    public void HighlightGameobject(Dictionary<string, float> highlightRadius)
     {
-        Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, Radius);
-        List<Collider> currentCollidersList = new List<Collider>();
+        _highlighRadius = highlightRadius;
+        _maxRadius = _highlighRadius.Values.Max();
 
-        foreach (Collider hitCollider in hitColliderArray)
+        FindCollidersInFrontOfPlayer();
+    }
+
+    public void FindCollidersInFrontOfPlayer()
+    {
+        if (PossessionBehaviour.PossessionTarget)
         {
-            if (hitCollider.TryGetComponent(out IPossessable possessable) || hitCollider.TryGetComponent(out ILevitateable levitateable) || hitCollider.TryGetComponent(out WorldSpaceClue worldSpaceClue))
-            {
-                Outline outline = hitCollider.gameObject.GetComponent<Outline>();
-
-                if (outline && !hitCollider.gameObject.GetComponent<SirBonkelBehaviour>())
-                {
-                    ToggleOutlineScriptOnGameobject(outline, true);
-                }
-
-                //Add colliders tot the previous list
-                if (!_previousColliders.Contains(hitCollider))
-                {
-                    _previousColliders.Add(hitCollider);
-                }
-
-                if (!currentCollidersList.Contains(hitCollider))
-                {
-                    currentCollidersList.Add(hitCollider);
-                }
-            } 
+            _position = PossessionBehaviour.PossessionTarget.transform.position;
+        } 
+        else
+        {
+            _position = transform.position;
         }
 
-        //Check differences in previous and current collider list
-        _removeShaderFromColliders = _previousColliders.Except(currentCollidersList);
+        Collider[] currentObjects = Physics.OverlapSphere(_position, _maxRadius)
+            .Where(c => { return IsHighlightable(c) && IsObjectInAngle(c); })
+            .ToArray();
 
-        foreach (Collider collider in _removeShaderFromColliders)
+        _currentCollider = GetClosestCollider(currentObjects);
+
+        if (_currentCollider != null)
         {
-            Outline outline = collider.gameObject.GetComponent<Outline>();
+            Outline outline = _currentCollider.gameObject.GetComponent<Outline>();
 
             if (outline)
             {
-                ToggleOutlineScriptOnGameobject(outline, false);
+                ToggleOutlineScriptOnGameobject(outline, true);
             }
+        }
+
+        if (_previousCollider != _currentCollider)
+        {
+            if (_previousCollider != null)
+            {
+                Outline outline = _previousCollider.gameObject.GetComponent<Outline>();
+
+                if (outline)
+                {
+                    ToggleOutlineScriptOnGameobject(outline, false);
+                }
+            }
+
+            _previousCollider = _currentCollider;
         }
     }
 
+    public bool IsHighlightable(Collider collider)
+    {
+        IPossessable possessableObject = collider.GetComponent<IPossessable>();
+        ILevitateable levitateableObject = collider.GetComponent<ILevitateable>();
+        WorldSpaceClue worldSpaceClue = collider.GetComponent<WorldSpaceClue>();
+
+        if (PossessionBehaviour.PossessionTarget)
+        {
+            return possessableObject != null;
+        }
+        else
+        {
+            return possessableObject != null || levitateableObject != null || worldSpaceClue != null;
+        }
+    }
+
+    public bool IsObjectInAngle(Collider collider)
+    {
+        Vector3 colliderDirection;
+        float angle;
+
+        //if possesing and player is not possesion target
+        if (PossessionBehaviour.PossessionTarget && gameObject != PossessionBehaviour.PossessionTarget)
+        {
+            //check if object is in front of the player
+            colliderDirection = (collider.transform.position - PossessionBehaviour.PossessionTarget.transform.position).normalized;
+            angle = Vector3.Angle(colliderDirection, PossessionBehaviour.PossessionTarget.transform.forward);
+        }
+        else
+        {
+            colliderDirection = (collider.transform.position - transform.position).normalized;
+            angle = Vector3.Angle(colliderDirection, transform.forward);
+        }
+
+        return angle > -90 && angle < 90;
+    }
+
+    public Collider GetClosestCollider(Collider[] colliders)
+    {
+        float minRadius = _maxRadius;
+        Collider closestCollider = null;
+
+        foreach (Collider collider in colliders)
+        {
+            //if collider is not null
+            if (collider)
+            {
+                float distance = Vector3.Distance(_position, collider.transform.position);
+
+                //check the extra distances distance < minDistance
+                if (!PossessionBehaviour.PossessionTarget &&
+                    (collider.GetComponent<ILevitateable>() != null && distance < _highlighRadius["LevitateRadius"] ||
+                     collider.GetComponent<IPossessable>() != null && distance < _highlighRadius["PossesionRadius"] ||
+                     collider.GetComponent<WorldSpaceClue>() != null && distance < _highlighRadius["ClueRadius"]) &&
+                     distance < minRadius)
+                {
+                    minRadius = distance;
+                    closestCollider = collider;
+                }
+
+                //if possesing
+                else if (PossessionBehaviour.PossessionTarget && PossessionBehaviour.PossessionTarget != collider.gameObject)
+                {
+                    //if collider is Possesable and within radius
+                    if (collider.gameObject.GetComponent<IPossessable>() != null && distance < _highlighRadius["ConversationRadius"])
+                    {
+                        if (distance < minRadius)
+                        {
+                            minRadius = distance;
+                            closestCollider = collider;
+                        }
+                    }
+                }
+            }
+        }
+
+        return closestCollider;
+    }
     private void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
     {
         outline.enabled = active;

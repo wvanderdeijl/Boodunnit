@@ -3785,7 +3785,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.4
-  m_Speed: 3
+  m_Speed: 0
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 1000
@@ -3818,6 +3818,7 @@ MonoBehaviour:
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  Animator: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
   MinimumFollowRange: 0
@@ -14486,6 +14487,22 @@ PrefabInstance:
       propertyPath: PauseMenu
       value: 
       objectReference: {fileID: 1931666623}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ClueRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LeviatateRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossesionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ConversationRadius
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_Name
       value: Player
@@ -34936,6 +34953,7 @@ MonoBehaviour:
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  Animator: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
   MinimumFollowRange: 0
@@ -38079,6 +38097,7 @@ MonoBehaviour:
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
+  Animator: {fileID: 0}
   IsOnCountdown: 0
   _pathFindingState: 1
   MinimumFollowRange: 0

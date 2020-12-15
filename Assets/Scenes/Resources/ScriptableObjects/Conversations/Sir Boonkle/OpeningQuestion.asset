@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
   m_Name: OpeningQuestion
   m_EditorClassIdentifier: 
-  Text: Wat is een vogel?
+  Text: Do you know what it feels like to fight in war, mr Krabs?
   Choices:
   - Text: Amfibie
     CharacterUnlocksChoice: 

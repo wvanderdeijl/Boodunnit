@@ -34,4 +34,16 @@ public class GameManager
         CursorLockMode newCursorLockModus = CursorIsLocked ? CursorLockMode.Locked : CursorLockMode.Confined;
         Cursor.lockState = newCursorLockModus;
     }
+
+    public static void ToggleCursor()
+    {
+        if (!IsPaused)
+        {
+            CursorIsLocked = true;
+        }
+        else
+        {
+            CursorIsLocked = false;
+        }
+    }
 }

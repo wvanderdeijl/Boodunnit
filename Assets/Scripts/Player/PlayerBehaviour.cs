@@ -17,6 +17,7 @@ public class PlayerBehaviour : BaseMovement
 
     private void Awake()
     {
+        InitBaseMovement();
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
     } 

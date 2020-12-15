@@ -12,9 +12,10 @@ namespace Entities
 {
     public abstract class BaseEntity : BaseEntityMovement, IPossessable
     {
-        //Property regarding Possession mechanic.
+        //Public properties
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
+        public bool IsWalking { get; set; }
 
         //Properties & Fields regarding Dialogue mechanic.
         [Header("Conversation")]
@@ -39,6 +40,7 @@ namespace Entities
         [SerializeField] private float _fearAngle;
 
         [SerializeField] private RagdollController _ragdollController;
+        [SerializeField] private Animator _animator;
 
         protected void InitBaseEntity()
         {
@@ -66,6 +68,9 @@ namespace Entities
                 if(EmotionalState != EmotionalState.Fainted && FearDamage <= 0)
                     MoveWithPathFinding();
             }
+            IsWalking = (IsGrounded && Rigidbody.velocity != Vector3.zero);
+            _animator.SetBool("IsWalking", IsWalking);
+            _animator.SetBool("IsGrounded", IsGrounded);
         }
 
         public abstract void UseFirstAbility();

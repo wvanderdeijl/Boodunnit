@@ -125,7 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 2832741858228525862}
   JumpForce: 7.1
-  Speed: 12
+  PossessionSpeed: 5
+  PathfindingSpeed: 0
   Collider: {fileID: 2832741858228525863}
   IsGrounded: 1
   CanJump: 0
@@ -181,9 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDashing: 0
   DashOnCooldown: 0
-  _dashCooldown: 1
-  _dashDuration: 0.4
-  _dashDistance: 7
+  DashCooldown: 2
+  DashDuration: 0.2
+  DashDistance: 7
 --- !u!114 &2832741858228525857
 MonoBehaviour:
   m_ObjectHideFlags: 0

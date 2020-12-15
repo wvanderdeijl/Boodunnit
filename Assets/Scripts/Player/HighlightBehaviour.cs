@@ -9,14 +9,12 @@ public class HighlightBehaviour : MonoBehaviour
     private Collider _currentCollider;
     private Collider _previousCollider;
 
-    public Collider HighlightGameobject(Dictionary<string, float> highlightRadius)
+    public void HighlightGameobject(Dictionary<string, float> highlightRadius)
     {
         _highlighRadius = highlightRadius;
         _maxRadius = _highlighRadius.Values.Max();
 
         FindCollidersInFrontOfPlayer();
-
-        return _currentCollider;
     }
 
     public void FindCollidersInFrontOfPlayer()

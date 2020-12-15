@@ -42,7 +42,7 @@ public class PlayerBehaviour : BaseMovement
     {
         PlayerAnimation();
 
-        Collider highlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -60,14 +60,14 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && IsGrounded)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && highlightedObject.GetComponent<IPossessable>() != null)
-                    PossessionBehaviour.PossessTarget(highlightedObject);
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
+                    PossessionBehaviour.PossessTarget();
             }
         }
 

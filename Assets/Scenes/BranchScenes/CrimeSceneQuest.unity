@@ -5753,26 +5753,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 132955847}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.4
-  m_Speed: 0
-  m_Acceleration: 5
-  avoidancePriority: 50
-  m_AngularSpeed: 1000
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2.484195
-  m_BaseOffset: 1.2420975
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &132955849
-MonoBehaviour:
-=======
   m_GameObject: {fileID: 135456965}
   m_LocalRotation: {x: 0.119787835, y: -0, z: -0, w: 0.9927995}
   m_LocalPosition: {x: 0.0070877075, y: -0.00028693676, z: -0.00022888184}
@@ -5783,7 +5763,6 @@ MonoBehaviour:
   m_LocalEulerAnglesHint: {x: 13.76, y: 0, z: 0}
 --- !u!65 &135456967
 BoxCollider:
->>>>>>> development
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5792,46 +5771,6 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-<<<<<<< HEAD
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  JumpForce: 10
-  Speed: 6
-  Collider: {fileID: 132955850}
-  IsGrounded: 1
-  CanJump: 0
-  bottomHitPoint: {x: 0, y: 0, z: 0}
-  TargetToFollow: {fileID: 0}
-  NavMeshAgent: {fileID: 0}
-  Animator: {fileID: 0}
-  IsOnCountdown: 0
-  _pathFindingState: 1
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  CanPossess: 1
-  Dialogue: {fileID: 0}
-  Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
-  Relationships: 0a000000
-  DefaultAnswers: []
-  CharacterName: 10
-  CanTalkToBoolia: 0
-  FearThreshold: 0
-  FearDamage: 0
-  FaintDuration: 0
-  EmotionalState: 0
-  HasFearCooldown: 0
-  _fearRadius: 0
-  _fearAngle: 0
-  _ragdollController: {fileID: 0}
-  ConsumableEndPosition: {fileID: 0}
-  _donutDetectionRadius: 10
-  _donutDetectionAngle: 90
---- !u!136 &132955850
-CapsuleCollider:
-=======
   serializedVersion: 2
   m_Size: {x: 90, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5842,7 +5781,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &136960595
 BoxCollider:
->>>>>>> development
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -53770,7 +53708,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: PauseMenu
       value: 
@@ -53794,11 +53731,6 @@ PrefabInstance:
     - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_Name
       value: Player
-=======
-    - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.21551904
->>>>>>> development
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_LocalScale.y
@@ -77170,64 +77102,6 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-<<<<<<< HEAD
-  m_Radius: 0.5
-  m_Height: 2.484195
-  m_Direction: 1
-  m_Center: {x: 0.0004036726, y: 0, z: 0}
---- !u!114 &1686607866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686607864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  JumpForce: 10
-  Speed: 6
-  Collider: {fileID: 132955850}
-  IsGrounded: 1
-  CanJump: 0
-  bottomHitPoint: {x: 0, y: 0, z: 0}
-  TargetToFollow: {fileID: 0}
-  NavMeshAgent: {fileID: 0}
-  Animator: {fileID: 0}
-  IsOnCountdown: 0
-  _pathFindingState: 1
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  CanPossess: 1
-  Dialogue: {fileID: 0}
-  Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
-  Relationships: 0a000000
-  DefaultAnswers: []
-  CharacterName: 10
-  CanTalkToBoolia: 0
-  FearThreshold: 0
-  FearDamage: 0
-  FaintDuration: 0
-  EmotionalState: 0
-  HasFearCooldown: 0
-  _fearRadius: 0
-  _fearAngle: 0
-  _ragdollController: {fileID: 0}
-  ConsumableEndPosition: {fileID: 0}
-  _donutDetectionRadius: 10
-  _donutDetectionAngle: 90
---- !u!54 &1686607867
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686607864}
-=======
->>>>>>> development
   serializedVersion: 2
   m_Size: {x: 0.016677883, y: 0.002590086, z: 0.011792935}
   m_Center: {x: 0.00016214182, y: 0.000060309427, z: 0.000078909565}
@@ -81109,73 +80983,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43041ce14a0ffc3489a33d1e227a0755, type: 3}
   m_PrefabInstance: {fileID: 2024501599}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1835016664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 318aedf8327a0d343bc64676ad26159b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  JumpForce: 10
-  Speed: 6
-  Collider: {fileID: 132955850}
-  IsGrounded: 1
-  CanJump: 0
-  bottomHitPoint: {x: 0, y: 0, z: 0}
-  TargetToFollow: {fileID: 0}
-  NavMeshAgent: {fileID: 0}
-  Animator: {fileID: 0}
-  IsOnCountdown: 0
-  _pathFindingState: 1
-  MinimumFollowRange: 0
-  MaximumFollowRange: 0
-  CanPossess: 1
-  Dialogue: {fileID: 0}
-  Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
-  Relationships: 0a000000
-  DefaultAnswers: []
-  CharacterName: 10
-  CanTalkToBoolia: 0
-  FearThreshold: 0
-  FearDamage: 0
-  FaintDuration: 0
-  EmotionalState: 0
-  HasFearCooldown: 0
-  _fearRadius: 0
-  _fearAngle: 0
-  _ragdollController: {fileID: 0}
-  ConsumableEndPosition: {fileID: 0}
-  _donutDetectionRadius: 10
-  _donutDetectionAngle: 90
---- !u!195 &1835016666
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835016664}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.4
-  m_Speed: 3
-  m_Acceleration: 5
-  avoidancePriority: 50
-  m_AngularSpeed: 1000
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2.484195
-  m_BaseOffset: 1.2420975
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!136 &1835016667
-CapsuleCollider:
-=======
---- !u!65 &2024501601
-BoxCollider:
->>>>>>> development
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

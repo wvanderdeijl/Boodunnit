@@ -1,5 +1,4 @@
-﻿using Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
@@ -21,12 +20,7 @@ public class PlayerBehaviour : BaseMovement
 
     private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
     private Transform _cameraTransform;
-<<<<<<< HEAD
-    private Collider _highlightedCollider;
-=======
     private int _dashCounter;
-
->>>>>>> development
 
     private void Awake()
     {

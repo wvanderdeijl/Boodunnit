@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class BirdBehaviour : BaseEntity
 {
-    public Mesh NotGlidingMesh, GlidingMesh;
-    
     [SerializeField] private GlideBehaviour _glideBehaviour;
     
     private void Awake()
@@ -37,6 +35,5 @@ public class BirdBehaviour : BaseEntity
     public override void UseFirstAbility()
     {
         _glideBehaviour.ToggleGlide();
-        GetComponent<MeshFilter>().mesh = _glideBehaviour.IsGliding ? GlidingMesh : NotGlidingMesh;
     }
 }

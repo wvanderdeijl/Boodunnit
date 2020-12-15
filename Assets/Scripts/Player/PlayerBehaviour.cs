@@ -124,7 +124,6 @@ public class PlayerBehaviour : BaseMovement
                 PossessionBehaviour.TargetBehaviour.Jump();
                 return;
             }
-
             Jump();
         }
 
@@ -192,15 +191,15 @@ public class PlayerBehaviour : BaseMovement
     {
         if (Animator)
         {
-            // Jump animation
-            if (IsJumping)
-            {
-                Animator.SetBool("IsJumping", true);
-            }
-            else if (!IsJumping)
-            {
-                Animator.SetBool("IsJumping", false);
-            }
+            //// Jump animation
+            //if (IsJumping && IsGrounded)
+            //{
+            //    Animator.SetBool("IsJumping", true);
+            //}
+            //else if (!IsJumping)
+            //{
+            //    Animator.SetBool("IsJumping", false);
+            //}
 
             // Levitate animation
             if (LevitateBehaviour.IsLevitating)

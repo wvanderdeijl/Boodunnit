@@ -16,7 +16,7 @@ public abstract class BaseMovement : MonoBehaviour
     //[HideInInspector]
     public bool IsGrounded = false;
 
-    public bool IsJumping = false;
+    public bool IsJumping;
     
     [HideInInspector]
     public bool CanJump;
@@ -159,7 +159,6 @@ public abstract class BaseMovement : MonoBehaviour
             }
 
             IsGrounded = true;
-            IsJumping = false;
         }
     }
 

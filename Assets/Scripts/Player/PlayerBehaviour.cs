@@ -36,7 +36,7 @@ public class PlayerBehaviour : BaseMovement
 
     void Update()
     {
-        HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -54,14 +54,14 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
-                    PossessionBehaviour.PossessTarget();
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject.GetComponent<IPossessable>() != null)
+                    PossessionBehaviour.PossessTarget(HighlightedObject);
             }
         }
 

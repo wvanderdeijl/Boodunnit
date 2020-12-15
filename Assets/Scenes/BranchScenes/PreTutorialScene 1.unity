@@ -19164,6 +19164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 20
+  DefaultLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &1847049727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22207,7 +22210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2832741858403064081}
   _mainCamera: {fileID: 39362225}
-  _overlapSphereRadiusInUnits: 20
+  _overlapSphereRadiusInUnits: 15
   _overlapSphereAngleInDegrees: 360
   _pushPullSpeed: 300
   _rotationSpeed: 5

@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BranchScenes/LoadingScene.unity
     guid: 080349b04d7ac7b49bdedeab11e69fb4
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BranchScenes/PreTutorialScene.unity
     guid: 3d6d85578c9384e43bb5e835cb8a1868
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BranchScenes/PreTutorialScene 1.unity
     guid: 9a41afa7a188bb0499cc243bdcbb1b46
   - enabled: 0

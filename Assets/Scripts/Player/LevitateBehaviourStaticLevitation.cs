@@ -9,7 +9,7 @@ public class LevitateBehaviourStaticLevitation : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
 
     [Header("OverlapSphere")]
-    [SerializeField] private float _overlapSphereRadiusInUnits = 20f;
+    [SerializeField] private float _overlapSphereRadiusInUnits = 15f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
     
     [Header("Speeds")]

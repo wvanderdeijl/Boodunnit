@@ -718,6 +718,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 20
+  DefaultLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &74044862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5152,98 +5155,14 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 39362225}
-    - target: {fileID: 2832741858228525857, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: _rotationSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525857, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: _velocitySpeedPercentage
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525857, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: _overlapSphereRadiusInUnits
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525858, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: DashDistance
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525858, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: DashDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525858, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: _dashDistance
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525858, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: _dashDuration
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525858, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: DashCooldownImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525859, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: Radius
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525860, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: CooldownImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525860, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: UnpossessRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: CanJump
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: JumpForce
-      value: 7.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: PauseMenu
       value: 
       objectReference: {fileID: 1520719935}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: PossessionSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: HighlightBehaviour
-      value: 
-      objectReference: {fileID: 443138624}
-    - target: {fileID: 2832741858228525862, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525862, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525862, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525880, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_Materials.Array.data[3]
-      value: 
-      objectReference: {fileID: 2100000, guid: ba2e6e10895ede149ba541a529c28c50, type: 2}
-    - target: {fileID: 2832741858228525880, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_Materials.Array.data[4]
-      value: 
-      objectReference: {fileID: 2100000, guid: 86283012f03e3b246be1cac1e9bf19b3, type: 2}
-    - target: {fileID: 2832741858228525880, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_Materials.Array.data[5]
-      value: 
-      objectReference: {fileID: 2100000, guid: 342ef3f5b98b33f41876b5bc3591e91e, type: 2}
     - target: {fileID: 2832741858228525882, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5295,17 +5214,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2832741858228525882, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
   m_PrefabInstance: {fileID: 443138622}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &443138624 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2832741858228525859, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-  m_PrefabInstance: {fileID: 443138622}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda64b232a8ed564b8fd5097cf3494e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &451547313
 GameObject:
   m_ObjectHideFlags: 0

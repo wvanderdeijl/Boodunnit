@@ -71,9 +71,9 @@ MeshRenderer:
   - {fileID: 2100000, guid: d0d7a08cf0e248b4ab16c083f04508d6, type: 2}
   - {fileID: 2100000, guid: 28eeb6a1dc897ca4fba9aad241f7eab3, type: 2}
   - {fileID: 2100000, guid: 28eeb6a1dc897ca4fba9aad241f7eab3, type: 2}
-  - {fileID: 2100000, guid: 4c0d6a7ca98d8314880fb4d401ea9b7a, type: 2}
-  - {fileID: 2100000, guid: 481f41d2a46c6794e880ee8968cbb2e3, type: 2}
-  - {fileID: 2100000, guid: 28295625e6f494e41be8af43a9012fec, type: 2}
+  - {fileID: 2100000, guid: ba2e6e10895ede149ba541a529c28c50, type: 2}
+  - {fileID: 2100000, guid: 86283012f03e3b246be1cac1e9bf19b3, type: 2}
+  - {fileID: 2100000, guid: 342ef3f5b98b33f41876b5bc3591e91e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,10 +125,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 2832741858228525862}
   JumpForce: 7.1
-  Speed: 12
+  PossessionSpeed: 10
+  PathfindingSpeed: 0
   Collider: {fileID: 2832741858228525863}
   IsGrounded: 1
-  CanJump: 0
+  CanJump: 1
   bottomHitPoint: {x: 0, y: 0, z: 0}
   PossessionBehaviour: {fileID: 2832741858228525860}
   DashBehaviour: {fileID: 2832741858228525858}
@@ -181,9 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDashing: 0
   DashOnCooldown: 0
-  _dashCooldown: 1
-  _dashDuration: 0.4
-  _dashDistance: 7
+  DashCooldown: 2
+  DashDuration: 0.2
+  DashDistance: 7
 --- !u!114 &2832741858228525857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,9 +199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2832741858228525871}
   _mainCamera: {fileID: 0}
-  _overlapSphereRadiusInUnits: 6
+  _overlapSphereRadiusInUnits: 15
   _overlapSphereAngleInDegrees: 360
-  _velocitySpeedPercentage: 35
+  _velocitySpeedPercentage: 90
   _pushPullSpeed: 300
   _rotationSpeed: 20
   _frozenDurationInSeconds: 5

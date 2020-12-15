@@ -193,7 +193,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 3135169515716433583, guid: ed33ce32dcb362d42be7e7056836b5b5, type: 3}
-  m_Tag: 
+  m_Tag: Scared
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -221,7 +221,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -998496362607748373, guid: ed33ce32dcb362d42be7e7056836b5b5, type: 3}
-  m_Tag: 
+  m_Tag: Scared
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -499,7 +499,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 8802385474561448576, guid: 10ea1615a669fcd4592e97c5c3844f2e, type: 3}
-  m_Tag: 
+  m_Tag: Terrified
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

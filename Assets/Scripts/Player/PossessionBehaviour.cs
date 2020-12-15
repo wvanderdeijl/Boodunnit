@@ -137,8 +137,10 @@ public class PossessionBehaviour : MonoBehaviour
                 TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 TargetBehaviour.NavMeshAgent.enabled = false;
                 TargetBehaviour.IsPossessed = true;
+                TargetBehaviour.ResetFearDamage();
                 IsPossessing = true;
                 transform.position = gameObjectInRangeCollider.gameObject.transform.position;
+
 
                 EnableOrDisableObjectChildColliders(false);
                 EnableOrDisableObjectRigidBody(false);
@@ -249,4 +251,5 @@ public class PossessionBehaviour : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, UnpossessRadius);
     }
+
 }

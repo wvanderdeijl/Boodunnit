@@ -6,12 +6,14 @@ using UnityEngine;
 
 public class BirdBehaviour : BaseEntity
 {
-    [SerializeField] private GlideBehaviour _glideBehaviour;
+    private GlideBehaviour _glideBehaviour;
+    private Animator _animator;
     
     private void Awake()
     {
         InitBaseEntity();
         _glideBehaviour = GetComponent<GlideBehaviour>();
+        _animator = GetComponent<Animator>();
         CanJump = true;
         
         FearThreshold = 20;
@@ -24,6 +26,16 @@ public class BirdBehaviour : BaseEntity
             [CharacterType.PoliceMan] = 3f,
             [CharacterType.Villager] = 3f
         };
+    }
+
+    private void LateUpdate()
+    {
+        IsWalking = (IsGrounded && Rigidbody.velocity != Vector3.zero);
+        if (_animator)
+        {
+            _animator.SetBool("IsWalking", IsWalking);
+            _animator.SetBool("IsGrounded", IsGrounded);
+        }
     }
 
     public override void MoveEntityInDirection(Vector3 direction)

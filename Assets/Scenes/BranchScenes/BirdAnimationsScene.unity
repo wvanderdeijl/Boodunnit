@@ -543,3 +543,117 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+--- !u!1001 &2140292264947604787
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7196294045831841731, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_Name
+      value: CrimeSceneEmmie
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.429
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+--- !u!1001 &4042446562093249880
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.194645
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.429
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773542581227117713, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257873727752635947, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: m_Name
+      value: CemeteryEmmie
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}

@@ -14,7 +14,7 @@ namespace SceneTransition
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject == GameObject.Find("Player")) LeaveCemeteryScene();
+            if(other.gameObject == GameObject.Find("Player") && EmmieTrigger.HasVisitedEmmie) LeaveCemeteryScene();
         }
     }
 }

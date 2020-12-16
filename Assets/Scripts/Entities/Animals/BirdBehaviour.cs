@@ -28,8 +28,16 @@ public class BirdBehaviour : BaseEntity
 
     public override void MoveEntityInDirection(Vector3 direction)
     {
-        if (_glideBehaviour.IsGliding && !IsGrounded) base.MoveEntityInDirection(direction, PossessionSpeed / 1.5f);
-        else base.MoveEntityInDirection(direction);
+        if (_glideBehaviour.IsGliding && !IsGrounded)
+        {
+            base.MoveEntityInDirection(direction, PossessionSpeed / 1.5f);
+            PlayAudioOnMovement(1);
+        }
+        else
+        {
+            base.MoveEntityInDirection(direction);
+            PlayAudioOnMovement(0);
+        }
     }
 
     public override void UseFirstAbility()

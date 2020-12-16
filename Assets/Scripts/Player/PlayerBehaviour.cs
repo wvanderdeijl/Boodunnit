@@ -8,25 +8,44 @@ public class PlayerBehaviour : BaseMovement
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
 
+    [Header("Highlight Radius")]
+    public float ConversationRadius;
+    public float LeviatateRadius;
+    public float PossesionRadius;
+    public float ClueRadius;
+
     public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
 
+
     public List<AudioSource> AudioSources;
+
+    public Animator Animator;
+
+    private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
+
 
     private Transform _cameraTransform;
     private int _dashCounter;
 
-
     private void Awake()
     {
+        InitBaseMovement();
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
+
+        //Add radiuses to dictionary
+        _highlightRadiuses.Add("ConversationRadius", ConversationRadius);
+        _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
+        _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
+        _highlightRadiuses.Add("ClueRadius", ClueRadius);
     } 
 
     void Update()
     {
-        HighlightBehaviour.HighlightGameobjectsInRadius();
+        Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        PlayerAnimation();
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -44,21 +63,24 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
-                    PossessionBehaviour.PossessTarget();
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject.GetComponent<IPossessable>() != null)
+                    PossessionBehaviour.PossessTarget(HighlightedObject);
             }
         }
 
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviour.IsLevitating)
+            if (!ConversationManager.HasConversationStarted && 
+                !DashBehaviour.IsDashing && 
+                !LevitateBehaviour.IsLevitating &&
+                GameManager.CurrentHighlightedCollider != null)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }
@@ -122,7 +144,6 @@ public class PlayerBehaviour : BaseMovement
                 PossessionBehaviour.TargetBehaviour.Jump();
                 return;
             }
-
             Jump();
         }
 
@@ -184,5 +205,51 @@ public class PlayerBehaviour : BaseMovement
         GameManager.CursorIsLocked = isRotating;
 
         LevitateBehaviour.RotateLevitateableObject();
+    }
+
+    private void PlayerAnimation()
+    {
+        if (Animator)
+        {
+            //// Jump animation
+            //if (IsJumping && IsGrounded)
+            //{
+            //    Animator.SetBool("IsJumping", true);
+            //}
+            //else if (!IsJumping)
+            //{
+            //    Animator.SetBool("IsJumping", false);
+            //}
+
+            // Levitate animation
+            if (LevitateBehaviour.IsLevitating)
+            {
+                Animator.SetBool("IsLevitating", true);
+            }
+            else
+            {
+                Animator.SetBool("IsLevitating", false);
+            }
+
+            // Dash animation
+            if (DashBehaviour.IsDashing)
+            {
+                Animator.SetBool("IsDashing", true);
+            }
+            else
+            {
+                Animator.SetBool("IsDashing", false);
+            }
+
+            // Move animation
+            if (Rigidbody.velocity.magnitude > 0.01 && !DashBehaviour.IsDashing && !IsJumping)
+            {
+                Animator.SetBool("IsMoving", true);
+            }
+            else if (Rigidbody.velocity.magnitude < 0.01)
+            {
+                Animator.SetBool("IsMoving", false);
+            }
+        }
     }
 }

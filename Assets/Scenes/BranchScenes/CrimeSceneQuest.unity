@@ -28096,6 +28096,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1931666623}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ClueRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LeviatateRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossesionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: PossessionSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -28110,6 +28122,9 @@ PrefabInstance:
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: AudioSources.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+      propertyPath: ConversationRadius
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: m_Name
@@ -53972,13 +53987,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187977647}
     m_Modifications:
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 1931666623}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ClueRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LeviatateRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossesionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ConversationRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_RootOrder
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.21551904
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_LocalScale.y
@@ -81615,24 +81650,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43041ce14a0ffc3489a33d1e227a0755, type: 3}
---- !u!1 &2024501600 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43041ce14a0ffc3489a33d1e227a0755, type: 3}
-  m_PrefabInstance: {fileID: 2024501599}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2024501601
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024501600}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.01667789, y: 0.0025900863, z: 0.011792942}
-  m_Center: {x: 0.00016215489, y: 0.000060324346, z: 0.00007887975}
 --- !u!1001 &2024708039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91288,6 +91305,10 @@ PrefabInstance:
     - target: {fileID: 8358265757348831169, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: CanPossess
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: PossessionSpeed

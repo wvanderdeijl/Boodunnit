@@ -12,9 +12,10 @@ namespace Entities
 {
     public abstract class BaseEntity : BaseEntityMovement, IPossessable
     {
-        //Property regarding Possession mechanic.
+        //Public properties
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
+        public bool IsWalking { get; set; }
 
         public List<AudioClip> WalkAudioClips;
 
@@ -41,6 +42,7 @@ namespace Entities
         [SerializeField] private float _fearAngle;
 
         [SerializeField] private RagdollController _ragdollController;
+        [SerializeField] private Animator _animator;
 
         protected void InitBaseEntity()
         {
@@ -52,7 +54,9 @@ namespace Entities
             Outline outline = gameObject.AddComponent<Outline>();
             if (outline)
             {
-                outline.OutlineColor = Color.magenta;
+                Color possesionColor;
+                ColorUtility.TryParseHtmlString("#ffed85", out possesionColor);
+                outline.OutlineColor = possesionColor;
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 outline.OutlineWidth = 5.0f;
                 outline.enabled = false;
@@ -74,6 +78,12 @@ namespace Entities
                     MoveWithPathFinding();
                 }
                 
+            }
+            IsWalking = (IsGrounded && Rigidbody.velocity != Vector3.zero);
+            if (_animator)
+            {
+                _animator.SetBool("IsWalking", IsWalking);
+                _animator.SetBool("IsGrounded", IsGrounded);
             }
         }
 

@@ -3359,6 +3359,10 @@ PrefabInstance:
       value: Burt
       objectReference: {fileID: 0}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: Dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: bb327518a3943e547867f291228c3168, type: 2}
+    - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: CanTalkToBoolia
       value: 1
       objectReference: {fileID: 0}
@@ -33228,7 +33232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.65
+      value: 37.88
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33650,6 +33654,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: Dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: a0c7191da6fbdd4418ebc2b12fed8f87, type: 2}
+    - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: CanTalkToBoolia
       value: 1
       objectReference: {fileID: 0}
@@ -33663,7 +33671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: DefaultAnswers.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: Relationships.Array.data[0]
@@ -33671,11 +33679,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: DefaultAnswers.Array.data[0].Text
-      value: Huh? What was that?
+      value: Who goes there?
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: DefaultAnswers.Array.data[1].Text
-      value: 
+      value: Burt?
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: DefaultAnswers.Array.data[2].Text
+      value: Was that the wind?
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000328, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_Enabled

@@ -45,11 +45,18 @@ public class PossessionBehaviour : MonoBehaviour
             gameObject.GetComponent<PlayerBehaviour>().IsGrounded = false;
 
             TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            TargetBehaviour.NavMeshAgent.enabled = true;
+
+            if (TargetBehaviour.NavMeshAgent)
+            {
+                TargetBehaviour.NavMeshAgent.enabled = true;
+            }
+
             TargetBehaviour.ResetDestination();
             
             
-            EnableOrDisablePlayerMeshRenderers(true);
+            // EnableOrDisablePlayerMeshRenderers(true);
+            EnableOrDisablePlayerSkinnedMeshRenderers(true);
+
             EnableOrDisablePlayerColliders(true);
             EnableOrDisableObjectChildColliders(true);
             EnableOrDisableObjectRigidBody(true);
@@ -85,6 +92,23 @@ public class PossessionBehaviour : MonoBehaviour
         }
     }
 
+    private void EnableOrDisablePlayerSkinnedMeshRenderers(bool activateMeshRenderers)
+    {
+        //Changes players mesh renderer
+        SkinnedMeshRenderer playerMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        if (playerMeshRenderer)
+        {
+            playerMeshRenderer.enabled = activateMeshRenderers;
+        }
+
+        //Changes all of the players children mesh renderers
+        SkinnedMeshRenderer[] arrayPlayerChildMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (SkinnedMeshRenderer childMeshRenderer in arrayPlayerChildMeshRenderers)
+        {
+            childMeshRenderer.enabled = activateMeshRenderers;
+        }
+    }
+
     private void EnableOrDisablePlayerColliders(bool activateColliders)
     {
         //Changes players collider
@@ -102,61 +126,41 @@ public class PossessionBehaviour : MonoBehaviour
         }
     }
 
-    public void PossessTarget()
+    public void PossessTarget(Collider possesionTarget)
     {
         if (IsPossessing || IsOnCooldown)
         {
             return;
         }
 
-        //It was really frustrating for everyone to possess something, so i the lead dev created this, this is code that will be used for now, later on interaction with the world will change (for example by hovering your mouse on an object and pressing E to possess). Dont worry about this new kind of input yet.
-        float overlapSphereRadius = 3;
-        List<Collider> listGameObjectsInRangeOrderedByRange = Physics
-            .OverlapSphere(transform.position, overlapSphereRadius)
-            .OrderBy(c => Vector3.Distance(transform.position, c.transform.position))
-            .ToList();
-        
-        foreach (Collider gameObjectInRangeCollider in listGameObjectsInRangeOrderedByRange)
+        //Check if the targetBehaviour is possessable.
+        TargetBehaviour = possesionTarget.GetComponent<BaseEntity>();
+        if (!TargetBehaviour.CanPossess)
         {
-            IPossessable possessableInterface = gameObjectInRangeCollider.GetComponent<IPossessable>();
-            if (possessableInterface != null && !PossessionTarget)
-            {
-                //Check if the targetBehaviour is possessable.
-                TargetBehaviour = gameObjectInRangeCollider.GetComponent<BaseEntity>();
-                if (!TargetBehaviour.CanPossess) break;
-                
-                //Check if there is a collider in between the player and the possessable.
-                Vector3 playerToPossessable = (TargetBehaviour.transform.position - transform.position).normalized;
-
-                Physics.Raycast(transform.position, playerToPossessable, out RaycastHit hit,
-                    Vector3.Distance(transform.position, TargetBehaviour.transform.position));
-                if (!hit.collider.transform.root.gameObject.Equals(TargetBehaviour.gameObject) && !hit.collider.isTrigger) continue;
-
-                PossessionTarget = gameObjectInRangeCollider.gameObject;
-                _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
-                TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-                TargetBehaviour.NavMeshAgent.enabled = false;
-                TargetBehaviour.IsPossessed = true;
-                TargetBehaviour.ResetFearDamage();
-                IsPossessing = true;
-                transform.position = gameObjectInRangeCollider.gameObject.transform.position;
-
-
-                EnableOrDisableObjectChildColliders(false);
-                EnableOrDisableObjectRigidBody(false);
-                EnableOrDisablePlayerMeshRenderers(false);
-                EnableOrDisablePlayerColliders(false);
-
-                //Stop iterating a possessable is found
-                break;
-            }
+            return;
         }
 
-        //ToDo: Did i do this right? i tried to mirror the code below as close as possible
-        if (listGameObjectsInRangeOrderedByRange.Count == 0 && PossessionTarget)
+        PossessionTarget = possesionTarget.gameObject;
+        _cameraController.CameraRotationTarget = possesionTarget.transform;
+        TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+
+        if (TargetBehaviour.NavMeshAgent)
         {
-            PossessionTarget = null;
+            TargetBehaviour.NavMeshAgent.enabled = false;
         }
+
+        TargetBehaviour.IsPossessed = true;
+        TargetBehaviour.ResetFearDamage();
+        IsPossessing = true;
+        transform.position = possesionTarget.gameObject.transform.position;
+
+        EnableOrDisableObjectChildColliders(false);
+        EnableOrDisableObjectRigidBody(false);
+
+        // EnableOrDisablePlayerMeshRenderers(false);
+        EnableOrDisablePlayerSkinnedMeshRenderers(false);
+
+        EnableOrDisablePlayerColliders(false);
     }
 
     private void TeleportPlayerToRandomPosition()

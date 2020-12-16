@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
+  m_Name: Question01
+  m_EditorClassIdentifier: 
+  Text: "What\u2019s on your mind?"
+  Choices:
+  - Text: Who are you?
+    CharacterUnlocksChoice: 
+    Dialogue: {fileID: 11400000, guid: e91666f01177d7542955e91ef43703b9, type: 2}
+    Question: {fileID: 0}
+  - Text: Where are we?
+    CharacterUnlocksChoice: 
+    Dialogue: {fileID: 11400000, guid: 794a965d368fc614d9ef472d3dd423d2, type: 2}
+    Question: {fileID: 0}
+  - Text: "Sorry, I\u2019ve got to go."
+    CharacterUnlocksChoice: 
+    Dialogue: {fileID: 11400000, guid: a4b40c8ad328b794bbd4d302eb0eaf48, type: 2}
+    Question: {fileID: 0}

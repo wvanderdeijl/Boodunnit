@@ -57,8 +57,6 @@ public class Cutscene : MonoBehaviour
                     CallMethodFromMonoBehaviour(action);
                     break;
             }
-
-            print(actionCounter);
            
             if (!action.IsExecuting)
             {

@@ -36,11 +36,13 @@ public class WorldSpaceClue : MonoBehaviour
     { 
         //Add this clue to the inventory of the player
         SaveHandler.Instance.SaveClue(ClueScriptableObject.Name);
-        if(Popup && !DoesPlayerHaveAllCLues()) // todo: remove !DoesPlayerHaveAllCLues() when to be continued popup is not neccisary enymore
+
+        if (Popup && !DoesPlayerHaveAllCLues()) //todo: remove !DoesPlayerHaveAllCLues() when to be continued popup is not neccisary enymore
         {
             Popup.OpenPopup();
         }
-
+    
+        SoundManager.Instance.PlaySound("Clue_pickup");
         gameObject.SetActive(false);
     }
 

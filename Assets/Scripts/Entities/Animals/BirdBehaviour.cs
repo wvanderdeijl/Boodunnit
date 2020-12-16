@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class BirdBehaviour : BaseEntity
 {
-    public Mesh NotGlidingMesh, GlidingMesh;
-    
-    [SerializeField] private GlideBehaviour _glideBehaviour;
+    private GlideBehaviour _glideBehaviour;
+    private Animator _animator;
     
     private void Awake()
     {
         InitBaseEntity();
         _glideBehaviour = GetComponent<GlideBehaviour>();
+        _animator = GetComponent<Animator>();
         CanJump = true;
         
         FearThreshold = 20;
@@ -28,15 +28,32 @@ public class BirdBehaviour : BaseEntity
         };
     }
 
+    private void LateUpdate()
+    {
+        IsWalking = (IsGrounded && Rigidbody.velocity != Vector3.zero);
+        if (_animator)
+        {
+            _animator.SetBool("IsWalking", IsWalking);
+            _animator.SetBool("IsGrounded", IsGrounded);
+        }
+    }
+
     public override void MoveEntityInDirection(Vector3 direction)
     {
-        if (_glideBehaviour.IsGliding && !IsGrounded) base.MoveEntityInDirection(direction, PossessionSpeed / 1.5f);
-        else base.MoveEntityInDirection(direction);
+        if (_glideBehaviour.IsGliding && !IsGrounded)
+        {
+            base.MoveEntityInDirection(direction, PossessionSpeed / 1.5f);
+            PlayAudioOnMovement(1);
+        }
+        else
+        {
+            base.MoveEntityInDirection(direction);
+            PlayAudioOnMovement(0);
+        }
     }
 
     public override void UseFirstAbility()
     {
         _glideBehaviour.ToggleGlide();
-        GetComponent<MeshFilter>().mesh = _glideBehaviour.IsGliding ? GlidingMesh : NotGlidingMesh;
     }
 }

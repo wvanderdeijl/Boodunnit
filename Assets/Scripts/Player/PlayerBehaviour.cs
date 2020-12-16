@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entities.Humans;
 using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
@@ -18,12 +19,16 @@ public class PlayerBehaviour : BaseMovement
 
     public PauseMenu PauseMenu;
 
+    public List<AudioSource> AudioSources;
+
     public Animator Animator;
 
     private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
 
+
     private Transform _cameraTransform;
     private int _dashCounter;
+    private EmmieBehaviour _emmie;
 
     private void Awake()
     {
@@ -36,13 +41,16 @@ public class PlayerBehaviour : BaseMovement
         _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
         _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
         _highlightRadiuses.Add("ClueRadius", ClueRadius);
+
+        _emmie = FindObjectOfType<EmmieBehaviour>();
     } 
 
     void Update()
     {
-        PlayerAnimation();
+        Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        GameManager.CurrentHighlightedCollider = HighlightedObject;
 
-        HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        PlayerAnimation();
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -60,14 +68,16 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && PossessionBehaviour.TargetBehaviour.IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
-                    PossessionBehaviour.PossessTarget();
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
+                {
+                    PossessionBehaviour.PossessTarget(HighlightedObject);
+                }
             }
         }
 
@@ -76,10 +86,11 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!ConversationManager.HasConversationStarted && 
                 !DashBehaviour.IsDashing && 
-                !LevitateBehaviour.IsLevitating &&
-                GameManager.CurrentHighlightedCollider != null)
+                !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
+
+                if (ConversationManager.ConversationTarget?.gameObject == _emmie.gameObject) _emmie.IsCrying = false;
             }
         }
 

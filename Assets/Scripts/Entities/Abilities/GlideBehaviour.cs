@@ -6,10 +6,13 @@ public class GlideBehaviour : MonoBehaviour
 
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _glideGravity = 1f;
+    [SerializeField] private Animator _animator;
 
     private void Update()
     {
         if(IsGliding) ApplyLoweredGravity();
+        if(_animator)
+            _animator.SetBool("IsGliding", IsGliding);
     }
 
     public void ToggleGlide()

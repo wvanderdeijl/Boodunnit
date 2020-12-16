@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -10,6 +11,8 @@ public class PlayerBehaviour : BaseMovement
     public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
+
+    public List<AudioSource> AudioSources;
 
     private Transform _cameraTransform;
     private int _dashCounter;

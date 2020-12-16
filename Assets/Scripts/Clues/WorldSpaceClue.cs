@@ -19,6 +19,7 @@ public class WorldSpaceClue : MonoBehaviour
     { 
         //Add this clue to the inventory of the player
         SaveHandler.Instance.SaveClue(ClueScriptableObject.Name);
+        SoundManager.Instance.PlaySound("Clue_pickup");
         if(Popup)
         {
             Popup.OpenPopup();

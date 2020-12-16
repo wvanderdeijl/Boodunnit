@@ -94,4 +94,16 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         transform.rotation = _spawnRotation;
         _rigidbody.velocity = Vector3.zero;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (State == LevitationState.Levitating)
+        {
+            float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+            if(collisionForce > 200f)
+            {
+                SoundManager.Instance.PlaySound("Levitate_bump");
+            }
+        }
+    }
 }

@@ -16,6 +16,8 @@ namespace Entities
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
 
+        public List<AudioClip> WalkAudioClips;
+
         //Properties & Fields regarding Dialogue mechanic.
         [Header("Conversation")]
         public Dialogue Dialogue;
@@ -43,6 +45,7 @@ namespace Entities
         protected void InitBaseEntity()
         {
             InitEntityMovement();
+            InitVolumeForEntity();
 
             Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
@@ -63,12 +66,72 @@ namespace Entities
             if (!IsPossessed)
             {
                 CheckSurroundings();
-                if(EmotionalState != EmotionalState.Fainted && FearDamage <= 0)
+                if (EmotionalState != EmotionalState.Fainted && FearDamage <= 0)
+                {
+                    if (_pathFindingState.Equals(PathFindingState.Following) || _pathFindingState.Equals(PathFindingState.PatrolAreas) || _pathFindingState.Equals(PathFindingState.Patrolling))
+                        CheckWhichAudioClipToPlayForEntity();
+
                     MoveWithPathFinding();
+                }
+                
             }
         }
 
         public abstract void UseFirstAbility();
+
+        public void PlayAudioClip(int index)
+        {
+            if (WalkAudioClips.Count <= 0)
+                return;
+
+            AudioSource audio = GetComponent<AudioSource>();
+            if (audio)
+            {
+                audio.clip = WalkAudioClips[index];
+                if(!audio.isPlaying)
+                    audio.Play();
+            }
+        }
+
+        public void PlayAudioOnMovement(int index)
+        {
+            if (IsPossessed)
+            {
+                if (Rigidbody.velocity.magnitude > 0.01f)
+                    PlayAudioClip(index);
+                else
+                    StopAudioClip();
+            }
+
+            if (NavMeshAgent)
+            {
+                if (NavMeshAgent.velocity.magnitude > 0.01f)
+                    PlayAudioClip(index);
+                else
+                    StopAudioClip();
+            }
+        }
+
+        public void StopAudioClip()
+        {
+            AudioSource audio = GetComponent<AudioSource>();
+            if (audio)
+                audio.Stop();
+        }
+
+        public void PlayWalkAudioClip()
+        {
+            if (WalkAudioClips.Count <= 0)
+                return;
+
+            AudioSource audio = GetComponent<AudioSource>();
+            int randomWalkAudioClip = UnityEngine.Random.Range(0, WalkAudioClips.Count);
+            if (audio)
+            {
+                audio.clip = WalkAudioClips[randomWalkAudioClip];
+                audio.Play();
+            }
+        }
 
         protected virtual void CheckSurroundings(Vector3 raycastStartPosition)
         {
@@ -181,6 +244,19 @@ namespace Entities
             }
         }
 
+        private void InitVolumeForEntity()
+        {
+            PlayerSettings settings = SaveHandler.Instance.LoadDataContainer<PlayerSettings>();
+            if(settings != null)
+            {
+                AudioSource source = GetComponent<AudioSource>();
+                if (source)
+                {
+                    source.volume = ((float)settings.AudioVolume / 100);
+                }
+            }
+        }
+
         public void ResetFearDamage()
         {
             SetScaredStage(0);
@@ -220,6 +296,17 @@ namespace Entities
 
             ResetDestination();
             CanPossess = true;
+        }
+
+        private void CheckWhichAudioClipToPlayForEntity()
+        {
+            //TODO: Bird 
+            switch (CharacterName)
+            {
+                case CharacterType.Rat:
+                    PlayAudioOnMovement(0);
+                    break;
+            }
         }
     }
 }

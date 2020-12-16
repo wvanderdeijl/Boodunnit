@@ -100,18 +100,22 @@ namespace Entities
             if (IsPossessed)
             {
                 if (Rigidbody.velocity.magnitude > 0.01f)
+                {
                     PlayAudioClip(index);
+                }
                 else
                     StopAudioClip();
-            }
-
-            if (NavMeshAgent)
+            } else
             {
-                if (NavMeshAgent.velocity.magnitude > 0.01f)
-                    PlayAudioClip(index);
-                else
-                    StopAudioClip();
+                if (NavMeshAgent)
+                {
+                    if (NavMeshAgent.velocity.magnitude > 0.01f)
+                        PlayAudioClip(index);
+                    else
+                        StopAudioClip();
+                }
             }
+            
         }
 
         public void StopAudioClip()
@@ -205,7 +209,7 @@ namespace Entities
                 {
                     if (Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
                     {
-                        if(Animator.GetCurrentAnimatorStateInfo(0).IsTag("Terrified") || Animator.GetCurrentAnimatorStateInfo(0).IsTag("Scared"))
+                        if (Animator.GetCurrentAnimatorStateInfo(0).IsTag("Terrified") || Animator.GetCurrentAnimatorStateInfo(0).IsTag("Scared"))
                         {
                             SetScaredStage(0);
                             Animator.Rebind();
@@ -302,10 +306,12 @@ namespace Entities
 
         private void CheckWhichAudioClipToPlayForEntity()
         {
-            //TODO: Bird 
             switch (CharacterName)
             {
                 case CharacterType.Rat:
+                    PlayAudioOnMovement(0);
+                    break;
+                case CharacterType.Bird:
                     PlayAudioOnMovement(0);
                     break;
             }

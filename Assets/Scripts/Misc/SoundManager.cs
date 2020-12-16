@@ -26,10 +26,12 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        Sound sound = Sounds.Find(s => s.ShouldStartOnStart);
-        if (sound != null)
+        foreach(Sound sound in Sounds)
         {
-            sound.AudioSource.Play();
+            if (sound.ShouldStartOnStart)
+            {
+                sound.AudioSource.Play();   
+            }
         }
     }
 

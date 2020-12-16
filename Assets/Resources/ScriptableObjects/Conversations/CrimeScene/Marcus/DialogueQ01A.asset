@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
+  m_Name: DialogueQ01A
+  m_EditorClassIdentifier: 
+  sentences:
+  - Text: "Who I am\u2026? Oh, of course. You\u2019ve only been here a day."
+  - Text: "My name is Marcus, I\u2019m the chief of police here in Boonkle."
+  - Text: "You\u2019ll probably see my colleagues Dana and Robert around town. "
+  - Text: "We try to set things right if they\u2019ve gone wrong, and help out where
+      we can."
+  - Text: "But, Boonkle has been crime-free for such a long time, we\u2019ve been
+      taking up other roles."
+  - Text: "We\u2019re also the anti-littering committee, as well as the tourism board
+      \u2026"
+  - Text: "\u2026 and lastly, we\u2019re top-notch donut taste-testers. Many years
+      of practice are needed for that."
+  - Text: "But, uh, it\u2019s been a while since we had to solve any mysteries. We
+      could use some help."
+  question: {fileID: 11400000, guid: 3cdc377ae9169904484093b0af432376, type: 2}

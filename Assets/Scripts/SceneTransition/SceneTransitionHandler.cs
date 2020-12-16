@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransitionHandler
@@ -26,6 +27,9 @@ public class SceneTransitionHandler
 
     public void GoToScene(string sceneNameToLoad)
     {
+        
+        Debug.Log(sceneNameToLoad);
+        
         LoadingScreen.GoToMainMenu = false;
         if (!sceneNameToLoad.Trim().Equals(""))
         {

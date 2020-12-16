@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
+  m_Name: DialogueQ01B
+  m_EditorClassIdentifier: 
+  sentences:
+  - Text: "Julia? Julia Lawson, right? Yeah, I know who you\u2019re on about."
+  - Text: Real nice gal, she was. A right pothead.
+  - Text: "...What\u2019s a pothead?"
+  - Text: A pothead is someone who pots plants. And she was potting like crazy.
+  - Text: Loved plants, she did. The air around her house was always so crisp.
+  - Text: I can get along with anyone who cares about air quality as much as I do.
+  - Text: "But I don\u2019t really know anything about her death. I wasn\u2019t in
+      the area when it happened."
+  - Text: "...I don\u2019t really even know when it happened."
+  - Text: "But it wasn\u2019t me. You can count on that."
+  question: {fileID: 11400000, guid: 448220f672d1fd746a21f842f2016e67, type: 2}

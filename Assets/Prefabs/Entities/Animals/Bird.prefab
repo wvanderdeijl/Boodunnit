@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7934131871459059026}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: leftnurbsSquare1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6811433764318099223}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3172849605510727176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5390509546259908028}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rightnurbsSquare1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7834717672742558242}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2678621950596589902}
   - component: {fileID: 6742832375370184383}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right_Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5828330674301902803}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8217919380968424992}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101025000488559014}
   - component: {fileID: 7848770609567783882}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eye_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1818335580074741717}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: rightnurbsSquare1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4563536989893941699}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ikHandle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 733301555590949769}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8057640337870188778}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: nurbsSquare2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6719888003076988369}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomnurbsSquare1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7023793345454433806}
   - component: {fileID: 5439240497711293331}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7026456700365549268}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6117118842681825024}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8577126175473191618}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: topnurbsSquare1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,7 +731,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3459096291432613835}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: nurbsSquare1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1114176161580402414}
   - component: {fileID: 1173984161908078481}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eye_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +853,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 587520572947390733}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -884,7 +884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2719183186699341404}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ikHandle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 176124073028549489}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7265509605861449085}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1119050023098886406}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1007,7 +1007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4011342839989403728}
   - component: {fileID: 8277988403752298867}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Beak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1094,7 +1094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463127615201328277}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2566911978781527847}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118920094013663196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,7 +1187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8661376270107574570}
   - component: {fileID: 6289271867638011458}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1282,7 +1282,8 @@ GameObject:
   - component: {fileID: 7774582952596386639}
   - component: {fileID: 8732152688911805772}
   - component: {fileID: 1910329565071685059}
-  m_Layer: 0
+  - component: {fileID: 990224285}
+  m_Layer: 11
   m_Name: Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1355,17 +1356,21 @@ MonoBehaviour:
   PathfindingSpeed: 5
   Collider: {fileID: 7774582952596386639}
   IsGrounded: 0
+  IsJumping: 0
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   Animator: {fileID: 0}
   IsOnCountdown: 0
-  _pathFindingState: 0
+  _pathFindingState: 1
   MinimumFollowRange: 2
   MaximumFollowRange: 10
   SequencePatrolAreas: []
   CanPossess: 1
+  WalkAudioClips:
+  - {fileID: 8300000, guid: e3a171d2d7134a444a9824ad9527caff, type: 3}
+  - {fileID: 8300000, guid: 4792cd57de7818a43a5a60b6807d15c4, type: 3}
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
   Relationships: 
@@ -1382,10 +1387,6 @@ MonoBehaviour:
   _fearRadius: 5
   _fearAngle: 90
   _ragdollController: {fileID: 0}
-  _animator: {fileID: 1192558606115780225}
-  NotGlidingMesh: {fileID: 0}
-  GlidingMesh: {fileID: 0}
-  _glideBehaviour: {fileID: 5954821494668570911}
 --- !u!114 &5954821494668570911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,7 +1417,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &7774582952596386639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1465,6 +1466,129 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!82 &990224285
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5559462583851824705}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.1
+      value: 1
+      inSlope: -10.0039835
+      outSlope: -10.0039835
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 0.5
+      inSlope: -2.5009959
+      outSlope: -2.5009959
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4
+      value: 0.25
+      inSlope: -0.62524897
+      outSlope: -0.62524897
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8
+      value: 0.125
+      inSlope: -0.15631224
+      outSlope: -0.15631224
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.99383545
+      value: 0.0052948
+      inSlope: -0.10003988
+      outSlope: -0.10003988
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6126705724363723368
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3636919435617862370}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1508,7 +1632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2337944384569022300}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomnurbsSquare1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1539,7 +1663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4930631421787462741}
   - component: {fileID: 8049438561038670459}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Right_Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1623,7 +1747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2437883504362447959}
   - component: {fileID: 6147241604217211833}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,7 +1831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8447455704032152507}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1738,7 +1862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637088954141581201}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1769,7 +1893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5192698689965922242}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: locator1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1801,7 +1925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7561682841721959167}
   - component: {fileID: 741021125653798372}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left_Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1884,7 +2008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 898022022863248961}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1914,7 +2038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4141971297892861234}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: leftnurbsSquare1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1944,7 +2068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6269209076346589022}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: topnurbsSquare1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,7 +2098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8191263782670060434}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: joint18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2005,7 +2129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2251101867528270927}
   - component: {fileID: 1796453030368778906}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Left_Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

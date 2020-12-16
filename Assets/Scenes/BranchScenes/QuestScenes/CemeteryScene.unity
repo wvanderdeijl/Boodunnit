@@ -8026,6 +8026,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6445ea4f1eb832f4a9891eb8cfb3adc1, type: 3}
+--- !u!1 &371465334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371465336}
+  - component: {fileID: 371465335}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371465335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371465334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb6fd55bad6caf44a69db5ece4f47b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: Theme
+    AudioClip: {fileID: 8300000, guid: d2acc31b531968e46afcf65a36ece848, type: 3}
+    Volume: 0
+    ShouldLoop: 1
+    ShouldStartOnStart: 1
+    IsMusicVolume: 1
+    AudioSource: {fileID: 0}
+  - Name: Levitate_bump
+    AudioClip: {fileID: 8300000, guid: 7fc3c3e1df9c2c14ba44761a6500d84b, type: 3}
+    Volume: 0
+    ShouldLoop: 0
+    ShouldStartOnStart: 0
+    IsMusicVolume: 0
+    AudioSource: {fileID: 0}
+--- !u!4 &371465336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371465334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.173683, y: 8.951943, z: -24.092653}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &373545118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a1aef72b06f7eb4baca8115c7376008, type: 3}
@@ -33372,7 +33430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.88
+      value: 39.14
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalRotation.w

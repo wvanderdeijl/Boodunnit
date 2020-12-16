@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entities.Humans;
 using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
@@ -27,6 +28,7 @@ public class PlayerBehaviour : BaseMovement
 
     private Transform _cameraTransform;
     private int _dashCounter;
+    private EmmieBehaviour _emmie;
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public class PlayerBehaviour : BaseMovement
         _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
         _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
         _highlightRadiuses.Add("ClueRadius", ClueRadius);
+
+        _emmie = FindObjectOfType<EmmieBehaviour>();
     } 
 
     void Update()
@@ -85,6 +89,8 @@ public class PlayerBehaviour : BaseMovement
                 !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
+
+                if (ConversationManager.ConversationTarget?.gameObject == _emmie.gameObject) _emmie.IsCrying = false;
             }
         }
 

@@ -42,7 +42,6 @@ namespace Entities
         [SerializeField] private float _fearAngle;
 
         [SerializeField] private RagdollController _ragdollController;
-        [SerializeField] private Animator _animator;
 
         protected void InitBaseEntity()
         {
@@ -77,13 +76,6 @@ namespace Entities
 
                     MoveWithPathFinding();
                 }
-                
-            }
-            IsWalking = (IsGrounded && Rigidbody.velocity != Vector3.zero);
-            if (_animator)
-            {
-                _animator.SetBool("IsWalking", IsWalking);
-                _animator.SetBool("IsGrounded", IsGrounded);
             }
         }
 

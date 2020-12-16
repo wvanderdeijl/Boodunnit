@@ -223,9 +223,7 @@ public class Cutscene : MonoBehaviour
     /// <param name="shouldPlayerBeEnabled">Should player be enabled or disabled.</param>
     private void DisableOrEnablePlayer(bool shouldPlayerBeEnabled)
     {
-        GameObject player = GameObject.Find("Player");
-        if(player)
-            player.GetComponent<PlayerBehaviour>().enabled = shouldPlayerBeEnabled;
+        FindObjectOfType<PlayerBehaviour>().enabled = shouldPlayerBeEnabled;
     }
 
     /// <summary>

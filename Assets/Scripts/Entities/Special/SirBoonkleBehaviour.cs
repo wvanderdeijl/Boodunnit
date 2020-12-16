@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Entities;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SirBoonkleBehaviour : BaseEntity
 {
@@ -14,16 +15,16 @@ public class SirBoonkleBehaviour : BaseEntity
     {
         InitBaseEntity();
         CanPossess = false;
-        _dialogues = Resources.LoadAll<Dialogue>($"ScriptableObjects/Conversations/Sir Boonkle/BoonkleBaseDialogue");
+        _dialogues = Resources.LoadAll<Dialogue>($"ScriptableObjects/Conversations/Boonkle/BoonkleBaseDialogue");
     }
 
     public void SpawnToNewLocation(Transform newTransform, int index)
     {
-        if (transform.position != newTransform.position)
+        if (transform.parent.position != newTransform.position)
         {
             _newSpawnTransform = newTransform;
             Dialogue = _dialogues[index];
-            StartCoroutine("FadeInAndOut");
+            StartCoroutine(FadeInAndOut());
         }
     }
 
@@ -43,8 +44,9 @@ public class SirBoonkleBehaviour : BaseEntity
         
         if (_newSpawnTransform)
         {
-            transform.root.position = _newSpawnTransform.position;
-            transform.root.rotation = _newSpawnTransform.rotation;
+            transform.parent.position = _newSpawnTransform.position;
+            transform.parent.rotation = _newSpawnTransform.rotation;
+            transform.localPosition = Vector3.zero;
         }
 
         // Fade in

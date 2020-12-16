@@ -68,7 +68,7 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && IsGrounded)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && PossessionBehaviour.TargetBehaviour.IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 

@@ -71,7 +71,9 @@ public class PlayerBehaviour : BaseMovement
             else
             {
                 if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject.GetComponent<IPossessable>() != null)
+                {
                     PossessionBehaviour.PossessTarget(HighlightedObject);
+                }
             }
         }
 

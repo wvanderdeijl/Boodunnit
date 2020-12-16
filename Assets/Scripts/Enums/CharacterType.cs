@@ -20,6 +20,8 @@
         QueenBee,
         Beekeeper,
         Villager,
-        Vincent
+        Vincent,
+        Burt,
+        Bort
     }
 }

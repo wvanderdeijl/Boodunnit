@@ -45,11 +45,18 @@ public class PossessionBehaviour : MonoBehaviour
             gameObject.GetComponent<PlayerBehaviour>().IsGrounded = false;
 
             TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            TargetBehaviour.NavMeshAgent.enabled = true;
+
+            if (TargetBehaviour.NavMeshAgent)
+            {
+                TargetBehaviour.NavMeshAgent.enabled = true;
+            }
+
             TargetBehaviour.ResetDestination();
             
             
-            EnableOrDisablePlayerMeshRenderers(true);
+            // EnableOrDisablePlayerMeshRenderers(true);
+            EnableOrDisablePlayerSkinnedMeshRenderers(true);
+
             EnableOrDisablePlayerColliders(true);
             EnableOrDisableObjectChildColliders(true);
             EnableOrDisableObjectRigidBody(true);
@@ -80,6 +87,23 @@ public class PossessionBehaviour : MonoBehaviour
         //Changes all of the players children mesh renderers
         MeshRenderer[] arrayPlayerChildMeshRenderers = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer childMeshRenderer in arrayPlayerChildMeshRenderers)
+        {
+            childMeshRenderer.enabled = activateMeshRenderers;
+        }
+    }
+
+    private void EnableOrDisablePlayerSkinnedMeshRenderers(bool activateMeshRenderers)
+    {
+        //Changes players mesh renderer
+        SkinnedMeshRenderer playerMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        if (playerMeshRenderer)
+        {
+            playerMeshRenderer.enabled = activateMeshRenderers;
+        }
+
+        //Changes all of the players children mesh renderers
+        SkinnedMeshRenderer[] arrayPlayerChildMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (SkinnedMeshRenderer childMeshRenderer in arrayPlayerChildMeshRenderers)
         {
             childMeshRenderer.enabled = activateMeshRenderers;
         }
@@ -119,7 +143,12 @@ public class PossessionBehaviour : MonoBehaviour
         PossessionTarget = possesionTarget.gameObject;
         _cameraController.CameraRotationTarget = possesionTarget.transform;
         TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        TargetBehaviour.NavMeshAgent.enabled = false;
+
+        if (TargetBehaviour.NavMeshAgent)
+        {
+            TargetBehaviour.NavMeshAgent.enabled = false;
+        }
+
         TargetBehaviour.IsPossessed = true;
         TargetBehaviour.ResetFearDamage();
         IsPossessing = true;
@@ -127,7 +156,10 @@ public class PossessionBehaviour : MonoBehaviour
 
         EnableOrDisableObjectChildColliders(false);
         EnableOrDisableObjectRigidBody(false);
-        EnableOrDisablePlayerMeshRenderers(false);
+
+        // EnableOrDisablePlayerMeshRenderers(false);
+        EnableOrDisablePlayerSkinnedMeshRenderers(false);
+
         EnableOrDisablePlayerColliders(false);
     }
 

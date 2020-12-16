@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
+  m_Name: Dialogue01
+  m_EditorClassIdentifier: 
+  sentences:
+  - Text: "Oh, hi. I mean, um, good day. You must be Julia\u2019s sister. Emmie,
+      right?"
+  - Text: "I\u2019m so sorry for your loss. It must be awful to lose someone so close
+      to you."
+  - Text: I remember when my cat Deputy Danger died. I cried for three weeks.
+  - Text: "I, uh, can\u2019t imagine the pain you must feel."
+  - Text: "Especially since her death was so \u2026 forgive my wording, but, well\u2026"
+  - Text: "It\u2019s very strange. We can\u2019t make head nor tail of it just yet."
+  - Text: "After we\u2019ve gotten five clues, we\u2019ll be able to make a solid
+      theory on what happened exactly."
+  question: {fileID: 0}

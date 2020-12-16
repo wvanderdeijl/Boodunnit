@@ -33538,12 +33538,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 889065046}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ClueRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LeviatateRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossesionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: PossessionSpeed
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: PathfindingSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ConversationRadius
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
       propertyPath: HighlightBehaviour

@@ -75,8 +75,7 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!ConversationManager.HasConversationStarted && 
                 !DashBehaviour.IsDashing && 
-                !LevitateBehaviour.IsLevitating &&
-                GameManager.CurrentHighlightedCollider != null)
+                !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }

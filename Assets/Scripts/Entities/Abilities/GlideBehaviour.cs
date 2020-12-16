@@ -11,7 +11,8 @@ public class GlideBehaviour : MonoBehaviour
     private void Update()
     {
         if(IsGliding) ApplyLoweredGravity();
-        _animator.SetBool("IsGliding", IsGliding);
+        if(_animator)
+            _animator.SetBool("IsGliding", IsGliding);
     }
 
     public void ToggleGlide()

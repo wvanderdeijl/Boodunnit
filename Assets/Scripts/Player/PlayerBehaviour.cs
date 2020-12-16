@@ -18,9 +18,12 @@ public class PlayerBehaviour : BaseMovement
 
     public PauseMenu PauseMenu;
 
+    public List<AudioSource> AudioSources;
+
     public Animator Animator;
 
     private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
+
 
     private Transform _cameraTransform;
     private int _dashCounter;
@@ -41,6 +44,8 @@ public class PlayerBehaviour : BaseMovement
     void Update()
     {
         Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        GameManager.CurrentHighlightedCollider = HighlightedObject;
+
         PlayerAnimation();
 
         //Pause game behaviour
@@ -65,8 +70,10 @@ public class PlayerBehaviour : BaseMovement
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject.GetComponent<IPossessable>() != null)
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
+                {
                     PossessionBehaviour.PossessTarget(HighlightedObject);
+                }
             }
         }
 

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
+  m_Name: DialogueQ01B
+  m_EditorClassIdentifier: 
+  sentences:
+  - Text: "We\u2019re, um, in the cemetery. Julia died yesterday."
+  - Text: I miss her already. She was so great to talk to. Always down for a good
+      prank.
+  - Text: Remember the one with the catapult and the manure? That we shot at your
+      house?
+  - Text: Oh, that was unforgettable. I think we permanently lowered the property
+      value.
+  - Text: We did help clean it up though. All good pranksters have to walk the walk,
+      as well.
+  - Text: "But, you know\u2026 Julia\u2019s not with us anymore. "
+  - Text: Her sister just came into town recently, as well. She must be having a
+      bad time.
+  question: {fileID: 11400000, guid: 51f8595b5c288a141afbe4849b9a0ae8, type: 2}

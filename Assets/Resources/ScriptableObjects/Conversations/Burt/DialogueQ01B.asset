@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
+  m_Name: DialogueQ01B
+  m_EditorClassIdentifier: 
+  sentences:
+  - Text: You seem a little confused today, are you OK?
+  - Text: "Maybe you\u2019re getting forgetful in your old age."
+  - Text: "We\u2019re in the cemetery. We just attended Julia\u2019s funeral. She
+      used to help you plan your pranks."
+  - Text: The pranks you played on me, to be clear.
+  - Text: You guys really knocked it out of the park with the water balloon.
+  - Text: "I thought I was dry, and then suddenly I wasn\u2019t. Crazy how it goes."
+  - Text: But sadly, Julia passed away yesterday. The cops are still trying to figure
+      out how it happened.
+  - Text: Her sister Emmie looks really torn up about it.
+  - Text: I would be, too. I would hate to lose you, dear Bort.
+  - Text: "Even if you prank me six ways \u2018til Sunday..."
+  question: {fileID: 11400000, guid: 6c3065d94933af24ba9e6b32a293f7b0, type: 2}

@@ -1,5 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,36 +14,33 @@ namespace DefaultNamespace
 {
     public class FirebaseHTTPController
     {
-        private string apiKey = "AIzaSyC5lGUMD6hlJPbI7zkcWEU3aV_seCde3Wo";
-        private string username = "drijvern@gmail.com";
-        private string credentials = "B00D3n1t";
-        
-        public FirebaseHTTPController PlaythroughLog = new FirebaseHTTPController();
-        private static FirebaseHTTPController _instance;
-        public static FirebaseHTTPController Instance { get => _instance; }
+        private static readonly string apiKey = "AIzaSyC5lGUMD6hlJPbI7zkcWEU3aV_seCde3Wo";
+        private static readonly string username = "drijvern@gmail.com";
+        private static readonly string credentials = "B00D3n1t";
+        private static string idToken;
 
-        static FirebaseHTTPController() => _instance = new FirebaseHTTPController();
-
-        public IEnumerator LoginPlaythroughDetails(Playthrough playthrough) 
+        public static async void PostPlaythrough(Playthrough playthrough)
         {
-            UnityWebRequest login = UnityWebRequest.Post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + apiKey,
-                JsonConvert.SerializeObject(new UserLoginCredentials(username, credentials)));
-            yield return login.SendWebRequest();
+            HttpClient client = new HttpClient();
+            string content = JsonConvert.SerializeObject(new UserLoginCredentials(username, credentials));
 
-            if (login.isNetworkError || login.isHttpError)
+            HttpResponseMessage responseMessage = await client.PostAsync(
+                "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apiKey,
+                new StringContent(content));
+            
+            if (responseMessage.IsSuccessStatusCode)
             {
-                Debug.Log(login.error);
-            }
-            else
-            {
-                // login.GetResponseHeaders()["idToken"];
+                string result = await responseMessage.Content.ReadAsStringAsync();
+                JObject jObject = JObject.Parse(result);
+                idToken = jObject["idToken"].Value<string>();
+                
+                HttpResponseMessage msg = await client.PostAsync(
+                    $"https://boodunnitcharts-default-rtdb.firebaseio.com/rest.json?auth={idToken}",
+                    new StringContent(JsonConvert.SerializeObject(playthrough))
+                );
+                Console.WriteLine(msg.StatusCode);
             }
         }
-        //
-        // public IEnumerator PostPlaythrough()
-        // {
-        //     UnityWebRequest post = UnityWebRequest.Post();
-        // }
 
         public class UserLoginCredentials
         {

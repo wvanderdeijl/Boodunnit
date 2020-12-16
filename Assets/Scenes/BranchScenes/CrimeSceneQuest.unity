@@ -1489,6 +1489,7 @@ MonoBehaviour:
   MinimumFollowRange: 0
   MaximumFollowRange: 0
   CanPossess: 1
+  TimesPosessed: 0
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
   Relationships: 
@@ -2315,6 +2316,7 @@ MonoBehaviour:
   MinimumFollowRange: 0
   MaximumFollowRange: 0
   CanPossess: 1
+  TimesPosessed: 0
   Dialogue: {fileID: 0}
   Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
   Relationships: 0a000000
@@ -6732,6 +6734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3a1223879a72e4ea8419ea063c7ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneInfo: 03000000
 --- !u!4 &603856529
 Transform:
   m_ObjectHideFlags: 0
@@ -17254,6 +17257,7 @@ MonoBehaviour:
   MinimumFollowRange: 0
   MaximumFollowRange: 0
   CanPossess: 1
+  TimesPosessed: 0
   Dialogue: {fileID: 0}
   Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
   Relationships: 0a000000
@@ -18745,6 +18749,7 @@ MonoBehaviour:
   MinimumFollowRange: 0
   MaximumFollowRange: 0
   CanPossess: 1
+  TimesPosessed: 0
   Dialogue: {fileID: 0}
   Question: {fileID: 11400000, guid: e0c9cdc9c720e12428e8da36269242f3, type: 2}
   Relationships: 0a000000

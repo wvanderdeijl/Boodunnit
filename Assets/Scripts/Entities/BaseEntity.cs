@@ -12,6 +12,7 @@ namespace Entities
         //Property regarding Possession mechanic.
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
+        [HideInInspector] public int TimesPosessed;
         
         //Properties & Fields regarding Dialogue mechanic.
         [Header("Conversation")]

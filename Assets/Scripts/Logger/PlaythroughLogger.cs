@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using DefaultNamespace;
 using Microsoft.Win32.SafeHandles;
 using Newtonsoft.Json;
 using UnityEditor;
@@ -17,13 +18,14 @@ public class PlaythroughLogger
 
     private PlaythroughLogger() {
         PlaythroughLog.Scenes = new List<SceneLog>();
-        PlaythroughLog.GameStartTime = DateTime.UtcNow;
+        PlaythroughLog.GameEndTime = DateTime.UtcNow;
         PlaythroughLog.GUID = GUID.Generate().ToString();
     }
-
+    
     public void WriteLog()
     {
-        File.WriteAllText(Application.persistentDataPath + "/" + PlaythroughLog.GUID + ".json",
-            JsonConvert.SerializeObject(PlaythroughLog));
+        FirebaseHTTPController.PostPlaythrough(PlaythroughLog);
+        // File.WriteAllText(Application.persistentDataPath + "/" + PlaythroughLog.GUID + ".json",
+        //     JsonConvert.SerializeObject(PlaythroughLog));
     }
 }

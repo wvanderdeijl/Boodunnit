@@ -1,10 +1,13 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Entities;
+using Logger;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -28,6 +31,9 @@ public class ConversationManager : MonoBehaviour
     private float _typeSpeed;
     private int _maxDefaultSencteces = 0;
 
+    private SceneLogger _sceneLogger;
+    private Log _conversationLog = new Log();
+
     private void Awake()
     {
         //Assign all variables in Dialogue Canvas
@@ -37,6 +43,7 @@ public class ConversationManager : MonoBehaviour
         _buttonPrefab = Resources.Load<Button>("ScriptableObjects/Dialogue/Button");
         _continueButton = GameObject.Find("Continue").GetComponent<Button>();
         _questionPool = GameObject.Find("QuestionPool");
+        _sceneLogger = FindObjectOfType<SceneLogger>();
     }
 
     #region Conversation Trigger 
@@ -140,6 +147,8 @@ public class ConversationManager : MonoBehaviour
         ConversationTarget = null;
         _animator.SetBool("IsOpen", false);
         GameManager.CursorIsLocked = true;
+        _sceneLogger.SceneLog.Stats.Add(_conversationLog);
+        _conversationLog = new Log();
     }
     #endregion
 
@@ -155,6 +164,7 @@ public class ConversationManager : MonoBehaviour
             _sentences.Enqueue(sentence.Text.ToString());
         }
 
+        DisplayNextSentence();
         DisplayNextSentence();
     }
 
@@ -228,11 +238,22 @@ public class ConversationManager : MonoBehaviour
             Button choiceButton = Instantiate(_buttonPrefab, Vector3.zero, Quaternion.identity);
             choiceButton.transform.SetParent(_questionPool.transform, false);
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();
-            choiceButton.onClick.AddListener(delegate () { ManageConversation(choice.Dialogue, choice.Question); });
+            choiceButton.onClick.AddListener(() =>
+            {
+                ManageConversation(choice.Dialogue, choice.Question);
+                if (_sceneLogger.SceneInfo.Contains(SceneInfoType.ConversationChoicesPerConversation) || 
+                    _sceneLogger.SceneInfo.Contains(SceneInfoType.All))
+                {
+                    _conversationLog.Name = ConversationTarget.name;
+                    _conversationLog.LogDetails.Add(
+                        new Log.Entry(choice.Text, (DateTime.UtcNow - _sceneLogger.SceneLog.StartingTime).TotalSeconds)
+                        );
+                }
+            });
 
             //If boolia is possesing the wrong NPC disable certain choiceButtons
             //If CharacterUnlocksChoice is 0 enable all choiceButtons
-            if (_currentPossedEntity != null && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
+            if (_currentPossedEntity && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
             {
                 choiceButton.interactable = false;
             }

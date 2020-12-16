@@ -123,6 +123,7 @@ public class PossessionBehaviour : MonoBehaviour
                 }
 
                 PossessionTarget = gameObjectInRangeCollider.gameObject;
+                TargetBehaviour.TimesPosessed +=1;
                 _cameraController.CameraRotationTarget = gameObjectInRangeCollider.transform;
                 TargetBehaviour.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 TargetBehaviour.NavMeshAgent.enabled = false;

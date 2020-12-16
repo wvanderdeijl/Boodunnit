@@ -58,7 +58,8 @@ public class LevitateBehaviour : MonoBehaviour
             RemoveGameObjectFromCursor();
             return;
         }
-
+        levitateable.TimesLevitated += 1;
+        
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _selectionDistance);
         Vector3 mousePositionOffset = _mainCamera.ScreenToWorldPoint(mousePosition) - _originalScreenTargetPosition;
             

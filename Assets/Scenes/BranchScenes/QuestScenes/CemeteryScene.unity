@@ -3473,9 +3473,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3734032660800116908, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: m_Height
+      value: 3.5238452
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734032660800116908, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734032660800116908, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: m_Center.y
+      value: -0.10765314
+      objectReference: {fileID: 0}
     - target: {fileID: 4269270940693356867, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: m_Name
       value: Burt
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046699222887342242, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: m_BaseOffset
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: Dialogue
@@ -3484,6 +3500,10 @@ PrefabInstance:
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: CanTalkToBoolia
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: PathfindingSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: _pathFindingState
@@ -3532,6 +3552,14 @@ PrefabInstance:
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: DefaultAnswers.Array.data[2].Text
       value: "Is anyone there? I don\u2019t see anybody..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046699222887342270, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: m_Height
+      value: 0.930006
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046699222887342270, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: m_Center.y
+      value: -1.5147986
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5364424460467163225, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
@@ -33225,11 +33253,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.479
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -51.675
+      value: 34.2
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33659,6 +33687,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: PathfindingSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: _pathFindingState
       value: 0
       objectReference: {fileID: 0}
@@ -33707,8 +33739,20 @@ PrefabInstance:
       value: Was that the wind?
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000328, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: m_Height
+      value: 0.9196453
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000328, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000328, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: m_Center.y
+      value: -1.5096185
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000332, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: m_BaseOffset
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 3491608994560916473, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_RootOrder
@@ -33753,6 +33797,14 @@ PrefabInstance:
     - target: {fileID: 3491608994560916473, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734032660800116908, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: m_Height
+      value: 3.5266187
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734032660800116908, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: m_Center.y
+      value: -0.1090399
       objectReference: {fileID: 0}
     - target: {fileID: 4269270940693356867, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_Name
@@ -38292,7 +38344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f941876dc4cf1049b7ac848fe645614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartCutsceneOnAwake: 1
+  StartCutsceneOnAwake: 0
   ActionsInCutscene:
   - ActionType: 0
     ObjectForCutscene: {fileID: 907654326}

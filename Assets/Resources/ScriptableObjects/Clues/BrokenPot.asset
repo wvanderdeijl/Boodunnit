@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a87fdf7dec06ae4b9e5dae250dc42ed, type: 3}
-  m_Name: Clue3
+  m_Name: BrokenPot
   m_EditorClassIdentifier: 
-  Name: Clue 3
-  Details: Details Clue 3
-  Location: Location Clue 3
-  Description: Description Clue 3
-  Image: {fileID: 21300000, guid: 65c647374a7924e429b1256ba48a2b81, type: 3}
+  Name: Broken Pot
+  Details: ???
+  Location: ???
+  Description: ???
+  Image: {fileID: 21300000, guid: ff282333821f4ab489db9365cf488b04, type: 3}

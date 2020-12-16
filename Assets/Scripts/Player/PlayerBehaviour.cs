@@ -18,9 +18,13 @@ public class PlayerBehaviour : BaseMovement
 
     public PauseMenu PauseMenu;
 
+
+    public List<AudioSource> AudioSources;
+
     public Animator Animator;
 
     private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
+
 
     private Transform _cameraTransform;
     private int _dashCounter;

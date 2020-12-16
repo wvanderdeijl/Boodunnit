@@ -14,11 +14,10 @@ public abstract class BaseEntityMovement : BaseMovement
     [HideInInspector]
     public Animator Animator;
 
-    
     public bool IsOnCountdown;
 
     [Header("Pathfinding")]
-    [SerializeField] private PathFindingState _pathFindingState;
+    public PathFindingState _pathFindingState;
     public float MinimumFollowRange, MaximumFollowRange;
     public List<EntityArea> SequencePatrolAreas;
     private int _sequencePatrolAreaCounter = 0;
@@ -43,9 +42,9 @@ public abstract class BaseEntityMovement : BaseMovement
             _spawnLocation = transform.position;
         }
     }
-    
+
     public void MoveWithPathFinding()
-    { 
+    {
         switch (_pathFindingState)
         {
             case PathFindingState.Stationary:
@@ -64,6 +63,7 @@ public abstract class BaseEntityMovement : BaseMovement
                 break;
         }
     }
+    
     private void FollowTarget()
     {
         if (TargetToFollow)

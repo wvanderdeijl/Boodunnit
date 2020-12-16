@@ -38,8 +38,16 @@ public class RatBehaviour : BaseEntity
     
     public override void MoveEntityInDirection(Vector3 direction)
     {
-        if (_climbBehaviour.IsClimbing) _climbBehaviour.Climb();
-        else base.MoveEntityInDirection(direction);
+        if (_climbBehaviour.IsClimbing)
+        {
+            PlayAudioOnMovement(1);
+            _climbBehaviour.Climb();
+        }
+        else
+        {
+            PlayAudioOnMovement(0);
+            base.MoveEntityInDirection(direction);
+        }
     }
 
     public override void UseFirstAbility()

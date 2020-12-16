@@ -16,6 +16,7 @@ public class WorldSpaceClue : MonoBehaviour
         
         if (SaveHandler.Instance.DoesPlayerHaveClue(ClueScriptableObject.Name))
         {
+            //If this throws an error: Check if the clue has an assigned scriptable object
             gameObject.SetActive(false);
         }
 
@@ -30,12 +31,12 @@ public class WorldSpaceClue : MonoBehaviour
             outline.enabled = false;
         }
     }
-
+    
     public void AddToInventory()
     { 
         //Add this clue to the inventory of the player
         SaveHandler.Instance.SaveClue(ClueScriptableObject.Name);
-        if(Popup)
+        if(Popup && !DoesPlayerHaveAllCLues()) // todo: remove !DoesPlayerHaveAllCLues() when to be continued popup is not neccisary enymore
         {
             Popup.OpenPopup();
         }
@@ -43,21 +44,21 @@ public class WorldSpaceClue : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private bool DoIHaveAllClues()
+    private bool DoesPlayerHaveAllCLues()
     {
-        return _listOfClues.All(clue => SaveHandler.Instance.DoesPlayerHaveClue(clue.name));
+        return _listOfClues.All(clue => SaveHandler.Instance.DoesPlayerHaveClue(clue.Name));
     }
 
     private void StartToBeContinuedPopup()
     {
-        ToBeContinuedPopup.OpenPopup();
+        ToBeContinuedPopup.OpenToBeContinuedPopUp();
     }
 
     void OnMouseDown()
     {
         AddToInventory();
 
-        if (DoIHaveAllClues())
+        if (DoesPlayerHaveAllCLues())
         {
             StartToBeContinuedPopup();
         }

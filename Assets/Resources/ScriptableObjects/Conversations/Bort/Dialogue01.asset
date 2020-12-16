@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
-  m_Name: DialogueQ01A01
+  m_Name: Dialogue01
   m_EditorClassIdentifier: 
   sentences:
-  - Text: "Bort, that\u2019s so hurtful. Please don\u2019t joke around like that.\r"
-  - Text: "Pretending you don\u2019t even remember your own twin brother\u2026\r\n"
-  - Text: "It\u2019s cruel, even for you. I liked your other pranks better.\r"
-  question: {fileID: 11400000, guid: 6c3065d94933af24ba9e6b32a293f7b0, type: 2}
+  - Text: "Hey, there\u2019s my BB - Big Bro."
+  question: {fileID: 11400000, guid: 51f8595b5c288a141afbe4849b9a0ae8, type: 2}

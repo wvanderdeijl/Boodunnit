@@ -18,7 +18,6 @@ public class PlayerBehaviour : BaseMovement
 
     public PauseMenu PauseMenu;
 
-
     public List<AudioSource> AudioSources;
 
     public Animator Animator;
@@ -45,6 +44,8 @@ public class PlayerBehaviour : BaseMovement
     void Update()
     {
         Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        GameManager.CurrentHighlightedCollider = HighlightedObject;
+
         PlayerAnimation();
 
         //Pause game behaviour
@@ -79,8 +80,7 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!ConversationManager.HasConversationStarted && 
                 !DashBehaviour.IsDashing && 
-                !LevitateBehaviour.IsLevitating &&
-                GameManager.CurrentHighlightedCollider != null)
+                !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
             }

@@ -11,12 +11,13 @@ public class SirBoonkleSpawnLocationBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        _sirBoonkleBehaviour = GameObject.Find("SirBoonkle_Body").GetComponent<SirBoonkleBehaviour>();
+        _sirBoonkleBehaviour = GameObject.Find("SirBoonkle").GetComponentInChildren<SirBoonkleBehaviour>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerBehaviour>() && _sirBoonkleBehaviour)
+        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
+        if (player && _sirBoonkleBehaviour)
         {
             _sirBoonkleBehaviour.SpawnToNewLocation(Spawnpoint, Index);
         }

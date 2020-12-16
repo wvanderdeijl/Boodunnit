@@ -19,6 +19,9 @@
         Rat,
         QueenBee,
         Beekeeper,
-        Villager
+        Villager,
+        Vincent,
+        Burt,
+        Bort
     }
 }

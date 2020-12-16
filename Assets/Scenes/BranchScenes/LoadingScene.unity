@@ -558,8 +558,30 @@ MonoBehaviour:
   HintText: {fileID: 279797820}
   LoadingBackground: {fileID: 533904886}
   HintTextArray:
-  - Did you know that Boolia likes pancakes?
-  - Boolia is actually a horse with a ghost's head and body
+  - Boonkle backwards is Elknoob.
+  - Julia used to be a private detective.
+  - "Boolia may be a ghost, but she can\u2019t fly because she needs to get used
+    to her new ghostly abilities. At least she\u2019s trying..."
+  - If you look around carefully, there may be multiple ways to overcome an obstacle
+    during quests.
+  - Emmie is the only one who can see and hear Boolia.
+  - Boonkle was founded by Sir Bartholomeus Boonkle. However, the biggest legacy
+    he left behind was his greed.
+  - Boolia is a ghost. Maybe this information will help you.
+  - "Boolia loves ghost puns, except for \u201CPeekaboolia\u201D\u2026 She hates
+    that one."
+  - "There are a total of 17 loading screen tips. If you\u2019ve seen all of them,
+    there will be no reward whatsoever."
+  - Some NPCs are scared more easily than others.
+  - "Boonkle\u2019s cemetery was the first public area to be built in Boonkle, and
+    has a statue of the town\u2019s founder, Sir Boonkle."
+  - Random tips will be shown on the loading screens, but their information varies
+    between somewhat helpful and completely useless.
+  - "Boolia\u2019s favourite snack is muffins."
+  - The game is loading as you are reading this.
+  - "If you jump, you\u2019ll go higher than if you walk."
+  - "Go nuts, but not walnuts, Emmie\u2019s allergic to those."
+  - Boodunnit is a game made by 16 humans. Just reality checking...
   _backgroundSpriteMockup: {fileID: 21300000, guid: 8365f2340ecadc443a4a3ef542ec3b86, type: 3}
 --- !u!1 &980051438
 GameObject:

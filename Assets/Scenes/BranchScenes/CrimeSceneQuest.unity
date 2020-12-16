@@ -53846,9 +53846,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187977647}
     m_Modifications:
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 1931666623}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ClueRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LeviatateRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossesionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ConversationRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_LocalScale.y
@@ -53860,7 +53888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.010371534
+      value: -0.01014
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -53909,30 +53937,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: PauseMenu
-      value: 
-      objectReference: {fileID: 1931666623}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: ClueRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: LeviatateRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: PossesionRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: ConversationRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_Name
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}

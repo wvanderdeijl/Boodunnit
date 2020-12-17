@@ -27186,6 +27186,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 19515175}
     m_Modifications:
+    - target: {fileID: 1470729771, guid: 8f8cd4d2a6ee9464196894779516d82a, type: 3}
+      propertyPath: Dialogue
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4802291010820939075, guid: 8f8cd4d2a6ee9464196894779516d82a, type: 3}
       propertyPath: m_Name
       value: SirBoonkle
@@ -34779,7 +34783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.568
+      value: 4.957
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.z
@@ -40035,7 +40039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f941876dc4cf1049b7ac848fe645614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartCutsceneOnAwake: 1
+  StartCutsceneOnAwake: 0
   ActionsInCutscene:
   - ActionType: 0
     ObjectForCutscene: {fileID: 907654326}
@@ -40085,6 +40089,22 @@ MonoBehaviour:
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
+  - ActionType: 1
+    ObjectForCutscene: {fileID: 907654326}
+    EndPosition: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: -41, z: 0}
+    EndScale: {x: 0, y: 0, z: 0}
+    TransitionSpeed: 8
+    IsInstant: 0
+    ShouldBeKinematic: 0
+    IsExecuting: 0
+    TimeBeforeNextAction: 2
+    Popup: {fileID: 0}
+    Dialogue: {fileID: 0}
+    Question: {fileID: 0}
+    MethodToCallFromScript:
+      m_PersistentCalls:
+        m_Calls: []
   - ActionType: 4
     ObjectForCutscene: {fileID: 907654326}
     EndPosition: {x: 0, y: 0, z: 0}
@@ -40097,38 +40117,6 @@ MonoBehaviour:
     TimeBeforeNextAction: 1
     Popup: {fileID: 0}
     Dialogue: {fileID: 11400000, guid: 859f624fcdc53ef4fbfff3884823aa74, type: 2}
-    Question: {fileID: 0}
-    MethodToCallFromScript:
-      m_PersistentCalls:
-        m_Calls: []
-  - ActionType: 0
-    ObjectForCutscene: {fileID: 907654326}
-    EndPosition: {x: -10.93, y: 5.08, z: -51.231}
-    EndRotation: {x: 0, y: 0, z: 0}
-    EndScale: {x: 0, y: 0, z: 0}
-    TransitionSpeed: 4
-    IsInstant: 1
-    ShouldBeKinematic: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
-    Popup: {fileID: 0}
-    Dialogue: {fileID: 0}
-    Question: {fileID: 0}
-    MethodToCallFromScript:
-      m_PersistentCalls:
-        m_Calls: []
-  - ActionType: 4
-    ObjectForCutscene: {fileID: 907654326}
-    EndPosition: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 22.023, y: -471.727, z: 3.549}
-    EndScale: {x: 0, y: 0, z: 0}
-    TransitionSpeed: 0
-    IsInstant: 0
-    ShouldBeKinematic: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 1
-    Popup: {fileID: 0}
-    Dialogue: {fileID: 0}
     Question: {fileID: 0}
     MethodToCallFromScript:
       m_PersistentCalls:

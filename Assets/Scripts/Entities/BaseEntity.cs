@@ -149,11 +149,11 @@ namespace Entities
             Collider[] colliders = Physics.OverlapSphere(raycastStartPosition, _fearRadius);
 
             List<BaseEntity> baseEntities = colliders
-                .Where(c =>
-                    !c.isTrigger &&
-                    Vector3.Dot((c.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
-                    c.GetComponent<BaseEntity>() &&
-                    ScaredOfEntities.ContainsKey(c.GetComponent<BaseEntity>().CharacterName))
+                .Where(collider =>
+                    (collider && !collider.isTrigger) &&
+                    Vector3.Dot((collider.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
+                    collider.GetComponent<BaseEntity>() &&
+                    ScaredOfEntities.ContainsKey(collider.GetComponent<BaseEntity>().CharacterName))
                 .Select(e => e.GetComponent<BaseEntity>())
                 .ToList();
 
@@ -230,7 +230,7 @@ namespace Entities
         {
             if (IsPossessed)
             {
-                if (Rigidbody.velocity.magnitude > 0.01)
+                if (Rigidbody.velocity.magnitude > 1f)
                 {
                     SetWalkingAnimation(true);
                 }
@@ -242,7 +242,7 @@ namespace Entities
             {
                 if (NavMeshAgent)
                 {
-                    if (NavMeshAgent.velocity.magnitude > 0.01)
+                    if (NavMeshAgent.velocity.magnitude > 1f)
                     {
                         SetWalkingAnimation(true);
                     }

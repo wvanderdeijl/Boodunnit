@@ -55,7 +55,12 @@ public class PlayerBehaviour : BaseMovement
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.ToggleCursor();
+            print(ConversationManager.HasConversationStarted);  
+            if (!ConversationManager.HasConversationStarted)
+            {
+                print("haai");
+                GameManager.ToggleCursor();
+            }
             PauseMenu.TogglePauseGame();
         }
         

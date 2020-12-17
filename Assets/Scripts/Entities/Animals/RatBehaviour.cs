@@ -30,11 +30,6 @@ public class RatBehaviour : BaseEntity
         _climbBehaviour.CurrentStamina = 50f;
         _climbBehaviour.Speed = 5f;
     }
-
-    private void LateUpdate()
-    {
-        if (_climbBehaviour.StaminaBarCanvas) _climbBehaviour.StaminaBarCanvas.enabled = IsPossessed;
-    }
     
     public override void MoveEntityInDirection(Vector3 direction)
     {

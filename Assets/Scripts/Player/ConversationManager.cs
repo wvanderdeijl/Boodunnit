@@ -63,10 +63,10 @@ public class ConversationManager : MonoBehaviour
             switch (_typeSpeed)
             {
                 case 0:
-                    _typeSpeed = 0.4f;
+                    _typeSpeed = 0.2f;
                     break;
                 case 1:
-                    _typeSpeed = 0.2f;
+                    _typeSpeed = 0.1f;
                     break;
                 case 2:
                     _typeSpeed = 0f;

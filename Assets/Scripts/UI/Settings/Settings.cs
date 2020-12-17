@@ -43,7 +43,7 @@ public class Settings : MonoBehaviour
         _screenResolutionValue = 0;
         _currentScreenResolution = ScreenResolutions[0];
         _isFullscreen = true;
-        _textSpeedValue = 0;
+        _textSpeedValue = 1;
     }
 
     private void UpdateCanvasValues()

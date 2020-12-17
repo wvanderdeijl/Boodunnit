@@ -15,17 +15,17 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.74092203, g: 0.7643025, b: 0.8490566, a: 1}
+  m_FogColor: {r: 0.65812266, g: 0.65812266, b: 0.8867924, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.022
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.280025, g: 0.2993371, b: 0.46348968, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.2688679, g: 0.346648, b: 1, a: 1}
+  m_AmbientEquatorColor: {r: 0.54908186, g: 0.52420795, b: 0.7169812, a: 1}
+  m_AmbientGroundColor: {r: 0.81480724, g: 0.7971698, b: 1, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.15663938, g: 0.28318667, b: 0.6037736, a: 1}
+  m_AmbientMode: 1
+  m_SubtractiveShadowColor: {r: 0.26030526, g: 0.24973296, b: 0.6509434, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300658, g: 0.4921953, b: 0.57192475, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -423,7 +423,7 @@ PrefabInstance:
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
 --- !u!4 &45531691 stripped
@@ -692,7 +692,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: LevitatableCloud
@@ -898,7 +898,7 @@ PrefabInstance:
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
 --- !u!4 &94941356 stripped
@@ -972,7 +972,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2 (2)
@@ -2089,7 +2089,7 @@ PrefabInstance:
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
 --- !u!4 &162178987 stripped
@@ -2582,7 +2582,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2
@@ -3039,7 +3039,7 @@ PrefabInstance:
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
 --- !u!4 &215598834 stripped
@@ -4032,7 +4032,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2 (5)
@@ -4829,7 +4829,7 @@ PrefabInstance:
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
 --- !u!4 &367234944 stripped
@@ -7905,7 +7905,7 @@ PrefabInstance:
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
 --- !u!4 &628644959 stripped
@@ -8060,7 +8060,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2 (4)
@@ -8496,6 +8496,7 @@ Transform:
   - {fileID: 760262776}
   - {fileID: 1417340279}
   - {fileID: 2001346283}
+  - {fileID: 1538650710}
   m_Father: {fileID: 685125483}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12702,7 +12703,7 @@ PrefabInstance:
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
 --- !u!4 &1152855977 stripped
@@ -14033,7 +14034,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2 (1)
@@ -16286,6 +16287,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 60e7bbb4cd829cd4b93d4ffffbbadcb9, type: 3}
   m_PrefabInstance: {fileID: 1536131602}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1538650709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1538650710}
+  - component: {fileID: 1538650711}
+  m_Layer: 13
+  m_Name: Roof
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1538650710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538650709}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.6, y: 29.4, z: -6.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 710477903}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1538650711
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538650709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 110, y: 10, z: 110}
+  m_Center: {x: 0, y: 0, z: -12.999472}
 --- !u!1 &1553802929
 GameObject:
   m_ObjectHideFlags: 0
@@ -18357,8 +18402,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: Press <b>ALT</b> to unlock the mouse and click on an object to levitate
-        it.
+      value: Press <b>Right Mouse Button</b> to unlock the mouse and <b>Left Mouse
+        Button</b> click on an object to levitate it.
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
@@ -19328,7 +19373,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2 (3)
@@ -19558,7 +19603,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.9888274, b: 0.7311321, a: 1}
   m_Intensity: 0.85
   m_Range: 10
   m_SpotAngle: 30
@@ -19774,7 +19819,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     - target: {fileID: 919132149155446097, guid: aed1d2137b39c2c4585f47a2026a6670, type: 3}
       propertyPath: m_Name
       value: Cloud2 (6)
@@ -20849,7 +20894,7 @@ PrefabInstance:
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fea4dc01353e594e88da3aa5f372d51, type: 2}
+      objectReference: {fileID: 2100000, guid: 63687b7e72643d24eb811884a7631979, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
 --- !u!4 &2047840131 stripped

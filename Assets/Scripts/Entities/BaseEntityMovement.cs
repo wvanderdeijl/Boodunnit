@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Enums;
 using UnityEngine;
 using UnityEngine.AI;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public abstract class BaseEntityMovement : BaseMovement
 {
@@ -38,8 +41,8 @@ public abstract class BaseEntityMovement : BaseMovement
         {
             NavMeshAgent.autoBraking = true;
             NavMeshAgent.speed = PathfindingSpeed;
-            _spawnRotation = transform.rotation;
-            _spawnLocation = transform.position;
+            _spawnRotation = transform.root.rotation;
+            _spawnLocation = transform.root.position;
         }
     }
 
@@ -83,20 +86,17 @@ public abstract class BaseEntityMovement : BaseMovement
 
     private void ReturnToSpawn()
     {
-        //if (HasReachedDestination(_spawnLocation))
-        //{
-        //    PauseEntityNavAgent(false);
-        if (name == "Burt")
-        {
-
+        if (HasReachedDestination(_spawnLocation)) {
+            if (transform.rotation == _spawnRotation) return;
+            Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation,
+                Time.deltaTime * 5f);
+            transform.rotation = lerpToRotation;
+            return;
         }
-            NavMeshAgent.destination = _spawnLocation - Vector3.up;
-        //    return;
-        //}
-        
-        Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation, 
-            Time.deltaTime * 5f);
-        transform.rotation = lerpToRotation;
+
+        if (NavMeshAgent.hasPath) return;
+        NavMeshAgent.destination = _spawnLocation; //- Vector3.up;
+        PauseEntityNavAgent(false);
     }
 
     private void PatrolArea()
@@ -140,7 +140,7 @@ public abstract class BaseEntityMovement : BaseMovement
     private bool HasReachedDestination(Vector3 destination)
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
-        return distanceToDestination < 1f;
+        return distanceToDestination < 0.5f;
     }
 
     public IEnumerator StartCountdownInArea(float amountOfTime)
@@ -182,6 +182,7 @@ public abstract class BaseEntityMovement : BaseMovement
     
     public void ChangePathFindingState(PathFindingState pathFindingState)
     {
+        NavMeshAgent.ResetPath();
         _pathFindingState = pathFindingState;
     }
 
@@ -194,10 +195,6 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void PauseEntityNavAgent(bool shouldPause)
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        if (agent)
-        {
-            agent.isStopped = shouldPause;
-        }
+        if (NavMeshAgent) NavMeshAgent.isStopped = shouldPause;
     }
 }

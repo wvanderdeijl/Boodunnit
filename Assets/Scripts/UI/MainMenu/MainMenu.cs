@@ -16,9 +16,9 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         // Todo start a new game
+        PlayerPrefs.DeleteAll();
         SaveHandler.Instance.StartNewGame();
         SceneTransitionHandler.Instance.GoToScene("PreTutorialScene");
-        Debug.Log(SaveHandler.Instance.LoadCurrentScene());
     }
 
     public void ContinueGame()

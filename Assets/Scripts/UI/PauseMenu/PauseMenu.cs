@@ -18,7 +18,8 @@ public class PauseMenu : MonoBehaviour
         }
 
         GameManager.IsPaused = !GameManager.IsPaused;
-        GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
+        if(!ConversationManager.HasConversationStarted)
+            GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
         Canvas.SetActive(GameManager.IsPaused);
         Time.timeScale = GameManager.IsPaused ? 0 : 1;
 

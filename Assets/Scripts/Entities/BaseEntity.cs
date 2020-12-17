@@ -15,6 +15,8 @@ namespace Entities
         //Public properties
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
+        [HideInInspector] public int TimesPosessed;
+        
         public bool IsWalking { get; set; }
 
         public List<AudioClip> WalkAudioClips;

@@ -7,4 +7,5 @@ public interface ILevitateable
     bool CanRespawnWhenOutOfRange { get; set; }
     LevitationState State { get; set; }
     IEnumerator LevitateForSeconds(float seconds);
+    int TimesLevitated { get; set; }
 }

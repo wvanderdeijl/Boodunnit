@@ -58,7 +58,7 @@ public class LevitateBehaviour : MonoBehaviour
             RemoveGameObjectFromCursor();
             return;
         }
-
+        
         Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _selectionDistance);
         Vector3 mousePositionOffset = _mainCamera.ScreenToWorldPoint(mousePosition) - _originalScreenTargetPosition;
             
@@ -108,6 +108,7 @@ public class LevitateBehaviour : MonoBehaviour
         if (!_selectedRigidbody) return;
         IsLevitating = true;
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+        levitateable.TimesLevitated += 1;
         if (levitateable != null) levitateable.State = LevitationState.Levitating;
     }
 
@@ -177,6 +178,7 @@ public class LevitateBehaviour : MonoBehaviour
             );
 
             _originalRigidbodyPosition = hitInfo.collider.transform.position;
+
             return rigidbody;
         }
 

@@ -4479,7 +4479,7 @@ RectTransform:
   - {fileID: 1931666624}
   - {fileID: 2067303929}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4546,7 +4546,7 @@ Transform:
   - {fileID: 1306462606}
   - {fileID: 2112744337}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97915877 stripped
 GameObject:
@@ -6467,7 +6467,7 @@ Transform:
   - {fileID: 1905303499}
   - {fileID: 1196233887}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &163048186
 PrefabInstance:
@@ -19695,7 +19695,7 @@ Transform:
   - {fileID: 1802824202}
   - {fileID: 990224283}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &462872239
 PrefabInstance:
@@ -23647,12 +23647,36 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: Dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: de666574abaed5449a031186c7d99d56, type: 2}
+    - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: _animator
       value: 
       objectReference: {fileID: 774851825}
     - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: _pathFindingState
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: Relationships.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: DefaultAnswers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: DefaultAnswers.Array.data[0].Text
+      value: Um, sorry, do I know you?
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: DefaultAnswers.Array.data[1].Text
+      value: Boolia? Is that you?
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280766746027359873, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: DefaultAnswers.Array.data[2].Text
+      value: What a strange day...
       objectReference: {fileID: 0}
     - target: {fileID: 1366926726734770274, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: m_Layer
@@ -23760,7 +23784,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26244,7 +26280,7 @@ Transform:
   - {fileID: 350306347}
   - {fileID: 1079871731}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &645509284
 PrefabInstance:
@@ -26732,7 +26768,7 @@ Transform:
   - {fileID: 1061778415}
   - {fileID: 1597202563}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &659764157
 PrefabInstance:
@@ -26957,7 +26993,7 @@ Transform:
   - {fileID: 1404255353}
   - {fileID: 1014052670}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -19.328, z: 0}
 --- !u!1001 &663720126
 PrefabInstance:
@@ -28331,7 +28367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34573,7 +34609,7 @@ Transform:
   m_LocalScale: {x: 40, y: 40, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 22.712, z: 0}
 --- !u!1 &862459787 stripped
 GameObject:
@@ -46275,7 +46311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1158294919
 MonoBehaviour:
@@ -50162,7 +50198,7 @@ Transform:
   - {fileID: 1258672186}
   - {fileID: 1254483333}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1247085175 stripped
 Transform:
@@ -53846,30 +53882,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187977647}
     m_Modifications:
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: PauseMenu
-      value: 
-      objectReference: {fileID: 1931666623}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: ClueRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: LeviatateRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: PossesionRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: ConversationRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -53937,6 +53949,30 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 1931666623}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ClueRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: LeviatateRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: PossesionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525861, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: ConversationRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832741858228525871, guid: 9ca607ca2c76c954cbf842c2275e9071, type: 3}
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db6596d7e38bc1142952677d91d0df3f, type: 3}
@@ -54392,7 +54428,7 @@ Transform:
   - {fileID: 561270861}
   - {fileID: 2070812010}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1351909211
 PrefabInstance:
@@ -56903,7 +56939,7 @@ Transform:
   - {fileID: 1549125080}
   - {fileID: 807077135}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1413227043
 PrefabInstance:
@@ -61658,7 +61694,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1529507049 stripped
 Transform:
@@ -67729,7 +67765,7 @@ Transform:
   m_LocalScale: {x: 7, y: 1, z: 12.928465}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &1683385134
 PrefabInstance:
@@ -71898,7 +71934,7 @@ Transform:
   - {fileID: 566991932}
   - {fileID: 1341478758}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1806375633
 PrefabInstance:
@@ -74491,7 +74527,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1865342654 stripped
 Transform:
@@ -79303,6 +79339,91 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.012890872, y: 0.00062881253, z: 0.01914445}
   m_Center: {x: -0.000000014901161, y: -0.000000014901161, z: -0.000000029802322}
+--- !u!1001 &1978914613
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -33.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935005670160872118, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: Dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 90d3e192734af584a81ac71e5ce4f4ac, type: 2}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: CanTalkToBoolia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: DefaultAnswers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: DefaultAnswers.Array.data[0].Text
+      value: "There\u2019s no one here. Nobody at all. Not a soul."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: DefaultAnswers.Array.data[1].Text
+      value: "I don\u2019t talk to cops. Or animals. No, I\u2019m not crazy. Go away."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: DefaultAnswers.Array.data[2].Text
+      value: Why are you talking to an air vent? What are you, a cop? Buzz off.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7472790734387500379, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: DefaultAnswers.Array.data[3].Text
+      value: I am imitating the sound of a working air vent.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7743313136000854028, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
+      propertyPath: m_Name
+      value: VincentTheVigilante
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca740bb8469ca654689ab733e5f3c91d, type: 3}
 --- !u!1001 &1979254852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80740,7 +80861,7 @@ Transform:
   - {fileID: 971405114}
   - {fileID: 1372496603}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2005127241 stripped
 GameObject:
@@ -84048,7 +84169,7 @@ Transform:
   - {fileID: 1233255067}
   - {fileID: 3194889674002421622}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2084855026
 PrefabInstance:
@@ -87081,6 +87202,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: Question
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: CharacterName
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: CanTalkToBoolia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: Relationships.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: DefaultAnswers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: DefaultAnswers.Array.data[0].Text
+      value: Geez, I'm so hungry. I could kill for a donut right now.
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: DefaultAnswers.Array.data[1].Text
+      value: Gosh, it's been so long since I had to deduce anything...
+      objectReference: {fileID: 0}
+    - target: {fileID: 424855534751672478, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
+      propertyPath: DefaultAnswers.Array.data[2].Text
+      value: What was that?
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eb9e9c41d06b324aba755209c112a53, type: 3}
 --- !u!1 &524212141407798990
@@ -87350,6 +87503,49 @@ PrefabInstance:
     - target: {fileID: 1379945964553877368, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: Dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c96e8a17013a3341ba3d1d1a081dfeb, type: 2}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: Question
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: CharacterName
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: CanTalkToBoolia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: DefaultAnswers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: Relationships.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: DefaultAnswers.Array.data[0].Text
+      value: "Now that I think about it\u2026 there\u2019s not many things that rhyme
+        with \u2018crime scene\u2019."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: DefaultAnswers.Array.data[1].Text
+      value: "Hmm\u2026 I wonder if Emmie would be willing to give a statement\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: DefaultAnswers.Array.data[2].Text
+      value: "The first unexplained death in years\u2026 peculiar. I\u2019ll get
+        to the bottom of this for sure."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379945964553877372, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
+      propertyPath: DefaultAnswers.Array.data[3].Text
+      value: "I wish I could have gone to Julia\u2019s funeral\u2026 but I\u2019m
+        sure her sister will be back soon."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
@@ -89476,6 +89672,39 @@ PrefabInstance:
     - target: {fileID: 8358265757348831169, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: Question
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: CharacterName
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: CanTalkToBoolia
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: Relationships.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: DefaultAnswers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: DefaultAnswers.Array.data[0].Text
+      value: Oh, um I'm a little busy right now.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: DefaultAnswers.Array.data[1].Text
+      value: Oh, what was it they always said in crime school... oh yeah! Don't commit
+        crimes!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: DefaultAnswers.Array.data[2].Text
+      value: Clues, clues, I'm looking for clues!
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757348831176, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_Name

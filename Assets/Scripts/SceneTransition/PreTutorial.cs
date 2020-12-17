@@ -18,4 +18,9 @@ public class PreTutorial : MonoBehaviour
             SceneTransitionHandler.Instance.GoToMainMenu();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        LeavePretutorial();
+    }
 }

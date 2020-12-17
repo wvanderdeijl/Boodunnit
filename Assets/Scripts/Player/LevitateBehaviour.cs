@@ -16,7 +16,6 @@ public class LevitateBehaviour : MonoBehaviour
     [Header("Speeds")]
     [SerializeField]private float _velocitySpeedPercentage = 25f;
     [SerializeField] private float _pushPullSpeed = 300f;
-    [SerializeField] private float _rotationSpeed = 5f;
     
     [Header("Durations")]
     [SerializeField] private float _frozenDurationInSeconds = 5f;
@@ -24,7 +23,6 @@ public class LevitateBehaviour : MonoBehaviour
     [Header("Distances")]
     [SerializeField] private float _minimumSelectionDistanceInUnits = 2f;
     
-    public static bool IsRotating { get; set; }
     public bool IsLevitating { get; set; }
     public Collider[] CurrentLevitateableObjects { get; set; }
 
@@ -39,10 +37,12 @@ public class LevitateBehaviour : MonoBehaviour
         if (!_selectedRigidbody)
         {
             GetRigidbodyAndStartLevitation();
+            if (_selectedRigidbody) _selectedRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         else
         {
+            _selectedRigidbody.constraints = RigidbodyConstraints.None;
             RemoveRigidbodyAndStartFreeze();
         }
     }
@@ -78,28 +78,6 @@ public class LevitateBehaviour : MonoBehaviour
         }
             
         _selectionDistance += (Input.GetAxis("Mouse ScrollWheel") * _pushPullSpeed * Time.deltaTime);
-    }
-
-    public void RotateLevitateableObject()
-    {
-        if (!_selectedRigidbody) return;
-
-        if (IsRotating)
-        {
-            _selectedRigidbody.useGravity = false;
-            _selectedRigidbody.isKinematic = true;
-        }
-        else
-        {
-            _selectedRigidbody.useGravity = true;
-            _selectedRigidbody.isKinematic = false;
-        }
-
-        float xaxisRotation = Input.GetAxis("Mouse X")* _rotationSpeed * Time.deltaTime;
-        float yaxisRotation = Input.GetAxis("Mouse Y")* _rotationSpeed * Time.deltaTime;
-            
-        _selectedRigidbody.transform.RotateAround (Vector3.down, xaxisRotation);
-        _selectedRigidbody.transform.RotateAround (_mainCamera.transform.rotation * Vector3.right, yaxisRotation);
     }
 
     private void GetRigidbodyAndStartLevitation()

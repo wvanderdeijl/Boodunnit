@@ -189,17 +189,8 @@ public class PlayerBehaviour : BaseMovement
         {
             LevitateBehaviour.LevitationStateHandler();
         }
-        
-        if (Input.GetMouseButton(1))
-        {
-            RotationHandler(true);
-        }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            RotationHandler(false);
-        }
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
         }
@@ -207,13 +198,7 @@ public class PlayerBehaviour : BaseMovement
         LevitateBehaviour.PushOrPullLevitateableObject();
     }
 
-    private void RotationHandler(bool isRotating)
-    {
-        LevitateBehaviour.IsRotating = isRotating;
-        GameManager.CursorIsLocked = isRotating;
 
-        LevitateBehaviour.RotateLevitateableObject();
-    }
 
     private void PlayerAnimation()
     {

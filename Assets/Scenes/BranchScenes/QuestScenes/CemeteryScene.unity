@@ -2554,6 +2554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1 &126745288 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: aae97da05abd54c4cb50512ad1bc6350, type: 3}
@@ -2778,6 +2779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!65 &140828757
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3329,6 +3331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &155530510
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3416,6 +3419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &160820827
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4826,6 +4830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1001 &207933200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6020,6 +6025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &286323873
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6578,6 +6584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &311786150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8399,6 +8406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1001 &378020256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8512,6 +8520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &390685638
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11241,6 +11250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &494639630
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11302,6 +11312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!4 &498535538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82e7f01b24571a241b09b79f5c4e06b2, type: 3}
@@ -11651,6 +11662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1001 &517814615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12167,6 +12179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1 &538458875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fef107cb94ebc9b4e915d60b25c82aa9, type: 3}
@@ -13098,6 +13111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!136 &572947243
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13321,6 +13335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &583519318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16048,6 +16063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &704019889
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20265,6 +20281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &919953556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25370,6 +25387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!65 &1148617606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25837,6 +25855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!65 &1172937437
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27040,6 +27059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1001 &1240641085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29044,6 +29064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &1335631057
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32319,6 +32340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!4 &1515905222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5a1aef72b06f7eb4baca8115c7376008, type: 3}
@@ -34757,11 +34779,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.9
+      value: 3.568
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.2
+      value: -51.297
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalRotation.w
@@ -39467,6 +39489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &1812029688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40012,7 +40035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f941876dc4cf1049b7ac848fe645614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartCutsceneOnAwake: 0
+  StartCutsceneOnAwake: 1
   ActionsInCutscene:
   - ActionType: 0
     ObjectForCutscene: {fileID: 907654326}
@@ -40056,38 +40079,6 @@ MonoBehaviour:
     ShouldBeKinematic: 0
     IsExecuting: 0
     TimeBeforeNextAction: 2
-    Popup: {fileID: 0}
-    Dialogue: {fileID: 0}
-    Question: {fileID: 0}
-    MethodToCallFromScript:
-      m_PersistentCalls:
-        m_Calls: []
-  - ActionType: 0
-    ObjectForCutscene: {fileID: 401040153}
-    EndPosition: {x: -8.045, y: 7.244, z: -49.175}
-    EndRotation: {x: 0, y: 0, z: 0}
-    EndScale: {x: 0, y: 0, z: 0}
-    TransitionSpeed: 3
-    IsInstant: 0
-    ShouldBeKinematic: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
-    Popup: {fileID: 0}
-    Dialogue: {fileID: 0}
-    Question: {fileID: 0}
-    MethodToCallFromScript:
-      m_PersistentCalls:
-        m_Calls: []
-  - ActionType: 1
-    ObjectForCutscene: {fileID: 401040153}
-    EndPosition: {x: 0, y: 0, z: 0}
-    EndRotation: {x: 22.023, y: -471.727, z: 3.549}
-    EndScale: {x: 0, y: 0, z: 0}
-    TransitionSpeed: 6
-    IsInstant: 0
-    ShouldBeKinematic: 0
-    IsExecuting: 0
-    TimeBeforeNextAction: 0
     Popup: {fileID: 0}
     Dialogue: {fileID: 0}
     Question: {fileID: 0}
@@ -40643,6 +40634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!54 &1870690316
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40825,6 +40817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1001 &1877425434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42733,6 +42726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1 &1974911682 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9a4013c74f7ceb74a8726cda48c7f78f, type: 3}
@@ -44645,6 +44639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!1 &2112347323 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9a4013c74f7ceb74a8726cda48c7f78f, type: 3}
@@ -46459,6 +46454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
+  WillLogPossessCount: 0
 --- !u!4 &5801136897955309765
 Transform:
   m_ObjectHideFlags: 0

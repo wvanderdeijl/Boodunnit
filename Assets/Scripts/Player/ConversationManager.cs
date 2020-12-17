@@ -272,8 +272,8 @@ public class ConversationManager : MonoBehaviour
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();
             choiceButton.onClick.AddListener(() =>
             {
-                if (_sceneLogger.SceneInfo.Contains(SceneInfoType.ConversationChoicesPerConversation) || 
-                    _sceneLogger.SceneInfo.Contains(SceneInfoType.All))
+                if (_sceneLogger && (_sceneLogger.SceneInfo.Contains(SceneInfoType.ConversationChoicesPerConversation) || 
+                    _sceneLogger.SceneInfo.Contains(SceneInfoType.All)))
                 {
                     _conversationLog.Name = ConversationTarget.name;
                      _conversationLog.LogDetails.Add(

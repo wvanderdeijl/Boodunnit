@@ -80,8 +80,7 @@ public class Outline : MonoBehaviour {
 
   private bool needsUpdate;
 
-  void Awake() {
-    
+  void Awake() {   
     foreach (SkinnedMeshRenderer skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
     {
         if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)

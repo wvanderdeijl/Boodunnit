@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.2
+    agentRadius: 0.4
     agentHeight: 2
     agentSlope: 60
-    agentClimb: 0.5
+    agentClimb: 1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
-    manualCellSize: 1
-    cellSize: 0.025
+    manualCellSize: 0
+    cellSize: 0.13333334
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 1
@@ -201,12 +201,6 @@ MonoBehaviour:
   - NameOfEntity: Rat
     EntityTimeSpentInAreaInSeconds: 5
     OdssEntityPicksThisAreaInWeight: 1
-  - NameOfEntity: WhitePoliceWoman
-    EntityTimeSpentInAreaInSeconds: 2
-    OdssEntityPicksThisAreaInWeight: 1
-  - NameOfEntity: BlackPoliceMan
-    EntityTimeSpentInAreaInSeconds: 3
-    OdssEntityPicksThisAreaInWeight: 1
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
   MaximumEntitiesAllowedInArea: 3
@@ -260,13 +254,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
   m_PrefabInstance: {fileID: 1979970676}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4243439 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
-  m_PrefabInstance: {fileID: 1979970676}
+--- !u!208 &4243437
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &4243440
-MeshCollider:
+  m_GameObject: {fileID: 4243436}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.115, y: 1.4100001, z: 1.1090001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.0050000004, y: -0.32900003, z: -0.12200001}
+  m_TimeToStationary: 0.5
+--- !u!65 &4243438
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -275,10 +280,14 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2386826534126193499, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.2297702, y: 2.8191857, z: 2.2183352}
+  m_Center: {x: -0.0053154826, y: -0.32857376, z: -0.121587604}
+--- !u!4 &4243439 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
+  m_PrefabInstance: {fileID: 1979970676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6024448 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8811a19dc0c188b46a70d34c291dabe9, type: 3}
@@ -6464,7 +6473,6 @@ Transform:
   - {fileID: 597497854}
   - {fileID: 344716635}
   - {fileID: 1021848703}
-  - {fileID: 1905303499}
   - {fileID: 1196233887}
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -18161,6 +18169,70 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.019712752, y: 0.0065515456, z: 0.012149962}
   m_Center: {x: -0.000036924146, y: -0.002169029, z: -9.3130287e-10}
+--- !u!1 &407671821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407671824}
+  - component: {fileID: 407671823}
+  - component: {fileID: 407671822}
+  m_Layer: 13
+  m_Name: PoliceSequenceArea (Empty GO 1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &407671822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407671821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.08085376, z: 1}
+  m_Center: {x: 0, y: -0.34859452, z: 0}
+--- !u!114 &407671823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407671821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesAllowedInThisArea:
+  - NameOfEntity: WhitePoliceWoman
+    EntityTimeSpentInAreaInSeconds: 1
+    OdssEntityPicksThisAreaInWeight: 1
+  EntitiesInArea: []
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 0
+--- !u!4 &407671824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407671821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.12, y: 0.66, z: 4.302}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &407844837
 GameObject:
   m_ObjectHideFlags: 0
@@ -23808,7 +23880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.153307
+      value: -25.77
       objectReference: {fileID: 0}
     - target: {fileID: 7536087752427740537, guid: 50e1305a49e1bb94da24160177938322, type: 3}
       propertyPath: m_LocalRotation.w
@@ -27910,7 +27982,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 4.85, y: 1, z: 1.5}
+  m_Extents: {x: 4.85, y: 2, z: 1.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -27924,7 +27996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694149876}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.23, y: 4.26, z: -13.29}
+  m_LocalPosition: {x: -23.23, y: 5.28, z: -13.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 645096971}
@@ -34339,6 +34411,70 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05387078, y: 0.05450785, z: 0.00845848}
   m_Center: {x: 0.02693539, y: -0.027253924, z: -0.0032682111}
+--- !u!1 &855910300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855910303}
+  - component: {fileID: 855910302}
+  - component: {fileID: 855910301}
+  m_Layer: 13
+  m_Name: PoliceSequenceArea (Empty GO 2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &855910301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855910300}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.08085376, z: 1}
+  m_Center: {x: 0, y: -0.34859452, z: 0}
+--- !u!114 &855910302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855910300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesAllowedInThisArea:
+  - NameOfEntity: WhitePoliceWoman
+    EntityTimeSpentInAreaInSeconds: 1
+    OdssEntityPicksThisAreaInWeight: 1
+  EntitiesInArea: []
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 0
+--- !u!4 &855910303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855910300}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -45.2, y: 0.66, z: 15.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &856850990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39044,6 +39180,70 @@ Transform:
   m_Father: {fileID: 1803583446}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &986962546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 986962549}
+  - component: {fileID: 986962548}
+  - component: {fileID: 986962547}
+  m_Layer: 13
+  m_Name: PoliceSequenceArea (Empty GO 3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &986962547
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986962546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.08085376, z: 1}
+  m_Center: {x: 0, y: -0.34859452, z: 0}
+--- !u!114 &986962548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986962546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa41e620202704c94115b8eb973c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesAllowedInThisArea:
+  - NameOfEntity: WhitePoliceWoman
+    EntityTimeSpentInAreaInSeconds: 1
+    OdssEntityPicksThisAreaInWeight: 1
+  EntitiesInArea: []
+  MinimumEntitiesRequiredInArea: 0
+  MaximumEntitiesAllowedInArea: 0
+--- !u!4 &986962549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986962546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -45.2, y: 0.66, z: -11.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989537270
 GameObject:
   m_ObjectHideFlags: 0
@@ -43080,7 +43280,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079871730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.76, y: 0, z: -16.42}
+  m_LocalPosition: {x: 4.76, y: -0.16, z: -25.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 645096971}
@@ -43116,7 +43316,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.951704, y: 0.49026084, z: 3.963789}
+  m_Size: {x: 8.951704, y: 0.2, z: 3.963789}
   m_Center: {x: 0.08152676, y: 0.25486958, z: -1.4818945}
 --- !u!1001 &1079883255
 PrefabInstance:
@@ -47660,7 +47860,7 @@ PrefabInstance:
       objectReference: {fileID: 1158294918}
     - target: {fileID: 1414204116288339528, guid: 3cc866ece351ef64694a939675e26ff9, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1414204116288339528, guid: 3cc866ece351ef64694a939675e26ff9, type: 3}
       propertyPath: m_LocalScale.x
@@ -59082,7 +59282,7 @@ MonoBehaviour:
     OdssEntityPicksThisAreaInWeight: 1
   - NameOfEntity: BlackPoliceMan
     EntityTimeSpentInAreaInSeconds: 3
-    OdssEntityPicksThisAreaInWeight: 9
+    OdssEntityPicksThisAreaInWeight: 2
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
   MaximumEntitiesAllowedInArea: 10
@@ -59097,8 +59297,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.312754, y: 1, z: 3.8584318}
-  m_Center: {x: 0.77616405, y: 0, z: -0.4708705}
+  m_Size: {x: 8.140974, y: 0.08905363, z: 3.0690918}
+  m_Center: {x: 0.8620539, y: -0.45547318, z: -0.7865572}
 --- !u!4 &1476516497
 Transform:
   m_ObjectHideFlags: 0
@@ -59107,7 +59307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476516494}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.03, y: 0.73, z: -14.89}
+  m_LocalPosition: {x: -23.03, y: 0.693, z: -14.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 645096971}
@@ -75849,138 +76049,6 @@ Transform:
   m_Father: {fileID: 1803583446}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1001 &1905303498
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 153205603}
-    m_Modifications:
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.2584
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -28.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7403791
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -14.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9555529
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.29481977
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -34.293
-      objectReference: {fileID: 0}
-    - target: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3133772564864530132, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9981a812674072548b7b7d66d06599a2, type: 2}
-    - target: {fileID: 3494118190855935745, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3494118190855935745, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4748030263385666315, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Name
-      value: PoliceBarricade (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4748030263385666315, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4748030263385666315, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 5194858464184302558, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9981a812674072548b7b7d66d06599a2, type: 2}
-    - target: {fileID: 5987294155067185675, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987294155067185675, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 7338427067413389744, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9981a812674072548b7b7d66d06599a2, type: 2}
-    - target: {fileID: 9139959759223832677, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9139959759223832677, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
---- !u!4 &1905303499 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1481305480324817623, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-  m_PrefabInstance: {fileID: 1905303498}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1905303500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4748030263385666315, guid: 96a2b623d8662bf469e5bc445aa69f3b, type: 3}
-  m_PrefabInstance: {fileID: 1905303498}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1905303501
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905303500}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1, z: 1.8}
-  m_Center: {x: 0, y: 0, z: -1.8}
 --- !u!1001 &1905685568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79662,6 +79730,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
       propertyPath: m_Name
       value: Dumpster
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: de0e55c9ba6b69548976d5d357ad5092, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -89686,11 +89758,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: _pathFindingState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: Relationships.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: DefaultAnswers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: SequencePatrolAreas.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
@@ -89706,6 +89786,18 @@ PrefabInstance:
       propertyPath: DefaultAnswers.Array.data[2].Text
       value: Clues, clues, I'm looking for clues!
       objectReference: {fileID: 0}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: SequencePatrolAreas.Array.data[0]
+      value: 
+      objectReference: {fileID: 407671823}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: SequencePatrolAreas.Array.data[1]
+      value: 
+      objectReference: {fileID: 855910302}
+    - target: {fileID: 8358265757348831173, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
+      propertyPath: SequencePatrolAreas.Array.data[2]
+      value: 
+      objectReference: {fileID: 986962548}
     - target: {fileID: 8358265757348831176, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_Name
       value: WhitePoliceWoman

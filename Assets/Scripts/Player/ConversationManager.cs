@@ -172,7 +172,7 @@ public class ConversationManager : MonoBehaviour
         ConversationTarget = null;
         _animator.SetBool("IsOpen", false);
         GameManager.CursorIsLocked = true;
-        _sceneLogger.SceneLog.Stats.Add(_conversationLog);
+        if (_sceneLogger) _sceneLogger.SceneLog.Stats.Add(_conversationLog);
         _conversationLog = new Log();
     }
     #endregion

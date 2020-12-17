@@ -118,7 +118,9 @@ public class ConversationCamera : MonoBehaviour
             if (CheckCameraObstruction(_conversationCenterPoint + CameraPoint, _conversationCenterPoint)) 
                 return Vector3.zero;  
         }
-        return _conversationCenterPoint + CameraPoint;
+        Vector3 result =  (_conversationCenterPoint + CameraPoint);
+        result.y = transform.position.y;
+        return result;
     }
 
     private float CheckAngleOverflow(float angle)

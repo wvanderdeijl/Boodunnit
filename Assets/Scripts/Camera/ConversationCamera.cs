@@ -43,7 +43,7 @@ public class ConversationCamera : MonoBehaviour
         //This makes both the conversation target and the player look at one another
         RotateWithIgnoreXZRotations(_cameraController.CameraRotationTarget, conversationTarget);
 
-        if (GameManager.CurrentHighlightedCollider.gameObject.GetComponent<VincentBehaviour>() == null)
+        if (GameManager.CurrentHighlightedCollider != null && GameManager.CurrentHighlightedCollider.gameObject.GetComponent<VincentBehaviour>() == null)
         {
             RotateWithIgnoreXZRotations(ConversationManager.ConversationTarget, _cameraController.CameraRotationTarget.position);
         }

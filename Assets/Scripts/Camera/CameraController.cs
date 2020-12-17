@@ -73,7 +73,7 @@ public class CameraController : MonoBehaviour
         if (ConversationManager.HasConversationStarted) return;
         RotationTarget = CameraRotationTarget;
         
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && !GameManager.IsPaused)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !GameManager.IsPaused)
         {
             GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
         }
@@ -108,10 +108,7 @@ public class CameraController : MonoBehaviour
 
         if (_rotationInput.y != 0)
         {
-            if (!LevitateBehaviour.IsRotating)
-            {
-                ElevationRange += (_rotationInput.y / 10f);
-            }
+            ElevationRange += (_rotationInput.y / 10f);
         }
 
         Vector3 position2DIfied = new Vector3(transform.position.x, 0, transform.position.z);
@@ -160,8 +157,6 @@ public class CameraController : MonoBehaviour
 
     public void RotateCamera()
     {
-        if (LevitateBehaviour.IsRotating) { return; }
-
         float plusMinusMultiplier = _rotationInput.x > 0 ? 1 : _rotationInput.x < 0 ? -1 : 0;
         float increment = plusMinusMultiplier * (Mathf.Abs(_rotationInput.x) / (1f/ RotationSpeed));
         _angle += increment;

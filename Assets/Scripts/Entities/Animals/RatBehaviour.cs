@@ -14,16 +14,15 @@ public class RatBehaviour : BaseEntity
         _climbBehaviour = GetComponent<ClimbBehaviour>();
         CanJump = true;
 
-        FearThreshold = 20;
+        FearThreshold = 50;
         FearDamage = 0;
         FaintDuration = 10;
         EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        IsScaredOfLevitatableObject = true;
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(BirdBehaviour)] = 5f,
-            [typeof(VillagerBehaviour)] = 4f,
-            [typeof(PoliceManBehaviour)] = 4f,
-            [typeof(ILevitateable)] = 3f
+            [CharacterType.Cat] = 5f,
+            [CharacterType.Bird] = 5f,
         };
         
         _climbBehaviour.MinimumStamina = 0f;
@@ -39,8 +38,16 @@ public class RatBehaviour : BaseEntity
     
     public override void MoveEntityInDirection(Vector3 direction)
     {
-        if (_climbBehaviour.IsClimbing) _climbBehaviour.Climb();
-        else base.MoveEntityInDirection(direction);
+        if (_climbBehaviour.IsClimbing)
+        {
+            PlayAudioOnMovement(1);
+            _climbBehaviour.Climb();
+        }
+        else
+        {
+            PlayAudioOnMovement(0);
+            base.MoveEntityInDirection(direction);
+        }
     }
 
     public override void UseFirstAbility()

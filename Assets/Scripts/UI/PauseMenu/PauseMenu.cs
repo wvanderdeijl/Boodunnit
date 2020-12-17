@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PauseMenu : MonoBehaviour
         }
 
         GameManager.IsPaused = !GameManager.IsPaused;
+        GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
         Canvas.SetActive(GameManager.IsPaused);
         Time.timeScale = GameManager.IsPaused ? 0 : 1;
 
@@ -31,7 +33,7 @@ public class PauseMenu : MonoBehaviour
     public void OnQuitToMainMenu()
     {
         TogglePauseGame();
-        SceneTransitionHandler.Instance.GoToScene("MainMenu");
+        SceneTransitionHandler.Instance.GoToMainMenu();
     }
 
     private void ResetPanels()

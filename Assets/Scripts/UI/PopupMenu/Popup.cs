@@ -15,9 +15,13 @@ public class Popup : MonoBehaviour
     public static bool isPopUpOpen;
 
     private int imageIndex = 0;
+    private SceneTransitionHandler _sceneTransitionHandler;
+
+    private bool _startMenuWantsToOpen;
 
     private void Awake()
     {
+        _sceneTransitionHandler = new SceneTransitionHandler();
         CloseButton = transform.Find("CloseButton").gameObject;
         NextBtn = transform.Find("NextButton").gameObject;
         PreviousBtn = transform.Find("PreviousButton").gameObject;
@@ -51,6 +55,31 @@ public class Popup : MonoBehaviour
         isPopUpOpen = false;
         Time.timeScale = 1f;
     }
+    
+    //todo: remove these functions when to be continued is not used anymore
+    // to be continued popup exclusivese
+    public void NavigateToMainMenu()
+    {
+        _startMenuWantsToOpen = false;
+        GameManager.CursorIsLocked = false;
+        DisableOrEnableOtherCanvasses(true);
+        PopupMenuUI.SetActive(false);
+        isPopUpOpen = false;
+        Time.timeScale = 1f;
+        _sceneTransitionHandler.GoToMainMenu();
+    }
+
+    public void OpenToBeContinuedPopUp()
+    {
+        GameManager.CursorIsLocked = false;
+        DisableOrEnableOtherCanvasses(true);
+        PopupMenuUI.SetActive(true);
+        imageIndex = 0;
+        UpdateImage();
+        isPopUpOpen = true;
+        Time.timeScale = 0f;
+    }
+    //end exclusiveness
 
     public void ShowNextImage()
     {
@@ -74,22 +103,25 @@ public class Popup : MonoBehaviour
 
     private void UpdateImage()
     {
-        DisplayImage.sprite = Sprites[imageIndex];
+        if (Sprites.Length > 0)
+        {
+            DisplayImage.sprite = Sprites[imageIndex];
 
-        if ((imageIndex + 1) == Sprites.Length)
-        {
-            CloseButton.SetActive(true);
-            NextBtn.SetActive(false);
-        }
-        else if (imageIndex == 0)
-        {
-            PreviousBtn.SetActive(false);
-        }
-        else
-        {
-            PreviousBtn.SetActive(true);
-            NextBtn.SetActive(true);
-            CloseButton.SetActive(false);
+            if ((imageIndex + 1) == Sprites.Length)
+            {
+                CloseButton.SetActive(true);
+                NextBtn.SetActive(false);
+            }
+            else if (imageIndex == 0)
+            {
+                PreviousBtn.SetActive(false);
+            }
+            else
+            {
+                PreviousBtn.SetActive(true);
+                NextBtn.SetActive(true);
+                CloseButton.SetActive(false);
+            } 
         }
     }
 

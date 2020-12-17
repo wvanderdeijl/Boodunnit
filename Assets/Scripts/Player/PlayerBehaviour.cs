@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Entities.Humans;
+using UnityEngine;
 
 public class PlayerBehaviour : BaseMovement
 {
@@ -7,25 +9,53 @@ public class PlayerBehaviour : BaseMovement
     public HighlightBehaviour HighlightBehaviour;
     public LevitateBehaviour LevitateBehaviour;
 
+    [Header("Highlight Radius")]
+    public float ConversationRadius;
+    public float LeviatateRadius;
+    public float PossesionRadius;
+    public float ClueRadius;
+
     public ConversationManager ConversationManager;
 
     public PauseMenu PauseMenu;
 
+    public List<AudioSource> AudioSources;
+
+    public Animator Animator;
+
+    private Dictionary<string, float> _highlightRadiuses = new Dictionary<string, float>();
+
+
     private Transform _cameraTransform;
+    private int _dashCounter;
+    private EmmieBehaviour _emmie;
 
     private void Awake()
     {
+        InitBaseMovement();
         _cameraTransform = UnityEngine.Camera.main.transform;
         CanJump = true;
+
+        //Add radiuses to dictionary
+        _highlightRadiuses.Add("ConversationRadius", ConversationRadius);
+        _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
+        _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
+        _highlightRadiuses.Add("ClueRadius", ClueRadius);
+
+        _emmie = FindObjectOfType<EmmieBehaviour>();
     } 
 
     void Update()
     {
-        HighlightBehaviour.HighlightGameobjectsInRadius();
+        Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
+        GameManager.CurrentHighlightedCollider = HighlightedObject;
+
+        PlayerAnimation();
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            GameManager.ToggleCursor();
             PauseMenu.TogglePauseGame();
         }
         
@@ -38,23 +68,29 @@ public class PlayerBehaviour : BaseMovement
         //Posses behaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
+            if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && PossessionBehaviour.TargetBehaviour.IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
             } 
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating)
-                    PossessionBehaviour.PossessTarget();
+                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
+                {
+                    PossessionBehaviour.PossessTarget(HighlightedObject);
+                }
             }
         }
 
         //Dialogue behaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!ConversationManager.HasConversationStarted && !DashBehaviour.IsDashing && !LevitateBehaviour.IsLevitating)
+            if (!ConversationManager.HasConversationStarted && 
+                !DashBehaviour.IsDashing && 
+                !LevitateBehaviour.IsLevitating)
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
+
+                if (ConversationManager.ConversationTarget?.gameObject == _emmie.gameObject) _emmie.IsCrying = false;
             }
         }
 
@@ -63,7 +99,16 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!DashBehaviour.IsDashing && !DashBehaviour.DashOnCooldown && !ConversationManager.HasConversationStarted)
             {
-                DashBehaviour.Dash();
+                // If player is grounded he can always dash.
+                if (IsGrounded)
+                    DashBehaviour.Dash();
+
+                // If player is not grounded, we check _dashCounter.
+                if (!IsGrounded && _dashCounter <= 0)
+                {
+                    DashBehaviour.Dash();
+                    _dashCounter++;
+                }
             }
         }
 
@@ -107,8 +152,13 @@ public class PlayerBehaviour : BaseMovement
                 PossessionBehaviour.TargetBehaviour.Jump();
                 return;
             }
-
             Jump();
+        }
+
+        if (IsGrounded)
+        {
+            // Reset dash counter for single in air dash.
+            _dashCounter = 0;
         }
     }
     private void FixedUpdate()
@@ -163,5 +213,51 @@ public class PlayerBehaviour : BaseMovement
         GameManager.CursorIsLocked = isRotating;
 
         LevitateBehaviour.RotateLevitateableObject();
+    }
+
+    private void PlayerAnimation()
+    {
+        if (Animator)
+        {
+            //// Jump animation
+            //if (IsJumping && IsGrounded)
+            //{
+            //    Animator.SetBool("IsJumping", true);
+            //}
+            //else if (!IsJumping)
+            //{
+            //    Animator.SetBool("IsJumping", false);
+            //}
+
+            // Levitate animation
+            if (LevitateBehaviour.IsLevitating)
+            {
+                Animator.SetBool("IsLevitating", true);
+            }
+            else
+            {
+                Animator.SetBool("IsLevitating", false);
+            }
+
+            // Dash animation
+            if (DashBehaviour.IsDashing)
+            {
+                Animator.SetBool("IsDashing", true);
+            }
+            else
+            {
+                Animator.SetBool("IsDashing", false);
+            }
+
+            // Move animation
+            if (Rigidbody.velocity.magnitude > 0.01 && !DashBehaviour.IsDashing && !IsJumping)
+            {
+                Animator.SetBool("IsMoving", true);
+            }
+            else if (Rigidbody.velocity.magnitude < 0.01)
+            {
+                Animator.SetBool("IsMoving", false);
+            }
+        }
     }
 }

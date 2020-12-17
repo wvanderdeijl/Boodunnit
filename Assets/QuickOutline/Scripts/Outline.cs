@@ -81,16 +81,20 @@ public class Outline : MonoBehaviour {
   private bool needsUpdate;
 
   void Awake() {
-    //foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
-    //{
-    //    if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)
-    //    {
-    //        skinnedMeshRenderer.sharedMesh.subMeshCount = skinnedMeshRenderer.sharedMesh.subMeshCount + 1;
-    //        skinnedMeshRenderer.sharedMesh.SetTriangles(skinnedMeshRenderer.sharedMesh.triangles, skinnedMeshRenderer.sharedMesh.subMeshCount - 1);
-    //    }
+    
+    foreach (SkinnedMeshRenderer skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
+    {
+        if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)
+        {
+            Mesh copyOfMesh = Instantiate(skinnedMeshRenderer.sharedMesh);
 
-    //}
+            copyOfMesh.subMeshCount += 1;
+            copyOfMesh.SetTriangles(copyOfMesh.triangles, copyOfMesh.subMeshCount - 1);
 
+            skinnedMeshRenderer.sharedMesh = copyOfMesh;
+        }
+    }
+    
     foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
     {
         if (meshFilter.mesh.subMeshCount > 1)

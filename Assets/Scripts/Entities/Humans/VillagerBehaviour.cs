@@ -9,17 +9,17 @@ public class VillagerBehaviour : BaseEntity
 {
     void Awake()
     {
-        // Todo give Name and Profession
+        InitBaseEntity();
 
-        FearThreshold = 20;
-        FearDamage = 0;
-        FaintDuration = 10;
-        EmotionalState = EmotionalState.Calm;
-        ScaredOfGameObjects = new Dictionary<Type, float>()
+        ScaredOfEntities = new Dictionary<CharacterType, float>()
         {
-            [typeof(RatBehaviour)] = 3f,
-            [typeof(ILevitateable)] = 3f
+            [CharacterType.Rat] = 3f,
         };
+    }
+
+    public override void MoveEntityInDirection(Vector3 direction)
+    {
+        if (!ConversationManager.HasConversationStarted) base.MoveEntityInDirection(direction);
     }
 
     public override void UseFirstAbility()

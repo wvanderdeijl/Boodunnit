@@ -28,6 +28,17 @@ public class SaveHandler
 
     private readonly string _cluesSaveKey = "PlayerClues";
     private readonly string _currentSceneSaveKey = "CurrentScene";
+    private readonly string _newGameSaveKey = "NewGameStarted";
+
+    /// <summary>
+    /// Call this when starting a new game.
+    /// Now we can also check if the player has already started a game.
+    /// We use int to represent true and false.
+    /// </summary>
+    public void StartNewGame() {
+        PlayerPrefs.SetInt(_newGameSaveKey, 1);
+        PlayerPrefs.Save();
+    }
 
     /// <summary>
     /// This method will remove the current save game.
@@ -197,5 +208,14 @@ public class SaveHandler
         string saveKey = typeof(T).Name;
         string containerData = PlayerPrefs.GetString(saveKey);
         return !string.IsNullOrEmpty(containerData) ? JsonConvert.DeserializeObject<T>(containerData) : default;
+    }
+
+    /// <summary>
+    /// Check if savegame exists
+    /// </summary>
+    /// <returns></returns>
+    public bool DoesSaveGameExist()
+    {
+        return PlayerPrefs.GetInt(_newGameSaveKey) == 1;
     }
 }

@@ -8,6 +8,7 @@ using Logger;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using UnityEngine.AI;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class ConversationManager : MonoBehaviour
     private bool _hasNoRelation;
     private float _typeSpeed;
     private int _maxDefaultSencteces = 0;
+    private bool _skipDialogue;
 
     private SceneLogger _sceneLogger;
     private Log _conversationLog = new Log();
@@ -56,7 +58,20 @@ public class ConversationManager : MonoBehaviour
         PlayerSettings playerSettings = SaveHandler.Instance.LoadDataContainer<PlayerSettings>();
         if (playerSettings != null)
         {
-            _typeSpeed = (float)playerSettings.TextSpeed / 10;
+            _typeSpeed = (float)playerSettings.TextSpeed;
+
+            switch (_typeSpeed)
+            {
+                case 0:
+                    _typeSpeed = 0.4f;
+                    break;
+                case 1:
+                    _typeSpeed = 0.2f;
+                    break;
+                case 2:
+                    _typeSpeed = 0f;
+                    break;
+            }
         }
 
         //ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
@@ -85,26 +100,25 @@ public class ConversationManager : MonoBehaviour
                     (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     HasConversationStarted = true;
-                    
                     ConversationTarget = entityCollider.gameObject.transform;
                     _entityNameTextbox.text = EnumValueToString(entityToTalkTo.CharacterName);
                     _animator.SetBool("IsOpen", true);
-                    
+
                     GameManager.CursorIsLocked = false;
 
-                    if(dialogue != null)
+                    if (dialogue != null)
                     {
                         ManageConversation(dialogue, null);
                         return;
                     }
 
-                    if(question != null)
+                    if (question != null)
                     {
                         ManageConversation(null, question);
                         return;
                     }
-                    
-                    if(dialogue == null && question == null)
+
+                    if (dialogue == null && question == null)
                     {
                         ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
                         return;
@@ -115,10 +129,16 @@ public class ConversationManager : MonoBehaviour
     }
     #endregion
 
-    #region Manange conversation 
+    #region Manage conversation 
     public void ManageConversation(Dialogue dialogue, Question question)
     {
         ResetQuestions();
+
+        BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
+        if (entity && entity.NavMeshAgent && entity._pathFindingState != PathFindingState.None)
+        {
+            entity.PauseEntityNavAgent(true);
+        }
         //Check to ask question, start dialogue or end conversation
         if (dialogue && !_hasNoRelation)
         {
@@ -143,6 +163,11 @@ public class ConversationManager : MonoBehaviour
 
     public void CloseConversation()
     {
+        BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
+        if (entity)
+        {
+            entity.PauseEntityNavAgent(false);
+        }
         HasConversationStarted = false;
         ConversationTarget = null;
         _animator.SetBool("IsOpen", false);
@@ -186,17 +211,18 @@ public class ConversationManager : MonoBehaviour
 
         StopAllCoroutines();
         _maxDefaultSencteces = 1;
-        StartCoroutine(TypeSentence(sentence, _typeSpeed));
+        StartCoroutine(TypeSentence(sentence));
     }
 
     public void DisplayNextSentence()
     {
         if (!_isSentenceFinished)
         {
+            _skipDialogue = true;
             return;
         }
 
-        if (_sentences.Count == 0 || _maxDefaultSencteces == 1)
+        if ((_sentences.Count == 0 || _maxDefaultSencteces == 1) && _isSentenceFinished)
         {
             if (_dialogueContainedQuestion)
             {
@@ -209,20 +235,26 @@ public class ConversationManager : MonoBehaviour
         }
 
         string sentence = _sentences.Dequeue();
-        StartCoroutine(TypeSentence(sentence, _typeSpeed));
+        StartCoroutine(TypeSentence(sentence));
     }
 
-    IEnumerator TypeSentence(string sentence, float typespeed)
+    IEnumerator TypeSentence(string sentence)
     {
         _dialogueTextbox.text = "";
         _isSentenceFinished = false;
 
         foreach (char letter in sentence.ToCharArray())
         {
-            _dialogueTextbox.text += letter;
-            yield return new WaitForSeconds(typespeed);
+            if (!_skipDialogue)
+            {
+                _dialogueTextbox.text += letter;
+                yield return new WaitForSeconds(_typeSpeed);
+            }
         }
 
+        _dialogueTextbox.text = sentence;
+
+        _skipDialogue = false;
         _isSentenceFinished = true;
     }
     #endregion
@@ -230,7 +262,7 @@ public class ConversationManager : MonoBehaviour
     #region Question
     private void AskQuestion(Question question)
     {
-        StartCoroutine(TypeSentence(question.Text.ToString(), _typeSpeed));
+        StartCoroutine(TypeSentence(question.Text.ToString()));
         _continueButton.gameObject.SetActive(false);
 
         foreach (Choice choice in question.Choices)
@@ -274,7 +306,7 @@ public class ConversationManager : MonoBehaviour
         }
     }
     #endregion
-    private string EnumValueToString(CharacterList character)
+    private string EnumValueToString(CharacterType character)
     {
         string newValue = Regex.Replace(character.ToString(), "([a-z])([A-Z])", "$1 $2");
 

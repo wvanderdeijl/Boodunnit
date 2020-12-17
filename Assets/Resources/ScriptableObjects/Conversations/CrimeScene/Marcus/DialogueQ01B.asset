@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
+  m_Name: DialogueQ01B
+  m_EditorClassIdentifier: 
+  sentences:
+  - Text: "Well, the detective novels I\u2019ve been reading say you shouldn\u2019t
+      reveal anything about the case."
+  - Text: You never know who is listening!
+  - Text: "But, uh, even if I would want to tell you, I, um, don\u2019t have anything
+      to tell you."
+  - Text: "We don\u2019t know what we\u2019re dealing with at the moment."
+  - Text: "Robert might have a lead up on the roof, but we\u2019re not certain yet."
+  - Text: "Oh no. I probably shouldn\u2019t have said that. Don\u2019t tell anyone,
+      OK?!"
+  question: {fileID: 11400000, guid: 3cdc377ae9169904484093b0af432376, type: 2}

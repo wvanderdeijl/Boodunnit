@@ -26,7 +26,10 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         Outline outline = gameObject.AddComponent<Outline>();
         if (outline)
         {
-            outline.OutlineColor = Color.white;
+            Color purple;
+            ColorUtility.TryParseHtmlString("#d2b8db", out purple);
+
+            outline.OutlineColor = purple;
             outline.OutlineMode = Outline.Mode.OutlineVisible;
             outline.OutlineWidth = 5.0f;
             outline.enabled = false;
@@ -95,5 +98,17 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         transform.position = _spawnLocation;
         transform.rotation = _spawnRotation;
         _rigidbody.velocity = Vector3.zero;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (State == LevitationState.Levitating)
+        {
+            float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
+            if(collisionForce > 200f)
+            {
+                SoundManager.Instance.PlaySound("Levitate_bump");
+            }
+        }
     }
 }

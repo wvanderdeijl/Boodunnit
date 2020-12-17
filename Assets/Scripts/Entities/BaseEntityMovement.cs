@@ -1,7 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Numerics;
 using Enums;
 using UnityEngine;
 using UnityEngine.AI;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public abstract class BaseEntityMovement : BaseMovement
 {
@@ -11,11 +15,15 @@ public abstract class BaseEntityMovement : BaseMovement
     public NavMeshAgent NavMeshAgent;
 
     [HideInInspector]
+    public Animator Animator;
+
     public bool IsOnCountdown;
 
     [Header("Pathfinding")]
-    [SerializeField] private PathFindingState _pathFindingState;
+    public PathFindingState _pathFindingState;
     public float MinimumFollowRange, MaximumFollowRange;
+    public List<EntityArea> SequencePatrolAreas;
+    private int _sequencePatrolAreaCounter = 0;
     private bool _isPathFinding;
     private bool _hasPositionInArea;
     private Quaternion _spawnRotation;
@@ -27,16 +35,17 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         InitBaseMovement();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
 
         if (NavMeshAgent)
         {
             NavMeshAgent.autoBraking = true;
-
-            _spawnRotation = transform.rotation;
-            _spawnLocation = transform.position;
+            NavMeshAgent.speed = PathfindingSpeed;
+            _spawnRotation = transform.root.rotation;
+            _spawnLocation = transform.root.position;
         }
     }
-    
+
     public void MoveWithPathFinding()
     {
         switch (_pathFindingState)
@@ -47,6 +56,9 @@ public abstract class BaseEntityMovement : BaseMovement
             case PathFindingState.Patrolling:
                 PatrolArea();
                 break;
+            case PathFindingState.PatrolAreas:
+                PatrolSequence();
+                break;
             case PathFindingState.Following:
                 FollowTarget();
                 break;
@@ -54,6 +66,7 @@ public abstract class BaseEntityMovement : BaseMovement
                 break;
         }
     }
+    
     private void FollowTarget()
     {
         if (TargetToFollow)
@@ -61,44 +74,67 @@ public abstract class BaseEntityMovement : BaseMovement
             float distanceToTarget = Vector3.Distance(transform.position, TargetToFollow.transform.position);
             if (distanceToTarget > MinimumFollowRange && distanceToTarget < MaximumFollowRange)
             {
-                NavMeshAgent.isStopped = false;
+                PauseEntityNavAgent(false);
+
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
 
-            NavMeshAgent.isStopped = true;
+            PauseEntityNavAgent(true);
         }
     }
 
     private void ReturnToSpawn()
     {
-        if (HasReachedDestination(_spawnLocation))
-        {
-            NavMeshAgent.isStopped = false;
-            NavMeshAgent.destination = _spawnLocation;
+        if (HasReachedDestination(_spawnLocation)) {
+            if (transform.rotation == _spawnRotation) return;
+            Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation,
+                Time.deltaTime * 5f);
+            transform.rotation = lerpToRotation;
             return;
         }
-        
-        Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation, 
-            Time.deltaTime * 5f);
-        transform.rotation = lerpToRotation;
+
+        if (NavMeshAgent.hasPath) return;
+        NavMeshAgent.destination = _spawnLocation; //- Vector3.up;
+        PauseEntityNavAgent(false);
     }
 
     private void PatrolArea()
     {
         if (!_currentArea) MoveToNextArea();
+        if (!_hasPositionInArea)
+        {
+            MoveToNextPosition();
+            _hasPositionInArea = true;
+        }
+        if (HasReachedDestination(_patrolDestination) && !IsOnCountdown)
+        {
+            IsOnCountdown = true;
+            StartCoroutine(StartCountdownInArea(_currentArea.GetEntityTimeInArea(gameObject)));
+        }
+    }
+
+    private void PatrolSequence()
+    {
+        if (SequencePatrolAreas.Count <= 0)
+            return;
 
         if (!_hasPositionInArea)
         {
-            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
-            NavMeshAgent.destination = _patrolDestination;
+            _currentArea = SequencePatrolAreas[_sequencePatrolAreaCounter];
+            MoveToNextPosition();
             _hasPositionInArea = true;
         }
 
-        if (HasReachedDestination(_patrolDestination))
+        if(HasReachedDestination(_patrolDestination) && !IsOnCountdown)
         {
-            _hasPositionInArea = false;
+            IsOnCountdown = true;
+            _sequencePatrolAreaCounter++;
+            StartCoroutine(StartCountdownInArea(0f));
         }
+
+        if(_sequencePatrolAreaCounter == SequencePatrolAreas.Count)
+            _sequencePatrolAreaCounter = 0;
     }
 
     private bool HasReachedDestination(Vector3 destination)
@@ -112,6 +148,7 @@ public abstract class BaseEntityMovement : BaseMovement
         yield return new WaitForSeconds(amountOfTime);
         _currentArea = null;
         IsOnCountdown = false;
+        _hasPositionInArea = false;
     }
 
     private void MoveToNextArea()
@@ -120,16 +157,44 @@ public abstract class BaseEntityMovement : BaseMovement
         _hasPositionInArea = false;
         NavMeshAgent.ResetPath();
     }
+
+    private void MoveToNextPosition()
+    {
+        bool positionIsFound = false;
+        if (_patrolDestination == null)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            NavMeshAgent.destination = _patrolDestination;
+            return;
+        }
+
+        Vector3 previousDestionation = _patrolDestination;
+        while (!positionIsFound)
+        {
+            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+            if(Vector3.Distance(previousDestionation, _patrolDestination) > 1f)
+            {
+                positionIsFound = true;
+                NavMeshAgent.destination = _patrolDestination;
+            }
+        }
+    }
     
     public void ChangePathFindingState(PathFindingState pathFindingState)
     {
+        NavMeshAgent.ResetPath();
         _pathFindingState = pathFindingState;
     }
 
     public void ResetDestination()
     {
-        NavMeshAgent.isStopped = false;
-        ChangePathFindingState(PathFindingState.Patrolling);
+        PauseEntityNavAgent(false);
+        ChangePathFindingState(_pathFindingState);
         _hasPositionInArea = false;
+    }
+
+    public void PauseEntityNavAgent(bool shouldPause)
+    {
+        if (NavMeshAgent) NavMeshAgent.isStopped = shouldPause;
     }
 }

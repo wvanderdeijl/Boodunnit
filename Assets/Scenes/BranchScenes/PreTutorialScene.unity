@@ -166,8 +166,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 10, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 30, y: 10, z: 3.7473526}
+  m_Center: {x: 0, y: 0, z: -0.6263237}
 --- !u!114 &8125856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +250,6 @@ GameObject:
   - component: {fileID: 39362224}
   - component: {fileID: 39362223}
   - component: {fileID: 39362222}
-  - component: {fileID: 39362221}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -258,18 +257,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &39362221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39362220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &39362222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,6 +785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 20
+  WillLogPossessCount: 0
 --- !u!65 &74044862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8250,15 +8238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1367206118}
     m_Modifications:
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.data[0]
-      value: Press <b>SHIFT</b> to <b>DASH</b> through thin surfaces, like walls
-        and fences.
-      objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8346,14 +8325,6 @@ PrefabInstance:
     - target: {fileID: 4266350324638384041, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Name
       value: DashObstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266350324638384041, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266350326092434549, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
@@ -11907,7 +11878,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
@@ -11915,7 +11886,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: Carry the cloud to the place where the last platform should be!s
+      value: When you release an object that can be levitated, it will snap into
+        place automatically!
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x

@@ -24,5 +24,5 @@ MonoBehaviour:
     Question: {fileID: 0}
   - Text: "Sorry, I\u2019ve got to go."
     CharacterUnlocksChoice: 
-    Dialogue: {fileID: 0}
+    Dialogue: {fileID: 11400000, guid: 04dccb965f093904da4fd1b8379f6d6b, type: 2}
     Question: {fileID: 0}

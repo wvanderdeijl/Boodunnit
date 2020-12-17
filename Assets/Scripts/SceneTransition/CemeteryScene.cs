@@ -12,9 +12,9 @@ namespace SceneTransition
             SceneTransitionHandler.Instance.GoToScene(SceneName ?? "MainMenu");
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            if(other.gameObject == GameObject.Find("Player") && EmmieTrigger.HasVisitedEmmie) LeaveCemeteryScene();
+            if(other.gameObject == FindObjectOfType<PlayerBehaviour>().gameObject && !ConversationManager.HasConversationStarted) LeaveCemeteryScene();
         }
     }
 }

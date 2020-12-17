@@ -90,7 +90,7 @@ public class PlayerBehaviour : BaseMovement
             {
                 ConversationManager.TriggerConversation(PossessionBehaviour.IsPossessing);
 
-                if (ConversationManager.ConversationTarget?.gameObject == _emmie.gameObject) _emmie.IsCrying = false;
+                if (ConversationManager.ConversationTarget?.gameObject == _emmie.gameObject) _emmie.TalkWithBoolia();
             }
         }
 

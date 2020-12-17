@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Entities.Humans
 {
@@ -25,6 +27,25 @@ namespace Entities.Humans
         public override void UseFirstAbility()
         {
             //Todo throw plant pot on Julia's head.
+        }
+
+        public void TalkWithBoolia()
+        {
+            if (SceneManager.GetActiveScene().name.Equals("CemeteryScene") && IsCrying)
+            {
+                StopCrying();
+                ActivateTransitionTrigger();
+            }
+        }
+
+        private void StopCrying()
+        {
+            IsCrying = false;
+        }
+
+        private void ActivateTransitionTrigger()
+        {
+            GameObject.Find("TransitionToCrimeScene").GetComponent<BoxCollider>().enabled = true; 
         }
     }
 }

@@ -20,10 +20,11 @@ public class PopupTrigger : MonoBehaviour
 
             ActivateCloudOutline();
 
-            GameManager.IsPaused = !GameManager.IsPaused;
-            GameManager.CursorIsLocked = !GameManager.CursorIsLocked;
-            Time.timeScale = GameManager.IsPaused ? 0 : 1;
+            GameManager.IsPaused = true;
+            GameManager.CursorIsLocked = false;
+            Time.timeScale = 0;
 
+            other.GetComponent<LevitateBehaviour>().RemoveRigidbodyAndStartFreeze();
             Popup.gameObject.SetActive(true);
             _hasBeenTriggered = true;
         }

@@ -99,6 +99,8 @@ public class DashBehaviour : MonoBehaviour
     {
         _raycastHits = Physics.RaycastAll(transform.position, transform.forward, DashDistance);
 
+        _raycastHits = CheckTriggerHits(_raycastHits);
+
         if(_raycastHits.Length == 0)
         {
             return true;
@@ -117,6 +119,19 @@ public class DashBehaviour : MonoBehaviour
         CheckRoomBetweenTwoDashables();
 
         return _canDash;
+    }
+
+    private RaycastHit[] CheckTriggerHits(RaycastHit[] raycastHits)
+    {
+        List<RaycastHit> raycastHitsWithoutTriggers = new List<RaycastHit>();
+        foreach (RaycastHit raycastHit in raycastHits)
+        {
+            if (!raycastHit.collider.isTrigger)
+            {
+                raycastHitsWithoutTriggers.Add(raycastHit);
+            }
+        }
+        return raycastHitsWithoutTriggers.ToArray();
     }
 
     private bool RayCastLengthIsOne()

@@ -826,7 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPossessing: 0
   TargetBehaviour: {fileID: 0}
-  UnpossessRadius: 3
+  UnpossessRadius: 2
   UnPossessRetriesOnYAxis: 5
   Cooldown: 1
   IsOnCooldown: 0
@@ -846,7 +846,7 @@ MonoBehaviour:
   DashOnCooldown: 0
   DashCooldown: 2
   DashDuration: 0.2
-  DashDistance: 7
+  DashDistance: 5
 --- !u!114 &8658040402228577262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,7 +877,6 @@ MonoBehaviour:
   _overlapSphereAngleInDegrees: 360
   _velocitySpeedPercentage: 25
   _pushPullSpeed: 300
-  _rotationSpeed: 5
   _frozenDurationInSeconds: 5
   _minimumSelectionDistanceInUnits: 2
 --- !u!114 &8658040402228577260

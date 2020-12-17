@@ -207,13 +207,16 @@ namespace Entities
             {
                 if (Animator && Animator.runtimeAnimatorController != null)
                 {
-                    if (Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
+                    if (CheckIfParamaterExists("ScaredStage"))
                     {
-                        if (Animator.GetCurrentAnimatorStateInfo(0).IsTag("Terrified") || Animator.GetCurrentAnimatorStateInfo(0).IsTag("Scared"))
+                        if (Animator.GetInteger("ScaredStage") > 0 && EmotionalState != EmotionalState.Fainted)
                         {
-                            SetScaredStage(0);
-                            Animator.Rebind();
-                            ResetDestination();
+                            if (Animator.GetCurrentAnimatorStateInfo(0).IsTag("Terrified") || Animator.GetCurrentAnimatorStateInfo(0).IsTag("Scared"))
+                            {
+                                SetScaredStage(0);
+                                Animator.Rebind();
+                                ResetDestination();
+                            }
                         }
                     }
                 }
@@ -315,6 +318,16 @@ namespace Entities
                     PlayAudioOnMovement(0);
                     break;
             }
+        }
+
+        private bool CheckIfParamaterExists(string paramaterName)
+        {
+            foreach(AnimatorControllerParameter param in Animator.parameters)
+            {
+                if (param.name.ToLower() == paramaterName.ToLower())
+                    return true;
+            }
+            return false;
         }
     }
 }

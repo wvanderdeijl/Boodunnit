@@ -10625,6 +10625,14 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 39362225}
+    - target: {fileID: 8658040402228577261, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
+      propertyPath: _velocitySpeedPercentage
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658040402228577261, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
+      propertyPath: _overlapSphereRadiusInUnits
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577266, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_Name
       value: PlayerV2

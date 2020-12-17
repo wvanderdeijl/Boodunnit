@@ -18,7 +18,10 @@ public class SoundManager : MonoBehaviour
         {
             if (_instance == null) 
             {
-                _instance = _instance = GameObject.FindObjectOfType<SoundManager>();
+                if (FindObjectOfType<SoundManager>())
+                {
+                    _instance = _instance = GameObject.FindObjectOfType<SoundManager>();
+                }
             }
             return _instance;
         }

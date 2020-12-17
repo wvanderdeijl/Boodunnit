@@ -7,26 +7,27 @@ public class ToggleAmbientSound : MonoBehaviour
 {
     public List<AudioClip> clips;
 
+    [HideInInspector]
     public int AmbientSoundPlaying = 0;
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        PlayerBehaviour player = other.gameObject.GetComponent<PlayerBehaviour>();
-        BaseEntity entity = other.gameObject.GetComponent<BaseEntity>();
-        if (player || entity.IsPossessed)
+        PlayerBehaviour player = FindObjectOfType<PlayerBehaviour>();
+        PossessionBehaviour possession = player.PossessionBehaviour;
+        if (player == other.GetComponent<PlayerBehaviour>() || possession.TargetBehaviour)
         {
             if (!other.isTrigger)
             {
                 if (AmbientSoundPlaying == 0)
                 {
-                    FindObjectOfType<SoundManager>().StopSound("CrimeScene_Sea");
-                    FindObjectOfType<SoundManager>().PlaySound("CrimeScene_Town");
+                    SoundManager.Instance.StopSound("CrimeScene_Sea");
+                    SoundManager.Instance.PlaySound("CrimeScene_Town");
                     AmbientSoundPlaying = 1;
                 }
                 else if (AmbientSoundPlaying == 1)
                 {
-                    FindObjectOfType<SoundManager>().StopSound("CrimeScene_Town");
-                    FindObjectOfType<SoundManager>().PlaySound("CrimeScene_Sea");
+                    SoundManager.Instance.StopSound("CrimeScene_Town");
+                    SoundManager.Instance.PlaySound("CrimeScene_Sea");
                     AmbientSoundPlaying = 0;
                 }
             }

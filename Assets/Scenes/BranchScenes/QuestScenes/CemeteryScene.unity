@@ -1678,7 +1678,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.586
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3656,6 +3656,14 @@ PrefabInstance:
       propertyPath: Dialogue
       value: 
       objectReference: {fileID: 11400000, guid: bb327518a3943e547867f291228c3168, type: 2}
+    - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: _fearAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: _fearRadius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: CanTalkToBoolia
       value: 0
@@ -13864,6 +13872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 19515175}
     m_Modifications:
+    - target: {fileID: 1918140656, guid: 9647b1a8667185c418af4b8d9a2d54d4, type: 3}
+      propertyPath: m_Volume
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 1097548279662457380, guid: 9647b1a8667185c418af4b8d9a2d54d4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -35211,6 +35223,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: a0c7191da6fbdd4418ebc2b12fed8f87, type: 2}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: _fearAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: _fearRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: CanTalkToBoolia
       value: 0
       objectReference: {fileID: 0}
@@ -40499,7 +40519,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.605
   m_Pitch: 1
   Loop: 0
   Mute: 0

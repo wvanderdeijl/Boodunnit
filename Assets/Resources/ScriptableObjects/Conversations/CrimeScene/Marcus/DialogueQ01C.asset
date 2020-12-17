@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: DialogueQ01C
   m_EditorClassIdentifier: 
   sentences:
-  - Text: "OK, but, um, please don\u2019t leave town just yet. We need you around
-      for the investigation."
+  - Text: OK, but make sure you stay in Boonkle for the time being.
   question: {fileID: 0}

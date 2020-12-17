@@ -16,13 +16,13 @@ MonoBehaviour:
   Choices:
   - Text: Who are you?
     CharacterUnlocksChoice: 
-    Dialogue: {fileID: 0}
+    Dialogue: {fileID: 11400000, guid: 993fe76a66675a6489f679da5eef6a37, type: 2}
     Question: {fileID: 0}
   - Text: Do you know anything about the murder?
     CharacterUnlocksChoice: 
-    Dialogue: {fileID: 0}
+    Dialogue: {fileID: 11400000, guid: ddda03d74afb3e1419ef96d3fda5c44e, type: 2}
     Question: {fileID: 0}
   - Text: "Sorry, I\u2019ve got to go."
     CharacterUnlocksChoice: 
-    Dialogue: {fileID: 0}
+    Dialogue: {fileID: 11400000, guid: 65c1846b1dbff6d47b81b56fbf8ea363, type: 2}
     Question: {fileID: 0}

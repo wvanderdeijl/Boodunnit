@@ -44,9 +44,8 @@ public class SceneLogger : MonoBehaviour
         log.Name = "Levitations";
         foreach (LevitateableObject levitateable in FindObjectsOfType<LevitateableObject>())
         {
-            log.LogDetails.Add(new Log.Entry(
-                new Log.Entry(levitateable.name, levitateable.TimesLevitated), 
-                (DateTime.UtcNow - SceneLog.StartingTime).TotalSeconds)
+            log.LogDetails.Add(
+                new Log.Entry(levitateable.name, levitateable.TimesLevitated)
             );
         }
         SceneLog.Stats.Add(log);
@@ -58,9 +57,8 @@ public class SceneLogger : MonoBehaviour
         
         foreach (BaseEntity entity in FindObjectsOfType<BaseEntity>())
         {
-            log.LogDetails.Add(new Log.Entry(
-                new Log.Entry(entity.name, entity.TimesPosessed), 
-                (DateTime.UtcNow - SceneLog.StartingTime).TotalSeconds)
+            log.LogDetails.Add(
+                new Log.Entry(entity.name, entity.TimesPosessed)
             );
         }
         SceneLog.Stats.Add(log);
@@ -73,4 +71,5 @@ public class SceneLogger : MonoBehaviour
         PlaythroughLogger.Instance.WriteLog();
     }
 
+    
 }

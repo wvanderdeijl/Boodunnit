@@ -301,8 +301,8 @@ MonoBehaviour:
   CameraRotationTarget: {fileID: 443138623}
   MaxElevation: 8
   MinElevation: -0.5
-  CanScrollZoom: 0
-  CanAutoZoom: 0
+  CanScrollZoom: 1
+  CanAutoZoom: 1
 --- !u!81 &39362224
 AudioListener:
   m_ObjectHideFlags: 0

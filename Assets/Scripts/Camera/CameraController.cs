@@ -59,8 +59,8 @@ public class CameraController : MonoBehaviour
     private float _elevationRange = 2f;
 
     [Header("Disable-ables")] 
-    public bool CanScrollZoom;
-    public bool CanAutoZoom;
+    public bool CanScrollZoom = true;
+    public bool CanAutoZoom = true;
 
     private void Awake()
     {
@@ -68,12 +68,14 @@ public class CameraController : MonoBehaviour
         _angle = Vector3.Angle(CameraRotationTarget.position, _pointToSlerpTo);
         Distance = MaxDistance;
         _minElevationOrigin = MinElevation;
-        _maxElevationOrigin = MaxElevation;  
-
+        _maxElevationOrigin = MaxElevation;
     }
 
     private void Update()
     {
+        Debug.Log(CanAutoZoom);
+        Debug.Log(CanScrollZoom);
+        
         if (ConversationManager.HasConversationStarted) return;
         RotationTarget = CameraRotationTarget;
         

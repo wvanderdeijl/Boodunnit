@@ -21,24 +21,31 @@ namespace DefaultNamespace
 
         public static async void PostPlaythrough(Playthrough playthrough)
         {
-            HttpClient client = new HttpClient();
-            string content = JsonConvert.SerializeObject(new UserLoginCredentials(username, credentials));
-
-            HttpResponseMessage responseMessage = await client.PostAsync(
-                "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apiKey,
-                new StringContent(content));
-            
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                string result = await responseMessage.Content.ReadAsStringAsync();
-                JObject jObject = JObject.Parse(result);
-                idToken = jObject["idToken"].Value<string>();
+                HttpClient client = new HttpClient();
+                string content = JsonConvert.SerializeObject(new UserLoginCredentials(username, credentials));
+
+                HttpResponseMessage responseMessage = await client.PostAsync(
+                    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apiKey,
+                    new StringContent(content));
+            
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    string result = await responseMessage.Content.ReadAsStringAsync();
+                    JObject jObject = JObject.Parse(result);
+                    idToken = jObject["idToken"].Value<string>();
                 
-                HttpResponseMessage msg = await client.PostAsync(
-                    $"https://boodunnitcharts-default-rtdb.firebaseio.com/rest.json?auth={idToken}",
-                    new StringContent(JsonConvert.SerializeObject(playthrough))
-                );
-                Console.WriteLine(msg.StatusCode);
+                    HttpResponseMessage msg = await client.PostAsync(
+                        $"https://boodunnitcharts-default-rtdb.firebaseio.com/rest.json?auth={idToken}",
+                        new StringContent(JsonConvert.SerializeObject(playthrough))
+                    );
+                    Console.WriteLine(msg.StatusCode);
+                }
+            }
+            catch (Exception e)
+            {
+                //ignore
             }
         }
 

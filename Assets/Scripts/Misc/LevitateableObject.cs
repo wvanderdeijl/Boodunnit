@@ -12,6 +12,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private Rigidbody _rigidbody;
 
     public int TimesLevitated { get; set; }
+    public bool WillLogPossessCount;
 
     private void Awake()
     {

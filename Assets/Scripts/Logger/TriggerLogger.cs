@@ -11,7 +11,7 @@ public class TriggerLogger : MonoBehaviour
 {
     public string Name;
     public List<LogType> LoggingTypes;
-    [HideInInspector] public bool hasLogged;
+    public bool hasLogged;
     private SceneLogger _scenelogger;
     
 
@@ -24,7 +24,7 @@ public class TriggerLogger : MonoBehaviour
     {
         if (other.isTrigger) return;
         //TODO do something with layers here LayerMask does not seem to work for this
-        if (other.gameObject.name != "Player")
+        if (other.gameObject.name.Contains("Player"))
             if (!(PossessionBehaviour.PossessionTarget &&
                   PossessionBehaviour.PossessionTarget.name == other.gameObject.name))
                 return;

@@ -272,15 +272,15 @@ public class ConversationManager : MonoBehaviour
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();
             choiceButton.onClick.AddListener(() =>
             {
-                ManageConversation(choice.Dialogue, choice.Question);
                 if (_sceneLogger.SceneInfo.Contains(SceneInfoType.ConversationChoicesPerConversation) || 
                     _sceneLogger.SceneInfo.Contains(SceneInfoType.All))
                 {
                     _conversationLog.Name = ConversationTarget.name;
-                    _conversationLog.LogDetails.Add(
+                     _conversationLog.LogDetails.Add(
                         new Log.Entry(choice.Text, (DateTime.UtcNow - _sceneLogger.SceneLog.StartingTime).TotalSeconds)
                         );
                 }
+                ManageConversation(choice.Dialogue, choice.Question);
             });
 
             //If boolia is possesing the wrong NPC disable certain choiceButtons

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3037786091283524549}
   - component: {fileID: 3037786091283524551}
   - component: {fileID: 3037786091283524548}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Area 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7689588c37ad2784fa2773328828831f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
+  LoggingTypes: 00000000
+  hasLogged: 0
 --- !u!65 &3037786091283524548
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68,7 +71,7 @@ GameObject:
   - component: {fileID: 3037786091477979927}
   - component: {fileID: 3037786091477979921}
   - component: {fileID: 3037786091477979926}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Area 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7689588c37ad2784fa2773328828831f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
+  LoggingTypes: 00000000
+  hasLogged: 0
 --- !u!65 &3037786091477979926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3037786091596932227}
   - component: {fileID: 3037786091596932226}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SceneLogger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,3 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3a1223879a72e4ea8419ea063c7ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneInfo: 03000000

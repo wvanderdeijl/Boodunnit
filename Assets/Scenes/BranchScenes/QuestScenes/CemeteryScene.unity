@@ -35995,7 +35995,11 @@ PrefabInstance:
     - target: {fileID: 6858462420071956329, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
       propertyPath: Dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 36ccf9c923d8e0d4faba6e5a9517ac47, type: 2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858462420071956329, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
+      propertyPath: Question
+      value: 
+      objectReference: {fileID: 11400000, guid: 86ccc56dcb988f548adecbf49413c288, type: 2}
     - target: {fileID: 6858462420071956329, guid: 3a1c9346c33a3a644be9e7bf5706eb9b, type: 3}
       propertyPath: _pathFindingState
       value: 4

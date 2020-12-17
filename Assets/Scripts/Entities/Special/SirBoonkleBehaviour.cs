@@ -23,7 +23,10 @@ public class SirBoonkleBehaviour : BaseEntity
         if (transform.parent.position != newTransform.position)
         {
             _newSpawnTransform = newTransform;
-            Dialogue = _dialogues[index];
+            if (index == 0)
+                Dialogue = null;
+            else
+                Dialogue = _dialogues[index];
             StartCoroutine(FadeInAndOut());
         }
     }

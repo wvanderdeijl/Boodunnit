@@ -19,7 +19,7 @@ public class PlaythroughLogger
     private PlaythroughLogger() {
         PlaythroughLog.Scenes = new List<SceneLog>();
         PlaythroughLog.GameEndTime = DateTime.UtcNow;
-        PlaythroughLog.GUID = GUID.Generate().ToString();
+        PlaythroughLog.GUID = Guid.NewGuid().ToString();
     }
     
     public void WriteLog()

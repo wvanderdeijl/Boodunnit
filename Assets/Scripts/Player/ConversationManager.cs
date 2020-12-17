@@ -135,7 +135,7 @@ public class ConversationManager : MonoBehaviour
         ResetQuestions();
 
         BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
-        if (entity && entity.NavMeshAgent && entity._pathFindingState != PathFindingState.None)
+        if (entity && entity._pathFindingState != PathFindingState.None)
         {
             entity.PauseEntityNavAgent(true);
         }
@@ -164,7 +164,7 @@ public class ConversationManager : MonoBehaviour
     public void CloseConversation()
     {
         BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
-        if (entity)
+        if (entity && entity.NavMeshAgent)
         {
             entity.PauseEntityNavAgent(false);
         }

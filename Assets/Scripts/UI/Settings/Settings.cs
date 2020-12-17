@@ -37,10 +37,10 @@ public class Settings : MonoBehaviour
     }
     private void SetDefaultValues()
     {
-        _audioValue = 100;
-        _musicValue = 100;
+        _audioValue = 50;
+        _musicValue = 50;
         _cameraSensivityValue = 1;
-        _screenResolutionValue = 0;
+        _screenResolutionValue = 14;
         _currentScreenResolution = ScreenResolutions[0];
         _isFullscreen = true;
         _textSpeedValue = 1;

@@ -608,6 +608,7 @@ MonoBehaviour:
   MaximumFollowRange: 0
   SequencePatrolAreas: []
   CanPossess: 1
+  TimesPosessed: 0
   WalkAudioClips: []
   Dialogue: {fileID: 0}
   Question: {fileID: 0}
@@ -625,7 +626,6 @@ MonoBehaviour:
   _fearRadius: 0
   _fearAngle: 0
   _ragdollController: {fileID: 432952813084000326}
-  _animator: {fileID: 3601822893818075575}
 --- !u!114 &432952813084000326
 MonoBehaviour:
   m_ObjectHideFlags: 0

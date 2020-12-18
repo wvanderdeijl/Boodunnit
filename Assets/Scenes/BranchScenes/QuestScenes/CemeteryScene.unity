@@ -27204,6 +27204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SirBoonkle
       objectReference: {fileID: 0}
+    - target: {fileID: 4802291010820939075, guid: 8f8cd4d2a6ee9464196894779516d82a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5327470938000246777, guid: 8f8cd4d2a6ee9464196894779516d82a, type: 3}
       propertyPath: m_RootOrder
       value: 0

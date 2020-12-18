@@ -79,7 +79,6 @@ public abstract class BaseEntityMovement : BaseMovement
                 NavMeshAgent.SetDestination(TargetToFollow.transform.position);
                 return;
             }
-
             PauseEntityNavAgent(true);
         }
     }
@@ -179,6 +178,9 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void PauseEntityNavAgent(bool shouldPause)
     {
-        if (NavMeshAgent) NavMeshAgent.isStopped = shouldPause;
+        if (NavMeshAgent)
+        {
+            NavMeshAgent.isStopped = shouldPause;
+        }
     }
 }

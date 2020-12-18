@@ -743,6 +743,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 20
+  DefaultLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &74044862
 BoxCollider:
@@ -12444,7 +12447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: <b>LEVITATE</b> and <b>STACK</b> these boxes to jump over the wall
+      value: <b>LEVITATE</b> and <b>STACK</b> these boxes to jump over the wall.
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
@@ -18406,7 +18409,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
@@ -18415,12 +18418,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: <b>Move</b> the mouse around to position it, <b>drag</b> the <b>RIGHT
-        MOUSE BUTTON</b> to rotate.
+      value: <b>Move</b> the mouse around to position it, and objects briefly <b>freeze</b>
+        in position after you let them go.
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[2]
-      value: Object briefly <b>freezes</b> in position after letting go.
+      value: Objects briefly <b>freeze</b> in position after you let them go.
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[3]

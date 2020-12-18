@@ -7845,8 +7845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: Press <b>SHIFT</b> to <b>DASH</b> through thin surfaces, like walls
-        and fences.
+      value: Press <b>SHIFT</b> to <b>DASH</b> through thin surfaces, like fences.
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
@@ -11687,7 +11686,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
@@ -11695,7 +11694,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: Carry the cloud to the place where the last platform should be!s
+      value: 'When releasing an object that can be levitated, it will snap into place
+        automatically
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x

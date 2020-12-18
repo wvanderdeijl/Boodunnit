@@ -8450,15 +8450,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1367206118}
     m_Modifications:
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.data[0]
-      value: Press <b>SHIFT</b> to <b>DASH</b> through thin surfaces, like walls
-        and fences.
-      objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8546,14 +8537,6 @@ PrefabInstance:
     - target: {fileID: 4266350324638384041, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Name
       value: DashObstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266350324638384041, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266350326092434549, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
@@ -11918,18 +11901,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1367206118}
     m_Modifications:
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.data[0]
-      value: "<b>LEVITATE</b> and carry this cloud to the marked position. \n"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: PopupTexts.Array.data[1]
-      value: Carry the cloud to the place where the last platform should be!s
-      objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -12017,14 +11988,6 @@ PrefabInstance:
     - target: {fileID: 4266350324638384041, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Name
       value: CloudObstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266350324638384041, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266350326092434549, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}

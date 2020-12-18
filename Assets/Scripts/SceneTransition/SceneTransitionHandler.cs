@@ -26,10 +26,7 @@ public class SceneTransitionHandler
     private static SceneTransitionHandler _instance;
 
     public void GoToScene(string sceneNameToLoad)
-    {
-        
-        Debug.Log(sceneNameToLoad);
-        
+    {   
         LoadingScreen.GoToMainMenu = false;
         if (!sceneNameToLoad.Trim().Equals(""))
         {

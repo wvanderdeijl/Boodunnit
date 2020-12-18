@@ -41,7 +41,7 @@ public class Settings : MonoBehaviour
         _musicValue = 50;
         _cameraSensivityValue = 1;
         _screenResolutionValue = 14;
-        _currentScreenResolution = ScreenResolutions[0];
+        _currentScreenResolution = ScreenResolutions[_screenResolutionValue];
         _isFullscreen = true;
         _textSpeedValue = 1;
     }
@@ -144,21 +144,24 @@ public class Settings : MonoBehaviour
 
     private void ApplySoundChangesInGame()
     {
-        // Everything for soundManager
-        foreach(Sound sound in SoundManager.Instance.Sounds)
+        if (SoundManager.Instance != null)
         {
-            if (sound.IsMusicVolume)
-                sound.AudioSource.volume = ((float)_musicValue / 100);
-            else
-                sound.AudioSource.volume = ((float)_audioValue / 100);
-        }
+            // Everything for soundManager
+            foreach (Sound sound in SoundManager.Instance.Sounds)
+            {
+                if (sound.IsMusicVolume)
+                    sound.AudioSource.volume = ((float)_musicValue / 100);
+                else
+                    sound.AudioSource.volume = ((float)_audioValue / 100);
+            }
 
-        // Everything not managed by soundmanagers (Entities for example)
-        foreach(AudioSource source in FindObjectsOfType<AudioSource>())
-        {
-            if(!source.GetComponentInParent<SoundManager>())
-                source.volume = ((float)_audioValue / 100);
-            
+            // Everything not managed by soundmanagers (Entities for example)
+            foreach (AudioSource source in FindObjectsOfType<AudioSource>())
+            {
+                if (!source.GetComponentInParent<SoundManager>())
+                    source.volume = ((float)_audioValue / 100);
+
+            }
         }
     }
 

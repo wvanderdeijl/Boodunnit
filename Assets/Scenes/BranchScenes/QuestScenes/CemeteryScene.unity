@@ -3598,7 +3598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3491608994560916473, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.85
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 3491608994560916473, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3652,6 +3652,10 @@ PrefabInstance:
       propertyPath: m_BaseOffset
       value: 1.84
       objectReference: {fileID: 0}
+    - target: {fileID: 9046699222887342268, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
+      propertyPath: _characterAnimator
+      value: 
+      objectReference: {fileID: 1856505778}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: Dialogue
       value: 
@@ -3674,7 +3678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: _pathFindingState
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9046699222887342269, guid: 579c0302a1fd7d941bc4ada478bc454a, type: 3}
       propertyPath: Relationships.Array.size
@@ -10029,7 +10033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5586861110341491549, guid: 8e0e33a7146f8a440bb6a8209d79ed20, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5586861110341491549, guid: 8e0e33a7146f8a440bb6a8209d79ed20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13886,11 +13890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1097548279662457380, guid: 9647b1a8667185c418af4b8d9a2d54d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.10595455
+      value: -0.1059546
       objectReference: {fileID: 0}
     - target: {fileID: 1097548279662457380, guid: 9647b1a8667185c418af4b8d9a2d54d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.069078445
+      value: 0.06907845
       objectReference: {fileID: 0}
     - target: {fileID: 1097548279662457380, guid: 9647b1a8667185c418af4b8d9a2d54d4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16574,7 +16578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 53a92f80c898d6548a053e5ecbd69ed1, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 53a92f80c898d6548a053e5ecbd69ed1, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -21419,7 +21423,7 @@ MonoBehaviour:
     OdssEntityPicksThisAreaInWeight: 1
   EntitiesInArea: []
   MinimumEntitiesRequiredInArea: 0
-  MaximumEntitiesAllowedInArea: 0
+  MaximumEntitiesAllowedInArea: 2
 --- !u!4 &984509121
 Transform:
   m_ObjectHideFlags: 0
@@ -24814,7 +24818,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.36762762, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.3676281, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -35218,6 +35222,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432952813084000326, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
+      propertyPath: _characterAnimator
+      value: 
+      objectReference: {fileID: 86591151}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: Dialogue
       value: 
@@ -35240,7 +35248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: _pathFindingState
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 432952813084000327, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: Relationships.Array.size
@@ -35312,7 +35320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3491608994560916473, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8499981
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 3491608994560916473, guid: 526af931129d0a24db9a74d0f62fea3a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -35918,7 +35926,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3037786091596932227, guid: 33752f51945aafc43967479672cfbf76, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3037786091596932227, guid: 33752f51945aafc43967479672cfbf76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42863,6 +42871,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.7196484, y: 8.328221, z: 0.5808265}
   m_Center: {x: 0, y: 4.1946254, z: 0.019077316}
+--- !u!114 &1992297982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992297977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254df0818448dd14cb9d1d7401392e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1995515916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43490,7 +43510,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2037919791 stripped
 GameObject:
@@ -46572,7 +46592,7 @@ Transform:
   - {fileID: 1986977732}
   - {fileID: 734674090}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6614125294300820095
 GameObject:

@@ -160,24 +160,8 @@ public abstract class BaseEntityMovement : BaseMovement
 
     private void MoveToNextPosition()
     {
-        bool positionIsFound = false;
-        if (_patrolDestination == null)
-        {
-            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
-            NavMeshAgent.destination = _patrolDestination;
-            return;
-        }
-
-        Vector3 previousDestionation = _patrolDestination;
-        while (!positionIsFound)
-        {
-            _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
-            if(Vector3.Distance(previousDestionation, _patrolDestination) > 1f)
-            {
-                positionIsFound = true;
-                NavMeshAgent.destination = _patrolDestination;
-            }
-        }
+        _patrolDestination = EntityAreaHandler.Instance.GetRandomPositionInArea(_currentArea, gameObject);
+        NavMeshAgent.destination = _patrolDestination;
     }
     
     public void ChangePathFindingState(PathFindingState pathFindingState)

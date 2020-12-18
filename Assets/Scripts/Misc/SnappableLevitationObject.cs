@@ -27,6 +27,13 @@ public class SnappableLevitationObject : MonoBehaviour
     {
         SnapLocation closestSnapLocation = FindClosestValidSnaplocation();
         
+        // changing layers (default layer changes back within the levitateable object script.
+        int levitatingObjectLayerMask = LayerMask.NameToLayer("Default");
+        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>())
+        {
+            transform.gameObject.layer = levitatingObjectLayerMask;
+        }     
+        
         if (closestSnapLocation)
         {
             SnappableLevitationObject snappableLevitationObject = GetComponent<SnappableLevitationObject>();

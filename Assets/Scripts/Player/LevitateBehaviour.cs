@@ -2,6 +2,9 @@
 using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
+using System.Numerics;
+using UnityEngine.SocialPlatforms;
+using Vector3 = UnityEngine.Vector3;
 
 public class LevitateBehaviour : MonoBehaviour
 {
@@ -22,6 +25,7 @@ public class LevitateBehaviour : MonoBehaviour
     
     [Header("Distances")]
     [SerializeField] private float _minimumSelectionDistanceInUnits = 2f;
+    [SerializeField][Range(0, 2)] private float _minimumDinstanceBetweenPlayerAndObject = 1.5f;
     
     public bool IsLevitating { get; set; }
     public Collider[] CurrentLevitateableObjects { get; set; }
@@ -50,6 +54,19 @@ public class LevitateBehaviour : MonoBehaviour
     public void MoveLevitateableObject()
     {
         if (!_selectedRigidbody) return;
+        
+        //check if the object isn't inside of Boolia
+        Collider selectedRigidbodyCollider = _selectedRigidbody.gameObject.GetComponent<Collider>();
+        Collider booliaCollider = gameObject.GetComponent<Collider>();
+
+        Vector3 closestPointObject = selectedRigidbodyCollider.ClosestPointOnBounds(gameObject.transform.position);
+        Vector3 closestPointBoolia = booliaCollider.ClosestPointOnBounds(_selectedRigidbody.transform.position);
+
+        float distanceBetweenTwoClosestPoints = Vector3.Distance(closestPointBoolia, closestPointObject);
+            
+        Debug.Log(distanceBetweenTwoClosestPoints);
+        Debug.DrawLine(closestPointBoolia, closestPointObject, Color.red);
+
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
         Collider collider = _selectedRigidbody.GetComponent<Collider>();
 
@@ -97,6 +114,18 @@ public class LevitateBehaviour : MonoBehaviour
         
         if (levitateable != null)
         {
+            //check if the object isn't inside of Boolia
+            Collider selectedRigidbodyCollider = _selectedRigidbody.gameObject.GetComponent<Collider>();
+            Collider booliaCollider = gameObject.GetComponent<Collider>();
+
+            if (!selectedRigidbodyCollider || !booliaCollider) return;
+            
+            Vector3 closestPointObject = selectedRigidbodyCollider.ClosestPointOnBounds(gameObject.transform.position);
+            Vector3 closestPointBoolia = booliaCollider.ClosestPointOnBounds(_selectedRigidbody.transform.position);
+
+            float distanceBetweenTwoClosestPoints = Vector3.Distance(closestPointBoolia, closestPointObject);
+
+            if (distanceBetweenTwoClosestPoints <= _minimumDinstanceBetweenPlayerAndObject) return;
 
             IsLevitating = false;
             levitateable.State = LevitationState.Frozen;
@@ -115,10 +144,10 @@ public class LevitateBehaviour : MonoBehaviour
                     return;
                 }
             }
+            
+            ActivateLevitateCoRoutine();
+            RemoveSelectedRigidbody();
         }
-
-        ActivateLevitateCoRoutine();
-        RemoveSelectedRigidbody();
     }
 
     private Rigidbody GetRigidbodyFromMouseClick()
@@ -156,6 +185,13 @@ public class LevitateBehaviour : MonoBehaviour
             );
 
             _originalRigidbodyPosition = hitInfo.collider.transform.position;
+            
+            // changing layers (default layer changes back within the levitateable object script.
+            int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
+            foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
+            {
+                transform.gameObject.layer = levitatingObjectLayerMask;
+            }     
 
             return rigidbody;
         }

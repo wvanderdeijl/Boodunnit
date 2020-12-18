@@ -16,14 +16,6 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     public int TimesLevitated { get; set; }
     public bool WillLogPossessCount;
 
-    private void Update()
-    {
-        if (gameObject.name.Equals("Box2"))
-        {
-            Debug.Log(gameObject.name + "'s state: " + State);
-        }
-    }
-
     private void Awake()
     {
         CanBeLevitated = true;

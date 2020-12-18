@@ -804,10 +804,10 @@ MonoBehaviour:
   DashBehaviour: {fileID: 8658040402228577263}
   HighlightBehaviour: {fileID: 8658040402228577262}
   LevitateBehaviour: {fileID: 8658040402228577261}
-  ConversationRadius: 6
-  LeviatateRadius: 6
-  PossesionRadius: 6
-  ClueRadius: 6
+  ConversationRadius: 5
+  LeviatateRadius: 5
+  PossesionRadius: 5
+  ClueRadius: 5
   ConversationManager: {fileID: 8658040402228577260}
   PauseMenu: {fileID: 0}
   AudioSources: []
@@ -846,7 +846,7 @@ MonoBehaviour:
   DashOnCooldown: 0
   DashCooldown: 2
   DashDuration: 0.2
-  DashDistance: 7
+  DashDistance: 5
 --- !u!114 &8658040402228577262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,5 +902,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.77857494, y: 0.35573387, z: 0.74780655}
-  m_Center: {x: -0.018658161, y: -0.6318593, z: 0.012144089}
+  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: -0.6318593, z: 0}

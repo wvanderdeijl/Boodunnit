@@ -54,18 +54,6 @@ public class LevitateBehaviour : MonoBehaviour
     public void MoveLevitateableObject()
     {
         if (!_selectedRigidbody) return;
-        
-        //check if the object isn't inside of Boolia
-        Collider selectedRigidbodyCollider = _selectedRigidbody.gameObject.GetComponent<Collider>();
-        Collider booliaCollider = gameObject.GetComponent<Collider>();
-
-        Vector3 closestPointObject = selectedRigidbodyCollider.ClosestPointOnBounds(gameObject.transform.position);
-        Vector3 closestPointBoolia = booliaCollider.ClosestPointOnBounds(_selectedRigidbody.transform.position);
-
-        float distanceBetweenTwoClosestPoints = Vector3.Distance(closestPointBoolia, closestPointObject);
-            
-        Debug.Log(distanceBetweenTwoClosestPoints);
-        Debug.DrawLine(closestPointBoolia, closestPointObject, Color.red);
 
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
         Collider collider = _selectedRigidbody.GetComponent<Collider>();

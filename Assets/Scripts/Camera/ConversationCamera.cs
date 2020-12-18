@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entities.Humans;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ConversationCamera : MonoBehaviour
 {
@@ -43,7 +45,9 @@ public class ConversationCamera : MonoBehaviour
         //This makes both the conversation target and the player look at one another
         RotateWithIgnoreXZRotations(_cameraController.CameraRotationTarget, conversationTarget);
 
-        if (GameManager.CurrentHighlightedCollider != null && GameManager.CurrentHighlightedCollider.gameObject.GetComponent<VincentBehaviour>() == null)
+        if (GameManager.CurrentHighlightedCollider != null && 
+            GameManager.CurrentHighlightedCollider.gameObject.GetComponent<VincentBehaviour>() == null &&
+            (GameManager.CurrentHighlightedCollider.gameObject.GetComponent<EmmieBehaviour>() == null && SceneManager.GetActiveScene().name.Equals("CemeteryScene")))
         {
             RotateWithIgnoreXZRotations(ConversationManager.ConversationTarget, _cameraController.CameraRotationTarget.position);
         }

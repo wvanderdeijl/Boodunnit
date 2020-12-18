@@ -71,7 +71,7 @@ namespace Entities
             if (!IsPossessed)
             {
                 CheckSurroundings();
-                if (EmotionalState != EmotionalState.Fainted && FearDamage <= 0 && NavMeshAgent)
+                if (EmotionalState != EmotionalState.Fainted && FearDamage <= 0 && NavMeshAgent.enabled && !NavMeshAgent.isStopped)
                 {
                     if (_pathFindingState.Equals(PathFindingState.Following) || _pathFindingState.Equals(PathFindingState.PatrolAreas) || _pathFindingState.Equals(PathFindingState.Patrolling))
                         CheckWhichAudioClipToPlayForEntity();

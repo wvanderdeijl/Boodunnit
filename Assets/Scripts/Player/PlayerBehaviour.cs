@@ -134,9 +134,10 @@ public class PlayerBehaviour : BaseMovement
 
         if (!DashBehaviour.IsDashing && !PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {
+
             MoveEntityInDirection(moveDirection);   
         } 
-        else if (PossessionBehaviour.IsPossessing)
+        else if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {
             PossessionBehaviour.TargetBehaviour.MoveEntityInDirection(moveDirection);
         }

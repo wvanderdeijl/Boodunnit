@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DefaultNamespace.Enums;
 using UnityEngine;
 
@@ -14,6 +15,14 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     public int TimesLevitated { get; set; }
     public bool WillLogPossessCount;
+
+    private void Update()
+    {
+        if (gameObject.name.Equals("Box2"))
+        {
+            Debug.Log(gameObject.name + "'s state: " + State);
+        }
+    }
 
     private void Awake()
     {
@@ -60,11 +69,11 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         switch (levitationState)
         {
-            case LevitationState.NotLevitating:
+            case LevitationState.Frozen:
                 SetRigidbodyAndLevitationBooleans(false, true, false);
                 break;
             
-            case LevitationState.Frozen:
+            case LevitationState.NotLevitating:
                 SetRigidbodyAndLevitationBooleans(true, false, true);
                 break;
         }
@@ -87,9 +96,9 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
             transform.gameObject.layer = DefaultLayerMask;
         }     
 
-        FreezeOrReleaseLevitateableObject(LevitationState.NotLevitating);
-        yield return new WaitForSeconds(seconds);
         FreezeOrReleaseLevitateableObject(LevitationState.Frozen);
+        yield return new WaitForSeconds(seconds);
+        FreezeOrReleaseLevitateableObject(LevitationState.NotLevitating);
     }
 
     private IEnumerator CheckForDistance()

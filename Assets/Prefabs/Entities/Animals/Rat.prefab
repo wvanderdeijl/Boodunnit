@@ -46,7 +46,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097548279662457391}
-  m_Mesh: {fileID: 8540514148174914653, guid: bf47d9769add51a408aba70f4dafe337, type: 3}
+  m_Mesh: {fileID: -2296947762352105228, guid: b937776ea9a2b4a4683488de54f284ba, type: 3}
 --- !u!23 &1097548279662457386
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,6 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 3e52dd58053ae394c989af063558a382, type: 2}
   - {fileID: 2100000, guid: 3e52dd58053ae394c989af063558a382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -119,7 +120,6 @@ MonoBehaviour:
   StaminaConsumptionPerSecond: 5
   StaminaReplenishRatePerSecond: 20
   IsClimbing: 0
-  StaminaBarCanvas: {fileID: 0}
   _rotationSpeed: 100
   _staminaRadialCircle: {fileID: 0}
 --- !u!114 &1097548279662457385
@@ -152,6 +152,7 @@ MonoBehaviour:
   MaximumFollowRange: 20
   SequencePatrolAreas: []
   CanPossess: 1
+  TimesPosessed: 0
   WalkAudioClips:
   - {fileID: 8300000, guid: 92c71e9046d969d44a0be7915856ddfa, type: 3}
   - {fileID: 8300000, guid: 99ae7d9cf49d5514e8f629b18848a8cf, type: 3}
@@ -184,7 +185,7 @@ CapsuleCollider:
   m_Radius: 0.14
   m_Height: 0.9
   m_Direction: 2
-  m_Center: {x: 0, y: 0.12, z: -0.06}
+  m_Center: {x: 0, y: 0.03, z: -0.06}
 --- !u!195 &1371556504
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -198,13 +199,13 @@ NavMeshAgent:
   m_Speed: 4
   m_Acceleration: 12
   avoidancePriority: 50
-  m_AngularSpeed: 100000
+  m_AngularSpeed: 1e+10
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!136 &427857425
@@ -217,10 +218,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.1
+  m_Radius: 0.1228205
   m_Height: 0.9
   m_Direction: 2
-  m_Center: {x: 0, y: 0.05, z: -0.06}
+  m_Center: {x: 0, y: -0.022820503, z: -0.060000002}
 --- !u!82 &1918140656
 AudioSource:
   m_ObjectHideFlags: 0
@@ -233,7 +234,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 0
   Mute: 0

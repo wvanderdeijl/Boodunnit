@@ -134,6 +134,8 @@ public class ConversationManager : MonoBehaviour
     {
         ResetQuestions();
 
+        if (!ConversationTarget) return;
+
         BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
 
         if (entity && entity._pathFindingState != PathFindingState.None && entity != entity.GetComponent<SirBoonkleBehaviour>())

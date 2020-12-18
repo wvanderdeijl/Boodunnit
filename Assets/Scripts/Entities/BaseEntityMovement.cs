@@ -179,7 +179,7 @@ public abstract class BaseEntityMovement : BaseMovement
 
     public void PauseEntityNavAgent(bool shouldPause)
     {
-        if (NavMeshAgent)
+        if (NavMeshAgent && NavMeshAgent.enabled)
         {
             NavMeshAgent.isStopped = shouldPause;
         }

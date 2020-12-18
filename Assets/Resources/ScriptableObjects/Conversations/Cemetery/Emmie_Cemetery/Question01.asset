@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f5ce73c4fbedd4ebf32b7dc1f44bb2, type: 3}
   m_Name: Question01
   m_EditorClassIdentifier: 
-  Text: "It\u2019s my fault\u2026 It\u2019s all my fault\u2026 My sweet sister\u2026"
+  Text: Where did I go wrong? Julia... My sweet sister. Why...
   Choices:
   - Text: Emmie?
     CharacterUnlocksChoice: 

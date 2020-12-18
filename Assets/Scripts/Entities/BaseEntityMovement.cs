@@ -91,11 +91,12 @@ public abstract class BaseEntityMovement : BaseMovement
             Quaternion lerpToRotation = Quaternion.Lerp(transform.rotation, _spawnRotation,
                 Time.deltaTime * 5f);
             transform.rotation = lerpToRotation;
+            NavMeshAgent.ResetPath();
             return;
         }
 
         if (NavMeshAgent.hasPath) return;
-        NavMeshAgent.destination = _spawnLocation; //- Vector3.up;
+        NavMeshAgent.destination = _spawnLocation;
         PauseEntityNavAgent(false);
     }
 

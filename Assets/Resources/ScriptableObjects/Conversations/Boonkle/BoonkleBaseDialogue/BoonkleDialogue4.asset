@@ -22,4 +22,5 @@ MonoBehaviour:
   - Text: Animals have a unique ability you can use when you possess them.
   - Text: Rats, for example, can climb walls with vines on them.
   - Text: "Maybe there\u2019s one walking around here?"
+  - Text: Press 'E' to possess, press 'Q' to climb the vines
   question: {fileID: 0}

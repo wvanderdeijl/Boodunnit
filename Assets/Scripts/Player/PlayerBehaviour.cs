@@ -198,8 +198,6 @@ public class PlayerBehaviour : BaseMovement
         {
             LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
         }
-
-        LevitateBehaviour.PushOrPullLevitateableObject();
     }
 
 

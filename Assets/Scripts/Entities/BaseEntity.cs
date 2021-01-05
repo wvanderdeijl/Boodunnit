@@ -79,6 +79,12 @@ namespace Entities
                     MoveWithPathFinding();
                 }
             }
+            
+            NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
+            if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
+            {
+                StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
+            }
         }
 
         public abstract void UseFirstAbility();

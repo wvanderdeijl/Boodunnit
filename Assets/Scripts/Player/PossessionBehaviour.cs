@@ -23,10 +23,13 @@ public class PossessionBehaviour : MonoBehaviour
 
     private float _playerEndPositionRadius;
 
+    private IconCanvas _iconCanvas;
+
     private void Awake()
     {
         _playerEndPositionRadius = GetComponent<Collider>().bounds.extents.z;
         _cameraController = Camera.main.GetComponent<CameraController>();
+        _iconCanvas = FindObjectOfType<IconCanvas>();
     }
 
     private void Update()
@@ -70,6 +73,8 @@ public class PossessionBehaviour : MonoBehaviour
 
             //ToDo: This code is left by the lead dev, change this to how it should be!, but right now i dont care
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+            _iconCanvas.DisableAlwaysActiveIcons();
 
             StartCoroutine(PossessionTimer());
         }
@@ -162,6 +167,8 @@ public class PossessionBehaviour : MonoBehaviour
         EnableOrDisablePlayerSkinnedMeshRenderers(false);
 
         EnableOrDisablePlayerColliders(false);
+
+        _iconCanvas.EnableAlwaysActiveIcons();
     }
 
     private void TeleportPlayerToRandomPosition()

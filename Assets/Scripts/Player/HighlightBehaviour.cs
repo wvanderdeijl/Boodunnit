@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Enums;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 public class HighlightBehaviour : MonoBehaviour
@@ -8,6 +9,7 @@ public class HighlightBehaviour : MonoBehaviour
     private Vector3 _position;
     private Collider _currentCollider;
     private Collider _previousCollider;
+    private IconCanvas _iconCanvas;
 
     public Collider HighlightGameobject(Dictionary<string, float> highlightRadius)
     {
@@ -15,6 +17,7 @@ public class HighlightBehaviour : MonoBehaviour
         _maxRadius = _highlighRadius.Values.Max();
 
         FindCollidersInFrontOfPlayer();
+        ShowIconsAboveHighlightedObject();
 
         return _currentCollider;
     }
@@ -55,6 +58,7 @@ public class HighlightBehaviour : MonoBehaviour
                 if (outline)
                 {
                     ToggleOutlineScriptOnGameobject(outline, false);
+                    DisableIconCanvasImages();
                 }
             }
 
@@ -143,5 +147,20 @@ public class HighlightBehaviour : MonoBehaviour
     private void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
     {
         outline.enabled = active;
+    }
+
+    private void ShowIconsAboveHighlightedObject()
+    {
+        _iconCanvas = FindObjectOfType<IconCanvas>();
+        if (_currentCollider)
+        {
+            _iconCanvas.GameObject = _currentCollider.gameObject;
+            _iconCanvas.EnableIcons();
+        }
+    }
+
+    private void DisableIconCanvasImages()
+    {
+        _iconCanvas.DisableIcons();
     }
 }

@@ -81,10 +81,9 @@ namespace Entities
             }
             
             NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
-            if (OffMeshLinkTraverseType != OffMeshLinkMethod.None && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
+            if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
             {
-                IsTraversingOfMeshLink = true;
-                if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola) StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
+                StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
             }
         }
 

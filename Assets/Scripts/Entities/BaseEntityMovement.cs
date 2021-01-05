@@ -208,6 +208,7 @@ public abstract class BaseEntityMovement : BaseMovement
     //Allows entities to traverse the offmeshlink in a parabola.
     public IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
     {
+        IsTraversingOfMeshLink = true;
         OffMeshLinkData data = agent.currentOffMeshLinkData;
         Vector3 startPos = agent.transform.position;
         Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;

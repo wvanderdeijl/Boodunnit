@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Entities.Humans;
+using Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,21 +9,20 @@ using UnityEngine.UI;
 public class IconCanvas : MonoBehaviour
 {
     [HideInInspector]
-    public GameObject GameObject;
-    public bool IconCanvasDisabled;
-    public List<Image> _enabledIconImages;
-    public List<Image> _enabledAlwaysActiveIconImages;
-    public Image[] IconImages;
-    public Sprite[] sprites;
-    public GameObject[] AlwaysEnabledIconLocations;
-    public Image ImagePrefab;
+    public GameObject IconTarget;
 
+    public GridLayoutGroup GridLayoutGroup;
+    public RectTransform GridLayoutTransform;
+
+    public bool IconCanvasDisabled;
+    public Image[] IconImages;
+
+    private List<Image> _enabledIconImages = new List<Image>();
 
     // Update is called once per frame
     void Update()
     {
         UpdateImagePosition();
-        UpdateAlwaysActiveImagePosition();
     }
 
     public void DisableIcons()
@@ -30,92 +30,85 @@ public class IconCanvas : MonoBehaviour
         foreach (Image iconImage in _enabledIconImages)
         {
             iconImage.gameObject.SetActive(false);
+            iconImage.transform.SetParent(transform, false);
         }
         _enabledIconImages.Clear();
     }
 
-    public void DisableAlwaysActiveIcons()
-    {
-        foreach (Image iconImage in _enabledAlwaysActiveIconImages)
-        {
-            iconImage.gameObject.SetActive(false);
-        }
-        foreach (Image iconImage in _enabledAlwaysActiveIconImages)
-        {
-            Destroy(iconImage.gameObject);
-        }
-        _enabledAlwaysActiveIconImages.Clear();
-    }
-
     public void EnableIcons()
     {
-        if (GameObject.GetComponent<IPossessable>() != null)
+        DisableIcons();
+        IPossessable possessable = IconTarget.GetComponent<IPossessable>();
+        if (possessable != null)
         {
-            if (PossessionBehaviour.PossessionTarget)
+            if (possessable.getEmotionalState() == EmotionalState.Fainted)
+            {
+                EnableIcon(WorldIconType.Ragdoll);
+            }
+            else if (PossessionBehaviour.PossessionTarget)
             {
                 EnableIcon(WorldIconType.TalkTo);
+                EnableIconEmotionalStates(possessable);
             }
-            else
+            else if (!PossessionBehaviour.PossessionTarget)
             {
                 EnableIcon(WorldIconType.Possess);
+                EnableIconEmotionalStates(possessable);
+                if (IconTarget.gameObject.GetComponent<EmmieBehaviour>() != null)
+                {
+                    EnableIcon(WorldIconType.TalkTo);
+                }
             }
         }
-        else if (GameObject.GetComponent<ILevitateable>() != null)
+        else if (IconTarget.GetComponent<ILevitateable>() != null)
         {
             EnableIcon(WorldIconType.Levitate);
         }
-        else if (GameObject.GetComponent<WorldSpaceClue>() != null)
+        else if (IconTarget.GetComponent<WorldSpaceClue>() != null)
         {
             EnableIcon(WorldIconType.PickupClue);
         }
+        else if (IconTarget.layer == 10)
+        {
+            EnableIcon(WorldIconType.Dash);
+        }
+        else if (PossessionBehaviour.PossessionTarget)
+        {
+            if (IconTarget.GetComponent<AirVent>() != null && PossessionBehaviour.PossessionTarget.GetComponent<BirdBehaviour>() != null)
+            {
+                EnableIcon(WorldIconType.BirdGlide);
+            }
+            else if (IconTarget.layer == 12 && PossessionBehaviour.PossessionTarget.GetComponent<RatBehaviour>() != null)
+            {
+                EnableIcon(WorldIconType.RatClimb);
+            }
+        }
     }
 
-    public void EnableAlwaysActiveIcons()
+    private void EnableIconEmotionalStates(IPossessable possessable)
     {
-        if (PossessionBehaviour.PossessionTarget)
+        if (possessable.getEmotionalState() == EmotionalState.Calm)
         {
-            if (PossessionBehaviour.PossessionTarget.GetComponent<BirdBehaviour>() != null)
-            {
-                EnableAlwaysEnabledIcon(WorldIconType.BirdGlide);
-            }
-            else if (PossessionBehaviour.PossessionTarget.GetComponent<RatBehaviour>() != null)
-            {
-                EnableAlwaysEnabledIcon(WorldIconType.RatClimb);
-            }
+            EnableIcon(WorldIconType.Normal);
+        }
+        else if (possessable.getEmotionalState() == EmotionalState.Scared)
+        {
+            EnableIcon(WorldIconType.Scared);
+        }
+        else if (possessable.getEmotionalState() == EmotionalState.Terrified)
+        {
+            EnableIcon(WorldIconType.Terrified);
         }
     }
 
     private void EnableIcon(WorldIconType iconType)
     {
-        foreach (Image image in IconImages)
+        foreach (Image iconImage in IconImages)
         {
-            if (image.name.Contains(iconType.ToString()))
+            if (iconImage.name.Contains(iconType.ToString()))
             {
-                _enabledIconImages.Add(image);
-                UpdateImagePosition();
-                image.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    private void EnableAlwaysEnabledIcon(WorldIconType iconType)
-    {
-        foreach (GameObject location in AlwaysEnabledIconLocations)
-        {
-            if (location.name.Contains(iconType.ToString()))
-            {
-                Image iconImage = Instantiate(ImagePrefab, Vector3.zero, Quaternion.identity);
-                iconImage.name = "Image" + location.name;
-                foreach (Sprite sprite in sprites)
-                {
-                    if (sprite.name.Contains(iconType.ToString()))
-                    {
-                        iconImage.sprite = sprite;
-                        iconImage.transform.SetParent(transform, false);
-                        break;
-                    }
-                }
-                _enabledAlwaysActiveIconImages.Add(iconImage);
+                _enabledIconImages.Add(iconImage);
+                iconImage.transform.SetParent(GridLayoutGroup.transform, false);
                 UpdateImagePosition();
                 iconImage.gameObject.SetActive(true);
             }
@@ -124,27 +117,28 @@ public class IconCanvas : MonoBehaviour
 
     private void UpdateImagePosition()
     {
-        if (_enabledIconImages != null)
+        if (_enabledIconImages != null && IconTarget != null)
         {
-            foreach (Image image in _enabledIconImages)
+            GridLayoutTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, CalculateGridWidth());
+
+            Vector3 pos = IconTarget.transform.position;
+
+            if (IconTarget.GetComponent<AirVent>() == null && IconTarget.GetComponent<ClimableBehaviour>() == null)
             {
-                image.rectTransform.position = Camera.main.WorldToScreenPoint(GameObject.transform.position);
+                pos.y += IconTarget.GetComponent<Collider>().bounds.max.y;
             }
+
+            GridLayoutTransform.position = Camera.main.WorldToScreenPoint(pos);
         }
     }
 
-    private void UpdateAlwaysActiveImagePosition()
+    private int CalculateGridWidth()
     {
-        foreach (Image image in _enabledAlwaysActiveIconImages)
+        int listSize = _enabledIconImages.Count;
+        if (listSize > 0)
         {
-            foreach (GameObject location in AlwaysEnabledIconLocations)
-            {
-                if (image.name.Contains(location.name))
-                {
-                    image.rectTransform.position = Camera.main.WorldToScreenPoint(location.transform.position);
-                    break;
-                }
-            }
+            return (listSize * 40) + ((listSize - 1) * 5);
         }
+        return 0;
     }
 }

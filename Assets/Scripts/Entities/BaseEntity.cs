@@ -188,6 +188,14 @@ namespace Entities
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
 
+            if (FearDamage >= FearThreshold / 2)
+            {
+                EmotionalState = EmotionalState.Terrified;
+            } else
+            {
+                EmotionalState = EmotionalState.Scared;
+            }
+
             SetScaredStage(FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted ? 2 : 1);
             PauseEntityNavAgent(true);
 
@@ -197,8 +205,10 @@ namespace Entities
         protected virtual void Faint()
         {
             EmotionalState = EmotionalState.Fainted;
+
             if (_ragdollController) _ragdollController.ToggleRagdoll(true);
             CanPossess = false;
+
             StartCoroutine(WakeUp());
         }
 
@@ -297,7 +307,7 @@ namespace Entities
             FearDamage = 0;
             EmotionalState = EmotionalState.Calm;
 
-            if(_ragdollController)  _ragdollController.ToggleRagdoll(false);
+            if (_ragdollController)  _ragdollController.ToggleRagdoll(false);
 
             if (Animator && Animator.runtimeAnimatorController != null)
             {
@@ -330,6 +340,11 @@ namespace Entities
                     return true;
             }
             return false;
+        }
+
+        public EmotionalState getEmotionalState()
+        {
+            return EmotionalState;
         }
     }
 }

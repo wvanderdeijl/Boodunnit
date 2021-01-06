@@ -8,6 +8,7 @@ public class EndCredits : MonoBehaviour
     {
         if (other.gameObject.name.Equals("End"))
         {
+            // TODO: Actual transition to ???
             print("Done");
         }
     }

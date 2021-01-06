@@ -185,23 +185,13 @@ public class PlayerBehaviour : BaseMovement
 
         SaveHandler.Instance.SaveDataContainer(playerDataContainer);
     }
+    
     private void HandleLevitationInput()
     {
         LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            LevitateBehaviour.LevitationStateHandler();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            LevitateBehaviour.FreezeLevitateableObject();
-        }
+        if (Input.GetMouseButtonDown(0)) LevitateBehaviour.LevitationStateHandler();
     }
-
-
-
+    
     private void PlayerAnimation()
     {
         if (Animator)

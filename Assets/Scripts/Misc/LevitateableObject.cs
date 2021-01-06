@@ -16,34 +16,43 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void Awake()
     {
-        CanBeLevitated = true;
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
-        SetSpawnLocationAndRotation();
-        StartCoroutine(CheckForDistance());
+        
         AddOutline();
+        SetSpawnLocationAndRotation();
         SetMaxDistanceToPlayerWhileFrozenValue();
+        StartCoroutine(CheckForDistance());
+    }
+
+    private void Update()
+    {
+        if (State != LevitationState.Frozen) return;
+
+        float distance =
+            Vector3.Distance(gameObject.transform.position, GameObject.Find("PlayerV2").transform.position);
+        
+        if (distance > MaxDistanceToPlayerWhileFrozen) Release();
     }
 
     public void Freeze()
     {
         ChangeLayerMask(0);
-        SetRigidbodyAndLevitationBooleans(false, true, false);
+        SetRigidbodyAndLevitationBooleans(false, true);
         State = LevitationState.Frozen;
     }
 
     public void Release()
     {
         ChangeLayerMask(16);
-        SetRigidbodyAndLevitationBooleans(true, false, true);
+        SetRigidbodyAndLevitationBooleans(true, false);
         State = LevitationState.NotLevitating;
     }
 
-    private void SetRigidbodyAndLevitationBooleans(bool useGravity, bool isKinematic, bool canBeLevited)
+    private void SetRigidbodyAndLevitationBooleans(bool useGravity, bool isKinematic)
     {
         _rigidbody.useGravity = useGravity;
         _rigidbody.isKinematic = isKinematic;
-        CanBeLevitated = canBeLevited;
     }
 
     private void ChangeLayerMask(int layerMaskParam)
@@ -116,6 +125,4 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     }
     
     public LevitationState State { get; set; }
-    
-    public bool CanBeLevitated { get; set; }
 }

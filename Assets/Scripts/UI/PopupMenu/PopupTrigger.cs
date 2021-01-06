@@ -24,7 +24,7 @@ public class PopupTrigger : MonoBehaviour
             GameManager.CursorIsLocked = false;
             Time.timeScale = 0;
 
-            other.GetComponent<LevitateBehaviour>().RemoveRigidbodyAndStartFreeze();
+            other.GetComponent<LevitateBehaviour>().FreezeLevitateableObject();
             Popup.gameObject.SetActive(true);
             _hasBeenTriggered = true;
         }

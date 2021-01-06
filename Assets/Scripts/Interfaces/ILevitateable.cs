@@ -2,7 +2,6 @@
 
 public interface ILevitateable
 {
-    bool CanBeLevitated { get; set; }
     bool CanRespawnWhenOutOfRange { get; set; }
     LevitationState State { get; set; }
     void Freeze();

@@ -1,27 +1,22 @@
-﻿using System;
-using DefaultNamespace.Enums;
+﻿using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
 
 public class LevitateBehaviour : MonoBehaviour
 {
     [Header("OverlapSphere")]
-    [SerializeField] private float _overlapSphereRadiusInUnits = 15f;
     [SerializeField][Range(0, 360)] private float _overlapSphereAngleInDegrees = 360f;
-
-    [Header("Durations")]
-    [SerializeField] private float _frozenDurationInSeconds = 5f;
-
+    
     [Header("Layermasks")]
     [SerializeField] private LayerMask _layerMask;
 
     private GameObject _player;
     private Camera _mainCamera; 
-    private Rigidbody _selectedRigidbody;
-    private float _heightOfLevitateableObject = 4f;
-    private float _distanceOfLevitateableObject = 10f;
-    private Vector3 _originalScreenTargetPosition;
     
+    private Rigidbody _selectedRigidbody;
+    private Vector3 _originalScreenTargetPosition;
+
+    public float OverLapSphereRadiusInUnits = 15f;
     public bool IsLevitating { get; set; }
     public Collider[] CurrentLevitateableObjects { get; set; }
     public bool PushingObjectIsToggled { get; set; }
@@ -59,9 +54,7 @@ public class LevitateBehaviour : MonoBehaviour
         // FindObjectOfType<CameraController>().CanAutoZoom = true;
         ToggleGravity(true);
         PushingObjectIsToggled = false;
-        _heightOfLevitateableObject = 4f;
-        _distanceOfLevitateableObject = 10f;
-        RemoveRigidbodyAndStartFreeze();
+        FreezeLevitateableObject();
     }
     #endregion
     
@@ -74,15 +67,15 @@ public class LevitateBehaviour : MonoBehaviour
 
         if (!levitateable.CanBeLevitated || !IsObjectInLevitateablesArray(collider))
         {
-            RemoveGameObjectFromCursor();
+            RemoveGameObjectFromCamera();
             return;
         }
         
         ToggleGravity(false);
         Transform cameraTransform = Camera.main.transform;
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-        Vector3 endOfRayCast = ray.GetPoint(_distanceOfLevitateableObject);
-        Vector3 heightOffset = new Vector3(0, _heightOfLevitateableObject * Time.deltaTime * 10f, 0);
+        Vector3 endOfRayCast = ray.GetPoint(10f);
+        Vector3 heightOffset = new Vector3(0, 4f * Time.deltaTime * 10f, 0);
         Vector3 targetPosition = endOfRayCast + heightOffset;
         _selectedRigidbody.MovePosition(targetPosition);
     }
@@ -91,7 +84,7 @@ public class LevitateBehaviour : MonoBehaviour
     #region Handle rigidbody
     private void GetRigidbodyAndStartLevitation()
     {
-        _selectedRigidbody = GetRigidbodyFromMouseClick();
+        _selectedRigidbody = GetRigidbodyFromCameraRay();
         if (!_selectedRigidbody) return;
         IsLevitating = true;
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
@@ -99,23 +92,7 @@ public class LevitateBehaviour : MonoBehaviour
         if (levitateable != null) levitateable.State = LevitationState.Levitating;
     }
 
-    public void RemoveRigidbodyAndStartFreeze()
-    {
-        ILevitateable levitateable =
-            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
-        
-        if (levitateable != null)
-        {
-
-            IsLevitating = false;
-            levitateable.State = LevitationState.Frozen;
-        }
-
-        ActivateLevitateCoRoutine();
-        RemoveSelectedRigidbody();
-    }
-
-    private Rigidbody GetRigidbodyFromMouseClick()
+    private Rigidbody GetRigidbodyFromCameraRay()
     {
         if (_selectedRigidbody)
         {
@@ -150,35 +127,40 @@ public class LevitateBehaviour : MonoBehaviour
         return null;
     }
     #endregion
-
-    #region Handle object freeze
-    private void ActivateLevitateCoRoutine()
+    
+    #region Handle Freeze Mechanic
+    public void FreezeLevitateableObject()
     {
         ILevitateable levitateable =
-            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;   
+            _selectedRigidbody ? _selectedRigidbody.gameObject.GetComponent<ILevitateable>() : null;
         
+        if (levitateable != null)
+        {
+            IsLevitating = false;
+            levitateable.State = LevitationState.Frozen;
+        }
+
         if (_selectedRigidbody && levitateable != null)
         {
-            StartCoroutine(levitateable.LevitateForSeconds(_frozenDurationInSeconds));
+            levitateable.Freeze();
         }
+        
+        RemoveSelectedRigidbody();
     }
     #endregion
-
-    
-    
     
     #region Finding Levitateable Objects In Front Of Player.
     public void FindLevitateableObjectsInFrontOfPlayer()
     {
         CurrentLevitateableObjects = Physics
-            .OverlapSphere(transform.position, _overlapSphereRadiusInUnits)
+            .OverlapSphere(transform.position, OverLapSphereRadiusInUnits)
             .Where(c => { return IsObjectInRange(c) && IsObjectLevitateble(c) && IsObjectInAngle(c); })
             .ToArray();
     }
     
     private bool IsObjectInRange(Collider colliderParam)
     {
-        return Vector3.Distance(transform.position, colliderParam.transform.position) <= _overlapSphereRadiusInUnits;
+        return Vector3.Distance(transform.position, colliderParam.transform.position) <= OverLapSphereRadiusInUnits;
     }
     
     private bool IsObjectLevitateble(Collider colliderParam)
@@ -201,7 +183,7 @@ public class LevitateBehaviour : MonoBehaviour
     #endregion
     
     #region Misc
-    private void RemoveGameObjectFromCursor()
+    private void RemoveGameObjectFromCamera()
     {
         IsLevitating = false;
         
@@ -219,7 +201,6 @@ public class LevitateBehaviour : MonoBehaviour
     {
         IsLevitating = false;
         _selectedRigidbody = null;
-        _heightOfLevitateableObject = 4f;
     }
 
     private void ToggleGravity(bool useGravity)

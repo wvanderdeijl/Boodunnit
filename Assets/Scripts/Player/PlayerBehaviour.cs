@@ -196,7 +196,7 @@ public class PlayerBehaviour : BaseMovement
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
+            LevitateBehaviour.FreezeLevitateableObject();
         }
     }
 

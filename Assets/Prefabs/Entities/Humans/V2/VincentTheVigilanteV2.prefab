@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7072416858783943055}
   - component: {fileID: 1236876983511295181}
   - component: {fileID: 77445720640220675}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VincentTheVigilanteV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,9 @@ MonoBehaviour:
   IsJumping: 0
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
+  OffMeshLinkTraverseType: 0
+  CyclePositions: []
+  IsTraversingOfMeshLink: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   Animator: {fileID: 0}

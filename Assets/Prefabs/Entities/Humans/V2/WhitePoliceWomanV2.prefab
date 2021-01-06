@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3038809511079070516}
   - component: {fileID: 4618477931172100613}
   - component: {fileID: 1504212246827971339}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WhitePoliceWomanV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +89,9 @@ MonoBehaviour:
   IsJumping: 0
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
+  OffMeshLinkTraverseType: 0
+  CyclePositions: []
+  IsTraversingOfMeshLink: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   Animator: {fileID: 0}
@@ -305,15 +308,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8358265756887934159, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000014901161
+      value: -0.000000007450581
       objectReference: {fileID: 0}
     - target: {fileID: 8358265756887934159, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.6467217
+      value: -0.6467218
       objectReference: {fileID: 0}
     - target: {fileID: 8358265756887934159, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.000000007450581
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757347649700, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -413,15 +416,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757798114536, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.021980103
+      value: 0.021980107
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757798114536, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.8387679
+      value: 0.83876765
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757798114536, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.015393584
+      value: -0.015393579
       objectReference: {fileID: 0}
     - target: {fileID: 8358265757842680844, guid: 8d107b6cc9dfb65418dec7ebb10ea28f, type: 3}
       propertyPath: m_ConnectedAnchor.x

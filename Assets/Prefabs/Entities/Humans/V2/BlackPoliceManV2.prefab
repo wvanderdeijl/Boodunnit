@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 179210455673402044}
   - component: {fileID: 3574527067513671780}
   - component: {fileID: 8418560961691113537}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BlackPoliceManV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,6 +212,9 @@ MonoBehaviour:
   IsJumping: 0
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
+  OffMeshLinkTraverseType: 0
+  CyclePositions: []
+  IsTraversingOfMeshLink: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
   Animator: {fileID: 0}
@@ -305,7 +308,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1379945964048329788, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.00000010430813
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1379945964048329788, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -317,19 +320,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379945964307512905, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.30434638
+      value: -0.3043464
       objectReference: {fileID: 0}
     - target: {fileID: 1379945964307512905, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.0437194
+      value: -0.043719403
       objectReference: {fileID: 0}
     - target: {fileID: 1379945964379351023, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.30434638
+      value: 0.3043464
       objectReference: {fileID: 0}
     - target: {fileID: 1379945964379351023, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.0437194
+      value: 0.043719403
       objectReference: {fileID: 0}
     - target: {fileID: 1379945964553877313, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_Name
@@ -397,7 +400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379945965141933215, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.22099204
+      value: 0.22099194
       objectReference: {fileID: 0}
     - target: {fileID: 1379945965141933215, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -405,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379945965637545459, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.22099204
+      value: -0.22099194
       objectReference: {fileID: 0}
     - target: {fileID: 1379945965637545459, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -425,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379945965815964624, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.00000010430813
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1379945965815964624, guid: 6bf3a6bb504da8940bc05e3f6fa2b4cd, type: 3}
       propertyPath: m_ConnectedAnchor.y

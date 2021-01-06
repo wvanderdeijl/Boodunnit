@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IPossessable
 {
-    EmotionalState getEmotionalState();
+
 }

@@ -3,7 +3,7 @@ using Entities;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SirBoonkleBehaviour : BaseEntity
+public class SirBoonkleBehaviour : BaseEntity, IIconable
 {
     [Header("SirBoonkle")]
     public float FadeDuration = 1f;

@@ -11,13 +11,17 @@ public class HighlightBehaviour : MonoBehaviour
     private Collider _previousCollider;
     private IconCanvas _iconCanvas;
 
+    private void Awake()
+    {
+        _iconCanvas = FindObjectOfType<IconCanvas>();
+    }
+
     public Collider HighlightGameobject(Dictionary<string, float> highlightRadius)
     {
         _highlighRadius = highlightRadius;
         _maxRadius = _highlighRadius.Values.Max();
 
         FindCollidersInFrontOfPlayer();
-        ShowIconsAboveHighlightedObject();
 
         return _currentCollider;
     }
@@ -47,6 +51,8 @@ public class HighlightBehaviour : MonoBehaviour
             {
                 ToggleOutlineScriptOnGameobject(outline, true);
             }
+
+            ShowIconsAboveHighlightedObject();
         }
 
         if (_previousCollider != _currentCollider)
@@ -155,8 +161,7 @@ public class HighlightBehaviour : MonoBehaviour
 
     private void ShowIconsAboveHighlightedObject()
     {
-        _iconCanvas = FindObjectOfType<IconCanvas>();
-        if (_currentCollider)
+        if (_iconCanvas && _currentCollider)
         {
             _iconCanvas.IconTarget = _currentCollider.gameObject;
             _iconCanvas.EnableIcons();

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Entities
 {
-    public abstract class BaseEntity : BaseEntityMovement, IPossessable
+    public abstract class BaseEntity : BaseEntityMovement, IPossessable, IIconable
     {
         //Public properties
         public bool IsPossessed { get; set; }
@@ -215,6 +215,16 @@ namespace Entities
         protected virtual void CalmDown()
         {
             if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
+
+            if (FearDamage == 0)
+            {
+                EmotionalState = EmotionalState.Calm;
+            }
+            else if (FearDamage < FearThreshold / 2)
+            {
+                EmotionalState = EmotionalState.Scared;
+            }
+
             if (FearDamage <= 0)
             {
                 if (Animator && Animator.runtimeAnimatorController != null)
@@ -342,9 +352,19 @@ namespace Entities
             return false;
         }
 
-        public EmotionalState getEmotionalState()
+        public EmotionalState GetEmotionalState()
         {
             return EmotionalState;
+        }
+
+        public bool GetCanBePossessed()
+        {
+            return CanPossess;
+        }
+
+        public bool GetCanTalkToBoolia()
+        {
+            return CanTalkToBoolia;
         }
     }
 }

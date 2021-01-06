@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class Testpossesible : MonoBehaviour, IPossessable
 {
-    public EmotionalState getEmotionalState()
+    public bool GetCanBePossessed()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public EmotionalState GetEmotionalState()
     {
         throw new System.NotImplementedException();
     }

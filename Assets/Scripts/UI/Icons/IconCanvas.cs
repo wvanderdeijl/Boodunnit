@@ -11,13 +11,34 @@ public class IconCanvas : MonoBehaviour
     [HideInInspector]
     public GameObject IconTarget;
 
+    public int ImageWidth;
+    public int ImageHeight;
+
     public GridLayoutGroup GridLayoutGroup;
     public RectTransform GridLayoutTransform;
 
-    public bool IconCanvasDisabled;
     public Image[] IconImages;
 
     private List<Image> _enabledIconImages = new List<Image>();
+
+    private void Awake()
+    {
+        if (IconImages != null && GridLayoutTransform && GridLayoutGroup)
+        {
+            GridLayoutTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ImageHeight);
+            GridLayoutGroup.cellSize = new Vector2(ImageWidth, ImageHeight);
+
+            foreach (Image iconImage in IconImages)
+            {
+                RectTransform imageTransform = iconImage.gameObject.GetComponent<RectTransform>();
+                if (imageTransform)
+                {
+                    imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ImageWidth);
+                    imageTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ImageHeight);
+                }
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -38,26 +59,29 @@ public class IconCanvas : MonoBehaviour
     public void EnableIcons()
     {
         DisableIcons();
-        IPossessable possessable = IconTarget.GetComponent<IPossessable>();
-        if (possessable != null)
+        IIconable iconable = IconTarget.GetComponent<IIconable>();
+        if (iconable != null)
         {
-            if (possessable.getEmotionalState() == EmotionalState.Fainted)
+            if (iconable.GetEmotionalState() == EmotionalState.Fainted)
             {
                 EnableIcon(WorldIconType.Ragdoll);
             }
             else if (PossessionBehaviour.PossessionTarget)
             {
                 EnableIcon(WorldIconType.TalkTo);
-                EnableIconEmotionalStates(possessable);
+                EnableIconEmotionalStates(iconable);
             }
             else if (!PossessionBehaviour.PossessionTarget)
             {
-                EnableIcon(WorldIconType.Possess);
-                EnableIconEmotionalStates(possessable);
-                if (IconTarget.gameObject.GetComponent<EmmieBehaviour>() != null)
+                if (iconable.GetCanBePossessed())
+                {
+                    EnableIcon(WorldIconType.Possess);
+                }
+                if (iconable.GetCanTalkToBoolia())
                 {
                     EnableIcon(WorldIconType.TalkTo);
                 }
+                EnableIconEmotionalStates(iconable);
             }
         }
         else if (IconTarget.GetComponent<ILevitateable>() != null)
@@ -85,17 +109,17 @@ public class IconCanvas : MonoBehaviour
         }
     }
 
-    private void EnableIconEmotionalStates(IPossessable possessable)
+    private void EnableIconEmotionalStates(IIconable iconable)
     {
-        if (possessable.getEmotionalState() == EmotionalState.Calm)
+        if (iconable.GetEmotionalState() == EmotionalState.Calm)
         {
             EnableIcon(WorldIconType.Normal);
         }
-        else if (possessable.getEmotionalState() == EmotionalState.Scared)
+        else if (iconable.GetEmotionalState() == EmotionalState.Scared)
         {
             EnableIcon(WorldIconType.Scared);
         }
-        else if (possessable.getEmotionalState() == EmotionalState.Terrified)
+        else if (iconable.GetEmotionalState() == EmotionalState.Terrified)
         {
             EnableIcon(WorldIconType.Terrified);
         }
@@ -121,14 +145,14 @@ public class IconCanvas : MonoBehaviour
         {
             GridLayoutTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, CalculateGridWidth());
 
-            Vector3 pos = IconTarget.transform.position;
+            Vector3 iconTargetPos = IconTarget.transform.position;
 
             if (IconTarget.GetComponent<AirVent>() == null && IconTarget.GetComponent<ClimableBehaviour>() == null)
             {
-                pos.y += IconTarget.GetComponent<Collider>().bounds.max.y;
+                iconTargetPos.y += IconTarget.GetComponent<Collider>().bounds.extents.y * 2;
             }
 
-            GridLayoutTransform.position = Camera.main.WorldToScreenPoint(pos);
+            GridLayoutTransform.position = Camera.main.WorldToScreenPoint(iconTargetPos);
         }
     }
 
@@ -137,7 +161,7 @@ public class IconCanvas : MonoBehaviour
         int listSize = _enabledIconImages.Count;
         if (listSize > 0)
         {
-            return (listSize * 40) + ((listSize - 1) * 5);
+            return (listSize * ImageWidth) + ((listSize - 1) * 5);
         }
         return 0;
     }

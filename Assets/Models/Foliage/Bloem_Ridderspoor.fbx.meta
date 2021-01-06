@@ -3,7 +3,22 @@ guid: 8c8430753cb7b1f469c9b2d9842c1436
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flower_Textures.002
+    second: {fileID: 2100000, guid: e128923ba8c02644682f181cf25419e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flower_TexturesV2
+    second: {fileID: 2100000, guid: e128923ba8c02644682f181cf25419e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tree_Leave_Loose
+    second: {fileID: 2100000, guid: e128923ba8c02644682f181cf25419e3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

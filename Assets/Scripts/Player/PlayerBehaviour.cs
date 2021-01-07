@@ -51,6 +51,8 @@ public class PlayerBehaviour : BaseMovement
         GameManager.CurrentHighlightedCollider = HighlightedObject;
 
         PlayerAnimation();
+        
+        PickUpClue(HighlightedObject);
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -165,6 +167,7 @@ public class PlayerBehaviour : BaseMovement
             _dashCounter = 0;
         }
     }
+
     private void FixedUpdate()
     {
         LevitateBehaviour.MoveLevitateableObject();
@@ -185,6 +188,7 @@ public class PlayerBehaviour : BaseMovement
 
         SaveHandler.Instance.SaveDataContainer(playerDataContainer);
     }
+
     private void HandleLevitationInput()
     {
         LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
@@ -202,7 +206,18 @@ public class PlayerBehaviour : BaseMovement
         LevitateBehaviour.PushOrPullLevitateableObject();
     }
 
+    public void PickUpClue(Collider HighlightedObject) {
+        if (!HighlightedObject)
+            return;
 
+        WorldSpaceClue clue = HighlightedObject.GetComponent<WorldSpaceClue>();
+        if (clue)
+        {
+            if (!SaveHandler.Instance.DoesPlayerHaveClue(clue.ClueScriptableObject.Name)) {
+                clue.AddToInventory();
+            }
+        }
+    }
 
     private void PlayerAnimation()
     {

@@ -45,6 +45,8 @@ namespace Entities
 
         [SerializeField] private RagdollController _ragdollController;
 
+        public float ParabolaHeight;
+
         protected void InitBaseEntity()
         {
             InitEntityMovement();
@@ -83,7 +85,7 @@ namespace Entities
             NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
             if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
             {
-                StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
+                StartCoroutine(Parabola(NavMeshAgent, ParabolaHeight, 2.5f));
             }
         }
 

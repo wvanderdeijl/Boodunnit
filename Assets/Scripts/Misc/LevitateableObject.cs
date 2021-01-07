@@ -8,6 +8,8 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private Vector3 _spawnLocation;
     private Quaternion _spawnRotation;
     private Rigidbody _rigidbody;
+    private Outline _outline;
+    private GameObject _player;
 
     public float DespawnDistance = 10f;
     public int TimesLevitated { get; set; }
@@ -18,6 +20,8 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
+        _outline = gameObject.AddComponent<Outline>();
+        _player = GameObject.Find("PlayerV2");
         
         AddOutline();
         SetSpawnLocationAndRotation();
@@ -27,11 +31,11 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void Update()
     {
-        if (State != LevitationState.Frozen) return;
-
         float distance =
-            Vector3.Distance(gameObject.transform.position, GameObject.Find("PlayerV2").transform.position);
-        
+            Vector3.Distance(gameObject.transform.position, _player.transform.position);
+
+        ChangeOutlineWidthWithDistance(distance);
+        if (State != LevitationState.Frozen) return;
         if (distance > MaxDistanceToPlayerWhileFrozen) Release();
     }
 
@@ -44,12 +48,11 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     public void Release()
     {
-        ChangeLayerMask(16);
         SetRigidbodyAndLevitationBooleans(true, false);
         State = LevitationState.NotLevitating;
     }
 
-    private void SetRigidbodyAndLevitationBooleans(bool useGravity, bool isKinematic)
+    public void SetRigidbodyAndLevitationBooleans(bool useGravity, bool isKinematic)
     {
         _rigidbody.useGravity = useGravity;
         _rigidbody.isKinematic = isKinematic;
@@ -66,7 +69,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private void SetMaxDistanceToPlayerWhileFrozenValue()
     {
         LevitateBehaviour levitateBehaviour = FindObjectOfType<LevitateBehaviour>();
-        MaxDistanceToPlayerWhileFrozen = levitateBehaviour.OverLapSphereRadiusInUnits + 0.1f;
+        MaxDistanceToPlayerWhileFrozen = levitateBehaviour.CurrentLevitateRadius + 0.1f;
     }
 
     private void SetSpawnLocationAndRotation()
@@ -77,17 +80,24 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void AddOutline()
     {
-        Outline outline = gameObject.AddComponent<Outline>();
-        if (outline)
+        if (_outline)
         {
             Color purple;
-            ColorUtility.TryParseHtmlString("#d2b8db", out purple);
+            ColorUtility.TryParseHtmlString("#6F4F61", out purple);
 
-            outline.OutlineColor = purple;
-            outline.OutlineMode = Outline.Mode.OutlineVisible;
-            outline.OutlineWidth = 5.0f;
-            outline.enabled = false;
+            _outline.OutlineColor = purple;
+            _outline.OutlineMode = Outline.Mode.OutlineVisible;
+            _outline.OutlineWidth = 0.0f;
+            _outline.enabled = false;
         }
+    }
+
+    private void ChangeOutlineWidthWithDistance(float distance)
+    {
+        float highlightOutlineFactor = distance / (MaxDistanceToPlayerWhileFrozen - 0.1f);
+        float multiplyOutlineWidth = 1 - highlightOutlineFactor;
+        float newHighlightOutlineWidth = 10f * multiplyOutlineWidth;
+        _outline.OutlineWidth = newHighlightOutlineWidth;
     }
     
     private IEnumerator CheckForDistance()

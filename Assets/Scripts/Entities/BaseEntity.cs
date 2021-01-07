@@ -337,5 +337,10 @@ namespace Entities
             }
             return false;
         }
+
+        public void DealFearDamageAfterDash(int damage)
+        {
+            DealFearDamage(damage);
+        }
     }
 }

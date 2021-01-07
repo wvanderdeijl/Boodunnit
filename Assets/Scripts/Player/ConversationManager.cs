@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.AI;
+using System.Linq;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -268,8 +269,57 @@ public class ConversationManager : MonoBehaviour
         StartCoroutine(TypeSentence(question.Text.ToString()));
         _continueButton.gameObject.SetActive(false);
 
+        for (int i = 0; i < question.Choices.Length; i++)
+        {
+            Choice choice = question.Choices[i];
+
+            //This choice has a clue
+            if (choice.ClueToUnlock)
+            {
+                //The player has this clue, && SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueToUnlock.Name)
+                if (SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueToUnlock.Name))//SaveHandler check should be here, this is for test purposes
+                {
+                    //A variable of question.Choices[index] can not be made because a Choice is a value type thus it remains unchanged outside this loop.
+                    //So i change it directly from inside the collection
+                    if (question.Choices[choice.ChoiceIndexToHide].PropertiesToChangeDuringRuntime == null)
+                    {
+                        question.Choices[choice.ChoiceIndexToHide].PropertiesToChangeDuringRuntime = new Choice.ChoicePropertiesToChangeDuringRuntime()
+                        {
+                            Hide = true
+                        };
+                    }
+                    else
+                    {
+                        question.Choices[choice.ChoiceIndexToHide].PropertiesToChangeDuringRuntime.Hide = true;
+                    }
+                }
+                else
+                {
+                    //A variable of question.Choices[index] can not be made because a Choice is a value type thus it remains unchanged outside this loop.
+                    //So i change it directly from inside the collection
+                    if (question.Choices[i].PropertiesToChangeDuringRuntime == null)
+                    {
+                        question.Choices[i].PropertiesToChangeDuringRuntime = new Choice.ChoicePropertiesToChangeDuringRuntime()
+                        {
+                            Hide = true
+                        };
+                    }
+                    else
+                    {
+                        question.Choices[i].PropertiesToChangeDuringRuntime.Hide = true;
+                    }
+                }
+            }
+        }
+
         foreach (Choice choice in question.Choices)
         {
+            //This choice is hiding, do not add it to the queue and continue from the next iteration
+            if (choice.PropertiesToChangeDuringRuntime != null && choice.PropertiesToChangeDuringRuntime.Hide)
+            {
+                continue;
+            }
+
             Button choiceButton = Instantiate(_buttonPrefab, Vector3.zero, Quaternion.identity);
             choiceButton.transform.SetParent(_questionPool.transform, false);
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();

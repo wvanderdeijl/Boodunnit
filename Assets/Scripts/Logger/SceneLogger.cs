@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Entities;
 using Logger;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,9 +20,11 @@ public class SceneLogger : MonoBehaviour
     private List<Log> unusedLogs = new List<Log>();
     private TriggerLogger[] _triggerLoggers;
 
+    private int playthroughSceneIndex = -1;
+    private Playthrough _lastPlaythrough;
+
     private void Awake()
     {
-        PlaythroughLogger.Instance.PlaythroughLog.GameStartTime = DateTime.UtcNow;
         _triggerLoggers = gameObject.GetComponentsInChildren<TriggerLogger>();
         Possessables = FindObjectsOfType<BaseEntity>().ToList();
         foreach (LevitateableObject obj in FindObjectsOfType<LevitateableObject>())
@@ -39,29 +43,19 @@ public class SceneLogger : MonoBehaviour
     {
         posessables = SavePossessionInfo();
         levitatables = SaveLevitationInfo();
+    }
+
+    private void OnDestroy()
+    {
         unusedLogs = new List<Log>();
         foreach (TriggerLogger logger in _triggerLoggers)
         {
             if (!logger.hasLogged) unusedLogs.Add(new Log(logger.name));
         }
-    }
-
-    private void OnDestroy()
-    {
-        // if (SceneInfo.Contains(SceneInfoType.All) || SceneInfo.Contains(SceneInfoType.LevitationsPerObject))
-        //     SaveLevitationInfo();
-        // if (SceneInfo.Contains(SceneInfoType.All) || SceneInfo.Contains(SceneInfoType.PossessionsPerObject))
-        //     SavePossessionInfo();
-        // TriggerLogger[] logs = gameObject.GetComponentsInChildren<TriggerLogger>();
-        // foreach (TriggerLogger logger in logs)
-        // {
-        //     if (!logger.hasLogged) SceneLog.UnusedLogs.Add(new Log(logger.name));
-        // }
-        //
-        // PlaythroughLogger.Instance.PlaythroughLog.Scenes.Add(SceneLog);
         SceneLog.Stats.Add(posessables);
         SceneLog.Stats.Add(levitatables);
         SceneLog.UnusedLogs = unusedLogs;
+
         PlaythroughLogger.Instance.PlaythroughLog.Scenes.Add(SceneLog);
     }
 
@@ -92,12 +86,7 @@ public class SceneLogger : MonoBehaviour
         return log;
     }
 
-    private void OnApplicationQuit()
-    {
-        PlaythroughLogger.Instance.PlaythroughLog.GameEndTime = DateTime.UtcNow;
-        PlaythroughLogger.Instance.PlaythroughLog.Platform = Application.platform.ToString();
-        PlaythroughLogger.Instance.WriteLog();
-    }
+ 
 
     
 }

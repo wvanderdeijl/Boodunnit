@@ -54,7 +54,7 @@ MonoBehaviour:
   JumpForce: 10
   PossessionSpeed: 5
   PathfindingSpeed: 5
-  Collider: {fileID: 0}
+  Collider: {fileID: 5047784528543426604}
   IsGrounded: 0
   IsJumping: 0
   CanJump: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da627399e7f96f44487113339014a820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
+  _rigidbody: {fileID: 7633436290999518960}
   _glideGravity: 1
   _animator: {fileID: 9029067343748056977}
 --- !u!54 &7633436290999518960

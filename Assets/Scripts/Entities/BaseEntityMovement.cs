@@ -43,7 +43,9 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         InitBaseMovement();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        
         Animator = GetComponent<Animator>();
+        if (!Animator) Animator = GetComponentInChildren<Animator>();
 
         if (NavMeshAgent)
         {

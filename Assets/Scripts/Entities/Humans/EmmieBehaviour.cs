@@ -15,7 +15,7 @@ namespace Entities.Humans
         private void Awake()
         {
             InitBaseEntity();
-            _animator = GetComponent<Animator>();
+            _animator = GetComponentInChildren<Animator>();
             CanJump = false;
         }
 

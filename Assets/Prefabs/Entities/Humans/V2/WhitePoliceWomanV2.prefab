@@ -84,7 +84,7 @@ MonoBehaviour:
   JumpForce: 10
   PossessionSpeed: 4
   PathfindingSpeed: 4
-  Collider: {fileID: 0}
+  Collider: {fileID: 6196170824466145342}
   IsGrounded: 0
   IsJumping: 0
   CanJump: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   HasFearCooldown: 0
   _fearRadius: 5
   _fearAngle: 90
-  _ragdollController: {fileID: 0}
+  _ragdollController: {fileID: 3001241893109621394}
   ConsumableEndPosition: {fileID: 465925174668980178}
   PoliceHead: {fileID: 465925174767567274}
   _donutDetectionRadius: 10

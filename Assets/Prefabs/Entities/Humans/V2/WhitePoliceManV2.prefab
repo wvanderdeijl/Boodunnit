@@ -84,7 +84,7 @@ MonoBehaviour:
   JumpForce: 10
   PossessionSpeed: 4
   PathfindingSpeed: 4
-  Collider: {fileID: 0}
+  Collider: {fileID: 6246365478507199918}
   IsGrounded: 0
   IsJumping: 0
   CanJump: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   NavMeshAgent: {fileID: 0}
   Animator: {fileID: 0}
   IsOnCountdown: 0
-  _pathFindingState: 0
+  _pathFindingState: 1
   MinimumFollowRange: 2
   MaximumFollowRange: 10
   SequencePatrolAreas: []
@@ -122,7 +122,7 @@ MonoBehaviour:
   HasFearCooldown: 0
   _fearRadius: 5
   _fearAngle: 90
-  _ragdollController: {fileID: 0}
+  _ragdollController: {fileID: 6994797227362185354}
   ConsumableEndPosition: {fileID: 1622397637321865056}
   PoliceHead: {fileID: 1622397636796117472}
   _donutDetectionRadius: 10

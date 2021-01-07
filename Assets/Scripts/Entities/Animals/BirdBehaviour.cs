@@ -13,7 +13,7 @@ public class BirdBehaviour : BaseEntity
     {
         InitBaseEntity();
         _glideBehaviour = GetComponent<GlideBehaviour>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         CanJump = true;
         
         FearThreshold = 20;

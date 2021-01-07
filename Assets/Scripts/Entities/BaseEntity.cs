@@ -56,7 +56,7 @@ namespace Entities
             if (outline)
             {
                 Color possesionColor;
-                ColorUtility.TryParseHtmlString("#ffed85", out possesionColor);
+                ColorUtility.TryParseHtmlString("#79957c", out possesionColor);
                 outline.OutlineColor = possesionColor;
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 outline.OutlineWidth = 5.0f;

@@ -116,6 +116,10 @@ public class PlayerBehaviour : BaseMovement
                 }
             }
         }
+        if (DashBehaviour.IsDashing)
+        {
+            DashBehaviour.CheckDashThroughPossessables();
+        }
 
         if(!PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted)
         {

@@ -58,14 +58,4 @@ public class WorldSpaceClue : MonoBehaviour
     {
         ToBeContinuedPopup.OpenToBeContinuedPopUp();
     }
-
-    void OnMouseDown()
-    {
-        AddToInventory();
-
-        if (DoesPlayerHaveAllCLues())
-        {
-            StartToBeContinuedPopup();
-        }
-    }
 }

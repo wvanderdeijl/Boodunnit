@@ -45,6 +45,8 @@ namespace Entities
 
         [SerializeField] private RagdollController _ragdollController;
 
+        public float ParabolaHeight;
+
         protected void InitBaseEntity()
         {
             InitEntityMovement();
@@ -56,7 +58,7 @@ namespace Entities
             if (outline)
             {
                 Color possesionColor;
-                ColorUtility.TryParseHtmlString("#ffed85", out possesionColor);
+                ColorUtility.TryParseHtmlString("#79957c", out possesionColor);
                 outline.OutlineColor = possesionColor;
                 outline.OutlineMode = Outline.Mode.OutlineVisible;
                 outline.OutlineWidth = 5.0f;
@@ -83,7 +85,7 @@ namespace Entities
             NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
             if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
             {
-                StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
+                StartCoroutine(Parabola(NavMeshAgent, ParabolaHeight, 2.5f));
             }
         }
 
@@ -336,6 +338,11 @@ namespace Entities
                     return true;
             }
             return false;
+        }
+
+        public void DealFearDamageAfterDash(int damage)
+        {
+            DealFearDamage(damage);
         }
     }
 }

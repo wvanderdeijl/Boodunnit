@@ -269,25 +269,58 @@ public class ConversationManager : MonoBehaviour
         StartCoroutine(TypeSentence(question.Text.ToString()));
         _continueButton.gameObject.SetActive(false);
 
-        List<Choice> filteredChoiceList = new List<Choice>();
-        int choiceIndexToIgnore = -1;
-        foreach (Choice choice in question.Choices)
+        for (int i = 0; i < question.Choices.Length; i++)
         {
-            if (SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueUnlocksChoice))
+            Choice choice = question.Choices[i];
+
+            //This choice has a clue
+            if (choice.ClueToUnlock)
             {
-                choiceIndexToIgnore = 1;
+                //The player has this clue, && SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueToUnlock.Name)
+                if (SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueToUnlock.Name))//SaveHandler check should be here, this is for test purposes
+                {
+                    //A variable of question.Choices[index] can not be made because a Choice is a value type thus it remains unchanged outside this loop.
+                    //So i change it directly from inside the collection
+                    if (question.Choices[choice.ChoiceIndexToHide].PropertiesToChangeDuringRuntime == null)
+                    {
+                        question.Choices[choice.ChoiceIndexToHide].PropertiesToChangeDuringRuntime = new Choice.ChoicePropertiesToChangeDuringRuntime()
+                        {
+                            Hide = true
+                        };
+                    }
+                    else
+                    {
+                        question.Choices[choice.ChoiceIndexToHide].PropertiesToChangeDuringRuntime.Hide = true;
+                    }
+                }
+                else
+                {
+                    //A variable of question.Choices[index] can not be made because a Choice is a value type thus it remains unchanged outside this loop.
+                    //So i change it directly from inside the collection
+                    if (question.Choices[i].PropertiesToChangeDuringRuntime == null)
+                    {
+                        question.Choices[i].PropertiesToChangeDuringRuntime = new Choice.ChoicePropertiesToChangeDuringRuntime()
+                        {
+                            Hide = true
+                        };
+                    }
+                    else
+                    {
+                        question.Choices[i].PropertiesToChangeDuringRuntime.Hide = true;
+                    }
+                }
             }
         }
 
-        filteredChoiceList = question.Choices.Where((v, i) => i == 1).ToList();
-
-        //foreach (Choice choice in filteredChoiceList)
-        //{
-        //    choice.Show = false;
-        //}
 
         foreach (Choice choice in question.Choices)
         {
+            //This choice is hiding, do not add it to the queue and continue from the next iteration
+            if (choice.PropertiesToChangeDuringRuntime != null && choice.PropertiesToChangeDuringRuntime.Hide)
+            {
+                continue;
+            }
+
             Button choiceButton = Instantiate(_buttonPrefab, Vector3.zero, Quaternion.identity);
             choiceButton.transform.SetParent(_questionPool.transform, false);
             choiceButton.GetComponentInChildren<Text>().text = choice.Text.ToString();
@@ -307,7 +340,7 @@ public class ConversationManager : MonoBehaviour
             //If boolia is possesing the wrong NPC disable certain choiceButtons
             //If CharacterUnlocksChoice is 0 enable all choiceButtons
             if ((_currentPossedEntity && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0) || 
-                !SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueUnlocksChoice) && choice.ClueUnlocksChoice != string.Empty)
+                (choice.ClueToUnlock && !SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueToUnlock.Name)))
             {
                 choiceButton.interactable = false;
             }

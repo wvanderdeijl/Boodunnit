@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using UnityEngine.AI;
+using System.Linq;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -268,6 +269,23 @@ public class ConversationManager : MonoBehaviour
         StartCoroutine(TypeSentence(question.Text.ToString()));
         _continueButton.gameObject.SetActive(false);
 
+        List<Choice> filteredChoiceList = new List<Choice>();
+        int choiceIndexToIgnore = -1;
+        foreach (Choice choice in question.Choices)
+        {
+            if (SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueUnlocksChoice))
+            {
+                choiceIndexToIgnore = 1;
+            }
+        }
+
+        filteredChoiceList = question.Choices.Where((v, i) => i == 1).ToList();
+
+        //foreach (Choice choice in filteredChoiceList)
+        //{
+        //    choice.Show = false;
+        //}
+
         foreach (Choice choice in question.Choices)
         {
             Button choiceButton = Instantiate(_buttonPrefab, Vector3.zero, Quaternion.identity);
@@ -288,7 +306,8 @@ public class ConversationManager : MonoBehaviour
 
             //If boolia is possesing the wrong NPC disable certain choiceButtons
             //If CharacterUnlocksChoice is 0 enable all choiceButtons
-            if (_currentPossedEntity && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
+            if ((_currentPossedEntity && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0) || 
+                !SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueUnlocksChoice) && choice.ClueUnlocksChoice != string.Empty)
             {
                 choiceButton.interactable = false;
             }

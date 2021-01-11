@@ -205,10 +205,14 @@ public abstract class BaseEntityMovement : BaseMovement
         float height = offMeshLinkProperties.ParabolaHeight;
         float duration = offMeshLinkProperties.ParabolaDuration;
         float normalizedTime = 0.0f;
-
-        transform.LookAt(endPos);
+        
         while (normalizedTime < 1.0f)
         {
+            var lookPos = endPos - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = rotation;
+                    
             float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
             agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
             normalizedTime += Time.deltaTime / duration;

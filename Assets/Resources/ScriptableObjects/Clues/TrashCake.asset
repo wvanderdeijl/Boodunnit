@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a87fdf7dec06ae4b9e5dae250dc42ed, type: 3}
-  m_Name: CoatScrap
+  m_Name: TrashCake
   m_EditorClassIdentifier: 
-  Name: Red fabric
-  Details: A small scrap of red fabric, perhaps from a coat or shirt.
-  Location: Air vent on the roof of the crime scene.
-  Description: "Looks like it\u2019s been ripped off a piece of clothing or accessory."
-  Image: {fileID: 21300000, guid: f44b80f795e3590458a98e995a242efa, type: 3}
+  Name: Trash cake
+  Details: A strawberry cake found in the trash.
+  Location: The cemetery, in a trash can.
+  Description: "A cake that has seen better days. Must have been made recently, since
+    the cream hasn\u2019t melted yet and there\u2019s no mold on it."
+  Image: {fileID: 0}

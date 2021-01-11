@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 532012604440946208, guid: 77bb95aaabec99645882353de5b912e0, type: 3}
+      propertyPath: Collider
+      value: 
+      objectReference: {fileID: 1508548231582930675}
+    - target: {fileID: 532012604440946208, guid: 77bb95aaabec99645882353de5b912e0, type: 3}
       propertyPath: CanPossess
       value: 1
       objectReference: {fileID: 0}
@@ -61,3 +65,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77bb95aaabec99645882353de5b912e0, type: 3}
+--- !u!136 &1508548231582930675 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 343899359827747823, guid: 77bb95aaabec99645882353de5b912e0, type: 3}
+  m_PrefabInstance: {fileID: 1164943817930913052}
+  m_PrefabAsset: {fileID: 0}

@@ -51,7 +51,7 @@ MonoBehaviour:
   JumpForce: 10
   PossessionSpeed: 0
   PathfindingSpeed: 0
-  Collider: {fileID: 0}
+  Collider: {fileID: 7072416858783943055}
   IsGrounded: 0
   IsJumping: 0
   CanJump: 0

@@ -10,9 +10,11 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private Rigidbody _rigidbody;
     private Outline _outline;
     private GameObject _player;
-
-    public float DespawnDistance = 10f;
+    
+    public LevitationState State { get; set; }
     public int TimesLevitated { get; set; }
+    
+    public float DespawnDistance = 10f;
     public bool WillLogPossessCount;
     public float MaxDistanceToPlayerWhileFrozen;
 
@@ -21,7 +23,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
         _outline = gameObject.AddComponent<Outline>();
-        _player = GameObject.Find("PlayerV2");
+        _player = FindObjectOfType<PlayerBehaviour>().gameObject;
         
         AddOutline();
         SetSpawnLocationAndRotation();
@@ -31,9 +33,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void Update()
     {
-        float distance =
-            Vector3.Distance(gameObject.transform.position, _player.transform.position);
-
+        float distance = Vector3.Distance(gameObject.transform.position, _player.transform.position);
         ChangeOutlineWidthWithDistance(distance);
         if (State != LevitationState.Frozen) return;
         if (distance > MaxDistanceToPlayerWhileFrozen) Release();
@@ -42,17 +42,17 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     public void Freeze()
     {
         ChangeLayerMask(0);
-        SetRigidbodyAndLevitationBooleans(false, true);
+        ToggleGravityAndKinematic(false, true); //todo: use one bool
         State = LevitationState.Frozen;
     }
 
     public void Release()
     {
-        SetRigidbodyAndLevitationBooleans(true, false);
+        ToggleGravityAndKinematic(true, false);
         State = LevitationState.NotLevitating;
     }
 
-    public void SetRigidbodyAndLevitationBooleans(bool useGravity, bool isKinematic)
+    public void ToggleGravityAndKinematic(bool useGravity, bool isKinematic)
     {
         _rigidbody.useGravity = useGravity;
         _rigidbody.isKinematic = isKinematic;
@@ -60,7 +60,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void ChangeLayerMask(int layerMaskParam)
     {
-        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
+        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true)) //todo: gameObject.transform (is iteratable)
         {
             transform.gameObject.layer = layerMaskParam;
         }   
@@ -94,15 +94,15 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void ChangeOutlineWidthWithDistance(float distance)
     {
-        float highlightOutlineFactor = distance / (MaxDistanceToPlayerWhileFrozen - 0.1f);
-        float multiplyOutlineWidth = 1 - highlightOutlineFactor;
+        float highlightOutlineFactor = distance / (MaxDistanceToPlayerWhileFrozen - 0.1f); //todo: make one line
+        float multiplyOutlineWidth = 1f - highlightOutlineFactor;
         float newHighlightOutlineWidth = 10f * multiplyOutlineWidth;
         _outline.OutlineWidth = newHighlightOutlineWidth;
     }
     
     private IEnumerator CheckForDistance()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         if (CanRespawnWhenOutOfRange && 
             Mathf.Abs(Vector3.Distance(transform.position, _spawnLocation)) >= DespawnDistance && 
             Mathf.Abs(Vector3.Distance(transform.position, CameraController.RotationTarget.position)) >= DespawnDistance && 
@@ -133,6 +133,4 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         get => _canRespawnWhenOutOfRange;
         set => _canRespawnWhenOutOfRange = value;
     }
-    
-    public LevitationState State { get; set; }
 }

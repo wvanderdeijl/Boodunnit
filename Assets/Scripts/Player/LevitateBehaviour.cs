@@ -100,7 +100,7 @@ public class LevitateBehaviour : MonoBehaviour
                 .Where(hit => hit.collider.gameObject.GetComponent<ILevitateable>() != null)
                 .FirstOrDefault();
 
-        if (!firstHit.collider)
+        if (firstHit.collider)
         {
             Rigidbody rigidbody = firstHit.collider.gameObject.GetComponent<Rigidbody>();
 
@@ -109,7 +109,7 @@ public class LevitateBehaviour : MonoBehaviour
                 !firstHit.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
 
             int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
-            foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>()) //todo: rigidbody.transform
+            foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
             {
                 transform.gameObject.layer = levitatingObjectLayerMask;
             }     
@@ -132,7 +132,7 @@ public class LevitateBehaviour : MonoBehaviour
         LevitateableObject levitateableObject = _selectedRigidbody.gameObject.GetComponent<LevitateableObject>();
 
         if (levitateableObject && levitateableObject.State == LevitationState.Frozen)
-            levitateableObject.ToggleGravityAndKinematic(true, false);
+            levitateableObject.ToggleIsKinematic(false);
         
         if (levitateable != null) levitateable.State = LevitationState.Levitating;
     }
@@ -156,9 +156,9 @@ public class LevitateBehaviour : MonoBehaviour
     #endregion
     
     #region Finding Levitateable Objects In Front Of Player.
-    public void FindLevitateableObjectsInFrontOfPlayer() //todo: public return array with colliders
+    public Collider[] FindLevitateableObjectsInFrontOfPlayer()
     {
-        CurrentLevitateableObjects = Physics
+        return Physics
             .OverlapSphere(transform.position, CurrentLevitateRadius)
             .Where(c => { return IsObjectInRange(c) && IsObjectLevitateble(c); })
             .ToArray();

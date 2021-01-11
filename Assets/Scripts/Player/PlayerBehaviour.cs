@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace.Enums;
 using Entities.Humans;
 using UnityEngine;
 
@@ -190,7 +191,7 @@ public class PlayerBehaviour : BaseMovement
     
     private void HandleLevitationInput()
     {
-        LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
+        LevitateBehaviour.CurrentLevitateableObjects = LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
         LevitateBehaviour.SetCurrentHighlightedObject(HighlightBehaviour.HighlightGameobject(_highlightRadiuses));
         if (Input.GetMouseButtonDown(0)) LevitateBehaviour.LevitationStateHandler();
     }

@@ -42,25 +42,25 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     public void Freeze()
     {
         ChangeLayerMask(0);
-        ToggleGravityAndKinematic(false, true); //todo: use one bool
+        ToggleIsKinematic(true);
         State = LevitationState.Frozen;
     }
 
     public void Release()
     {
-        ToggleGravityAndKinematic(true, false);
+        ToggleIsKinematic(false);
         State = LevitationState.NotLevitating;
     }
 
-    public void ToggleGravityAndKinematic(bool useGravity, bool isKinematic)
+    public void ToggleIsKinematic(bool isKinematic)
     {
-        _rigidbody.useGravity = useGravity;
+        _rigidbody.useGravity = !isKinematic;
         _rigidbody.isKinematic = isKinematic;
     }
 
     private void ChangeLayerMask(int layerMaskParam)
     {
-        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true)) //todo: gameObject.transform (is iteratable)
+        foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
         {
             transform.gameObject.layer = layerMaskParam;
         }   
@@ -94,10 +94,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void ChangeOutlineWidthWithDistance(float distance)
     {
-        float highlightOutlineFactor = distance / (MaxDistanceToPlayerWhileFrozen - 0.1f); //todo: make one line
-        float multiplyOutlineWidth = 1f - highlightOutlineFactor;
-        float newHighlightOutlineWidth = 10f * multiplyOutlineWidth;
-        _outline.OutlineWidth = newHighlightOutlineWidth;
+        _outline.OutlineWidth = 10f * (1f - (distance / (MaxDistanceToPlayerWhileFrozen - 0.1f)));
     }
     
     private IEnumerator CheckForDistance()

@@ -55,21 +55,6 @@ public abstract class BaseEntityMovement : BaseMovement
         }
     }
 
-    private void Update()
-    {
-        NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
-        
-        if (OffMeshLinkTraverseType != OffMeshLinkMethod.None && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
-        {
-            OffMeshLinkProperties offMeshLinkProperties = NavMeshAgent.currentOffMeshLinkData.offMeshLink.GetComponent<OffMeshLinkProperties>();
-            IsTraversingOfMeshLink = true;
-            if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola)
-            {
-                StartCoroutine(Parabola(NavMeshAgent, offMeshLinkProperties.ParabolaHeight, offMeshLinkProperties.ParabolaDuration));
-            }
-        }
-    }
-
     public void MoveWithPathFinding()
     {
         switch (_pathFindingState)
@@ -210,13 +195,18 @@ public abstract class BaseEntityMovement : BaseMovement
     }
     
     //Allows entities to traverse the offmeshlink in a parabola.
-    public IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
+    public IEnumerator Parabola(NavMeshAgent agent)
     {
         IsTraversingOfMeshLink = true;
         OffMeshLinkData data = agent.currentOffMeshLinkData;
+        OffMeshLinkProperties offMeshLinkProperties = data.offMeshLink.gameObject.GetComponent<OffMeshLinkProperties>();
+        
         Vector3 startPos = agent.transform.position;
         Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
+        float height = offMeshLinkProperties.ParabolaHeight;
+        float duration = offMeshLinkProperties.ParabolaDuration;
         float normalizedTime = 0.0f;
+        
         while (normalizedTime < 1.0f)
         {
             float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);

@@ -11,6 +11,7 @@ public class LevitateBehaviour : MonoBehaviour
     private Camera _mainCamera;
     private Rigidbody _selectedRigidbody;
     private Collider _currentHighlightedObject;
+    private Vector3 _originalRigidbodyPosition;
 
     public float CurrentLevitateRadius { get; set; }
     public Collider[] CurrentLevitateableObjects { get; set; }
@@ -22,7 +23,7 @@ public class LevitateBehaviour : MonoBehaviour
         _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
-    #region Levitatin Handler
+    #region Levitation Handler
     public void LevitationStateHandler()
     {
         if (!_selectedRigidbody) Levitate();
@@ -43,7 +44,6 @@ public class LevitateBehaviour : MonoBehaviour
     }
     #endregion
     
-    
     #region Levitateable Object Movement
     public void MoveLevitateableObject()
     {
@@ -58,15 +58,20 @@ public class LevitateBehaviour : MonoBehaviour
         }
         
         ToggleGravity(false);
+        
         Transform cameraTransform = Camera.main.transform;
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        
         Vector3 endOfRayCast = ray.GetPoint(10f);
         Vector3 heightOffset = new Vector3(0, _objectStartingHeight * Time.deltaTime * 10f, 0);
         Vector3 targetPosition = endOfRayCast + heightOffset;
-        _selectedRigidbody.MovePosition(targetPosition);
+        Vector3 cameraRayPositionOffset = targetPosition - _originalRigidbodyPosition;
+        
+        _selectedRigidbody.velocity = 
+            (_originalRigidbodyPosition + cameraRayPositionOffset - _selectedRigidbody.transform.position) 
+            * (250f * Time.deltaTime);
     }
     #endregion
-
     
     #region Receiving a Rigidbody
     private Rigidbody GetRigidbodyFromCameraRay()
@@ -79,18 +84,29 @@ public class LevitateBehaviour : MonoBehaviour
             if (levitateable != null && !IsObjectInLevitateablesArray(collider)) return null;
         }
 
-        if (Physics.Raycast(_mainCamera.transform.position, 
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(
+            _mainCamera.transform.position,
             _mainCamera.transform.forward,
-            out RaycastHit hitInfo, 
             20f,
-            ~_ignoredLayerMask))
+            ~_ignoredLayerMask
+        );
+        
+
+        RaycastHit firstHit = hits
+                .OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position))
+                .Where(hit => hit.collider.gameObject.GetComponent<ILevitateable>() != null)
+                .ToArray()
+                .FirstOrDefault();
+
+        if (firstHit.collider != null)
         {
-            Rigidbody rigidbody = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
+            Rigidbody rigidbody = firstHit.collider.gameObject.GetComponent<Rigidbody>();
 
             if (!rigidbody) return null;
-            if (hitInfo.collider != _currentHighlightedObject) return null;
+            if (firstHit.collider != _currentHighlightedObject) return null;
             
-            if (!hitInfo.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
+            if (!firstHit.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
 
             int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
             foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
@@ -98,6 +114,7 @@ public class LevitateBehaviour : MonoBehaviour
                 transform.gameObject.layer = levitatingObjectLayerMask;
             }     
             
+            _originalRigidbodyPosition = firstHit.collider.transform.position;
             return rigidbody;
         }
 
@@ -120,7 +137,6 @@ public class LevitateBehaviour : MonoBehaviour
         if (levitateable != null) levitateable.State = LevitationState.Levitating;
     }
     #endregion
-
     
     #region Freezing an Object
     public void FreezeLevitateableObject()
@@ -142,7 +158,6 @@ public class LevitateBehaviour : MonoBehaviour
         RemoveSelectedRigidbody();
     }
     #endregion
-    
     
     #region Finding Levitateable Objects In Front Of Player.
     public void FindLevitateableObjectsInFrontOfPlayer()
@@ -169,8 +184,7 @@ public class LevitateBehaviour : MonoBehaviour
         return CurrentLevitateableObjects.Length > 0 && CurrentLevitateableObjects.Contains(colliderParam);
     }
     #endregion
-    
-    
+
     #region Miscellaneous Functions
     private void RemoveGameObjectFromCamera()
     {

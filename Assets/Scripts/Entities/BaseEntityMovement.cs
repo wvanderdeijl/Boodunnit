@@ -61,8 +61,12 @@ public abstract class BaseEntityMovement : BaseMovement
         
         if (OffMeshLinkTraverseType != OffMeshLinkMethod.None && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
         {
+            OffMeshLinkProperties offMeshLinkProperties = NavMeshAgent.currentOffMeshLinkData.offMeshLink.GetComponent<OffMeshLinkProperties>();
             IsTraversingOfMeshLink = true;
-            if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola) StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
+            if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola)
+            {
+                StartCoroutine(Parabola(NavMeshAgent, offMeshLinkProperties.ParabolaHeight, offMeshLinkProperties.ParabolaDuration));
+            }
         }
     }
 

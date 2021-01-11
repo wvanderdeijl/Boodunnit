@@ -312,6 +312,7 @@ public class ConversationManager : MonoBehaviour
             }
         }
 
+
         foreach (Choice choice in question.Choices)
         {
             //This choice is hiding, do not add it to the queue and continue from the next iteration
@@ -338,7 +339,8 @@ public class ConversationManager : MonoBehaviour
 
             //If boolia is possesing the wrong NPC disable certain choiceButtons
             //If CharacterUnlocksChoice is 0 enable all choiceButtons
-            if (_currentPossedEntity && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0)
+            if ((_currentPossedEntity && !choice.CharacterUnlocksChoice.Contains(_currentPossedEntity.CharacterName) && choice.CharacterUnlocksChoice.Count != 0) || 
+                (choice.ClueToUnlock && !SaveHandler.Instance.DoesPlayerHaveClue(choice.ClueToUnlock.Name)))
             {
                 choiceButton.interactable = false;
             }

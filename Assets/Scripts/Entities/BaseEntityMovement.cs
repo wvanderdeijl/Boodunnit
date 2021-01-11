@@ -11,10 +11,6 @@ using Vector3 = UnityEngine.Vector3;
 public abstract class BaseEntityMovement : BaseMovement
 {
     public OffMeshLinkMethod OffMeshLinkTraverseType;
-
-    private int _cyclePosIndex = 1;
-    public List<Transform> CyclePositions = new List<Transform>();
-
     public bool IsTraversingOfMeshLink;
     
     public GameObject TargetToFollow;
@@ -217,7 +213,5 @@ public abstract class BaseEntityMovement : BaseMovement
 
         agent.CompleteOffMeshLink();
         IsTraversingOfMeshLink = false;
-
-        agent.SetDestination(CyclePositions[_cyclePosIndex].position);
     }
 }

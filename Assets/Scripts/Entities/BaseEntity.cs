@@ -13,6 +13,7 @@ namespace Entities
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
         public int TimesPosessed;
+        public bool HasToggledAbility;
         
         public bool IsWalking { get; set; }
 
@@ -43,8 +44,6 @@ namespace Entities
         [SerializeField] private float _fearAngle;
         
         [SerializeField] private RagdollController _ragdollController;
-
-        private bool _hasToggledAbility;
 
         protected void InitBaseEntity()
         {
@@ -90,7 +89,7 @@ namespace Entities
 
         public virtual void UseFirstAbility()
         {
-            _hasToggledAbility = !_hasToggledAbility;
+            HasToggledAbility = !HasToggledAbility;
         }
 
         public void PlayAudioClip(int index)

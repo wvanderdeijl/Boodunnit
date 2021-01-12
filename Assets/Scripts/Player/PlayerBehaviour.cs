@@ -14,6 +14,9 @@ public class PlayerBehaviour : BaseMovement
     public float LeviatateRadius;
     public float PossesionRadius;
     public float ClueRadius;
+    public float AirVentRadius;
+    public float ClimableRadius;
+    public float DashRadius;
 
     public ConversationManager ConversationManager;
 
@@ -41,6 +44,9 @@ public class PlayerBehaviour : BaseMovement
         _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
         _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
         _highlightRadiuses.Add("ClueRadius", ClueRadius);
+        _highlightRadiuses.Add("AirVentRadius", AirVentRadius);
+        _highlightRadiuses.Add("ClimableRadius", ClimableRadius);
+        _highlightRadiuses.Add("DashRadius", DashRadius);
 
         _emmie = FindObjectOfType<EmmieBehaviour>();
     } 

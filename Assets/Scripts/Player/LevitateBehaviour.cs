@@ -5,8 +5,12 @@ using System.Linq;
 public class LevitateBehaviour : MonoBehaviour
 {
     [Header("Levitate Options")]
-    [SerializeField] private LayerMask _ignoredLayerMask;
+    [SerializeField] private float _levitationMoveSpeed = 250f;
+    [SerializeField] private float _objectStartingDistance = 10f;
     [SerializeField] private float _objectStartingHeight = 4f;
+    
+    [Header("Layers")]
+    [SerializeField] private LayerMask _ignoredLayerMask;
 
     private Camera _mainCamera;
     private Rigidbody _selectedRigidbody;
@@ -61,15 +65,15 @@ public class LevitateBehaviour : MonoBehaviour
         
         _selectedRigidbody.velocity = 
             (_originalRigidbodyPosition + GetCameraRayPossitionOffset() - _selectedRigidbody.transform.position) 
-            * (250f * Time.deltaTime); //todo: slider with % for 250f
+            * (_levitationMoveSpeed * Time.deltaTime);
     }
 
     private Vector3 GetCameraRayPossitionOffset()
     {
         Transform cameraTransform = Camera.main.transform;
         Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-        Vector3 endOfRayCast = ray.GetPoint(10f);
-        Vector3 heightOffset = new Vector3(0, _objectStartingHeight * Time.deltaTime * 10f, 0);
+        Vector3 endOfRayCast = ray.GetPoint(_objectStartingDistance);
+        Vector3 heightOffset = new Vector3(0, _objectStartingHeight * Time.deltaTime * _objectStartingDistance, 0);
         Vector3 targetPosition = endOfRayCast + heightOffset;
         return targetPosition - _originalRigidbodyPosition;
     }
@@ -86,39 +90,39 @@ public class LevitateBehaviour : MonoBehaviour
             if (levitateable != null && !IsObjectInLevitateablesArray(collider)) return null;
         }
 
+        float distanceBetweenObjectAndCamera =
+            Vector3.Distance(gameObject.transform.position, _mainCamera.transform.position) 
+            + CurrentLevitateRadius;
+
         RaycastHit[] hits;
         hits = Physics.RaycastAll(
             _mainCamera.transform.position,
             _mainCamera.transform.forward,
-            20f, //todo: change to actual distance of camera and levitation radius
+            distanceBetweenObjectAndCamera,
             ~_ignoredLayerMask
         );
         
-
         RaycastHit firstHit = hits
-                .OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position))
-                .Where(hit => hit.collider.gameObject.GetComponent<ILevitateable>() != null)
-                .FirstOrDefault();
+            .OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position))
+            .FirstOrDefault(hit => hit.collider.gameObject.GetComponent<ILevitateable>() != null);
 
-        if (firstHit.collider)
+        if (!firstHit.collider) return null;
+        
+        Rigidbody rigidbody = firstHit.collider.gameObject.GetComponent<Rigidbody>();
+
+        if (!rigidbody ||
+            firstHit.collider != _currentHighlightedObject ||
+            !firstHit.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
+
+        int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
+        
+        foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
         {
-            Rigidbody rigidbody = firstHit.collider.gameObject.GetComponent<Rigidbody>();
-
-            if (!rigidbody ||
-                firstHit.collider != _currentHighlightedObject ||
-                !firstHit.collider.gameObject.GetComponent(typeof(ILevitateable))) return null;
-
-            int levitatingObjectLayerMask = LayerMask.NameToLayer("LevitatingObject");
-            foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
-            {
-                transform.gameObject.layer = levitatingObjectLayerMask;
-            }     
+            transform.gameObject.layer = levitatingObjectLayerMask;
+        }     
             
-            _originalRigidbodyPosition = firstHit.collider.transform.position;
-            return rigidbody;
-        }
-
-        return null;
+        _originalRigidbodyPosition = firstHit.collider.transform.position;
+        return rigidbody;
     }
     
     private void ChangeLevitationStateToLevitating()

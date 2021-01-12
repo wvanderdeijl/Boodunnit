@@ -9,8 +9,6 @@ public class BirdBehaviour : BaseEntity
     private GlideBehaviour _glideBehaviour;
     private Animator _animator;
 
-    private bool _hasLanded = true;
-    
     private void Awake()
     {
         InitBaseEntity();
@@ -38,14 +36,6 @@ public class BirdBehaviour : BaseEntity
             _animator.SetBool("IsWalking", IsWalking);
             _animator.SetBool("IsGrounded", IsGrounded);
         }
-
-        if (IsGrounded && _glideBehaviour.IsGliding && !_hasLanded)
-        {
-            _glideBehaviour.ToggleGlide();
-            _hasLanded = true;
-        }
-
-        if (!IsGrounded) _hasLanded = false;
     }
 
     public override void MoveEntityInDirection(Vector3 direction)

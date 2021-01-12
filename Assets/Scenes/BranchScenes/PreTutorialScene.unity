@@ -759,9 +759,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6060311439522971498, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Name
       value: TextCloud01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1078,15 +1086,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: Press <b>SHIFT</b> mid-air to perform a <b>DASH-JUMP</b>!
+      value: I sure hope you know what you're doing...
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: "Try performing a dash-jump over that wall. \nJust press shift mid-air!"
+      value: Try combining <b>jumping, levitation, and dash</b> to get to new areas!
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
@@ -1897,7 +1905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 171861911}
   - component: {fileID: 171861912}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2398,6 +2406,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextCloud02
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 923414871342372259, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2646,7 +2662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227890424}
   - component: {fileID: 227890425}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2728,7 +2744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 240394725}
   - component: {fileID: 240394726}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Scrollwheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3251,7 +3267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 264997622}
   - component: {fileID: 264997623}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Ampersand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3568,7 +3584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 316298307}
   - component: {fileID: 316298308}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftMouseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4102,9 +4118,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6060311439522971498, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Name
       value: TextCloud01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4579,7 +4603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 427529257}
   - component: {fileID: 427529258}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4736,7 +4760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 445666765}
   - component: {fileID: 445666766}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Ampersand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5079,7 +5103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 460920109}
   - component: {fileID: 460920110}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5476,7 +5500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 486887709}
   - component: {fileID: 486887710}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Levitate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6228,7 +6252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 537740695}
   - component: {fileID: 537740696}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6310,7 +6334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 550883514}
   - component: {fileID: 550883515}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7083,6 +7107,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextCloud02
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 923414871342372259, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -7321,7 +7353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677045510}
   - component: {fileID: 677045511}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7438,7 +7470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 691720990}
   - component: {fileID: 691720991}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MagnifyingGlassMinus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7520,7 +7552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 692688966}
   - component: {fileID: 692688967}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7759,6 +7791,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1367206118}
     m_Modifications:
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.data[0]
+      value: Press <b>SHIFT</b> to dash through thin surfaces, like fences.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.data[1]
+      value: But... are you sure you want to go that way? That way leads back to
+        Earth...
+      objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7869,7 +7914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746926565}
   - component: {fileID: 746926566}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7995,7 +8040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 759913428}
   - component: {fileID: 759913429}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8120,7 +8165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771247067}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CloudText01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8225,7 +8270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 788097049}
   - component: {fileID: 788097050}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8666,7 +8711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 818368925}
   - component: {fileID: 818368926}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8825,7 +8870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 825922446}
   - component: {fileID: 825922447}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9075,7 +9120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 837389501}
   - component: {fileID: 837389502}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9287,7 +9332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847028600}
   - component: {fileID: 847028601}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftMouseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10379,7 +10424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 990492753}
   - component: {fileID: 990492754}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10590,7 +10635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1029979000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CloudText04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10675,7 +10720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1031736924}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CloudText06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10934,7 +10979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1055294621}
   - component: {fileID: 1055294622}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Levitate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11095,7 +11140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1075565614}
   - component: {fileID: 1075565615}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11180,12 +11225,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: "<b>LEVITATE</b> and carry this cloud to the marked position. \n"
+      value: 'This is the last hurdle before you can return to Earth... '
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: When you release an object that can be levitated, it will snap into
-        place automatically!
+      value: 'You''ll have to use <b>jumping, levitation and dash</b> as best as
+        possible!
+
+        Good luck!'
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
@@ -11537,7 +11584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1116992404}
   - component: {fileID: 1116992405}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11618,16 +11665,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: <b>LEVITATE</b> and <b>STACK</b> these boxes to jump over the wall.
+      value: Your choice, I guess... you're only missing out on eternal peace...
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: "Why don\u2019t you levitate and stack these boxes to jump over the
-        wall?"
+      value: <b>Levitate</b> and stack these boxes to jump over the wall.
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
@@ -11747,7 +11793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1152814928}
   - component: {fileID: 1152814929}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MoveMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11882,9 +11928,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6060311439522971498, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Name
       value: TextCloud01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8681116840852213461, guid: fd5b8a8c3b529f648bce03faad6eef23, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12331,7 +12385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204003467}
   - component: {fileID: 1204003468}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MoveMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12772,7 +12826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1254909924}
   - component: {fileID: 1254909925}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Ampersand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13824,7 +13878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1369860074}
   - component: {fileID: 1369860075}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14081,7 +14135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1407966534}
   - component: {fileID: 1407966535}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14271,7 +14325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1412678270}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CloudText02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14313,7 +14367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1412820787}
   - component: {fileID: 1412820788}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14426,7 +14480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434365920}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CloudText03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14514,11 +14568,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: 'Good job completing the tutorial level!
+      value: 'Well, good job completing the tutorial level! You are now ready to
+        return to Earth. Maybe you''ll find more peace there.
 
 
-        Press the <b>X</b>
-        to exit the tutorial.'
+        Press the
+        <b>X</b> to continue.'
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
@@ -14883,7 +14938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511170231}
   - component: {fileID: 1511170232}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15042,7 +15097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1517329702}
   - component: {fileID: 1517329703}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MagnifyingGlassPlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15253,7 +15308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1522072857}
   - component: {fileID: 1522072858}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15334,7 +15389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1531436131}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CloudText05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15594,7 +15649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553802930}
   - component: {fileID: 1553802931}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: W
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15868,7 +15923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1577684720}
   - component: {fileID: 1577684721}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Ampersand (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16059,7 +16114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1586939143}
   - component: {fileID: 1586939144}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Spacebar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16339,7 +16394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1626112971}
   - component: {fileID: 1626112972}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16926,7 +16981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1715940449}
   - component: {fileID: 1715940450}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17251,6 +17306,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Name
       value: TextCloud02
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 923414871342372259, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1326998542555739621, guid: 0a7bbfcf81070cd458ef01c8a6d3c914, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17665,26 +17728,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: Press <b>Right Mouse Button</b> to unlock the mouse and <b>Left Mouse
-        Button</b> click on an object to levitate it.
+      value: Since you've passed away, you've gained a number of ghostly abilities.
+        The first one is <b>levitation.</b>
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
-      value: <b>Move</b> the mouse around to position it, and objects briefly <b>freeze</b>
-        in position after you let them go.
+      value: <b>Click Left Mouse Button</b> on an object to levitate it.
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[2]
-      value: Objects briefly <b>freeze</b> in position after you let them go.
+      value: <b>Move the mouse</b> around to position it...
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[3]
-      value: "<b>RIGHT MOUSE BUTTON</b> \u2192 Hold and drag right mouse button to
-        rotate\n\n<b>LEFT MOUSE BUTTON</b> again to let go of the object."
+      value: ... and <b>Click Left Mouse Button</b> again to release it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.data[4]
+      value: Objects <b>freeze</b> in position around you after you let them go.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.data[5]
+      value: Give it a try!
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: m_Pivot.x
@@ -17799,7 +17868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1804397102}
   - component: {fileID: 1804397103}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18025,7 +18094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1816855635}
   - component: {fileID: 1816855636}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Levitate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18289,7 +18358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870648347}
   - component: {fileID: 1870648348}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18371,7 +18440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1879949886}
   - component: {fileID: 1879949887}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MoveMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19159,7 +19228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1967230496}
   - component: {fileID: 1967230497}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Ampersand (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19847,7 +19916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2049605737}
   - component: {fileID: 2049605738}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: UI_Icon_PreTutorial_Arrow_Straight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20233,7 +20302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091364928}
   - component: {fileID: 2091364929}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Levitate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20406,7 +20475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114435065}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.71, y: 17.49, z: 151.01999}
+  m_LocalPosition: {x: 0.71, y: 17.49, z: 120.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1555130926}
@@ -20692,20 +20761,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[0]
-      value: 'Press <b>WASD</b> to navigate.
-
-
-        Move the <b>MOUSE</b> to rotate
-        the camera.
+      value: 'Welcome to the afterlife. We do hope you''ll enjoy yourself.
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
       propertyPath: PopupTexts.Array.data[1]
+      value: 'Press <b>WASD</b> to navigate.
+
+
+        Move the <b>MOUSE</b> to rotate
+        the camera.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.data[2]
+      value: Press the <b>SPACEBAR</b> to jump.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749973458317448039, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}
+      propertyPath: PopupTexts.Array.data[3]
       value: Press the <b>SPACEBAR</b> to jump.
       objectReference: {fileID: 0}
     - target: {fileID: 4266350324638384038, guid: aa60c6d064adddc41b5c2865882cdc81, type: 3}

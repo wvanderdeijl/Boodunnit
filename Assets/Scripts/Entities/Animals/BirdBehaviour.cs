@@ -55,5 +55,6 @@ public class BirdBehaviour : BaseEntity
     public override void UseFirstAbility()
     {
         _glideBehaviour.ToggleGlide();
+        base.UseFirstAbility();
     }
 }

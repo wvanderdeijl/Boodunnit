@@ -176,6 +176,21 @@ public class Cutscene : MonoBehaviour
         if (!currentAction.ObjectForCutscene)
             yield break;
 
+        // Set static var for conversation system.
+        Action.ConversationTargetIsNpc = currentAction.ConversationBetweenEntities;
+
+        // Check conversation between entities.
+        if (currentAction.ConversationBetweenEntities)
+        {
+            currentAction.ConversationManager.TriggerConversation(false, currentAction.Dialogue, currentAction.Question);
+            while (currentAction.IsExecuting)
+            {
+                currentAction.IsExecuting = ConversationManager.HasConversationStarted;
+                yield return null;
+            }
+        }
+
+        // Conversation between player and entity.
         PlayerBehaviour playerBehaviour = currentAction.ObjectForCutscene.GetComponent<PlayerBehaviour>();
         if (playerBehaviour)
         {

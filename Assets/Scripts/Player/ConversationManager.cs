@@ -97,7 +97,7 @@ public class ConversationManager : MonoBehaviour
 
                 //start conversation if boolia is possesing another npc
                 //or if she is not possesing anyone check if she can talk to the NPC
-                if ((!isPossesing && entityToTalkTo.CanTalkToBoolia) ||
+                if ((!isPossesing && entityToTalkTo.CanTalkToBoolia || Action.ConversationTargetIsNpc) ||
                     (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     HasConversationStarted = true;

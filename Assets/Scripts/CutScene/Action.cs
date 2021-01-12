@@ -39,8 +39,14 @@ public class Action
     public Dialogue Dialogue;
     public Question Question;
 
+    [Header("Check if cutscene is between entity and entity instead of boolia and entity")]
+    public bool ConversationBetweenEntities;
+    public ConversationManager ConversationManager;
+
     [Header("Click the '+' button and pass a reference to a scrip if the action is 'Method'")]
     public MethodToCallEvent MethodToCallFromScript;
+
+    public static bool ConversationTargetIsNpc;
 }
 
 [System.Serializable]

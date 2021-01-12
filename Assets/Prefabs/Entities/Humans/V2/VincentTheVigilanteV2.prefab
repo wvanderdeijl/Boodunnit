@@ -57,7 +57,6 @@ MonoBehaviour:
   CanJump: 0
   bottomHitPoint: {x: 0, y: 0, z: 0}
   OffMeshLinkTraverseType: 0
-  CyclePositions: []
   IsTraversingOfMeshLink: 0
   TargetToFollow: {fileID: 0}
   NavMeshAgent: {fileID: 0}
@@ -70,7 +69,7 @@ MonoBehaviour:
   CanPossess: 0
   TimesPosessed: 0
   WalkAudioClips: []
-  Dialogue: {fileID: 0}
+  Dialogue: {fileID: 11400000, guid: 90d3e192734af584a81ac71e5ce4f4ac, type: 2}
   Question: {fileID: 0}
   Relationships: 02000000
   DefaultAnswers: []
@@ -86,6 +85,7 @@ MonoBehaviour:
   _fearRadius: 0
   _fearAngle: 0
   _ragdollController: {fileID: 0}
+  ParabolaHeight: 0
 --- !u!65 &7072416858783943055
 BoxCollider:
   m_ObjectHideFlags: 0

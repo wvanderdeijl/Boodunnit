@@ -239,14 +239,20 @@ public class PlayerBehaviour : BaseMovement
         if (emmie)
         {
             print("Emmie: " + emmie.name);
-            if (GameManager.PlayerHasAllClues)
+            if (GameManager.PlayerHasAllClues && !GameManager.PlayerIsInEndState)
             {
+                GameManager.PlayerIsInEndState = true;
                 FadeInAndOut fade = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInAndOut>();
                 if (fade)
                 {
                     fade.FadeIn(1);
                 }
 
+                Cutscene endCutscene = GameObject.Find("EndCutscene").GetComponent<Cutscene>();
+                if (endCutscene)
+                {
+                    endCutscene.StartCutscene();
+                }
             }
         }
     }

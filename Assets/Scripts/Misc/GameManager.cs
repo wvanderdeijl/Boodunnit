@@ -11,6 +11,7 @@ public class GameManager
     public static bool IsCutscenePlaying { get; set; }
 
     public static bool PlayerHasAllClues = true;
+    public static bool PlayerIsInEndState = false;
     public static Collider CurrentHighlightedCollider { get; set; }
 
     private static bool _cursorIsLocked = true;

@@ -17,18 +17,18 @@ MonoBehaviour:
   - Text: What are you saying, Emmie?
     CharacterUnlocksChoice: 
     Dialogue: {fileID: 0}
-    Question: {fileID: 0}
+    Question: {fileID: 11400000, guid: 0dae97a170a14a04c93b00b805211b21, type: 2}
     ChoiceIndexToHide: 0
     ClueToUnlock: {fileID: 0}
   - Text: "Emmie\u2026 Did you\u2026?"
     CharacterUnlocksChoice: 
     Dialogue: {fileID: 0}
-    Question: {fileID: 0}
+    Question: {fileID: 11400000, guid: 0dae97a170a14a04c93b00b805211b21, type: 2}
     ChoiceIndexToHide: 0
     ClueToUnlock: {fileID: 0}
   - Text: "Emmie, if you\u2019ve got something to tell me, tell me!"
     CharacterUnlocksChoice: 
     Dialogue: {fileID: 0}
-    Question: {fileID: 0}
+    Question: {fileID: 11400000, guid: 0dae97a170a14a04c93b00b805211b21, type: 2}
     ChoiceIndexToHide: 0
     ClueToUnlock: {fileID: 0}

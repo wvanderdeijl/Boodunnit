@@ -106,9 +106,9 @@ public class ConversationManager : MonoBehaviour
                     _animator.SetBool("IsOpen", true);
 
                     GameManager.CursorIsLocked = false;
-
                     if (dialogue != null)
                     {
+                        print("Ik kom hier: "+dialogue.name);
                         ManageConversation(dialogue, null);
                         return;
                     }

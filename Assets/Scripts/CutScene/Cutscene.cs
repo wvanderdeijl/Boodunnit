@@ -182,11 +182,15 @@ public class Cutscene : MonoBehaviour
         // Check conversation between entities.
         if (currentAction.ConversationBetweenEntities)
         {
-            currentAction.ConversationManager.TriggerConversation(false, currentAction.Dialogue, currentAction.Question);
-            while (currentAction.IsExecuting)
+            ConversationManager conversationManager = currentAction.ConversationManager;
+            if (conversationManager)
             {
-                currentAction.IsExecuting = ConversationManager.HasConversationStarted;
-                yield return null;
+                conversationManager.TriggerConversation(false, currentAction.Dialogue, currentAction.Question);
+                while (currentAction.IsExecuting)
+                {
+                    currentAction.IsExecuting = ConversationManager.HasConversationStarted;
+                    yield return null;
+                }
             }
         }
 

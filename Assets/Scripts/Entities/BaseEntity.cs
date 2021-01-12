@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Entities
 {
-    public abstract class BaseEntity : BaseEntityMovement, IPossessable
+    public abstract class BaseEntity : BaseEntityMovement, IPossessable, IIconable
     {
         //Public properties
         public bool IsPossessed { get; set; }
@@ -85,7 +85,7 @@ namespace Entities
             NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
             if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
             {
-                StartCoroutine(Parabola(NavMeshAgent, ParabolaHeight, 2.5f));
+                StartCoroutine(Parabola(NavMeshAgent));
             }
         }
 
@@ -161,6 +161,7 @@ namespace Entities
                     (collider && !collider.isTrigger) &&
                     Vector3.Dot((collider.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
                     collider.GetComponent<BaseEntity>() &&
+                    ScaredOfEntities != null &&
                     ScaredOfEntities.ContainsKey(collider.GetComponent<BaseEntity>().CharacterName))
                 .Select(e => e.GetComponent<BaseEntity>())
                 .ToList();
@@ -196,6 +197,15 @@ namespace Entities
             if (EmotionalState == EmotionalState.Fainted) return;
             FearDamage += amount;
 
+            if (FearDamage >= FearThreshold / 2)
+            {
+                EmotionalState = EmotionalState.Terrified;
+            }
+            else
+            {
+                EmotionalState = EmotionalState.Scared;
+            }
+
             SetScaredStage(FearDamage >= FearThreshold / 2 && EmotionalState != EmotionalState.Fainted ? 2 : 1);
             PauseEntityNavAgent(true);
 
@@ -213,6 +223,16 @@ namespace Entities
         protected virtual void CalmDown()
         {
             if (FearDamage > 0) FearDamage -= FearThreshold / 20f;
+
+            if (FearDamage == 0)
+            {
+                EmotionalState = EmotionalState.Calm;
+            }
+            else if (FearDamage < FearThreshold / 2)
+            {
+                EmotionalState = EmotionalState.Scared;
+            }
+
             if (FearDamage <= 0)
             {
                 if (Animator && Animator.runtimeAnimatorController != null)
@@ -343,6 +363,21 @@ namespace Entities
         public void DealFearDamageAfterDash(int damage)
         {
             DealFearDamage(damage);
+        }
+
+        public EmotionalState GetEmotionalState()
+        {
+            return EmotionalState;
+        }
+
+        public bool GetCanBePossessed()
+        {
+            return CanPossess;
+        }
+
+        public bool GetCanTalkToBoolia()
+        {
+            return CanTalkToBoolia;
         }
     }
 }

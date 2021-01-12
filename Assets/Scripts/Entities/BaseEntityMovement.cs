@@ -11,10 +11,6 @@ using Vector3 = UnityEngine.Vector3;
 public abstract class BaseEntityMovement : BaseMovement
 {
     public OffMeshLinkMethod OffMeshLinkTraverseType;
-
-    private int _cyclePosIndex = 1;
-    public List<Transform> CyclePositions = new List<Transform>();
-
     public bool IsTraversingOfMeshLink;
     
     public GameObject TargetToFollow;
@@ -43,7 +39,9 @@ public abstract class BaseEntityMovement : BaseMovement
     {
         InitBaseMovement();
         NavMeshAgent = GetComponent<NavMeshAgent>();
+        
         Animator = GetComponent<Animator>();
+        if (!Animator) Animator = GetComponentInChildren<Animator>();
 
         if (NavMeshAgent)
         {
@@ -52,17 +50,6 @@ public abstract class BaseEntityMovement : BaseMovement
             _spawnRotation = transform.root.rotation;
             _spawnLocation = transform.root.position;
             NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
-        }
-    }
-
-    private void Update()
-    {
-        NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
-        
-        if (OffMeshLinkTraverseType != OffMeshLinkMethod.None && NavMeshAgent.isOnOffMeshLink && !IsTraversingOfMeshLink)
-        {
-            IsTraversingOfMeshLink = true;
-            if (OffMeshLinkTraverseType == OffMeshLinkMethod.Parabola) StartCoroutine(Parabola(NavMeshAgent, 5.1f, 2.5f));
         }
     }
 
@@ -206,15 +193,26 @@ public abstract class BaseEntityMovement : BaseMovement
     }
     
     //Allows entities to traverse the offmeshlink in a parabola.
-    public IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
+    public IEnumerator Parabola(NavMeshAgent agent)
     {
+        
         IsTraversingOfMeshLink = true;
         OffMeshLinkData data = agent.currentOffMeshLinkData;
+        OffMeshLinkProperties offMeshLinkProperties = data.offMeshLink.gameObject.GetComponent<OffMeshLinkProperties>();
+        
         Vector3 startPos = agent.transform.position;
         Vector3 endPos = data.endPos + Vector3.up * agent.baseOffset;
+        float height = offMeshLinkProperties.ParabolaHeight;
+        float duration = offMeshLinkProperties.ParabolaDuration;
         float normalizedTime = 0.0f;
+        
         while (normalizedTime < 1.0f)
         {
+            var lookPos = endPos - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = rotation;
+                    
             float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
             agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
             normalizedTime += Time.deltaTime / duration;
@@ -223,7 +221,5 @@ public abstract class BaseEntityMovement : BaseMovement
 
         agent.CompleteOffMeshLink();
         IsTraversingOfMeshLink = false;
-
-        agent.SetDestination(CyclePositions[_cyclePosIndex].position);
     }
 }

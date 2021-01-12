@@ -55,8 +55,15 @@ public class SceneLogger : MonoBehaviour
         SceneLog.Stats.Add(posessables);
         SceneLog.Stats.Add(levitatables);
         SceneLog.UnusedLogs = unusedLogs;
-
-        PlaythroughLogger.Instance.PlaythroughLog.Scenes.Add(SceneLog);
+        try
+        {
+            Playthrough.Instance.Scenes.Add(SceneLog);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private Log SaveLevitationInfo()
@@ -85,8 +92,4 @@ public class SceneLogger : MonoBehaviour
 
         return log;
     }
-
- 
-
-    
 }

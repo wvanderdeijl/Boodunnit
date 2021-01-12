@@ -195,6 +195,7 @@ public abstract class BaseEntityMovement : BaseMovement
     //Allows entities to traverse the offmeshlink in a parabola.
     public IEnumerator Parabola(NavMeshAgent agent)
     {
+        
         IsTraversingOfMeshLink = true;
         OffMeshLinkData data = agent.currentOffMeshLinkData;
         OffMeshLinkProperties offMeshLinkProperties = data.offMeshLink.gameObject.GetComponent<OffMeshLinkProperties>();
@@ -207,6 +208,11 @@ public abstract class BaseEntityMovement : BaseMovement
         
         while (normalizedTime < 1.0f)
         {
+            var lookPos = endPos - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = rotation;
+                    
             float yOffset = height * 4.0f * (normalizedTime - normalizedTime * normalizedTime);
             agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
             normalizedTime += Time.deltaTime / duration;

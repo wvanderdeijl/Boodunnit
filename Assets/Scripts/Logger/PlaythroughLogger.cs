@@ -9,25 +9,12 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using static Newtonsoft.Json.JsonConvert;
 
 public class PlaythroughLogger : MonoBehaviour
 {
-    public Playthrough PlaythroughLog = new Playthrough();
     private string _userInfoFilePath;
-    public Playthrough PlaythroughFile
-    {
-        get
-        {
-            return PlaythroughLog;
-        }
-        set
-        {
-            File.WriteAllText($"{Application.dataPath}/{Instance.PlaythroughLog.GUID}.json",
-                SerializeObject(value));
-        }
-    }
-
     static PlaythroughLogger mInstance;
 
     public static PlaythroughLogger Instance
@@ -44,15 +31,10 @@ public class PlaythroughLogger : MonoBehaviour
     private void Awake()
     {
         mInstance = this;
-        Instance.PlaythroughLog.GameStartTime = DateTime.UtcNow;
+        Playthrough.Instance.GameStartTime = DateTime.UtcNow;
         
         _userInfoFilePath = $"{Application.dataPath}/UserInfo.json";
-        
-        PlaythroughLog.Scenes = new List<SceneLog>();
-        PlaythroughLog.GameEndTime = DateTime.UtcNow;
-        PlaythroughLog.GUID = Guid.NewGuid().ToString();
-        PlaythroughFile = PlaythroughLog;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
         CheckClientGUID();
     }
 
@@ -60,22 +42,23 @@ public class PlaythroughLogger : MonoBehaviour
     public void WriteLogThenQuit()
     {
         if (Application.isEditor) Application.Quit();
-        PlaythroughFile = PlaythroughLog;
-        Instance.PlaythroughLog.GameEndTime = DateTime.UtcNow;
-        Instance.PlaythroughLog.Platform = Application.platform.ToString();
+        File.WriteAllText($"{Application.dataPath}/{Playthrough.Instance.GUID}.json",
+            SerializeObject(Playthrough.Instance));
+        Playthrough.Instance.GameEndTime = DateTime.UtcNow;
+        Playthrough.Instance.Platform = Application.platform.ToString();
         
-        StartCoroutine(Login(PlaythroughLog, FirebaseHTTPController.GetLogin()));
+        StartCoroutine(Login(Playthrough.Instance, FirebaseHTTPController.GetLogin()));
     }
 
     private void CheckClientGUID()
     {
         if (File.Exists(_userInfoFilePath))
-            PlaythroughLog.ClientGUID = File.ReadAllText(_userInfoFilePath);
+            Playthrough.Instance.ClientGUID = File.ReadAllText(_userInfoFilePath);
         else
         {
             string userId = Guid.NewGuid().ToString();
             File.WriteAllText(_userInfoFilePath, userId);
-            PlaythroughLog.ClientGUID = userId;
+            Playthrough.Instance.ClientGUID = userId;
         }
     }
 
@@ -86,13 +69,22 @@ public class PlaythroughLogger : MonoBehaviour
         loginPostRequest.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
         loginPostRequest.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
         loginPostRequest.SetRequestHeader("Content-Type", "application/json");
+        if (StopAppAfterExecution)
+            SceneManager.MoveGameObjectToScene(Instance.gameObject, SceneManager.GetActiveScene());
+        
         yield return loginPostRequest.SendWebRequest();
-        if (StopAppAfterExecution) Application.Quit();
+        if (StopAppAfterExecution)
+        {
+            Application.Quit();
+        }
     }
 
     IEnumerator Login(Playthrough playthrough, FirebaseHTTPController.UserLoginCredentials login, bool stopApplicationAfterUpload = true, string logLocation = null)
     {
-        if (logLocation == null) logLocation = $"{Application.dataPath}/{Instance.PlaythroughLog.GUID}.json";
+        if (logLocation == null)
+        {
+            logLocation = $"{Application.dataPath}/{Playthrough.Instance.GUID}.json";
+        }
         string url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + FirebaseHTTPController.apiKey;
         UnityWebRequest postRequest = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(SerializeObject(login));
@@ -131,4 +123,5 @@ public class PlaythroughLogger : MonoBehaviour
 
         }
     }
+
 }

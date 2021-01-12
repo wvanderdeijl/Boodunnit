@@ -8,7 +8,7 @@ public class BirdBehaviour : BaseEntity
 {
     private GlideBehaviour _glideBehaviour;
     private Animator _animator;
-    
+
     private void Awake()
     {
         InitBaseEntity();
@@ -55,5 +55,6 @@ public class BirdBehaviour : BaseEntity
     public override void UseFirstAbility()
     {
         _glideBehaviour.ToggleGlide();
+        base.UseFirstAbility();
     }
 }

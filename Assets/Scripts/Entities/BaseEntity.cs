@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Enums;
 using Enums;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UI;
 
 namespace Entities
 {
@@ -16,6 +13,7 @@ namespace Entities
         public bool IsPossessed { get; set; }
         public bool CanPossess = true;
         public int TimesPosessed;
+        public bool HasToggledAbility;
         
         public bool IsWalking { get; set; }
 
@@ -39,13 +37,13 @@ namespace Entities
         public bool IsScaredOfLevitatableObject;
         public float LevitatableObjectFearDamage = 10;
         public bool HasFearCooldown;
+        
+        public float ParabolaHeight;
 
         [SerializeField] private float _fearRadius;
         [SerializeField] private float _fearAngle;
-
+        
         [SerializeField] private RagdollController _ragdollController;
-
-        public float ParabolaHeight;
 
         protected void InitBaseEntity()
         {
@@ -89,7 +87,10 @@ namespace Entities
             }
         }
 
-        public abstract void UseFirstAbility();
+        public virtual void UseFirstAbility()
+        {
+            HasToggledAbility = !HasToggledAbility;
+        }
 
         public void PlayAudioClip(int index)
         {

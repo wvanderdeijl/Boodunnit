@@ -147,7 +147,7 @@ public class IconCanvas : MonoBehaviour
 
             if (IconTarget.GetComponent<AirVent>() == null && IconTarget.gameObject.layer != 12)
             {
-                iconTargetPos.y += IconTarget.GetComponent<Collider>().bounds.extents.y * 2;
+                iconTargetPos.y += IconTarget.GetComponent<Collider>().bounds.extents.y;
             }
 
             GridLayoutTransform.position = Camera.main.WorldToScreenPoint(iconTargetPos);

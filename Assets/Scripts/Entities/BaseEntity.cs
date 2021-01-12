@@ -161,6 +161,7 @@ namespace Entities
                     (collider && !collider.isTrigger) &&
                     Vector3.Dot((collider.transform.root.position - transform.position).normalized, transform.forward) * 100f >= (90f - (_fearAngle / 2f)) &&
                     collider.GetComponent<BaseEntity>() &&
+                    ScaredOfEntities != null &&
                     ScaredOfEntities.ContainsKey(collider.GetComponent<BaseEntity>().CharacterName))
                 .Select(e => e.GetComponent<BaseEntity>())
                 .ToList();

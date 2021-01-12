@@ -36,7 +36,7 @@ public class PossessionBehaviour : MonoBehaviour
 
     public void LeavePossessedTarget()
     {
-        if (PossessionTarget && IsPossessing && !PossessionTarget.HasToggledAbility)
+        if (PossessionTarget && IsPossessing && !TargetBehaviour.HasToggledAbility)
         {
             IsPossessing = false;
             TargetBehaviour.IsPossessed = false;

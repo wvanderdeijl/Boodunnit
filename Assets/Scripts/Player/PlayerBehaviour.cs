@@ -59,6 +59,7 @@ public class PlayerBehaviour : BaseMovement
         PlayerAnimation();
         
         PickUpClue(HighlightedObject);
+        StartEndingWithEmmie(HighlightedObject);
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -216,7 +217,7 @@ public class PlayerBehaviour : BaseMovement
         LevitateBehaviour.PushOrPullLevitateableObject();
     }
 
-    public void PickUpClue(Collider HighlightedObject) {
+    private void PickUpClue(Collider HighlightedObject) {
         if (!HighlightedObject)
             return;
 
@@ -225,6 +226,27 @@ public class PlayerBehaviour : BaseMovement
         {
             if (!SaveHandler.Instance.DoesPlayerHaveClue(clue.ClueScriptableObject.Name)) {
                 clue.AddToInventory();
+            }
+        }
+    }
+
+    private void StartEndingWithEmmie(Collider HighlightedObject)
+    {
+        if (!HighlightedObject)
+            return;
+
+        EmmieBehaviour emmie = HighlightedObject.GetComponent<EmmieBehaviour>();
+        if (emmie)
+        {
+            print("Emmie: " + emmie.name);
+            if (GameManager.PlayerHasAllClues)
+            {
+                FadeInAndOut fade = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInAndOut>();
+                if (fade)
+                {
+                    fade.FadeIn(1);
+                }
+
             }
         }
     }

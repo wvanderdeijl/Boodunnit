@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 1
-  DespawnDistance: 5
+  DespawnDistance: 7
   DefaultLayerMask:
     serializedVersion: 2
     m_Bits: 0

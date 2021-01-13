@@ -155,7 +155,7 @@ public class HighlightBehaviour : MonoBehaviour
 
         return closestCollider;
     }
-    private void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
+    private  void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
     {
         outline.enabled = active;
     }

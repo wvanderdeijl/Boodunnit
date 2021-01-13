@@ -56,10 +56,9 @@ public class PlayerBehaviour : BaseMovement
         Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
         GameManager.CurrentHighlightedCollider = HighlightedObject;
 
-        PlayerAnimation();
-        
         PickUpClue(HighlightedObject);
         StartEndingWithEmmie(HighlightedObject);
+        PlayerAnimation();
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -83,10 +82,10 @@ public class PlayerBehaviour : BaseMovement
             if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && PossessionBehaviour.TargetBehaviour.IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
-            } 
+            }
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
+                if (!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
                 {
                     PossessionBehaviour.PossessTarget(HighlightedObject);
                 }

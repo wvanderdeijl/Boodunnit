@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/BranchScenes/LoadingScene.unity
     guid: 080349b04d7ac7b49bdedeab11e69fb4
   - enabled: 1
-    path: Assets/Scenes/BranchScenes/QuestScenes/CemeteryScene.unity
+    path: Assets/Scenes/BranchScenes/QuestScenes/CemeteryScene_1.unity
     guid: a747e6d88e664ca4e9b1230929bfd9b7
   m_configObjects: {}

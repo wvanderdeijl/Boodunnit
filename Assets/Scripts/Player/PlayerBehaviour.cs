@@ -41,8 +41,8 @@ public class PlayerBehaviour : BaseMovement
         _highlightRadiuses.Add("LevitateRadius", LeviatateRadius);
         _highlightRadiuses.Add("PossesionRadius", PossesionRadius);
         _highlightRadiuses.Add("ClueRadius", ClueRadius);
-        
-        LevitateBehaviour.SetCurrentHighlightLevitateRadius(LeviatateRadius);
+
+        LevitateBehaviour.CurrentLevitateRadius = LeviatateRadius;
 
         _emmie = FindObjectOfType<EmmieBehaviour>();
     } 

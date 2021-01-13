@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Enums;
+﻿using System;
+using DefaultNamespace.Enums;
 using UnityEngine;
 using System.Linq;
 
@@ -118,7 +119,10 @@ public class LevitateBehaviour : MonoBehaviour
         
         foreach (Transform transform in rigidbody.GetComponentsInChildren<Transform>())
         {
-            transform.gameObject.layer = levitatingObjectLayerMask;
+            if (!transform.gameObject.GetComponent<LevitateableObjectIsInsideTrigger>())
+            {
+                transform.gameObject.layer = levitatingObjectLayerMask;
+            }
         }     
             
         _originalRigidbodyPosition = firstHit.collider.transform.position;
@@ -134,7 +138,7 @@ public class LevitateBehaviour : MonoBehaviour
         IsLevitating = true;
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
         LevitateableObject levitateableObject = _selectedRigidbody.gameObject.GetComponent<LevitateableObject>();
-
+        
         if (levitateableObject && levitateableObject.State == LevitationState.Frozen)
             levitateableObject.ToggleIsKinematic(false);
         
@@ -210,11 +214,6 @@ public class LevitateBehaviour : MonoBehaviour
     {
         if (!gameObject || _currentHighlightedObject == gameObject) return;
         _currentHighlightedObject = gameObject;
-    }
-
-    public void SetCurrentHighlightLevitateRadius(float radius)
-    {
-        CurrentLevitateRadius = radius;
     }
     #endregion
 }

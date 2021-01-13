@@ -10,13 +10,12 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private Rigidbody _rigidbody;
     private Outline _outline;
     private GameObject _player;
+    private float _maxDistanceToPlayerWhileFrozen;
     
     public LevitationState State { get; set; }
     public int TimesLevitated { get; set; }
-    
     public float DespawnDistance = 10f;
     public bool WillLogPossessCount;
-    public float MaxDistanceToPlayerWhileFrozen;
 
     private void Awake()
     {
@@ -27,8 +26,12 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         
         AddOutline();
         SetSpawnLocationAndRotation();
-        SetMaxDistanceToPlayerWhileFrozenValue();
         StartCoroutine(CheckForDistance());
+    }
+
+    private void Start()
+    {
+        _maxDistanceToPlayerWhileFrozen = _player.GetComponent<LevitateBehaviour>().CurrentLevitateRadius + 0.1f;
     }
 
     private void Update()
@@ -36,7 +39,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         float distance = Vector3.Distance(gameObject.transform.position, _player.transform.position);
         ChangeOutlineWidthWithDistance(distance);
         if (State != LevitationState.Frozen) return;
-        if (distance > MaxDistanceToPlayerWhileFrozen) Release();
+        if (distance > _maxDistanceToPlayerWhileFrozen) Release();
     }
 
     public void Freeze()
@@ -62,14 +65,11 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
         {
-            transform.gameObject.layer = layerMaskParam;
+            if (!transform.gameObject.GetComponent<LevitateableObjectIsInsideTrigger>())
+            {
+                transform.gameObject.layer = layerMaskParam;
+            }
         }   
-    }
-
-    private void SetMaxDistanceToPlayerWhileFrozenValue()
-    {
-        LevitateBehaviour levitateBehaviour = FindObjectOfType<LevitateBehaviour>();
-        MaxDistanceToPlayerWhileFrozen = levitateBehaviour.CurrentLevitateRadius + 0.1f;
     }
 
     private void SetSpawnLocationAndRotation()
@@ -94,9 +94,9 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void ChangeOutlineWidthWithDistance(float distance)
     {
-        _outline.OutlineWidth = 10f * (1f - (distance / (MaxDistanceToPlayerWhileFrozen - 0.1f)));
+        _outline.OutlineWidth = 10f * (1f - (distance / (_maxDistanceToPlayerWhileFrozen - 0.1f)));
     }
-    
+
     private IEnumerator CheckForDistance()
     {
         yield return new WaitForSeconds(2f);

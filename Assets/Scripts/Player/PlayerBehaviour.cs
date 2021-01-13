@@ -238,7 +238,6 @@ public class PlayerBehaviour : BaseMovement
         EmmieBehaviour emmie = HighlightedObject.GetComponent<EmmieBehaviour>();
         if (emmie)
         {
-            print("Emmie: " + emmie.name);
             if (GameManager.PlayerHasAllClues && !GameManager.PlayerIsInEndState)
             {
                 GameManager.PlayerIsInEndState = true;
@@ -246,6 +245,7 @@ public class PlayerBehaviour : BaseMovement
                 if (fade)
                 {
                     fade.FadeIn(1);
+                    PrepareForEnding();
                 }
 
                 Cutscene endCutscene = GameObject.Find("EndCutscene").GetComponent<Cutscene>();
@@ -254,6 +254,18 @@ public class PlayerBehaviour : BaseMovement
                     endCutscene.StartCutscene();
                 }
             }
+        }
+    }
+
+    private void PrepareForEnding()
+    {
+        PossessionSpeed = 0;
+        Rigidbody.velocity = Vector3.zero;
+        Animator.SetBool("IsMoving", false);
+        IconCanvas canvas = FindObjectOfType<IconCanvas>();
+        if (canvas)
+        {
+            canvas.DisableIcons();
         }
     }
 

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: Dialogue01
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: "No! Please! I can\u2019t do this anymore! It was my fault!"
   question: {fileID: 0}

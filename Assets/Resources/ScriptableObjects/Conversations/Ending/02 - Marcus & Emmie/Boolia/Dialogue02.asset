@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: Dialogue02
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: "I forgive you, Emmie. There\u2019s no need for more suffering."
+  - Text: You made the right decision by telling Boonkle the truth.
+  - Text: "I can\u2019t stay mad with you, not as a ghost at least."
   question: {fileID: 0}

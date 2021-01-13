@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: Dialogue03
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: What?
+  - Text: I mean, you took the words out my mouth, miss!
+  - Text: "I didn\u2019t expect a confession so quickly, however."
+  - Text: "Care to enlighten us while you\u2019re at it?"
   question: {fileID: 0}

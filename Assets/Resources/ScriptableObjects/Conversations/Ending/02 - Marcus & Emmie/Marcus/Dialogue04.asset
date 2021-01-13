@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: Dialogue04
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: "Not trying to ruin the moment, but we\u2019re not done yet, miss."
+  - Text: You see, here in Boonkle we follow a certain justice protocol,
+  - Text: Which says that the victim gets to decide the punishment for the perpetrator.
+  - Text: Usually, we make an exception for murder cases, for, um, obvious reasons.
+  - Text: But since your sister seems to be here right now, I believe we can ask
+      her what she thinks?
   question: {fileID: 0}

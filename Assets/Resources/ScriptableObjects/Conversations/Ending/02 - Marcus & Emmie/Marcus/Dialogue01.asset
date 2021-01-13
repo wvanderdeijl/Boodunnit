@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Dialogue01
   m_EditorClassIdentifier: 
   sentences:
-  - Text: Ladies and gentlemen, may I have your attention, please?
+  - Text: "Ladies and gentlemen, may I have your attention, please?\r"
   - Text: "Uhm\u2026 I need to tell you something about the case of Julia Lawson\u2019s
       death."
-  - Text: I know it had a major impact on all of Boonkle.
+  - Text: I know it had a major impact on all of Boonkle
   - Text: "Our founder probably wouldn\u2019t have cared like most of you do."
   - Text: "So regardless of what I\u2019m about to tell you, it goes without saying
       that our bond as a town,"

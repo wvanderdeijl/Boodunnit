@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f58d2f2c4326554192b1344512242ec, type: 3}
   m_Name: Dialogue03
   m_EditorClassIdentifier: 
-  sentences: []
+  sentences:
+  - Text: "Julia, even though it\u2019s the last thing I deserve right now,"
+  - Text: I-I hope you can find it in your heart to f-forgive me...
   question: {fileID: 0}

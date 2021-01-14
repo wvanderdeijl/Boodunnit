@@ -49,7 +49,10 @@ public class WorldSpaceClue : MonoBehaviour
         gameObject.SetActive(false);
 
         if (DoesPlayerHaveAllCLues())
+        {
+            SaveHandler.Instance.SaveGameProperty("PlayerHasAllClues", "bool", true);
             GameManager.PlayerHasAllClues = true;
+        }
     }
 
     private bool DoesPlayerHaveAllCLues()

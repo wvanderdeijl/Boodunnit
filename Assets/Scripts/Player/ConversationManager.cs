@@ -242,7 +242,7 @@ public class ConversationManager : MonoBehaviour
             _skipDialogue = true;
             return;
         }
-
+        print(_sentences);
         if ((_sentences.Count == 0 || _maxDefaultSencteces == 1) && _isSentenceFinished)
         {
             if (_dialogueContainedQuestion)

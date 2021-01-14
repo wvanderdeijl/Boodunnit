@@ -354,7 +354,7 @@ Transform:
   - {fileID: 1651998200}
   - {fileID: 1667721812}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &19847287
 PrefabInstance:
@@ -1392,7 +1392,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 22.371, y: -33.904, z: -163.014}
 --- !u!1001 &65410277
 PrefabInstance:
@@ -2839,9 +2839,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!4 &121943782 stripped
 Transform:
@@ -3178,9 +3175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &140828757
 BoxCollider:
@@ -3664,9 +3658,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &155530510
 Rigidbody:
@@ -3755,9 +3746,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &160820827
 Rigidbody:
@@ -5349,9 +5337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1001 &207933200
 PrefabInstance:
@@ -6773,9 +6758,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &286323873
 Rigidbody:
@@ -7430,9 +7412,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &311786150
 Rigidbody:
@@ -7672,7 +7651,7 @@ Transform:
   - {fileID: 454889947}
   - {fileID: 689975214}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &330569214
 PrefabInstance:
@@ -8549,7 +8528,7 @@ Transform:
   - {fileID: 1886432212}
   - {fileID: 977752193}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &358516890
 PrefabInstance:
@@ -9213,9 +9192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1001 &378020256
 PrefabInstance:
@@ -9520,9 +9496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &390685638
 Rigidbody:
@@ -10769,7 +10742,7 @@ Transform:
   - {fileID: 104169002}
   - {fileID: 1971946155}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &426188608
 PrefabInstance:
@@ -12655,9 +12628,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &494639630
 Rigidbody:
@@ -12720,9 +12690,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!4 &498535538 stripped
 Transform:
@@ -12930,7 +12897,7 @@ Transform:
   m_LocalScale: {x: 0.17172463, y: 0.18074757, z: 0.18074755}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 89.37, y: 230.153, z: 138.477}
 --- !u!1001 &507651989
 PrefabInstance:
@@ -13218,9 +13185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1001 &517814615
 PrefabInstance:
@@ -13738,9 +13702,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1 &538458875 stripped
 GameObject:
@@ -14623,9 +14584,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!136 &572947243
 CapsuleCollider:
@@ -14811,9 +14769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &583519318
 Rigidbody:
@@ -17272,9 +17227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &689975216
 BoxCollider:
@@ -18053,9 +18005,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &704019889
 Rigidbody:
@@ -22616,7 +22565,7 @@ RectTransform:
   m_LocalScale: {x: 0.15501553, y: 0.15501553, z: 0.15501553}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22798,9 +22747,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &919953556
 Rigidbody:
@@ -25422,7 +25368,7 @@ Transform:
   - {fileID: 1532008464}
   - {fileID: 2018915919}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1026481556
 PrefabInstance:
@@ -28188,9 +28134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &1148617606
 BoxCollider:
@@ -28677,9 +28620,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &1172937437
 BoxCollider:
@@ -30396,9 +30336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1001 &1240641085
 PrefabInstance:
@@ -32493,9 +32430,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &1335631057
 Rigidbody:
@@ -33876,7 +33810,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: da8b12aa46b795b4ea9a1c29ff595bdb, type: 2}
     - target: {fileID: 1667472201513131060, guid: 41cae9b70bd7e1e48862ac8108ba1aad, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1667472201513131060, guid: 41cae9b70bd7e1e48862ac8108ba1aad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34819,7 +34753,7 @@ Transform:
   - {fileID: 1556488229}
   - {fileID: 1532794603}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1474422263 stripped
 GameObject:
@@ -35690,9 +35624,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!4 &1515905222 stripped
 Transform:
@@ -38386,7 +38317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8658040402228577267, guid: a1f7abed19c66a442918c5fa0806c600, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41405,7 +41336,7 @@ Transform:
   - {fileID: 984509121}
   - {fileID: 2029701252}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1718166865
 PrefabInstance:
@@ -42975,7 +42906,7 @@ Transform:
   - {fileID: 983883959}
   - {fileID: 863016218}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784050577
 GameObject:
@@ -44177,9 +44108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &1812029688
 Rigidbody:
@@ -44836,6 +44764,9 @@ MonoBehaviour:
     Popup: {fileID: 0}
     Dialogue: {fileID: 0}
     Question: {fileID: 0}
+    ConversationManager: {fileID: 0}
+    TargetToTalkTo: {fileID: 0}
+    targetIsPlayer: 0
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
@@ -44852,6 +44783,9 @@ MonoBehaviour:
     Popup: {fileID: 0}
     Dialogue: {fileID: 0}
     Question: {fileID: 0}
+    ConversationManager: {fileID: 0}
+    TargetToTalkTo: {fileID: 0}
+    targetIsPlayer: 0
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
@@ -44868,6 +44802,9 @@ MonoBehaviour:
     Popup: {fileID: 0}
     Dialogue: {fileID: 0}
     Question: {fileID: 0}
+    ConversationManager: {fileID: 0}
+    TargetToTalkTo: {fileID: 0}
+    targetIsPlayer: 0
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
@@ -44884,6 +44821,9 @@ MonoBehaviour:
     Popup: {fileID: 0}
     Dialogue: {fileID: 0}
     Question: {fileID: 0}
+    ConversationManager: {fileID: 0}
+    TargetToTalkTo: {fileID: 0}
+    targetIsPlayer: 0
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
@@ -44900,6 +44840,9 @@ MonoBehaviour:
     Popup: {fileID: 0}
     Dialogue: {fileID: 11400000, guid: 859f624fcdc53ef4fbfff3884823aa74, type: 2}
     Question: {fileID: 0}
+    ConversationManager: {fileID: 0}
+    TargetToTalkTo: {fileID: 0}
+    targetIsPlayer: 0
     MethodToCallFromScript:
       m_PersistentCalls:
         m_Calls: []
@@ -45562,9 +45505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &1870690316
 Rigidbody:
@@ -45643,9 +45583,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1 &1878872173 stripped
 GameObject:
@@ -48772,9 +48709,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1 &1975858146 stripped
 GameObject:
@@ -49301,7 +49235,7 @@ Transform:
   - {fileID: 1691570569}
   - {fileID: 1319388647}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &1995515916
 PrefabInstance:
@@ -50809,6 +50743,63 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: da8b12aa46b795b4ea9a1c29ff595bdb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c76adc4d8641cc246843a096f392f32a, type: 3}
+--- !u!1001 &2083597712
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 896132474739751302, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_Name
+      value: Leafs_particlesystems
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.44576386
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.112616114
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8740095
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.15722509
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824964651080399090, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 821bc52835636be4aaa6a17663072f79, type: 3}
 --- !u!1 &2084563199
 GameObject:
   m_ObjectHideFlags: 0
@@ -51217,9 +51208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1 &2112347323 stripped
 GameObject:
@@ -51805,43 +51793,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.345148
+      value: 11.68
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17477512
+      value: -1.152
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.440338
+      value: -32.051125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7329239
+      value: 0.6785678
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4221316
+      value: 0.5048945
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.46738905
+      value: 0.49424994
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.25724488
+      value: -0.200859
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 59.232
+      value: 62.099
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 66.167
+      value: 89.804
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.962
+      value: 28.949
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -51851,6 +51839,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: ffc9955e192d1b947bd540b1aea47756, type: 2}
+    - target: {fileID: -5754084199372789682, guid: f18004c3900485344911e922b6371566, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2531907223522294176, guid: 00a5117ba8afdc94fbfa0cca2daf2b6f, type: 3}
     - target: {fileID: 919132149155446097, guid: f18004c3900485344911e922b6371566, type: 3}
       propertyPath: m_Name
       value: Shovel1
@@ -54567,9 +54559,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &1067035847192676009
 BoxCollider:
@@ -54715,9 +54704,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!54 &1067035847465375026
 Rigidbody:
@@ -54762,9 +54748,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &1067035847473936208
 BoxCollider:
@@ -54838,9 +54821,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!33 &1067035847504630379
 MeshFilter:
@@ -55426,7 +55406,7 @@ Transform:
   - {fileID: 667770855636750094}
   - {fileID: 923655418}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1067035847767136055
 GameObject:
@@ -55574,9 +55554,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!33 &1067035847892573514
 MeshFilter:
@@ -55993,9 +55970,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!65 &1067035848235352423
 BoxCollider:
@@ -56305,9 +56279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!4 &1067035848569996576
 Transform:
@@ -61420,15 +61391,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 17000
+      value: 12609.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6895.956
+      value: 18161.88
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.74172
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -61436,11 +61407,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -3.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 101.04
+      value: -28.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d32b7b2da19949745a1bbf0184b043a5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -61879,9 +61850,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canRespawnWhenOutOfRange: 0
   DespawnDistance: 10
-  DefaultLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   WillLogPossessCount: 0
 --- !u!1 &5402862696182869437
 GameObject:
@@ -63399,7 +63367,7 @@ Transform:
   - {fileID: 1986977732}
   - {fileID: 734674090}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6594782630065627754
 MeshFilter:

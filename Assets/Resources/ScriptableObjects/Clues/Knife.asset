@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a87fdf7dec06ae4b9e5dae250dc42ed, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  Name: Knife
-  Details: ????
-  Location: ????
-  Description: ????
+  Name: Bloody knife
+  Details: A knife with red liquid on it.
+  Location: Crime scene, at a barbecue
+  Description: Still sharp, has a red liquid on it that could be blood. No fingerprints.
   Image: {fileID: 21300000, guid: d02d0c0eb4da87a4ca804b5158f01686, type: 3}

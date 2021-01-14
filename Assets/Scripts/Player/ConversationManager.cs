@@ -23,9 +23,9 @@ public class ConversationManager : MonoBehaviour
     private Button _buttonPrefab;
     private Button _continueButton;
     private GameObject _questionPool;
-    
-    private Queue<string> _sentences = new Queue<string>();
-    private Queue<Button> _choiceButtons = new Queue<Button>();
+
+    private Queue<string> _sentences;
+    private Queue<Button> _choiceButtons;
     private Question _dialogueContainedQuestion;
     private Sentence[] _defaultAnswers;
     private bool _isSentenceFinished = true;
@@ -39,6 +39,8 @@ public class ConversationManager : MonoBehaviour
 
     private void Awake()
     {
+        _sentences = new Queue<string>();
+        _choiceButtons = new Queue<Button>();
         //Assign all variables in Dialogue Canvas
         _animator = GameObject.Find("DialogBox").GetComponent<Animator>();
         _entityNameTextbox = GameObject.Find("Name").GetComponent<Text>();
@@ -75,8 +77,8 @@ public class ConversationManager : MonoBehaviour
             }
         }
 
-        //ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.
-        Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, 5);
+        //ToDo: Remove this line later when interaction with the world is thought about by the lead dev and lead game designer.]
+        Collider[] hitColliderArray = Physics.OverlapSphere(transform.position, 5); // Player
         foreach (Collider entityCollider in hitColliderArray)
         {
             //Check which entity boolia is possesing
@@ -85,7 +87,7 @@ public class ConversationManager : MonoBehaviour
                 _currentPossedEntity = PossessionBehaviour.PossessionTarget.GetComponent<BaseEntity>();
             }
 
-            if (entityCollider.TryGetComponent(out BaseEntity entityToTalkTo))
+            if (entityCollider.TryGetComponent(out BaseEntity entityToTalkTo)) // Target to talk too
             {
                 //When possesing check if the 2 interacting NPC have a relationship
                 //If realtionship count is 0 they have a realtionship with everyone
@@ -97,7 +99,7 @@ public class ConversationManager : MonoBehaviour
 
                 //start conversation if boolia is possesing another npc
                 //or if she is not possesing anyone check if she can talk to the NPC
-                if ((!isPossesing && entityToTalkTo.CanTalkToBoolia) ||
+                if (((!isPossesing && entityToTalkTo.CanTalkToBoolia)) ||
                     (isPossesing && entityToTalkTo != _currentPossedEntity))
                 {
                     HasConversationStarted = true;
@@ -106,27 +108,23 @@ public class ConversationManager : MonoBehaviour
                     _animator.SetBool("IsOpen", true);
 
                     GameManager.CursorIsLocked = false;
-
-                    if (dialogue != null)
-                    {
-                        ManageConversation(dialogue, null);
-                        return;
-                    }
-
-                    if (question != null)
-                    {
-                        ManageConversation(null, question);
-                        return;
-                    }
-
-                    if (dialogue == null && question == null)
-                    {
-                        ManageConversation(entityToTalkTo.Dialogue, entityToTalkTo.Question);
-                        return;
-                    }
+                    CheckWhichTypeOfConversationToExecute(dialogue, question, entityToTalkTo);
                 }
             }
         }
+    }
+
+
+    public void TriggerCutsceneConversation(BaseEntity target, bool targetIsPlayer, Dialogue dialogue = null, Question question = null)
+    {
+        _hasNoRelation = false;
+        HasConversationStarted = true;
+        ConversationTarget = targetIsPlayer ? transform : target.transform;
+        _entityNameTextbox.text = targetIsPlayer ? "Boolia" : EnumValueToString(target.CharacterName);
+        _animator.SetBool("IsOpen", true);
+
+        GameManager.CursorIsLocked = false;
+        CheckWhichTypeOfConversationToExecute(dialogue, question, target);
     }
     #endregion
 
@@ -134,7 +132,9 @@ public class ConversationManager : MonoBehaviour
     public void ManageConversation(Dialogue dialogue, Question question)
     {
         ResetQuestions();
+        _sentences.Clear();
 
+        //ResetQuestions();
         if (!ConversationTarget) return;
 
         BaseEntity entity = ConversationTarget.gameObject.GetComponent<BaseEntity>();
@@ -184,17 +184,34 @@ public class ConversationManager : MonoBehaviour
     #region Dialogue
     private void StartDialogue(Dialogue dialogue)
     {
-        _dialogueContainedQuestion = dialogue.question;
+           _dialogueContainedQuestion = dialogue.question;
         _continueButton.gameObject.SetActive(true);
-        _sentences.Clear();
-        
         foreach (Sentence sentence in dialogue.sentences)
         {
             _sentences.Enqueue(sentence.Text.ToString());
         }
+        DisplayNextSentence();
+    }
 
-        DisplayNextSentence();
-        DisplayNextSentence();
+    private void CheckWhichTypeOfConversationToExecute(Dialogue dialogue, Question question, BaseEntity entity)
+    {
+        if (dialogue != null)
+        {
+            ManageConversation(dialogue, null);
+            return;
+        }
+
+        if (question != null)
+        {
+            ManageConversation(null, question);
+            return;
+        }
+
+        if (dialogue == null && question == null)
+        {
+            ManageConversation(entity.Dialogue, entity.Question);
+            return;
+        }
     }
 
     private void StartDefaultDialogue(Sentence[] dialogue)
@@ -237,8 +254,9 @@ public class ConversationManager : MonoBehaviour
             ManageConversation(null, null);
             return;
         }
-
+        print("Boemba: " + _sentences.Count);
         string sentence = _sentences.Dequeue();
+        print("Boemba: " + _sentences.Count);
         StartCoroutine(TypeSentence(sentence));
     }
 
@@ -266,6 +284,7 @@ public class ConversationManager : MonoBehaviour
     #region Question
     private void AskQuestion(Question question)
     {
+        StopAllCoroutines();
         StartCoroutine(TypeSentence(question.Text.ToString()));
         _continueButton.gameObject.SetActive(false);
 
@@ -359,6 +378,7 @@ public class ConversationManager : MonoBehaviour
                 Destroy(button.gameObject);
             }
         }
+        _dialogueContainedQuestion = null;
     }
     #endregion
     private string EnumValueToString(CharacterType character)

@@ -48,6 +48,8 @@ public class PlayerBehaviour : BaseMovement
         _highlightRadiuses.Add("ClimableRadius", ClimableRadius);
         _highlightRadiuses.Add("DashRadius", DashRadius);
 
+        LevitateBehaviour.CurrentLevitateRadius = LeviatateRadius;
+
         _emmie = FindObjectOfType<EmmieBehaviour>();
     } 
 
@@ -56,9 +58,9 @@ public class PlayerBehaviour : BaseMovement
         Collider HighlightedObject = HighlightBehaviour.HighlightGameobject(_highlightRadiuses);
         GameManager.CurrentHighlightedCollider = HighlightedObject;
 
-        PlayerAnimation();
-        
         PickUpClue(HighlightedObject);
+        StartEndingWithEmmie(HighlightedObject);
+        PlayerAnimation();
 
         //Pause game behaviour
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -82,10 +84,10 @@ public class PlayerBehaviour : BaseMovement
             if (PossessionBehaviour.IsPossessing && !ConversationManager.HasConversationStarted && PossessionBehaviour.TargetBehaviour.IsGrounded)
             {
                 PossessionBehaviour.LeavePossessedTarget();
-            } 
+            }
             else
             {
-                if(!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
+                if (!DashBehaviour.IsDashing && !ConversationManager.HasConversationStarted && !LevitateBehaviour.IsLevitating && HighlightedObject && HighlightedObject.GetComponent<IPossessable>() != null)
                 {
                     PossessionBehaviour.PossessTarget(HighlightedObject);
                 }
@@ -201,22 +203,12 @@ public class PlayerBehaviour : BaseMovement
 
     private void HandleLevitationInput()
     {
-        LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            LevitateBehaviour.LevitationStateHandler();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
-        }
-
-        LevitateBehaviour.PushOrPullLevitateableObject();
+        LevitateBehaviour.CurrentLevitateableObjects = LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
+        LevitateBehaviour.SetCurrentHighlightedObject(HighlightBehaviour.HighlightGameobject(_highlightRadiuses));
+        if (Input.GetMouseButtonDown(0)) LevitateBehaviour.LevitationStateHandler();
     }
 
-    public void PickUpClue(Collider HighlightedObject) {
+    private void PickUpClue(Collider HighlightedObject) {
         if (!HighlightedObject)
             return;
 
@@ -226,6 +218,45 @@ public class PlayerBehaviour : BaseMovement
             if (!SaveHandler.Instance.DoesPlayerHaveClue(clue.ClueScriptableObject.Name)) {
                 clue.AddToInventory();
             }
+        }
+    }
+
+    private void StartEndingWithEmmie(Collider HighlightedObject)
+    {
+        if (!HighlightedObject)
+            return;
+
+        EmmieBehaviour emmie = HighlightedObject.GetComponent<EmmieBehaviour>();
+        if (emmie)
+        {
+            if (GameManager.PlayerHasAllClues && !GameManager.PlayerIsInEndState)
+            {
+                GameManager.PlayerIsInEndState = true;
+                FadeInAndOut fade = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInAndOut>();
+                if (fade)
+                {
+                    fade.FadeIn(1);
+                    PrepareForEnding();
+                }
+
+                Cutscene endCutscene = GameObject.Find("EndCutscene").GetComponent<Cutscene>();
+                if (endCutscene)
+                {
+                    endCutscene.StartCutscene();
+                }
+            }
+        }
+    }
+
+    private void PrepareForEnding()
+    {
+        PossessionSpeed = 0;
+        Rigidbody.velocity = Vector3.zero;
+        Animator.SetBool("IsMoving", false);
+        IconCanvas canvas = FindObjectOfType<IconCanvas>();
+        if (canvas)
+        {
+            canvas.DisableIcons();
         }
     }
 

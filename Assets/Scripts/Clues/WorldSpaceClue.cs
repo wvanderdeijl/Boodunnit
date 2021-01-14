@@ -42,9 +42,10 @@ public class WorldSpaceClue : MonoBehaviour
         }
 
         Canvas = Popup.GetComponent<Canvas>();
-        ClueText = Popup.gameObject.transform.Find("ClueTitle_TXT").GetComponent<Text>();
-        Description = Popup.gameObject.transform.Find("Body_TXT").GetComponent<Text>();
-        ClueImage = Popup.gameObject.transform.Find("Clue_Img").GetComponent<Image>();
+
+        ClueText = Popup.gameObject.transform.Find("Body").Find("TitleBar").Find("ClueTitle_TXT").GetComponent<Text>();
+        Description = Popup.gameObject.transform.Find("Body").Find("Description").Find("TextBox").Find("Body_TXT").GetComponent<Text>();
+        ClueImage = Popup.gameObject.transform.transform.Find("Body").Find("Description").Find("ClueSprite_Box").Find("Clue_Img").GetComponent<Image>();
     }
     
     public void AddToInventory()

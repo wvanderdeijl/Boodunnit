@@ -20,19 +20,27 @@ public class Popup : MonoBehaviour
 
     private bool _startMenuWantsToOpen;
 
+    public bool IsACluePickupPopup;
+
     private void Awake()
     {
         _sceneTransitionHandler = new SceneTransitionHandler();
-        CloseButton = transform.Find("CloseButton").gameObject;
-        NextBtn = transform.Find("NextButton").gameObject;
-        PreviousBtn = transform.Find("PreviousButton").gameObject;
         Canvas = GetComponent<Canvas>();
-        
+
         if (Sprites != null && Sprites.Length == 1)
         {
             NextBtn.SetActive(false);
             PreviousBtn.SetActive(false);
         }
+
+        if (IsACluePickupPopup)
+        {
+            return;
+        }
+
+        CloseButton = transform.Find("CloseButton").gameObject;
+        NextBtn = transform.Find("NextButton").gameObject;
+        PreviousBtn = transform.Find("PreviousButton").gameObject;
     }
 
     public void OpenPopup()

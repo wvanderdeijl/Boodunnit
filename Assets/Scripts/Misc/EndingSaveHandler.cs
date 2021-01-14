@@ -11,6 +11,7 @@ public class EndingSaveHandler : MonoBehaviour
 {
     private void Awake()
     {
+        /**
         if (CheckIfPlayerHasAllClues())
         {
             GameManager.PlayerHasAllClues = true;
@@ -28,6 +29,8 @@ public class EndingSaveHandler : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+        **/
+        GameManager.PlayerHasAllClues = true;
     }
 
     public bool CheckIfPlayerInEndingState()

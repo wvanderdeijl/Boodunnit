@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -176,5 +177,33 @@ public class EndingSaveHandler : MonoBehaviour
     private void SaveNavMeshAgentState(GameObject gameObject, bool shouldBeEnabled)
     {
         SaveHandler.Instance.SaveGameProperty(gameObject.name, "navmesh", shouldBeEnabled);
+    }
+
+    private void TownCanTalkToBoolia()
+    {
+        GameObject police = GameObject.Find("BlackPoliceMan");
+        GameObject burt = GameObject.Find("Burt");
+        GameObject bort = GameObject.Find("Bort");
+
+        BaseEntity policeEntity = police.GetComponent<BaseEntity>();
+        if (policeEntity)
+        {
+            policeEntity.CanTalkToBoolia = true;
+            // TODO: Set dialogue;
+        }
+
+        BaseEntity burtEntity = burt.GetComponent<BaseEntity>();
+        if (burtEntity)
+        {
+            burtEntity.CanTalkToBoolia = true;
+            // TODO: Set dialogue;
+        }
+
+        BaseEntity bortEntity = bort.GetComponent<BaseEntity>();
+        if (bortEntity)
+        {
+            bortEntity.CanTalkToBoolia = true;
+            // TODO: Set dialogue;
+        }
     }
 }

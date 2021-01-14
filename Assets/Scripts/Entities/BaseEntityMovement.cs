@@ -147,8 +147,6 @@ public abstract class BaseEntityMovement : BaseMovement
     private bool HasReachedDestination(Vector3 destination)
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
-        Debug.Log(name + ": " + ((Collider.bounds.extents.y / 2) + 1f));
-        if(name.Equals("WhitePoliceWoman") && distanceToDestination < (Collider.bounds.extents.y / 2) + 1f) Debug.Log("Destination reached.");
         return distanceToDestination < (Collider.bounds.extents.y / 2) + 1f;
     }
 

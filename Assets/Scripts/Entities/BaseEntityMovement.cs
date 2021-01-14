@@ -47,8 +47,8 @@ public abstract class BaseEntityMovement : BaseMovement
         {
             NavMeshAgent.autoBraking = true;
             NavMeshAgent.speed = PathfindingSpeed;
-            _spawnRotation = transform.root.rotation;
-            _spawnLocation = transform.root.position;
+            _spawnRotation = transform.rotation;
+            _spawnLocation = transform.position;
             NavMeshAgent.autoTraverseOffMeshLink = (OffMeshLinkTraverseType == OffMeshLinkMethod.None);
         }
     }
@@ -147,7 +147,7 @@ public abstract class BaseEntityMovement : BaseMovement
     private bool HasReachedDestination(Vector3 destination)
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination);
-        return distanceToDestination < 0.5f;
+        return distanceToDestination < (Collider.bounds.extents.y / 2) + 1f;
     }
 
     public IEnumerator StartCountdownInArea(float amountOfTime)

@@ -1,17 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldSpaceClue : MonoBehaviour
 {
     public Clue ClueScriptableObject;
-    public Popup Popup;
-    public Popup ToBeContinuedPopup;
+    public GameObject Popup;
+    public Canvas Canvas;
+
+    public Text ClueText;
+    public Text Description;
+    public Image ClueImage;
 
     private List<Clue> _listOfClues;
 
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
+        
         _listOfClues = Resources.LoadAll<Clue>("ScriptableObjects/Clues").ToList();
         
         if (SaveHandler.Instance.DoesPlayerHaveClue(ClueScriptableObject.Name))
@@ -33,16 +40,24 @@ public class WorldSpaceClue : MonoBehaviour
                 outline.enabled = false;
             }
         }
+
+        Canvas = Popup.GetComponent<Canvas>();
+        ClueText = Popup.gameObject.transform.Find("ClueTitle_TXT").GetComponent<Text>();
+        Description = Popup.gameObject.transform.Find("Body_TXT").GetComponent<Text>();
+        ClueImage = Popup.gameObject.transform.Find("Clue_Img").GetComponent<Image>();
     }
     
     public void AddToInventory()
     { 
         //Add this clue to the inventory of the player
         SaveHandler.Instance.SaveClue(ClueScriptableObject.Name);
+        SetClueInPopup();
 
         if (Popup && !DoesPlayerHaveAllCLues()) //todo: remove !DoesPlayerHaveAllCLues() when to be continued popup is not neccisary enymore
         {
-            Popup.OpenPopup();
+            Canvas.enabled = true;
+            GameManager.CursorIsLocked = false;
+            Time.timeScale = 0f;
         }
     
         SoundManager.Instance.PlaySound("Clue_pickup");
@@ -60,8 +75,10 @@ public class WorldSpaceClue : MonoBehaviour
         return _listOfClues.All(clue => SaveHandler.Instance.DoesPlayerHaveClue(clue.Name));
     }
 
-    private void StartToBeContinuedPopup()
+    public void SetClueInPopup()
     {
-        ToBeContinuedPopup.OpenToBeContinuedPopUp();
+        ClueText.text = ClueScriptableObject.Name;
+        Description.text = ClueScriptableObject.Description;
+        ClueImage.sprite = ClueScriptableObject.Image;
     }
 }

@@ -13,6 +13,7 @@ public class Popup : MonoBehaviour
     public Sprite[] Sprites;
     public Image DisplayImage;
     public static bool isPopUpOpen;
+    public Canvas Canvas;
 
     private int imageIndex = 0;
     private SceneTransitionHandler _sceneTransitionHandler;
@@ -25,7 +26,8 @@ public class Popup : MonoBehaviour
         CloseButton = transform.Find("CloseButton").gameObject;
         NextBtn = transform.Find("NextButton").gameObject;
         PreviousBtn = transform.Find("PreviousButton").gameObject;
-
+        Canvas = GetComponent<Canvas>();
+        
         if (Sprites != null && Sprites.Length == 1)
         {
             NextBtn.SetActive(false);
@@ -53,6 +55,13 @@ public class Popup : MonoBehaviour
         DisableOrEnableOtherCanvasses(true);
         PopupMenuUI.SetActive(false);
         isPopUpOpen = false;
+        Time.timeScale = 1f;
+    }
+
+    public void ResetCursorAndTimeScale()
+    {
+        GameManager.CursorIsLocked = true;
+        Canvas.enabled = false;
         Time.timeScale = 1f;
     }
     

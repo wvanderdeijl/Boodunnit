@@ -48,6 +48,8 @@ public class PlayerBehaviour : BaseMovement
         _highlightRadiuses.Add("ClimableRadius", ClimableRadius);
         _highlightRadiuses.Add("DashRadius", DashRadius);
 
+        LevitateBehaviour.CurrentLevitateRadius = LeviatateRadius;
+
         _emmie = FindObjectOfType<EmmieBehaviour>();
     } 
 
@@ -201,19 +203,9 @@ public class PlayerBehaviour : BaseMovement
 
     private void HandleLevitationInput()
     {
-        LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            LevitateBehaviour.LevitationStateHandler();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            LevitateBehaviour.RemoveRigidbodyAndStartFreeze();
-        }
-
-        LevitateBehaviour.PushOrPullLevitateableObject();
+        LevitateBehaviour.CurrentLevitateableObjects = LevitateBehaviour.FindLevitateableObjectsInFrontOfPlayer();
+        LevitateBehaviour.SetCurrentHighlightedObject(HighlightBehaviour.HighlightGameobject(_highlightRadiuses));
+        if (Input.GetMouseButtonDown(0)) LevitateBehaviour.LevitationStateHandler();
     }
 
     private void PickUpClue(Collider HighlightedObject) {

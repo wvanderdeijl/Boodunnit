@@ -4,7 +4,7 @@ public class LevitateableObjectIsInsideTrigger : MonoBehaviour
 {
     public bool PlayerIsInsideObject { get; set; }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerBehaviour>())
         {

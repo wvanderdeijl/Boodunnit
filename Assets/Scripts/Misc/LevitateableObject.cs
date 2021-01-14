@@ -8,12 +8,16 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     private Vector3 _spawnLocation;
     private Quaternion _spawnRotation;
     private Rigidbody _rigidbody;
-    private Outline _outline;
     private GameObject _player;
     private float _maxDistanceToPlayerWhileFrozen;
     
+    private Outline _outline;
+    private Color _purple;
+    private Color _coolerPurple;
+    
     public LevitationState State { get; set; }
     public int TimesLevitated { get; set; }
+    
     public float DespawnDistance = 10f;
     public bool WillLogPossessCount;
 
@@ -23,7 +27,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         _rigidbody = GetComponent<Rigidbody>();
         _outline = gameObject.AddComponent<Outline>();
         _player = FindObjectOfType<PlayerBehaviour>().gameObject;
-        
+
         AddOutline();
         SetSpawnLocationAndRotation();
         StartCoroutine(CheckForDistance());
@@ -38,12 +42,14 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         float distance = Vector3.Distance(gameObject.transform.position, _player.transform.position);
         ChangeOutlineWidthWithDistance(distance);
-        if (State != LevitationState.Frozen) return;
         if (distance > _maxDistanceToPlayerWhileFrozen) Release();
     }
 
     public void Freeze()
     {
+        if (gameObject.GetComponentInChildren<LevitateableObjectIsInsideTrigger>().PlayerIsInsideObject) return;
+        
+        _outline.OutlineColor = _coolerPurple;
         ChangeLayerMask(0);
         ToggleIsKinematic(true);
         State = LevitationState.Frozen;
@@ -51,6 +57,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     public void Release()
     {
+        if (_outline) _outline.OutlineColor = _purple;
         ToggleIsKinematic(false);
         State = LevitationState.NotLevitating;
     }
@@ -66,9 +73,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
         foreach (Transform transform in gameObject.GetComponentsInChildren<Transform>(true))
         {
             if (!transform.gameObject.GetComponent<LevitateableObjectIsInsideTrigger>())
-            {
                 transform.gameObject.layer = layerMaskParam;
-            }
         }   
     }
 
@@ -82,10 +87,10 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         if (_outline)
         {
-            Color purple;
-            ColorUtility.TryParseHtmlString("#6F4F61", out purple);
+            ColorUtility.TryParseHtmlString("#6F4F61", out _purple);
+            ColorUtility.TryParseHtmlString("C6BAC4", out _coolerPurple);
 
-            _outline.OutlineColor = purple;
+            _outline.OutlineColor = _purple;
             _outline.OutlineMode = Outline.Mode.OutlineVisible;
             _outline.OutlineWidth = 0.0f;
             _outline.enabled = false;
@@ -94,7 +99,10 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void ChangeOutlineWidthWithDistance(float distance)
     {
-        _outline.OutlineWidth = 10f * (1f - (distance / (_maxDistanceToPlayerWhileFrozen - 0.1f)));
+        if (_outline)
+        {
+            _outline.OutlineWidth = 10f * (1f - (distance / (_maxDistanceToPlayerWhileFrozen - 0.1f)));
+        }
     }
 
     private IEnumerator CheckForDistance()

@@ -28,6 +28,11 @@ public class LevitateBehaviour : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
+    private void Start()
+    {
+        InstantiateAllDuplicateLevitateableObjects();
+    }
+
     #region Levitation Handler
     public void LevitationStateHandler()
     {
@@ -61,7 +66,7 @@ public class LevitateBehaviour : MonoBehaviour
             RemoveGameObjectFromCamera();
             return;
         }
-        
+
         ToggleGravity(false);
         
         _selectedRigidbody.velocity = 
@@ -202,6 +207,30 @@ public class LevitateBehaviour : MonoBehaviour
     {
         IsLevitating = false;
         _selectedRigidbody = null;
+    }
+
+    private void InstantiateAllDuplicateLevitateableObjects()
+    {
+        LevitateableObject[] listOfLevitateableObjects = FindObjectsOfType<LevitateableObject>();
+        foreach (LevitateableObject levitateableObject in listOfLevitateableObjects)
+        {
+            GameObject duplicate = Instantiate(levitateableObject.gameObject);
+            duplicate.name = "IsTriggerForLevitationObject";
+            duplicate.layer = LayerMask.NameToLayer("IgnoreCameraZoom");
+            
+            foreach (Component component in duplicate.GetComponents<Component>())
+            {
+                if (!(component is Collider || component is Transform)) Destroy(component);
+            }
+            
+            foreach (Transform child in duplicate.transform) {
+                if (child.name != "IsTriggerForLevitationObject") Destroy(child.gameObject);
+            }
+            
+            duplicate.GetComponent<Collider>().isTrigger = true;
+            duplicate.AddComponent(typeof(LevitateableObjectIsInsideTrigger));
+            duplicate.transform.SetParent(levitateableObject.transform, true);
+        }
     }
 
     private void ToggleGravity(bool useGravity)

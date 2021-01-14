@@ -12274,7 +12274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 134, y: -2811}
+  m_AnchoredPosition: {x: 134, y: -3227}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &1516179011
@@ -16552,7 +16552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollRect: {fileID: 2127880549}
   Content: {fileID: 463093220}
-  ScrollSpeed: 0.3
+  ScrollSpeed: 1.5
 --- !u!114 &2127880553
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -115,6 +115,7 @@ public class SaveHandler
             if (propertiesInScene.ContainsKey(uniqueKey))
             {
                 propertyValue = (T)Convert.ChangeType(propertiesInScene[uniqueKey], typeof(T));
+                Debug.Log("Boemba: " + propertyValue);
                 isValueFound = true;
             }
         }

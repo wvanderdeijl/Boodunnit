@@ -14,7 +14,7 @@ public class AutomaticScrolling : MonoBehaviour
     void Start()
     {
         _actualScrollSpeed = ScrollSpeed;
-        _fastScrollSpeed = 2f;
+        _fastScrollSpeed = ScrollSpeed * 2;
     }
 
     // Update is called once per frame

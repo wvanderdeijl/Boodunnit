@@ -226,8 +226,12 @@ public class LevitateBehaviour : MonoBehaviour
             foreach (Transform child in duplicate.transform) {
                 if (child.name != "IsTriggerForLevitationObject") Destroy(child.gameObject);
             }
+
+            foreach (Collider collider in duplicate.GetComponents<Collider>())
+            {
+                collider.isTrigger = true;
+            }
             
-            duplicate.GetComponent<Collider>().isTrigger = true;
             duplicate.AddComponent(typeof(LevitateableObjectIsInsideTrigger));
             duplicate.transform.SetParent(levitateableObject.transform, true);
         }

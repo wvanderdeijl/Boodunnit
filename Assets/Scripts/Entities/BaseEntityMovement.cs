@@ -176,6 +176,13 @@ public abstract class BaseEntityMovement : BaseMovement
         NavMeshAgent.ResetPath();
         _pathFindingState = pathFindingState;
     }
+    
+    public void SetPathFindingStateToNone() 
+    {
+        NavMeshAgent.ResetPath();
+        NavMeshAgent.enabled = false;
+        _pathFindingState = PathFindingState.None;
+    }
 
     public void ResetDestination()
     {

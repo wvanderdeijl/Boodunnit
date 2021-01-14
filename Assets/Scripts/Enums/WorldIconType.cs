@@ -13,6 +13,7 @@
         Scared,
         Terrified,
         BirdGlide,
-        RatClimb
+        RatClimb,
+        EmmieQuest
     }
 }

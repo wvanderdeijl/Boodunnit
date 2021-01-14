@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Entities.Humans;
+using Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,6 +65,7 @@ public class IconCanvas : MonoBehaviour
             {
                 EnableIcon(WorldIconType.Ragdoll);
             }
+
             else if (PossessionBehaviour.PossessionTarget)
             {
                 EnableIcon(WorldIconType.TalkTo);

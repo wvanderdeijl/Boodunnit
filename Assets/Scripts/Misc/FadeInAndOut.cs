@@ -17,7 +17,6 @@ public class FadeInAndOut : MonoBehaviour
     {
         image.CrossFadeAlpha(1.0f, fadeInSpeed, false);
     }
-
     public void FadeOut(int fadeOutSpeed)
     {
         image.CrossFadeAlpha(0, fadeOutSpeed, false);

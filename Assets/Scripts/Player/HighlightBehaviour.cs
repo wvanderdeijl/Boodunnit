@@ -51,7 +51,8 @@ public class HighlightBehaviour : MonoBehaviour
                 ToggleOutlineScriptOnGameobject(outline, true);
             }
 
-            ShowIconsAboveHighlightedObject();
+            if(!GameManager.IsCutscenePlaying)
+                ShowIconsAboveHighlightedObject();
         }
 
         if (_previousCollider != _currentCollider)
@@ -154,7 +155,7 @@ public class HighlightBehaviour : MonoBehaviour
 
         return closestCollider;
     }
-    private void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
+    private  void ToggleOutlineScriptOnGameobject(Outline outline, bool active)
     {
         outline.enabled = active;
     }

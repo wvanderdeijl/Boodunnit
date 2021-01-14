@@ -47,6 +47,9 @@ public class WorldSpaceClue : MonoBehaviour
     
         SoundManager.Instance.PlaySound("Clue_pickup");
         gameObject.SetActive(false);
+
+        if (DoesPlayerHaveAllCLues())
+            GameManager.PlayerHasAllClues = true;
     }
 
     private bool DoesPlayerHaveAllCLues()

@@ -25,8 +25,10 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     {
         State = LevitationState.NotLevitating;
         _rigidbody = GetComponent<Rigidbody>();
-        _outline = gameObject.AddComponent<Outline>();
         _player = FindObjectOfType<PlayerBehaviour>().gameObject;
+
+        Outline outlineComponent = gameObject.GetComponent<Outline>();
+        if (!outlineComponent) _outline = gameObject.AddComponent<Outline>();
 
         AddOutline();
         SetSpawnLocationAndRotation();
@@ -48,7 +50,6 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
     public void Freeze()
     {
         if (gameObject.GetComponentInChildren<LevitateableObjectIsInsideTrigger>().PlayerIsInsideObject) return;
-        
         _outline.OutlineColor = _coolerPurple;
         ChangeLayerMask(0);
         ToggleIsKinematic(true);
@@ -99,10 +100,7 @@ public class LevitateableObject : MonoBehaviour, ILevitateable
 
     private void ChangeOutlineWidthWithDistance(float distance)
     {
-        if (_outline)
-        {
-            _outline.OutlineWidth = 10f * (1f - (distance / (_maxDistanceToPlayerWhileFrozen - 0.1f)));
-        }
+        if (_outline) _outline.OutlineWidth = 10f * (1f - (distance / (_maxDistanceToPlayerWhileFrozen - 0.1f)));
     }
 
     private IEnumerator CheckForDistance()

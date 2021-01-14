@@ -16,9 +16,7 @@ public class WorldSpaceClue : MonoBehaviour
     private List<Clue> _listOfClues;
 
     private void Awake()
-    {
-        PlayerPrefs.DeleteAll();
-        
+    {      
         _listOfClues = Resources.LoadAll<Clue>("ScriptableObjects/Clues").ToList();
         
         if (SaveHandler.Instance.DoesPlayerHaveClue(ClueScriptableObject.Name))

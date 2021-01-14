@@ -168,6 +168,21 @@ public class SaveHandler
     }
 
     /// <summary>
+    /// Get all names of the collected clues
+    /// </summary>
+    /// <returns>list with names of all collected clues</returns>
+    public List<string> GetSavedClueNames()
+    {
+        string clues = PlayerPrefs.GetString(_cluesSaveKey);
+        if (!string.IsNullOrEmpty(clues))
+        {
+            List<string> clueList = JsonConvert.DeserializeObject<List<string>>(clues);
+            return clueList;
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Save the current scene
     /// </summary>
     /// <param name="currentScene">Name of scene you want to save</param>

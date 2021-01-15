@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sounds:
   - Name: MainMenuTheme
-    AudioClip: {fileID: 8300000, guid: d2acc31b531968e46afcf65a36ece848, type: 3}
+    AudioClip: {fileID: 8300000, guid: 9151fd8e1c986fd4fa7fdc9af83dd479, type: 3}
     Volume: 0
     ShouldLoop: 1
     ShouldStartOnStart: 1

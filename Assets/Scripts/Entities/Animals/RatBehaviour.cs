@@ -48,6 +48,5 @@ public class RatBehaviour : BaseEntity
     public override void UseFirstAbility()
     {
         _climbBehaviour.ToggleClimb();
-        base.UseFirstAbility();
     }
 }

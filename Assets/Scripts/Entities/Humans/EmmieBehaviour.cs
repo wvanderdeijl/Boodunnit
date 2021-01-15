@@ -31,7 +31,7 @@ namespace Entities.Humans
 
         public void TalkWithBoolia()
         {
-            if (SceneManager.GetActiveScene().name.Equals("CemeteryScene") && IsCrying)
+            if (SceneManager.GetActiveScene().name.Equals("CemeteryScene_1") && IsCrying)
             {
                 StopCrying();
                 ActivateTransitionTrigger();

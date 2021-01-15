@@ -87,10 +87,7 @@ namespace Entities
             }
         }
 
-        public virtual void UseFirstAbility()
-        {
-            HasToggledAbility = !HasToggledAbility;
-        }
+        public abstract void UseFirstAbility();
 
         public void PlayAudioClip(int index)
         {

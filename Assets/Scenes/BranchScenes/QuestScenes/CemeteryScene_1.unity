@@ -28652,7 +28652,6 @@ GameObject:
   - component: {fileID: 1172937439}
   - component: {fileID: 1172937438}
   - component: {fileID: 1172937437}
-  - component: {fileID: 1172937436}
   - component: {fileID: 1172937435}
   m_Layer: 0
   m_Name: Cube
@@ -28691,21 +28690,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1172937436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172937433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f258dcafd797a479e19f02f4018f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canRespawnWhenOutOfRange: 0
-  DespawnDistance: 10
-  WillLogPossessCount: 0
 --- !u!65 &1172937437
 BoxCollider:
   m_ObjectHideFlags: 0

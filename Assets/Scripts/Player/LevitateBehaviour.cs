@@ -146,6 +146,7 @@ public class LevitateBehaviour : MonoBehaviour
         
         IsLevitating = true;
         ILevitateable levitateable = _selectedRigidbody.gameObject.GetComponent<ILevitateable>();
+        levitateable.TimesLevitated += 1;
         LevitateableObject levitateableObject = _selectedRigidbody.gameObject.GetComponent<LevitateableObject>();
         
         if (levitateableObject && levitateableObject.State == LevitationState.Frozen)

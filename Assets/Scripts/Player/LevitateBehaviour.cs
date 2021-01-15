@@ -238,6 +238,7 @@ public class LevitateBehaviour : MonoBehaviour
             
             duplicate.AddComponent(typeof(LevitateableObjectIsInsideTrigger));
             duplicate.transform.SetParent(levitateableObject.transform, true);
+            duplicate.transform.localPosition = Vector3.zero;
         }
     }
 

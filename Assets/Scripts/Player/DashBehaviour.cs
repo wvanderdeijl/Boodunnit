@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.Humans;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -214,7 +215,7 @@ public class DashBehaviour : MonoBehaviour
         foreach (Collider hitCollider in hitColliders)
         {
             IPossessable possessable = hitCollider.GetComponent<IPossessable>();
-            if (possessable != null && !_fearDashPossessables.Contains(possessable))
+            if (possessable != null && !_fearDashPossessables.Contains(possessable) && !hitCollider.GetComponent<EmmieBehaviour>())
             {
                 _fearDashPossessables.Add(possessable);
                 possessable.DealFearDamageAfterDash(DashFearDamage);

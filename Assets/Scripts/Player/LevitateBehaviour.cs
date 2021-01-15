@@ -37,7 +37,11 @@ public class LevitateBehaviour : MonoBehaviour
     public void LevitationStateHandler()
     {
         if (!_selectedRigidbody) Levitate();
-        else StopLevitation();
+        else
+        {
+            if (!_selectedRigidbody.gameObject.GetComponentInChildren<LevitateableObjectIsInsideTrigger>()
+                .PlayerIsInsideObject) StopLevitation();
+        }
     }
 
     private void Levitate()

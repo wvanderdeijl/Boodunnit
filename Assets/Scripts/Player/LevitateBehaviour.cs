@@ -8,7 +8,7 @@ public class LevitateBehaviour : MonoBehaviour
     [Header("Levitate Options")]
     [SerializeField] private float _levitationMoveSpeed = 250f;
     [SerializeField] private float _objectStartingDistance = 10f;
-    [SerializeField] private float _objectStartingHeight = 4f;
+    [SerializeField] private float _objectStartingHeight = 8f;
     
     [Header("Layers")]
     [SerializeField] private LayerMask _ignoredLayerMask;

@@ -8,8 +8,6 @@ using Logger;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-using UnityEngine.AI;
-using System.Linq;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -184,7 +182,7 @@ public class ConversationManager : MonoBehaviour
     #region Dialogue
     private void StartDialogue(Dialogue dialogue)
     {
-           _dialogueContainedQuestion = dialogue.question;
+        _dialogueContainedQuestion = dialogue.question;
         _continueButton.gameObject.SetActive(true);
         foreach (Sentence sentence in dialogue.sentences)
         {
@@ -242,7 +240,7 @@ public class ConversationManager : MonoBehaviour
             _skipDialogue = true;
             return;
         }
-        print(_sentences);
+
         if ((_sentences.Count == 0 || _maxDefaultSencteces == 1) && _isSentenceFinished)
         {
             if (_dialogueContainedQuestion)
@@ -254,9 +252,8 @@ public class ConversationManager : MonoBehaviour
             ManageConversation(null, null);
             return;
         }
-        print("Boemba: " + _sentences.Count);
+
         string sentence = _sentences.Dequeue();
-        print("Boemba: " + _sentences.Count);
         StartCoroutine(TypeSentence(sentence));
     }
 

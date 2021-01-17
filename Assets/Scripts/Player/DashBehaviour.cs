@@ -215,7 +215,11 @@ public class DashBehaviour : MonoBehaviour
         foreach (Collider hitCollider in hitColliders)
         {
             IPossessable possessable = hitCollider.GetComponent<IPossessable>();
-            if (possessable != null && !_fearDashPossessables.Contains(possessable) && !hitCollider.GetComponent<EmmieBehaviour>())
+            if (possessable != null 
+                && !_fearDashPossessables.Contains(possessable) 
+                && !hitCollider.GetComponent<EmmieBehaviour>()
+                && !hitCollider.GetComponent<SirBoonkleBehaviour>() 
+                && !hitCollider.GetComponent<VincentBehaviour>())
             {
                 _fearDashPossessables.Add(possessable);
                 possessable.DealFearDamageAfterDash(DashFearDamage);
